@@ -16,7 +16,7 @@ public class Banner {
 	private static final char STAR = '*';
 
 	/**
-	 * Build a banner string of a title wrapped by a number of specified padding
+	 * Builds a banner string of a title wrapped by a number of specified padding
 	 * signs. Used internally for building more specific banner strings.
 	 * 
 	 * @param title the title
@@ -52,7 +52,7 @@ public class Banner {
 	}
 
 	/**
-	 * Return a banner string padded with Equal signs.
+	 * Returns a banner string padded with Equal signs.
 	 * 
 	 * @param title the title
 	 * @param num   the number of padding signs
@@ -63,7 +63,7 @@ public class Banner {
 	}
 
 	/**
-	 * Return a banner string padded with Dash signs.
+	 * Returns a banner string padded with Dash signs.
 	 * 
 	 * @param title the title
 	 * @param num   the number of padding signs
@@ -74,7 +74,7 @@ public class Banner {
 	}
 
 	/**
-	 * Return a banner string padded with Star signs.
+	 * Returns a banner string padded with Star signs.
 	 * 
 	 * @param title the title
 	 * @param num   the number of padding signs

@@ -13,7 +13,7 @@ package io.esoma.cbj.algo;
 public class MergeSort {
 
 	/**
-	 * Perform sorting on an initially unsorted array. Order is ascending.
+	 * Performs sorting on an initially unsorted array. Order is ascending.
 	 * 
 	 * @param array the input array
 	 * @return the sorted array
@@ -27,7 +27,7 @@ public class MergeSort {
 	}
 
 	/**
-	 * Divide array and process sorting after. It is used internally for the
+	 * Divides the array and processes sorting after. It is used internally for the
 	 * recursive call.
 	 * 
 	 * @param array the array to divide and conquer
