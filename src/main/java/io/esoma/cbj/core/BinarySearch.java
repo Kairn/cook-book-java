@@ -29,17 +29,39 @@ public class BinarySearch {
 	}
 
 	/**
-	 * Performs the basic binary search but instead of returning -1 when a value is
-	 * not found, the appropriate index for inserting the value into the array so
-	 * that the array remains sorted is returned. This is leveraged in the binary
-	 * insertion sort.
+	 * Performs the basic binary search but strictly favors finding the leftmost
+	 * index of the search target when duplicates exist. Only searches the array
+	 * within the bounds specified by the inputs. Regardless of whether the target
+	 * value exists in the array, this method returns the leftmost index at which
+	 * the target can be inserted so that the array remains sorted.
 	 * 
-	 * @param array  the integer array to search, ascending order is assumed
+	 * @param array  an integer array of ascending order
 	 * @param target the value to search
-	 * @return the index for inserting the target into the array after which it
-	 *         remains sorted
+	 * @param bin    the left bound
+	 * @param end    the right bound
+	 * @return an imaginary index for the target to be inserted as the leftmost
+	 *         element of its duplicates
 	 */
-	public static int getIndexInt(int[] array, int target) {
-		return 0;
+	public static int searchIntLeft(int[] array, int target, int bin, int end) {
+		return bin;
 	}
+
+	/**
+	 * Performs the basic binary search but strictly favors finding the rightmost
+	 * index of the search target when duplicates exist. Only searches the array
+	 * within the bounds specified by the inputs. Regardless of whether the target
+	 * value exists in the array, this method returns the rightmost index at which
+	 * the target can be inserted so that the array remains sorted.
+	 * 
+	 * @param array  an integer array of ascending order
+	 * @param target the value to search
+	 * @param bin    the left bound
+	 * @param end    the right bound
+	 * @return an imaginary index for the target to be inserted as the rightmost
+	 *         element of its duplicates
+	 */
+	public static int searchIntRight(int[] array, int target, int bin, int end) {
+		return end;
+	}
+
 }

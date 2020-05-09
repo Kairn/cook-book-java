@@ -83,4 +83,5 @@ public class Banner {
 	public static String getSpecialBanner(String title, int num) {
 		return getCommonBanner(title, num, STAR);
 	}
+
 }
