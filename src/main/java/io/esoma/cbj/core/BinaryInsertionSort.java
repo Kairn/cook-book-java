@@ -16,4 +16,19 @@ package io.esoma.cbj.core;
  */
 public class BinaryInsertionSort {
 
+	/**
+	 * Performs in-place insertion of elements starting from the next unsorted index
+	 * given to the method. It will not waste time sorting the entire region
+	 * specified by the bounds if there is a sorted left portion.
+	 * 
+	 * @param array the source array to perform sorting
+	 * @param bin   the left bound
+	 * @param end   the right bound
+	 * @param next  the first unsorted index, anything between it and the left bound
+	 *              is assumed to be sorted
+	 */
+	public static void sortOnline(int[] array, int bin, int end, int next) {
+		//
+	}
+
 }

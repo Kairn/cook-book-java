@@ -25,7 +25,24 @@ public class BinarySearch {
 	 * @return the target's index or -1 if not existent
 	 */
 	public static int searchInt(int[] array, int target) {
-		return -1;
+		int lo = 0;
+		int hi = array.length - 1;
+
+		while (lo != hi) {
+			// Find the middle point, leaning towards left.
+			int mid = (lo + hi) / 2;
+			int temp = array[mid];
+			if (temp == target) {
+				return mid;
+			} else if (temp > target) {
+				hi = mid;
+			} else {
+				// Since the middle point leans left, this always avoid infinite cycle.
+				lo = mid + 1;
+			}
+		}
+
+		return array[lo] == target ? lo : -1;
 	}
 
 	/**
@@ -43,7 +60,18 @@ public class BinarySearch {
 	 *         element of its duplicates
 	 */
 	public static int searchIntLeft(int[] array, int target, int bin, int end) {
-		return bin;
+		while (bin != end) {
+			int mid = (bin + end) / 2;
+			int temp = array[mid];
+			// Always nail it down to one single element, favoring the left side.
+			if (temp >= target) {
+				end = mid;
+			} else {
+				bin = mid + 1;
+			}
+		}
+
+		return array[bin] >= target ? bin : bin + 1;
 	}
 
 	/**
@@ -61,7 +89,18 @@ public class BinarySearch {
 	 *         element of its duplicates
 	 */
 	public static int searchIntRight(int[] array, int target, int bin, int end) {
-		return end;
+		while (bin != end) {
+			int mid = (bin + end) / 2;
+			int temp = array[mid];
+			// Always nail it down to one single element, favoring the right side.
+			if (temp > target) {
+				end = mid;
+			} else {
+				bin = mid + 1;
+			}
+		}
+
+		return array[bin] <= target ? bin + 1 : bin;
 	}
 
 }
