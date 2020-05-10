@@ -1,9 +1,16 @@
 package io.esoma.cbj.core;
 
+/**
+ * Dummy class for testing the project setup. No practical use.
+ * 
+ * @author Eddy Soma
+ *
+ */
 public class HelloWorld {
 
 	/**
-	 * For testing the project and JUnit connectivity.
+	 * Tests the project build flow and JUnit connectivity by printing out a test
+	 * string to the debug console and returning the same for the unit test.
 	 * 
 	 * @return a test string
 	 */

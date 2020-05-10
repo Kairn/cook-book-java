@@ -28,7 +28,22 @@ public class BinaryInsertionSort {
 	 *              is assumed to be sorted
 	 */
 	public static void sortOnline(int[] array, int bin, int end, int next) {
-		//
+		// The first element is obviously sorted.
+		if (next <= bin) {
+			next = bin + 1;
+		}
+
+		// Looping through all elements that need to be inserted (sorted).
+		for (int i = next; i <= end; ++i) {
+			int it = array[i];
+
+			// Perform binary search to find the insertion spot.
+			// To maintain stability, we insert at the rightmost index.
+			int target = BinarySearch.searchIntRight(array, it, bin, i - 1);
+
+			// Insert the element into the sorted region.
+			ArrayCore.insertInt(array, i, target);
+		}
 	}
 
 }
