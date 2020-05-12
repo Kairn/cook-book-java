@@ -30,10 +30,13 @@ public class TimSort {
 	// mode for merging.
 	// A high number can be set to disable galloping.
 	private static final int MIN_GALLOP_INIT = 7;
+	private static final boolean ENABLE_GALLOP = true;
 
 	// This keeps track of the ideal galloping threshold which adapts appropriately
 	// based on the data for each sorting case.
 	private static int min_gallop = MIN_GALLOP_INIT;
+	// This controls the merge mode.
+	private static boolean gallop_mode = false;
 	// The minimum length of a run will be calculated at the start of the algorithm.
 	private static int min_run = 32;
 	// The stack of runs
@@ -187,7 +190,6 @@ public class TimSort {
 		int rBin = rRun.getLb();
 		int rEnd = rRun.getRb();
 
-		mergeLo(array, lBin, rEnd, lEnd);
 		// New bounds after binary search.
 		int nlb = BinarySearch.searchIntRight(array, array[rBin], lBin, lEnd);
 		int nrb = BinarySearch.searchIntLeft(array, array[lEnd], rBin, rEnd) - 1;
@@ -197,10 +199,10 @@ public class TimSort {
 		// Decide the merge direction. Favor left.
 		if (lSize > 0 && rSize >= lSize) {
 			// Merge starts from the lower end.
-			mergeLo(array, lBin, rEnd, lEnd);
+			mergeLo(array, nlb, nrb, lEnd);
 		} else if (rSize > 0 && lSize > rSize) {
 			// Merge starts from the higher end.
-			mergeHi(array, lBin, rEnd, rBin);
+			mergeHi(array, nlb, nrb, rBin);
 		}
 
 		// Recursively call until no longer needed.
@@ -224,6 +226,17 @@ public class TimSort {
 		int lp = 0;
 		int rp = mid + 1;
 
+		if (!ArrayCore.checkIntAsc(tempL, 0, tempL.length - 1) || !ArrayCore.checkIntAsc(array, mid + 1, end)) {
+			System.out.println("BAD!!");
+		}
+
+		// Keep track of the win streak. Positive is right, and negative is left.
+		int streak = 0;
+		// The run from which we select the first element to search.
+		boolean leftGallop = true;
+		// If galloping is not paying off, will shutdown on the next bad result.
+		boolean badGallop = false;
+
 		for (int i = bin; i <= end; ++i) {
 			if (lp >= tempL.length) {
 				array[i] = array[rp];
@@ -234,13 +247,70 @@ public class TimSort {
 			} else {
 				int le = tempL[lp];
 				int re = array[rp];
-				// Need to maintain stability.
-				if (le <= re) {
-					array[i] = le;
-					++lp;
+				if (!gallop_mode) {
+					// One pair at a time mode (pairing).
+					if (le <= re) {
+						// Left run wins.
+						streak = Math.min(-1, streak - 1);
+						// Need to maintain stability.
+						array[i] = le;
+						++lp;
+					} else {
+						streak = Math.max(1, streak + 1);
+						array[i] = re;
+						++rp;
+					}
+					// Check if we need to switch mode.
+					if (Math.abs(streak) >= min_gallop) {
+						gallop_mode = ENABLE_GALLOP;
+						streak = 0;
+					}
 				} else {
-					array[i] = re;
-					++rp;
+					// Galloping mode.
+					// Keep track of the galloping payoff.
+					int gp = 0;
+					if (leftGallop) {
+						// Left search.
+						int rlp = BinarySearch.searchIntLeft(array, le, rp, end);
+						gp = rlp - rp;
+						// Load the right chunk.
+						while (rp < rlp) {
+							array[i] = array[rp];
+							++i;
+							++rp;
+						}
+						// Move the left run element.
+						array[i] = le;
+						++lp;
+					} else {
+						// Right search.
+						int lrp = BinarySearch.searchIntRight(tempL, re, lp, tempL.length - 1);
+						gp = lrp - lp;
+						while (lp < lrp) {
+							array[i] = tempL[lp];
+							++i;
+							++lp;
+						}
+						// Move the right run element.
+						array[i] = re;
+						++rp;
+					}
+					// Evaluate galloping.
+					leftGallop = !leftGallop;
+					if (gp >= min_gallop) {
+						// Galloping is paying off.
+						--min_gallop;
+					} else {
+						if (badGallop) {
+							// Switch back to pairing mode.
+							gallop_mode = false;
+							badGallop = false;
+							++min_gallop;
+						} else {
+							badGallop = true;
+							++min_gallop;
+						}
+					}
 				}
 			}
 		}
@@ -263,6 +333,14 @@ public class TimSort {
 		int rp = tempR.length - 1;
 		int lp = mid - 1;
 
+		if (!ArrayCore.checkIntAsc(tempR, 0, tempR.length - 1) || !ArrayCore.checkIntAsc(array, bin, mid - 1)) {
+			System.out.println("BAD!!");
+		}
+
+		int streak = 0;
+		boolean rightGallop = true;
+		boolean badGallop = false;
+
 		for (int i = end; i >= bin; --i) {
 			if (rp < 0) {
 				array[i] = array[lp];
@@ -273,13 +351,65 @@ public class TimSort {
 			} else {
 				int re = tempR[rp];
 				int le = array[lp];
-				// Again, stability.
-				if (re >= le) {
-					array[i] = re;
-					--rp;
+				if (!gallop_mode) {
+					// Pairing mode.
+					if (re >= le) {
+						streak = Math.max(1, streak + 1);
+						// Again, stability.
+						array[i] = re;
+						--rp;
+					} else {
+						streak = Math.min(-1, streak - 1);
+						array[i] = le;
+						--lp;
+					}
+					// Check if we need to switch mode.
+					if (Math.abs(streak) >= min_gallop) {
+						gallop_mode = ENABLE_GALLOP;
+						streak = 0;
+					}
 				} else {
-					array[i] = le;
-					--lp;
+					// Galloping mode.
+					int gp = 0;
+					if (rightGallop) {
+						// Right search.
+						int lrp = BinarySearch.searchIntRight(array, re, bin, lp);
+						gp = lp - lrp;
+						while (lp > lrp) {
+							array[i] = array[lp];
+							--i;
+							--lp;
+						}
+						array[i] = re;
+						--rp;
+					} else {
+						// Left search.
+						int rlp = BinarySearch.searchIntLeft(tempR, le, 0, rp);
+						gp = rp - rlp;
+						while (rp > rlp) {
+							array[i] = tempR[rp];
+							--i;
+							--rp;
+						}
+						array[i] = le;
+						--lp;
+					}
+					// Evaluate galloping.
+					rightGallop = !rightGallop;
+					if (gp >= min_gallop) {
+						// Galloping is paying off.
+						--min_gallop;
+					} else {
+						if (badGallop) {
+							// Switch back to pairing mode.
+							gallop_mode = false;
+							badGallop = false;
+							++min_gallop;
+						} else {
+							badGallop = true;
+							++min_gallop;
+						}
+					}
 				}
 			}
 		}
