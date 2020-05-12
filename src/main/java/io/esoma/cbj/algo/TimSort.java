@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import io.esoma.cbj.core.ArrayCore;
 import io.esoma.cbj.core.BinaryInsertionSort;
+import io.esoma.cbj.core.BinarySearch;
 
 /**
  * Class for implementing the Timsort algorithm. Timsort is a hybrid stable
@@ -71,13 +72,13 @@ public class TimSort {
 				newRun = false;
 				lb = i;
 				// If only one element remains, we push it to the stack.
-				if (i + 1 == n) {
+				if (i == n - 1) {
 					run_stack.push(new Run(i, i));
 					break;
 				} else {
-					// A run is at least a length of 2, we will decide the order.
-					rb = ++i;
+					// A run has at least a length of 2, we will decide the order.
 					asc = array[i + 1] >= array[i];
+					rb = ++i;
 				}
 			} else {
 				// Try to add to the run.
@@ -90,13 +91,14 @@ public class TimSort {
 					}
 					// Check if the current run has reaches required length.
 					// Insertion sort is used for adding additional elements if not.
-					if (rb - lb > min_run) {
+					if (rb - lb + 1 >= min_run) {
 						// This element needs to be reused for the new run.
 						--i;
 					} else {
 						// Collect more elements
 						rb = Math.min(n - 1, lb + min_run - 1);
 						BinaryInsertionSort.sortOnline(array, lb, rb, i);
+						i = rb;
 					}
 					// Push the natural or crafted run.
 					run_stack.push(new Run(lb, rb));
@@ -135,7 +137,152 @@ public class TimSort {
 	 * @param force
 	 */
 	private static void mergeCollapse(int[] array, boolean force) {
-		//
+		if (run_stack.size() < 2) {
+			return;
+		}
+
+		Run lRun = null;
+		Run rRun = null;
+
+		if (run_stack.size() == 2 && force) {
+			rRun = run_stack.pop();
+			lRun = run_stack.pop();
+		} else if (run_stack.size() > 2) {
+			// Load the top three runs and check the merge condition.
+			Run c = run_stack.pop();
+			Run b = run_stack.pop();
+			Run a = run_stack.pop();
+			// Two invariants specified by the author.
+			if ((b.getLen() > c.getLen() && a.getLen() > (b.getLen() + c.getLen())) && !force) {
+				// Return the runs to the stack.
+				run_stack.push(a);
+				run_stack.push(b);
+				run_stack.push(c);
+				return;
+			}
+
+			// Merge is needed.
+			if (c.getLen() > a.getLen()) {
+				// Merge a and b.
+				lRun = a;
+				rRun = b;
+				run_stack.push(new Run(a.getLb(), b.getRb()));
+				run_stack.push(c);
+			} else {
+				// Merge b and c.
+				lRun = b;
+				rRun = c;
+				run_stack.push(a);
+				run_stack.push(new Run(b.getLb(), c.getRb()));
+			}
+		} else {
+			// Only 2 runs in the stack while in the process.
+			return;
+		}
+
+		// Further shrink the merging size by searching for elements already suited in
+		// the right place on both runs.
+		int lBin = lRun.getLb();
+		int lEnd = lRun.getRb();
+		int rBin = rRun.getLb();
+		int rEnd = rRun.getRb();
+
+		mergeLo(array, lBin, rEnd, lEnd);
+		// New bounds after binary search.
+		int nlb = BinarySearch.searchIntRight(array, array[rBin], lBin, lEnd);
+		int nrb = BinarySearch.searchIntLeft(array, array[lEnd], rBin, rEnd) - 1;
+		int lSize = lEnd - nlb + 1;
+		int rSize = nrb - rBin + 1;
+
+		// Decide the merge direction. Favor left.
+		if (lSize > 0 && rSize >= lSize) {
+			// Merge starts from the lower end.
+			mergeLo(array, lBin, rEnd, lEnd);
+		} else if (rSize > 0 && lSize > rSize) {
+			// Merge starts from the higher end.
+			mergeHi(array, lBin, rEnd, rBin);
+		}
+
+		// Recursively call until no longer needed.
+		mergeCollapse(array, force);
+	}
+
+	/**
+	 * Merges two runs starting at the left bound. Assumes the left side is shorter.
+	 * Automatically puts the left run into temporary memory and starts pairing
+	 * mode.
+	 * 
+	 * @param array the source array
+	 * @param bin   the beginning index
+	 * @param end   the ending index
+	 * @param mid   the ending index of the left run
+	 */
+	private static void mergeLo(int[] array, int bin, int end, int mid) {
+		// Copy the left run into temporary memory.
+		int[] tempL = ArrayCore.copyInt(array, bin, mid);
+		// Index pointers.
+		int lp = 0;
+		int rp = mid + 1;
+
+		for (int i = bin; i <= end; ++i) {
+			if (lp >= tempL.length) {
+				array[i] = array[rp];
+				++rp;
+			} else if (rp > end) {
+				array[i] = tempL[lp];
+				++lp;
+			} else {
+				int le = tempL[lp];
+				int re = array[rp];
+				// Need to maintain stability.
+				if (le <= re) {
+					array[i] = le;
+					++lp;
+				} else {
+					array[i] = re;
+					++rp;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Merges two runs starting at the right bound. Assumes the right side is
+	 * shorter. Automatically puts the right run into temporary memory and starts
+	 * pairing mode.
+	 * 
+	 * @param array the source array
+	 * @param bin   the beginning index
+	 * @param end   the ending index
+	 * @param mid   the ending index of the right run
+	 */
+	private static void mergeHi(int[] array, int bin, int end, int mid) {
+		// Copy the left run into temporary memory.
+		int[] tempR = ArrayCore.copyInt(array, mid, end);
+
+		int rp = tempR.length - 1;
+		int lp = mid - 1;
+
+		for (int i = end; i >= bin; --i) {
+			if (rp < 0) {
+				array[i] = array[lp];
+				--lp;
+			} else if (lp < bin) {
+				array[i] = tempR[rp];
+				--rp;
+			} else {
+				int re = tempR[rp];
+				int le = array[lp];
+				// Again, stability.
+				if (re >= le) {
+					array[i] = re;
+					--rp;
+				} else {
+					array[i] = le;
+					--lp;
+				}
+			}
+		}
 	}
 
 	/**
@@ -193,6 +340,10 @@ class Run {
 
 	public int getRb() {
 		return rb;
+	}
+
+	public int getLen() {
+		return this.rb - this.lb + 1;
 	}
 
 }

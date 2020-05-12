@@ -84,4 +84,51 @@ public class ArrayCore {
 		array[target] = is;
 	}
 
+	/**
+	 * Copies the elements within the bounds of the original array into a new array
+	 * of that exact length.
+	 * 
+	 * @param array the source array
+	 * @param bin   the left bound
+	 * @param end   the right bound
+	 * @return the copied array, an empty array will be return for invalid range
+	 */
+	public static int[] copyInt(int[] array, int bin, int end) {
+		if (end < bin) {
+			return new int[0];
+		}
+
+		int len = end - bin + 1;
+		int[] copy = new int[len];
+
+		for (int i = 0; i < len; ++i) {
+			copy[i] = array[bin + i];
+		}
+
+		return copy;
+	}
+
+	/**
+	 * Checks if the given integer array of the specified range is in ascending
+	 * (non-descending) order. False is returned if the array/range is empty.
+	 * 
+	 * @param array the input array
+	 * @param bin   the left bound
+	 * @param end   the right bound
+	 * @return
+	 */
+	public static boolean checkIntAsc(int[] array, int bin, int end) {
+		if (end < bin || array.length < 1) {
+			return false;
+		}
+
+		for (int i = bin + 1; i <= end; ++i) {
+			if (array[i] < array[i - 1]) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

@@ -116,4 +116,27 @@ public class ArrayCoreTest {
 		assertArrayEquals(old, inserted);
 	}
 
+	@Test
+	public void testCheckIntAsc1() throws Exception {
+		int[] array = new int[] { 1, 2, 4, 5, 5, 6, 6, 8, 8, 8, 8, 9, 9, 10, 11, 12, 14, 16, 18, 19, 21, 21, 23, 23, 24,
+				24, 25, 26, 27, 28, 28, 28, 31, 32, 34, 35, 36, 37, 37, 37, 39, 40, 40, 42, 43, 44, 45, 46, 46, 46, 46,
+				47, 47, 49, 53, 55, 56, 57, 58, 58, 60, 63, 63, 64, 65, 65, 66, 66, 70, 71, 72, 72, 72, 73, 73, 74, 77,
+				78, 78, 80, 80, 80, 81, 81, 82, 82, 82, 85, 86, 89, 89, 90, 92, 94, 95, 95, 96, 96, 98, 100 };
+		assertTrue(ArrayCore.checkIntAsc(array, 0, array.length - 1));
+	}
+
+	@Test
+	public void testCheckIntAsc2() throws Exception {
+		int[] array = new int[] { 99, 1009, 40, 40, 40, 40, 41, 42, 43, 43, 44, 44, 45, 45, 46, 47, 48, 48, 48, 49, 49,
+				50, 5080, 90, 50 };
+		assertTrue(ArrayCore.checkIntAsc(array, 2, array.length - 4));
+	}
+
+	@Test
+	public void testCheckIntAsc3() throws Exception {
+		int[] array = new int[] { 684, 684, 685, 692, 703, 708, 710, 713, 720, 766, 777, 884, 802, 804, 813, 817, 823,
+				826, 878, 902, 902, 906, 908, 909, 932, 934, 936, 942, 987, 996 };
+		assertTrue(!ArrayCore.checkIntAsc(array, 0, array.length - 1));
+	}
+
 }
