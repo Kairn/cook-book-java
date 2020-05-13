@@ -226,10 +226,6 @@ public class TimSort {
 		int lp = 0;
 		int rp = mid + 1;
 
-		if (!ArrayCore.checkIntAsc(tempL, 0, tempL.length - 1) || !ArrayCore.checkIntAsc(array, mid + 1, end)) {
-			System.out.println("BAD!!");
-		}
-
 		// Keep track of the win streak. Positive is right, and negative is left.
 		int streak = 0;
 		// The run from which we select the first element to search.
@@ -333,10 +329,6 @@ public class TimSort {
 		int rp = tempR.length - 1;
 		int lp = mid - 1;
 
-		if (!ArrayCore.checkIntAsc(tempR, 0, tempR.length - 1) || !ArrayCore.checkIntAsc(array, bin, mid - 1)) {
-			System.out.println("BAD!!");
-		}
-
 		int streak = 0;
 		boolean rightGallop = true;
 		boolean badGallop = false;
@@ -373,7 +365,7 @@ public class TimSort {
 					int gp = 0;
 					if (rightGallop) {
 						// Right search.
-						int lrp = BinarySearch.searchIntRight(array, re, bin, lp);
+						int lrp = BinarySearch.searchIntRight(array, re, bin, lp) - 1;
 						gp = lp - lrp;
 						while (lp > lrp) {
 							array[i] = array[lp];
@@ -384,7 +376,7 @@ public class TimSort {
 						--rp;
 					} else {
 						// Left search.
-						int rlp = BinarySearch.searchIntLeft(tempR, le, 0, rp);
+						int rlp = BinarySearch.searchIntLeft(tempR, le, 0, rp) - 1;
 						gp = rp - rlp;
 						while (rp > rlp) {
 							array[i] = tempR[rp];
