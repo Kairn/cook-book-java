@@ -1,7 +1,10 @@
 package io.esoma.cbj.core;
 
+import io.esoma.cbj.algo.SortedSum;
+
 /**
- * Dummy class for testing the project setup. No practical use.
+ * Dummy class for testing the project setup. No practical use. It contains a
+ * driver "Main" method for testing static methods.
  * 
  * @author Eddy Soma
  *
@@ -18,6 +21,11 @@ public class HelloWorld {
 		String test = "Hello world from Cook Book Java.";
 		System.out.println("Hello, World!");
 		return test;
+	}
+
+	public static void main(String[] args) {
+		int[] array = new int[] { 1 };
+		System.out.println(SortedSum.naiveInsertion(array));
 	}
 
 }
