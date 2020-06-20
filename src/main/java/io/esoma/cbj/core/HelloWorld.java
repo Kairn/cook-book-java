@@ -1,7 +1,5 @@
 package io.esoma.cbj.core;
 
-import io.esoma.cbj.algo.SortedSum;
-
 /**
  * Dummy class for testing the project setup. No practical use. It contains a
  * driver "Main" method for testing static methods.
@@ -24,8 +22,6 @@ public class HelloWorld {
 	}
 
 	public static void main(String[] args) {
-		int[] array = new int[] { 1 };
-		System.out.println(SortedSum.naiveInsertion(array));
 	}
 
 }
