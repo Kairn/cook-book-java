@@ -115,7 +115,7 @@ public class ArrayCore {
 	 * @param array the input array
 	 * @param bin   the left bound
 	 * @param end   the right bound
-	 * @return
+	 * @return true if the array is ascending, or false otherwise
 	 */
 	public static boolean checkIntAsc(int[] array, int bin, int end) {
 		if (end < bin || array.length < 1) {
@@ -129,6 +129,26 @@ public class ArrayCore {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Converts the array into a formatted string with the specified delimiter.
+	 * 
+	 * @param array the input array
+	 * @param deli  the delimiter
+	 * @return the formatted string
+	 */
+	public static String getString(int[] array, String deli) {
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < array.length; ++i) {
+			sb.append(array[i]);
+			if (i != array.length - 1) {
+				sb.append(deli);
+			}
+		}
+
+		return sb.toString();
 	}
 
 }

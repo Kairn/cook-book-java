@@ -1,5 +1,8 @@
 package io.esoma.cbj.core;
 
+import io.esoma.cbj.algo.DeciBinary;
+import io.esoma.cbj.util.Banner;
+
 /**
  * Dummy class for testing the project setup. No practical use. It contains a
  * driver "Main" method for testing static methods.
@@ -22,6 +25,17 @@ public class HelloWorld {
 	}
 
 	public static void main(String[] args) {
+		int start = 0;
+		int end = 10010;
+		int step = 10;
+		for (int i = start; i < end; i += step) {
+			int mid = i + 10;
+			System.out.println(Banner.getSpecialBanner(i + "_" + (mid - 1), 5));
+			for (int j = i; j < mid; ++j) {
+				System.out.print(DeciBinary.deciValue(j) + " ");
+			}
+			System.out.println();
+		}
 	}
 
 }

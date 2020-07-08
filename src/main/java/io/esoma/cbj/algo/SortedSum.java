@@ -1,5 +1,12 @@
 package io.esoma.cbj.algo;
 
+import java.util.Arrays;
+
+import io.esoma.cbj.core.ArrayCore;
+import io.esoma.cbj.core.BinarySearch;
+import io.esoma.cbj.util.Banner;
+import io.esoma.cbj.util.Printer;
+
 /**
  * Class for studying the Sorted Sum problem. The task is to efficiently compute
  * the sum of the first i elements multiplied by its index (1 based) after
@@ -26,7 +33,7 @@ public class SortedSum {
 	 * @return the total of all sorted sums
 	 */
 	public static int naiveInsertion(int[] array) {
-		int total = 0;
+		long total = 0;
 		int l = array.length;
 
 		// Going through the array.
@@ -51,12 +58,12 @@ public class SortedSum {
 					}
 				}
 				// Add the weight to the total.
-				total += (j + 1) * array[j];
+				total += (j + 1) * (long) array[j];
 				total %= M;
 			}
 		}
 
-		return total;
+		return (new Long(total)).intValue();
 	}
 
 	/**
@@ -66,7 +73,48 @@ public class SortedSum {
 	 * @return the total of all sorted sums
 	 */
 	public static int optimalSum(int[] array) {
-		return 0;
+		final int len = array.length;
+		if (len == 0) {
+			return 0;
+		}
+
+		// Load the first element and setting up.
+		int[] sorted = new int[len];
+		int[] prefixSum = new int[len];
+		int sum = array[0];
+		int end = 0;
+		int prev = array[0];
+		sorted[0] = array[0];
+		prefixSum[0] = array[0];
+
+		// The cycle for collecting new elements and computing the updated sum.
+		for (int i = 1; i < len; ++i) {
+			int e = array[i];
+			// Use binary search to find the insertion index.
+			int ni = BinarySearch.searchIntRight(sorted, e, 0, end);
+			int cul = ni == 0 ? prefixSum[end] : prefixSum[end] - prefixSum[ni - 1];
+			prev += e * (ni + 1) + cul;
+			prev %= M;
+			sum += prev;
+			sum %= M;
+
+			if (i < len - 1) {
+				// Shift elements to update the sorted array.
+				for (int j = end; j >= ni; --j) {
+					sorted[j + 1] = sorted[j];
+					prefixSum[j + 1] = prefixSum[j] + e;
+				}
+				sorted[ni] = e;
+				prefixSum[ni] = e + (ni == 0 ? 0 : prefixSum[ni - 1]);
+//				System.out.println("---");
+//				System.out.println(ArrayCore.getString(sorted, ", "));
+//				System.out.println(ArrayCore.getString(prefixSum, ", "));
+//				System.out.println(sum);
+				++end;
+			}
+		}
+
+		return sum;
 	}
 
 }
