@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import io.esoma.cbj.util.Banner;
@@ -25,7 +24,6 @@ public class SortedSumTest {
 		System.out.println();
 	}
 
-	@Ignore
 	@Test
 	public void testNaiveInsertion1() throws Exception {
 		int[] array = new int[] { 4, 3, 2, 1 };
@@ -35,7 +33,6 @@ public class SortedSumTest {
 		assertTrue(expected == actual);
 	}
 
-	@Ignore
 	@Test
 	public void testNaiveInsertion2() throws Exception {
 		int[] array = new int[] { 9, 5, 8 };
@@ -45,7 +42,6 @@ public class SortedSumTest {
 		assertTrue(expected == actual);
 	}
 
-	@Ignore
 	@Test
 	public void testNaiveInsertion3() throws Exception {
 		int[] array = new int[] { 9, 5, 8, 7, 4, 12 };

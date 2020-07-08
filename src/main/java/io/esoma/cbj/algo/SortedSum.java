@@ -1,11 +1,6 @@
 package io.esoma.cbj.algo;
 
-import java.util.Arrays;
-
-import io.esoma.cbj.core.ArrayCore;
 import io.esoma.cbj.core.BinarySearch;
-import io.esoma.cbj.util.Banner;
-import io.esoma.cbj.util.Printer;
 
 /**
  * Class for studying the Sorted Sum problem. The task is to efficiently compute
@@ -25,7 +20,7 @@ public class SortedSum {
 	private static final int M = 1000000007;
 
 	/**
-	 * Process the input array from left to right in a way similar to an insertion
+	 * Processes the input array from left to right in a way similar to an insertion
 	 * sort. For each element, traverse through the sorted area, adding to the sum
 	 * by comparison, and insert the element into the sorted region.
 	 * 
@@ -63,11 +58,14 @@ public class SortedSum {
 			}
 		}
 
-		return (new Long(total)).intValue();
+		return new Long(total).intValue();
 	}
 
 	/**
-	 * ?
+	 * Follows the naive insertion sort algorithm for keeping track of the sorted
+	 * array at every index but uses robust caching to reduce the work for computing
+	 * the sum. The length of the sorted array is always equal to the amount of
+	 * processed elements so unnecessary shifting is eliminated.
 	 * 
 	 * @param array the input array
 	 * @return the total of all sorted sums
@@ -80,10 +78,10 @@ public class SortedSum {
 
 		// Load the first element and setting up.
 		int[] sorted = new int[len];
-		int[] prefixSum = new int[len];
-		int sum = array[0];
+		long[] prefixSum = new long[len];
+		long sum = array[0];
 		int end = 0;
-		int prev = array[0];
+		long prev = array[0];
 		sorted[0] = array[0];
 		prefixSum[0] = array[0];
 
@@ -92,9 +90,8 @@ public class SortedSum {
 			int e = array[i];
 			// Use binary search to find the insertion index.
 			int ni = BinarySearch.searchIntRight(sorted, e, 0, end);
-			int cul = ni == 0 ? prefixSum[end] : prefixSum[end] - prefixSum[ni - 1];
-			prev += e * (ni + 1) + cul;
-			prev %= M;
+			long cul = ni == 0 ? prefixSum[end] : prefixSum[end] - prefixSum[ni - 1];
+			prev += (long) e * (ni + 1) + cul;
 			sum += prev;
 			sum %= M;
 
@@ -106,15 +103,11 @@ public class SortedSum {
 				}
 				sorted[ni] = e;
 				prefixSum[ni] = e + (ni == 0 ? 0 : prefixSum[ni - 1]);
-//				System.out.println("---");
-//				System.out.println(ArrayCore.getString(sorted, ", "));
-//				System.out.println(ArrayCore.getString(prefixSum, ", "));
-//				System.out.println(sum);
 				++end;
 			}
 		}
 
-		return sum;
+		return new Long(sum).intValue();
 	}
 
 }
