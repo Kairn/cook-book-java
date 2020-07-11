@@ -166,7 +166,7 @@ public class DeciBinary {
 				return 0L;
 			}
 		} else if (COUNTS[d][s] == -1) {
-			// Recurse by summing up results from placing 0-9 on the dth digit.
+			// Recur by summing up results from placing 0-9 on the dth digit.
 			// Cache the values for further use.
 			COUNTS[d][s] = 0;
 			for (int i = 0; i < 10 && s >= i * (1 << d); ++i) {
