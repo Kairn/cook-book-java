@@ -15,6 +15,7 @@ public class DeciBinaryTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		DeciBinary.initCache();
 		System.out.println(Banner.getTitleBanner(START, 3));
 	}
 
@@ -117,7 +118,7 @@ public class DeciBinaryTest {
 	@Test
 	public void testDeciFromDb3() throws Exception {
 		long db = 3L;
-		long expected = 10L;
+		long expected = 2L;
 		long actual = DeciBinary.deciFromDb(db);
 		System.out.println(actual);
 		assertTrue(expected == actual);
