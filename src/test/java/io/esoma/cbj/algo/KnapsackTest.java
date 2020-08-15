@@ -94,4 +94,14 @@ public class KnapsackTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void testFitKs8() throws Exception {
+		int[] array = new int[] { 30, 11, 580, 22, 98, 7, 20, 11, 1, 4, 3, 29, 388, 24 };
+		int limit = 8888;
+		int expected = 1228;
+		int actual = Knapsack.fitKs(array, limit);
+		System.out.println(actual);
+		assertEquals(expected, actual);
+	}
+
 }

@@ -11,6 +11,9 @@ The purpose of this repository is to collect many algorithmic problems and provi
 4. Quick sort
 5. Tim sort with galloping
 
+### Searching :mag_right:
+1. Knapsack with divide and conquer
+
 ### Dynamic Programming :rocket:
 1. Greatest common divisor
 2. Longest common subsequence
