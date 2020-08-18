@@ -1,5 +1,8 @@
 package io.esoma.cbj.algo;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Class for illustrating Dijkstra's algorithm. This is an algorithm for finding
  * the shortest paths between nodes in a graph, and it was conceived by computer
@@ -29,8 +32,43 @@ public class Dijkstra {
 	 */
 	public static int[] djFind(int[][] graph) {
 		int n = graph.length;
-		// Create the result set
+		// Create the result set.
 		int[] results = new int[n];
+		// Initialize with -1.
+		for (int i = 0; i < n; ++i) {
+			results[i] = -1;
+		}
+
+		// Start the traversal process with the 0th node.
+		Queue<Integer> nodeQueue = new LinkedList<>();
+		nodeQueue.add(0);
+		// The distance to itself is 0.
+		results[0] = 0;
+
+		// Check all neighbors and repeat.
+		while (!nodeQueue.isEmpty()) {
+			int nodeId = nodeQueue.poll();
+			// Current distance value.
+			int cur = results[nodeId];
+			for (int i = 0; i < n; ++i) {
+				int dist = graph[nodeId][i];
+				if (i == nodeId) {
+					// Skip the node itself.
+					continue;
+				}
+				if (dist != -1) {
+					// Direct path exists.
+					// Calculate new distance value and update if smaller.
+					if (results[i] == -1) {
+						results[i] = cur + dist;
+						nodeQueue.offer(i);
+					} else if (cur + dist < results[i]) {
+						results[i] = cur + dist;
+						nodeQueue.offer(i);
+					}
+				}
+			}
+		}
 
 		return results;
 	}
