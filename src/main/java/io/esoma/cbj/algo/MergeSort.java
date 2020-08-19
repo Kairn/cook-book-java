@@ -6,7 +6,6 @@ package io.esoma.cbj.algo;
  * produce a stable sort. Merge sort is a divide and conquer algorithm that was
  * invented by John von Neumann in 1945.
  * 
- * 
  * @author Eddy Soma
  *
  */

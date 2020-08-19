@@ -11,7 +11,6 @@ import java.util.Queue;
  * single node as the source node and finds shortest paths from the source to
  * all other nodes in the graph, producing a shortest-path tree.
  * 
- * 
  * @author Eddy Soma
  *
  */
