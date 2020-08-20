@@ -21,6 +21,7 @@ The purpose of this repository is to collect many algorithmic problems and provi
 
 ### Graph Theory :globe_with_meridians:
 1. Dijkstra's algorithm
+2. Minimum spanning tree
 
 ### Miscellaneous :balloon:
 1. Sorted sum (from HackerRank)
