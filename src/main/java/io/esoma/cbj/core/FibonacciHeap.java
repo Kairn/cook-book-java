@@ -1,6 +1,8 @@
 package io.esoma.cbj.core;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * Class for implementing the Fibonacci Heap data structure. A Fibonacci heap is
@@ -14,7 +16,7 @@ import java.util.LinkedList;
  *
  * @param <E> the type of elements held in this heap
  */
-public class FibonacciHeap<E> {
+public class FibonacciHeap<E extends Comparable<E>> {
 
 	/**
 	 * Helper class for heap nodes.
@@ -23,15 +25,14 @@ public class FibonacciHeap<E> {
 	 *
 	 * @param <E> the type of elements stored in the heap
 	 */
-	private static class FhNode<E> {
+	private static class FhNode<E extends Comparable<E>> {
 
 		E key;
-		boolean marked;
-		FhNode<E> parent;
-		LinkedList<E> children;
+		LinkedList<FhNode<E>> children;
 
 		FhNode(E key) {
 			this.key = key;
+			this.children = new LinkedList<>();
 		}
 
 		/**
@@ -44,6 +45,37 @@ public class FibonacciHeap<E> {
 				return 0;
 			} else {
 				return this.children.size();
+			}
+		}
+
+		/**
+		 * Writes all the elements under the node into the given StringBuilder for
+		 * debugging and reporting purpose.
+		 * 
+		 * @param bu
+		 */
+		void reportElements(StringBuilder bu) {
+			bu.append(this.key.toString());
+			bu.append(' ');
+			if (this.children != null) {
+				for (FhNode<E> n : this.children) {
+					n.reportElements(bu);
+				}
+			}
+		}
+
+		/**
+		 * Compares to another node and checks if the key is less in comparison.
+		 * 
+		 * @param other the other node
+		 * @return true if the key in the current node is less than the key in the other
+		 *         node, or false otherwise
+		 */
+		boolean isLess(FhNode<E> other) {
+			if (other == null) {
+				return false;
+			} else {
+				return this.key.compareTo(other.key) < 0;
 			}
 		}
 
@@ -79,7 +111,16 @@ public class FibonacciHeap<E> {
 	 * @param e
 	 */
 	public void push(E e) {
-		//
+		// Create a new node for the element.
+		FhNode<E> n = new FhNode<>(e);
+		// Append the node to the chain.
+		this.mainChain.add(n);
+		++this.size;
+
+		// Update the min key if necessary.
+		if (this.minNode == null || n.isLess(this.minNode)) {
+			this.minNode = n;
+		}
 	}
 
 	/**
@@ -104,17 +145,91 @@ public class FibonacciHeap<E> {
 	 * @return the head of the heap, or null of the heap is empty
 	 */
 	public E popMin() {
+		if (this.minNode == null) {
+			return null;
+		}
+
+		// Hold on to the reference for the return value.
 		E min = this.minNode.key;
+		// Remove the min node.
+		this.mainChain.remove(this.minNode);
+		// Promote its children if any.
+		if (this.minNode.children != null) {
+			for (FhNode<E> mnc : this.minNode.children) {
+				this.mainChain.add(mnc);
+			}
+		}
+
+		// Prepare the next min key.
+		--this.size;
+		if (this.mainChain.size() == 0) {
+			this.minNode = null;
+		} else {
+			FhNode<E> newMn = this.mainChain.element();
+			Map<Integer, FhNode<E>> map = new HashMap<>();
+
+			while (!this.mainChain.isEmpty()) {
+				FhNode<E> n = this.mainChain.poll();
+				// Update the next min key if less.
+				if (n.isLess(newMn)) {
+					newMn = n;
+				}
+
+				// Merge node operation.
+				this.mergeNode(map, n);
+			}
+
+			// Populate the main chain again.
+			for (FhNode<E> n : map.values()) {
+				this.mainChain.add(n);
+			}
+
+			// Set the next min key.
+			this.minNode = newMn;
+		}
+
 		return min;
 	}
 
-	@Override
 	/**
+	 * Recursively merges nodes of the same degree based on the given map of degree
+	 * to node.
+	 * 
+	 * @param map  a map containing nodes of different degrees
+	 * @param node the node to be merged
+	 */
+	private void mergeNode(Map<Integer, FhNode<E>> map, FhNode<E> node) {
+		int deg = node.degree();
+		if (map.get(deg) == null) {
+			map.put(deg, node);
+		} else {
+			FhNode<E> pn = map.remove(deg);
+			if (node.isLess(pn)) {
+				node.children.add(pn);
+				pn = node;
+			} else {
+				pn.children.add(node);
+			}
+
+			// Repeat the process.
+			this.mergeNode(map, pn);
+		}
+	}
+
+	@Override
+	/*
 	 * Returns a string representation of the Fibonacci heap. All elements will be
 	 * listed but in arbitrary order.
 	 */
 	public String toString() {
-		return "FibonacciHeap []";
+		StringBuilder bu = new StringBuilder();
+		if (this.mainChain != null) {
+			for (FhNode<E> n : this.mainChain) {
+				n.reportElements(bu);
+			}
+		}
+
+		return "FibonacciHeap [" + bu.toString().trim() + "]";
 	}
 
 }
