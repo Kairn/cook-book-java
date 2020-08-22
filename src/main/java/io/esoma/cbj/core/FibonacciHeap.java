@@ -23,13 +23,16 @@ public class FibonacciHeap<E extends Comparable<E>> {
 	 * 
 	 * @author Eddy Soma
 	 *
-	 * @param <E> the type of elements stored in the heap
+	 * @param <E> the type of elements stored in the node
 	 */
 	private static class FhNode<E extends Comparable<E>> {
 
 		E key;
 		LinkedList<FhNode<E>> children;
 
+		/*
+		 * Constructor for creating a basic node with the given key.
+		 */
 		FhNode(E key) {
 			this.key = key;
 			this.children = new LinkedList<>();
@@ -87,9 +90,10 @@ public class FibonacciHeap<E extends Comparable<E>> {
 	private LinkedList<FhNode<E>> mainChain;
 
 	/*
-	 * Constructor for creating a blank Fibonacci heap.
+	 * Default constructor for creating a blank Fibonacci heap.
 	 */
 	public FibonacciHeap() {
+		super();
 		this.mainChain = new LinkedList<>();
 	}
 
@@ -108,7 +112,7 @@ public class FibonacciHeap<E extends Comparable<E>> {
 	 * appended to the main chain. The pointer to the minimum element will be
 	 * updated if necessary.
 	 * 
-	 * @param e
+	 * @param e the element to be inserted
 	 */
 	public void push(E e) {
 		// Create a new node for the element.
