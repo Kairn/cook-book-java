@@ -94,7 +94,7 @@ public class AvlTreeTest {
 		assertEquals(expected, actual);
 
 		expected = 1;
-		actual = avt.toSortedArray()[0];
+		actual = avt.toSortedList().get(0);
 		System.out.println(avt);
 		assertEquals(expected, actual);
 
@@ -136,6 +136,7 @@ public class AvlTreeTest {
 
 		avt.delete(550);
 		expected = 17;
+		actual = avt.getSize();
 		System.out.println(avt);
 		assertEquals(expected, actual);
 
@@ -150,11 +151,12 @@ public class AvlTreeTest {
 		avt.delete(67);
 		avt.delete(111);
 		expected = 16;
+		actual = avt.getSize();
 		System.out.println(avt);
 		assertEquals(expected, actual);
 
 		expected = 9999;
-		actual = avt.toSortedArray()[avt.getSize() - 1];
+		actual = avt.toSortedList().get(avt.getSize() - 1);
 		System.out.println(avt);
 		assertEquals(expected, actual);
 
@@ -163,14 +165,14 @@ public class AvlTreeTest {
 		avt.delete(9999);
 		avt.delete(9);
 		expected = 12;
-		actual = avt.toSortedArray()[1];
+		actual = avt.toSortedList().get(1);
 		System.out.println(avt);
 		assertEquals(expected, actual);
 
 	}
 
 	@Test
-	public void testToSortedArray() throws Exception {
+	public void testToSortedList() throws Exception {
 		AvlTree<Integer> tree = new AvlTree<>();
 		int[] array = new int[] { 56, 94, 80, 88, 23, 5, 0, 68, 49, 60, 15, 66, 12, 35, -3, 69, 89, 12, 46, 11, 24, -5,
 				86, 5, 33, 5, 86, 52, 48, 76, 4, 55, 15, 51, 102, 67, 8, 103, 92, 84, 92, 38, 48, 57, 13, 15, 49, 87,
@@ -180,12 +182,12 @@ public class AvlTreeTest {
 			tree.insert(a);
 		}
 
-		int[] expected = new int[] { -5, -3, -3, -2, 0, 4, 4, 4, 5, 5, 5, 5, 5, 5, 8, 8, 9, 11, 12, 12, 13, 13, 15, 15,
-				15, 15, 16, 19, 23, 24, 24, 29, 31, 31, 32, 33, 33, 34, 35, 36, 37, 38, 40, 40, 41, 42, 42, 46, 46, 47,
-				48, 48, 49, 49, 49, 51, 52, 55, 56, 57, 60, 62, 62, 63, 66, 67, 68, 68, 69, 73, 73, 73, 74, 76, 79, 80,
-				82, 83, 84, 85, 85, 86, 86, 87, 88, 89, 89, 89, 90, 92, 92, 92, 94, 96, 100, 101, 102, 103, 104, 104 };
+		// Duplicates are not included.
+		int[] expected = new int[] { -5, -3, -2, 0, 4, 5, 8, 9, 11, 12, 13, 15, 16, 19, 23, 24, 29, 31, 32, 33, 34, 35,
+				36, 37, 38, 40, 41, 42, 46, 47, 48, 49, 51, 52, 55, 56, 57, 60, 62, 63, 66, 67, 68, 69, 73, 74, 76, 79,
+				80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 94, 96, 100, 101, 102, 103, 104 };
 		int i = 0;
-		for (int e : tree.toSortedArray()) {
+		for (int e : tree.toSortedList()) {
 			assertEquals(expected[i], e);
 			++i;
 		}
