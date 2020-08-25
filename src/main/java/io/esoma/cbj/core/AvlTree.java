@@ -25,7 +25,7 @@ public class AvlTree<E extends Comparable<E>> {
 	 *
 	 * @param <E> the type of elements held in the node
 	 */
-	public static class AtNode<E extends Comparable<E>> {
+	private static class AtNode<E extends Comparable<E>> {
 
 		E key;
 		AtNode<E> parent;
@@ -46,7 +46,7 @@ public class AvlTree<E extends Comparable<E>> {
 
 	// Internal state.
 	private int size;
-	public AtNode<E> root;
+	private AtNode<E> root;
 	private AtNode<E> del;
 
 	/*
