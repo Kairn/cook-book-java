@@ -22,14 +22,19 @@ public class DetectSingleByteXor {
 	private static final int THRESHOLD = 95;
 
 	public static void main(String[] args) {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader()
-				.getResourceAsStream("DetectSingleByteXorTestCases.txt")));
-		reader.lines().forEach(encrypted -> {
-			String decrypted = SingleByteXorCipher.decryptMessage(encrypted);
-			if (isGoodMessage(decrypted)) {
-				System.out.format("Detected cipher <%s> which yields: %s", encrypted, decrypted);
-			}
-		});
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		String inputFileName = "DetectSingleByteXorTestCases.txt";
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(loader.getResourceAsStream(inputFileName)))) {
+			br.lines().forEach(encrypted -> {
+				String decrypted = SingleByteXorCipher.decryptMessage(encrypted);
+				if (isGoodMessage(decrypted)) {
+					System.out.format("Detected cipher <%s> which yields: %s", encrypted, decrypted);
+				}
+			});
+		} catch (Exception e) {
+			throw new IllegalStateException("Unable to read file", e);
+		}
+
 	}
 
 	private static boolean isGoodMessage(String message) {

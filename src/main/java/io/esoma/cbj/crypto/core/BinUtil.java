@@ -36,4 +36,54 @@ public class BinUtil {
 		return result;
 	}
 
+	/**
+	 * Encodes an integer value into a stream of bits. Padding of "0"s will be
+	 * applied to ensure the resulting string has a length equal to the specified
+	 * number of bits. Negative values are not supported.
+	 * 
+	 * @param value   the integer
+	 * @param numBits the number of bits on the result
+	 * @return the encoded bit stream
+	 */
+	public static String intToBitStream(int value, int numBits) {
+		if (value >= (1 << numBits) || value < 0) {
+			throw new IllegalArgumentException("Value is too large or negative");
+		}
+
+		StringBuilder builder = new StringBuilder();
+		for (int i = numBits - 1; i >= 0; --i) {
+			if (value >= (1 << i)) {
+				builder.append('1');
+				value -= 1 << i;
+			} else {
+				builder.append('0');
+			}
+		}
+
+		return builder.toString();
+	}
+
+	/**
+	 * Returns the number of bits that are "1" for a given integer.
+	 * 
+	 * @param value the integer
+	 * @param limit the highest possible bit (exclusive)
+	 * @return the number of bits set
+	 */
+	public static int getBitsSet(int value, int limit) {
+		if (value >= (1 << limit) || value < 0) {
+			throw new IllegalArgumentException("Invalid value");
+		}
+
+		int count = 0;
+		for (int i = 0; i < limit; ++i) {
+			int test = 1 << i;
+			if ((value & test) > 0) {
+				++count;
+			}
+		}
+
+		return count;
+	}
+
 }
