@@ -86,4 +86,33 @@ public class HexUtil {
 			throw new IllegalArgumentException("Invalid bits");
 		}
 	}
+
+	/**
+	 * Converts a byte (as a code point integer) into 2 hex characters.
+	 * 
+	 * @param code the code point
+	 * @return the resulting hex encoded string
+	 */
+	public static String byteToHexString(int code) {
+		if (code > Character.MAX_CODE_POINT || code < Character.MIN_CODE_POINT) {
+			throw new IllegalArgumentException("Invalid code point");
+		}
+
+		StringBuilder builder = new StringBuilder();
+		for (int i = 7; i >= 0; --i) {
+			if (code >= (1 << i)) {
+				builder.append('1');
+				code -= 1 << i;
+			} else {
+				builder.append('0');
+			}
+		}
+
+		String bits = builder.toString();
+		char[] hexParts = new char[2];
+		hexParts[0] = bitsToHexChar(bits.substring(0, 4));
+		hexParts[1] = bitsToHexChar(bits.substring(4));
+
+		return new String(hexParts);
+	}
 }
