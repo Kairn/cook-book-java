@@ -43,7 +43,7 @@ public class SingleByteXorCipher {
 			int score = 0;
 			for (int j = 0; j < rawCodes.length; ++j) {
 				int d = i ^ rawCodes[j];
-				if (Character.isAlphabetic(d) || Character.isWhitespace(d)) {
+				if (Character.isLetter(d) || Character.isWhitespace(d)) {
 					++score;
 				}
 				decCodes[j] = d;
