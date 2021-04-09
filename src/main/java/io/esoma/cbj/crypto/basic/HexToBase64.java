@@ -2,6 +2,7 @@ package io.esoma.cbj.crypto.basic;
 
 import org.apache.commons.lang3.StringUtils;
 
+import io.esoma.cbj.crypto.core.BinUtil;
 import io.esoma.cbj.crypto.core.HexUtil;
 
 /**
@@ -58,13 +59,6 @@ public class HexToBase64 {
 			throw new IllegalArgumentException("Invalid bits");
 		}
 
-		int index = 0;
-		for (int i = 0; i < BLOCK_SIZE; ++i) {
-			if (bits.charAt(i) == '1') {
-				index += 1 << (BLOCK_SIZE - 1 - i);
-			}
-		}
-
-		return BASE64_CHARS.charAt(index);
+		return BASE64_CHARS.charAt(BinUtil.bitStreamToInt(bits));
 	}
 }
