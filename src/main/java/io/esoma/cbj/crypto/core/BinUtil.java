@@ -86,4 +86,17 @@ public class BinUtil {
 		return count;
 	}
 
+	public static byte[] reduceToBytes(int[] intArray) {
+		if (intArray == null) {
+			throw new IllegalArgumentException("Invalid array");
+		}
+
+		byte[] byteArray = new byte[intArray.length];
+		for (int i = 0; i < intArray.length; ++i) {
+			byteArray[i] = (byte) intArray[i];
+		}
+
+		return byteArray;
+	}
+
 }
