@@ -1,5 +1,7 @@
 package io.esoma.cbj.crypto.core;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Class for providing Base64 related utility functions.
  * 
@@ -52,6 +54,35 @@ public class Base64Util {
 		}
 
 		return builder64.toString();
+	}
+
+	public static int[] decodeToByteArray(String encoded) {
+		if (StringUtils.isBlank(encoded)) {
+			return new int[0];
+		}
+
+		int numPads = 0;
+		StringBuilder builder = new StringBuilder();
+		for (char c : encoded.toCharArray()) {
+			if (c == PADDING) {
+				++numPads;
+			} else {
+				builder.append(BinUtil.intToBitStream(getIndex(c), BLOCK_SIZE));
+			}
+		}
+
+		String bitStream = numPads == 2 ? builder.substring(0, builder.length() - 4)
+				: numPads == 1 ? builder.substring(0, builder.length() - 2) : builder.toString();
+		if (bitStream.length() % 8 != 0) {
+			throw new IllegalStateException("Failed to decode");
+		}
+
+		int[] decoded = new int[bitStream.length() / 8];
+		for (int i = 0; i < bitStream.length(); i += 8) {
+			decoded[i / 8] = BinUtil.bitStreamToInt(bitStream.substring(i, i + 8));
+		}
+
+		return decoded;
 	}
 
 	private static char bitsToBase64Char(String bits) {

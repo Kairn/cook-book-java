@@ -15,25 +15,44 @@ public class RepeatingXor {
 	/**
 	 * Encrypts a message with the given key using repeating XOR cipher scheme. Each
 	 * byte of the message will be XORed with a byte from the key by cycling
-	 * iteration. The resulting cipher will be hex encoded.
+	 * iteration. The resulting cipher can optionally be hex encoded. This can be
+	 * used to decipher a non hex encoded cipher string as well.
 	 * 
-	 * @param message
-	 * @param key
-	 * @return
+	 * @param message the message to encrypt/decrypt
+	 * @param key     the encryption key
+	 * @param hex     if the result should be hex encoded
+	 * @return the encrypted string
 	 */
-	public static String encrypt(String message, String key) {
+	public static String create(String message, String key, boolean hex) {
 		if (StringUtils.isAnyBlank(message, key)) {
 			throw new IllegalArgumentException("Invalid message or key");
 		}
 
-		int[] cipherChars = new int[message.length()];
+		int[] rawBytes = new int[message.length()];
 		for (int i = 0; i < message.length(); ++i) {
-			cipherChars[i] = message.charAt(i) ^ key.charAt(i % key.length());
+			rawBytes[i] = message.charAt(i);
+		}
+
+		return operate(rawBytes, key, hex);
+	}
+
+	public static String create(int[] bytes, String key, boolean hex) {
+		return operate(bytes, key, hex);
+	}
+
+	private static String operate(int[] bytes, String key, boolean hex) {
+		int[] cipherChars = new int[bytes.length];
+		for (int i = 0; i < bytes.length; ++i) {
+			cipherChars[i] = bytes[i] ^ key.charAt(i % key.length());
 		}
 
 		StringBuilder builder = new StringBuilder();
 		for (int c : cipherChars) {
-			builder.append(HexUtil.byteToHexString(c));
+			if (hex) {
+				builder.append(HexUtil.byteToHexString(c));
+			} else {
+				builder.append((char) c);
+			}
 		}
 
 		return builder.toString();

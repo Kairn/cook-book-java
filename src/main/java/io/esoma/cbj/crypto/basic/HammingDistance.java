@@ -31,4 +31,17 @@ public class HammingDistance {
 		int xor = c1 ^ c2;
 		return BinUtil.getBitsSet(xor, 8);
 	}
+
+	public static int computeCharArrays(int[] chunk1, int[] chunk2) {
+		if (chunk1 == null || chunk2 == null || chunk1.length != chunk2.length) {
+			throw new IllegalArgumentException("Invalid input arrays");
+		}
+
+		int distance = 0;
+		for (int i = 0; i < chunk1.length; ++i) {
+			distance += compute((char) chunk1[i], (char) chunk2[i]);
+		}
+
+		return distance;
+	}
 }

@@ -26,7 +26,7 @@ public class DetectSingleByteXor {
 		String inputFileName = "DetectSingleByteXorTestCases.txt";
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(loader.getResourceAsStream(inputFileName)))) {
 			br.lines().forEach(encrypted -> {
-				String decrypted = SingleByteXorCipher.decryptMessage(encrypted);
+				String decrypted = SingleByteXorCipher.decryptMessage(encrypted).getDecrypted();
 				if (isGoodMessage(decrypted)) {
 					System.out.format("Detected cipher <%s> which yields: %s", encrypted, decrypted);
 				}
