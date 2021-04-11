@@ -28,19 +28,19 @@ public class RepeatingXor {
 			throw new IllegalArgumentException("Invalid message or key");
 		}
 
-		int[] rawBytes = new int[message.length()];
+		byte[] rawBytes = new byte[message.length()];
 		for (int i = 0; i < message.length(); ++i) {
-			rawBytes[i] = message.charAt(i);
+			rawBytes[i] = (byte) message.charAt(i);
 		}
 
 		return operate(rawBytes, key, hex);
 	}
 
-	public static String create(int[] bytes, String key, boolean hex) {
+	public static String create(byte[] bytes, String key, boolean hex) {
 		return operate(bytes, key, hex);
 	}
 
-	private static String operate(int[] bytes, String key, boolean hex) {
+	private static String operate(byte[] bytes, String key, boolean hex) {
 		int[] cipherChars = new int[bytes.length];
 		for (int i = 0; i < bytes.length; ++i) {
 			cipherChars[i] = bytes[i] ^ key.charAt(i % key.length());

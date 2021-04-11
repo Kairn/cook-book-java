@@ -1,5 +1,7 @@
 package io.esoma.cbj.crypto.core;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Class that contains utility methods for hexadecimal related encoding and
  * operations.
@@ -101,5 +103,26 @@ public class HexUtil {
 		hexParts[1] = bitsToHexChar(bits.substring(4));
 
 		return new String(hexParts);
+	}
+
+	/**
+	 * Decodes a hex encoded string into raw bytes.
+	 * 
+	 * @param hexString the input string
+	 * @return the resulting bytes
+	 */
+	public static byte[] stringToRawBytes(String hexString) {
+		if (StringUtils.isBlank(hexString)) {
+			return new byte[0];
+		} else if (hexString.length() % 2 != 0) {
+			throw new IllegalArgumentException("Invalid hex string");
+		}
+
+		StringBuilder builder = new StringBuilder();
+		for (char c : hexString.toCharArray()) {
+			builder.append(hexCharToBits(c));
+		}
+
+		return BinUtil.bitStreamToBytes(builder.toString());
 	}
 }

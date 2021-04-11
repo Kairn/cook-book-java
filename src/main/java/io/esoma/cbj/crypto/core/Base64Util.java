@@ -56,9 +56,9 @@ public class Base64Util {
 		return builder64.toString();
 	}
 
-	public static int[] decodeToByteArray(String encoded) {
+	public static byte[] decodeToByteArray(String encoded) {
 		if (StringUtils.isBlank(encoded)) {
-			return new int[0];
+			return new byte[0];
 		}
 
 		int numPads = 0;
@@ -73,16 +73,8 @@ public class Base64Util {
 
 		String bitStream = numPads == 2 ? builder.substring(0, builder.length() - 4)
 				: numPads == 1 ? builder.substring(0, builder.length() - 2) : builder.toString();
-		if (bitStream.length() % 8 != 0) {
-			throw new IllegalStateException("Failed to decode");
-		}
 
-		int[] decoded = new int[bitStream.length() / 8];
-		for (int i = 0; i < bitStream.length(); i += 8) {
-			decoded[i / 8] = BinUtil.bitStreamToInt(bitStream.substring(i, i + 8));
-		}
-
-		return decoded;
+		return BinUtil.bitStreamToBytes(bitStream);
 	}
 
 	private static char bitsToBase64Char(String bits) {

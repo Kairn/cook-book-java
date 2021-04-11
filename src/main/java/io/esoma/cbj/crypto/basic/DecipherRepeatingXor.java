@@ -32,14 +32,14 @@ public class DecipherRepeatingXor {
 			throw new IllegalStateException("Unable to read file", e);
 		}
 
-		int[] cipherChars = Base64Util.decodeToByteArray(input);
-		int keySize = guessKeySize(cipherChars);
-		String key = hackForKey(cipherChars, keySize);
+		byte[] cipherBytes = Base64Util.decodeToByteArray(input);
+		int keySize = guessKeySize(cipherBytes);
+		String key = hackForKey(cipherBytes, keySize);
 
-		System.out.println("Decrypted message as: " + RepeatingXor.create(cipherChars, key, false));
+		System.out.println("Decrypted message as: " + RepeatingXor.create(cipherBytes, key, false));
 	}
 
-	private static int guessKeySize(int[] bytes) {
+	private static int guessKeySize(byte[] bytes) {
 		int bestKeySize = 0;
 		double bestNhd = Double.MAX_VALUE;
 
@@ -49,16 +49,16 @@ public class DecipherRepeatingXor {
 			}
 
 			double hd = 0.0;
-			int[] chunk1 = Arrays.copyOfRange(bytes, 0, i);
-			int[] chunk2 = Arrays.copyOfRange(bytes, i, i * 2);
-			int[] chunk3 = Arrays.copyOfRange(bytes, i * 2, i * 3);
-			int[] chunk4 = Arrays.copyOfRange(bytes, i * 3, i * 4);
-			hd += HammingDistance.computeCharArrays(chunk1, chunk2);
-			hd += HammingDistance.computeCharArrays(chunk1, chunk3);
-			hd += HammingDistance.computeCharArrays(chunk1, chunk4);
-			hd += HammingDistance.computeCharArrays(chunk2, chunk3);
-			hd += HammingDistance.computeCharArrays(chunk2, chunk4);
-			hd += HammingDistance.computeCharArrays(chunk3, chunk4);
+			byte[] chunk1 = Arrays.copyOfRange(bytes, 0, i);
+			byte[] chunk2 = Arrays.copyOfRange(bytes, i, i * 2);
+			byte[] chunk3 = Arrays.copyOfRange(bytes, i * 2, i * 3);
+			byte[] chunk4 = Arrays.copyOfRange(bytes, i * 3, i * 4);
+			hd += HammingDistance.computeByteArrays(chunk1, chunk2);
+			hd += HammingDistance.computeByteArrays(chunk1, chunk3);
+			hd += HammingDistance.computeByteArrays(chunk1, chunk4);
+			hd += HammingDistance.computeByteArrays(chunk2, chunk3);
+			hd += HammingDistance.computeByteArrays(chunk2, chunk4);
+			hd += HammingDistance.computeByteArrays(chunk3, chunk4);
 
 			double nhd = hd / i;
 			if (nhd < bestNhd) {
@@ -71,7 +71,7 @@ public class DecipherRepeatingXor {
 		return bestKeySize;
 	}
 
-	private static String hackForKey(int[] bytes, int keySize) {
+	private static String hackForKey(byte[] bytes, int keySize) {
 		if (bytes == null || bytes.length < keySize) {
 			throw new IllegalArgumentException("Invalid bytes or key size");
 		}

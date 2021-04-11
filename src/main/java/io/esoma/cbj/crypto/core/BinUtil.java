@@ -99,4 +99,17 @@ public class BinUtil {
 		return byteArray;
 	}
 
+	public static byte[] bitStreamToBytes(String bits) {
+		if (StringUtils.isBlank(bits) || bits.length() % 8 != 0) {
+			throw new IllegalArgumentException("Invalid bits");
+		}
+
+		byte[] decoded = new byte[bits.length() / 8];
+		for (int i = 0; i < bits.length(); i += 8) {
+			decoded[i / 8] = (byte) bitStreamToInt(bits.substring(i, i + 8));
+		}
+
+		return decoded;
+	}
+
 }

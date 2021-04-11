@@ -11,7 +11,6 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.lang3.StringUtils;
 
 import io.esoma.cbj.crypto.core.Base64Util;
-import io.esoma.cbj.crypto.core.BinUtil;
 
 /**
  * Class for exploring the AES-128 encryption standard in ECB mode (not secure
@@ -58,7 +57,7 @@ public class AesInEcb {
 			Cipher aesCipher = Cipher.getInstance(SCHEME);
 			aesCipher.init(Cipher.DECRYPT_MODE, aesKey);
 
-			byte[] cipherBytes = BinUtil.reduceToBytes(Base64Util.decodeToByteArray(input));
+			byte[] cipherBytes = Base64Util.decodeToByteArray(input);
 			byte[] decrypted = aesCipher.doFinal(cipherBytes);
 
 			return new String(decrypted);
