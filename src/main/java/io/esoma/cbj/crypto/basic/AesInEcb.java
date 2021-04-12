@@ -22,8 +22,9 @@ import io.esoma.cbj.crypto.core.Base64Util;
  */
 public class AesInEcb {
 
-	public static final String ALGORITHM = "AES";
-	public static final String SCHEME = "AES/ECB/PKCS5Padding";
+	private static final String ALGORITHM = "AES";
+	private static final String PAD_SCHEME = "AES/ECB/PKCS5Padding";
+	private static final String NO_PAD_SCHEME = "AES/ECB/NoPadding";
 
 	public static void main(String[] args) {
 		final String secretKey = "YELLOW SUBMARINE";
@@ -52,15 +53,21 @@ public class AesInEcb {
 			throw new IllegalArgumentException("Invalid input or key");
 		}
 
+		byte[] cipherBytes = Base64Util.decodeToByteArray(input);
+		return new String(decrypt(cipherBytes, key, true));
+	}
+
+	public static byte[] decrypt(byte[] input, String key, boolean padding) {
+		if (input == null || StringUtils.isBlank(key)) {
+			throw new IllegalArgumentException("Invalid input or key");
+		}
+
 		try {
 			Key aesKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
-			Cipher aesCipher = Cipher.getInstance(SCHEME);
+			Cipher aesCipher = Cipher.getInstance(padding ? PAD_SCHEME : NO_PAD_SCHEME);
 			aesCipher.init(Cipher.DECRYPT_MODE, aesKey);
 
-			byte[] cipherBytes = Base64Util.decodeToByteArray(input);
-			byte[] decrypted = aesCipher.doFinal(cipherBytes);
-
-			return new String(decrypted);
+			return aesCipher.doFinal(input);
 		} catch (Exception e) {
 			throw new IllegalStateException("Failed to decrypt");
 		}
