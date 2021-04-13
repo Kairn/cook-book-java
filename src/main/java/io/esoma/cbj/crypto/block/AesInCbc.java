@@ -2,8 +2,12 @@ package io.esoma.cbj.crypto.block;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.security.Key;
 import java.util.Arrays;
 import java.util.stream.Collectors;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,6 +26,9 @@ import io.esoma.cbj.crypto.core.Base64Util;
 public class AesInCbc {
 
 	private static final int BLOCK_SIZE = 16;
+	private static final String ALGORITHM = "AES";
+	private static final String PAD_SCHEME = "AES/CBC/PKCS5Padding";
+	private static final String NO_PAD_SCHEME = "AES/CBC/NoPadding";
 
 	public static void main(String[] args) {
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
@@ -81,6 +88,22 @@ public class AesInCbc {
 		}
 
 		return finalBuffer;
+	}
+
+	public static byte[] encrypt(byte[] input, String key, byte[] iv, boolean padding) {
+		if (input == null || StringUtils.isBlank(key)) {
+			throw new IllegalArgumentException("Invalid input or key");
+		}
+
+		try {
+			Key aesKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
+			Cipher aesCipher = Cipher.getInstance(padding ? PAD_SCHEME : NO_PAD_SCHEME);
+			aesCipher.init(Cipher.ENCRYPT_MODE, aesKey);
+
+			return aesCipher.doFinal(input);
+		} catch (Exception e) {
+			throw new IllegalStateException("Failed to encrypt");
+		}
 	}
 
 }

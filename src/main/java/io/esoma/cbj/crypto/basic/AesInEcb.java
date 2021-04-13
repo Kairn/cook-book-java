@@ -73,4 +73,20 @@ public class AesInEcb {
 		}
 	}
 
+	public static byte[] encrypt(byte[] input, String key, boolean padding) {
+		if (input == null || StringUtils.isBlank(key)) {
+			throw new IllegalArgumentException("Invalid input or key");
+		}
+
+		try {
+			Key aesKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
+			Cipher aesCipher = Cipher.getInstance(padding ? PAD_SCHEME : NO_PAD_SCHEME);
+			aesCipher.init(Cipher.ENCRYPT_MODE, aesKey);
+
+			return aesCipher.doFinal(input);
+		} catch (Exception e) {
+			throw new IllegalStateException("Failed to encrypt");
+		}
+	}
+
 }
