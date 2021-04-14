@@ -102,7 +102,7 @@ public class AesInCbc {
 
 			return aesCipher.doFinal(input);
 		} catch (Exception e) {
-			throw new IllegalStateException("Failed to encrypt");
+			throw new IllegalStateException("Failed to encrypt", e);
 		}
 	}
 

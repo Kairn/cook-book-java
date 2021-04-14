@@ -69,7 +69,7 @@ public class AesInEcb {
 
 			return aesCipher.doFinal(input);
 		} catch (Exception e) {
-			throw new IllegalStateException("Failed to decrypt");
+			throw new IllegalStateException("Failed to decrypt", e);
 		}
 	}
 
@@ -85,7 +85,7 @@ public class AesInEcb {
 
 			return aesCipher.doFinal(input);
 		} catch (Exception e) {
-			throw new IllegalStateException("Failed to encrypt");
+			throw new IllegalStateException("Failed to encrypt", e);
 		}
 	}
 
