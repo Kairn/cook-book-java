@@ -8,7 +8,7 @@ import io.esoma.cbj.crypto.slave.SandwichCbcCryptoScheme;
 /**
  * Class that studies the bit flipping attack used against CBC encryption mode.
  * It takes advantage of the fact that an one bit edit in any cipher block will
- * cause an identical bit flip in all subsequent blocks.
+ * cause an identical bit flip in the next block.
  * 
  * @author Eddy Soma
  *
@@ -35,7 +35,15 @@ public class CbcBitFlippingAttack {
 			throw new IllegalArgumentException("Scheme is required");
 		}
 
-		return null;
+		String attackString = "abcdefghijklmnop" + "?????:admin<true";
+		int attackPos1 = 5 + BLOCK_SIZE * 2;
+		int attackPos2 = 11 + BLOCK_SIZE * 2;
+
+		byte[] origCipher = scheme.encrypt(attackString.getBytes());
+		origCipher[attackPos1] ^= 1;
+		origCipher[attackPos2] ^= 1;
+
+		return origCipher;
 	}
 
 	private static boolean isAdmin(String userData) {
