@@ -77,7 +77,7 @@ public class AesInCbc {
 			piv = encrypted;
 		}
 
-		byte[] lastBlock = PKCS7Padding.unpad(finalized[finalized.length - 1]);
+		byte[] lastBlock = PKCS7Padding.unpad(finalized[finalized.length - 1], false);
 		finalized[finalized.length - 1] = lastBlock;
 		byte[] finalBuffer = new byte[cipherBytes.length - BLOCK_SIZE + lastBlock.length];
 		for (int i = 0; i < finalized.length; ++i) {

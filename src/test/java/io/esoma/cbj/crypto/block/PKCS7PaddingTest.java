@@ -33,4 +33,25 @@ public class PKCS7PaddingTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void testUnpadValid() throws Exception {
+		final String input = "ICE ICE BABY\u0004\u0004\u0004\u0004";
+		final String expected = "ICE ICE BABY";
+		String actual = new String(PKCS7Padding.unpad(input.getBytes(), false));
+		System.out.println(actual);
+		assertEquals(expected, actual);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void testUnpadInvalid() throws Exception {
+		final String input = "ICE ICE BABY\u0001\u0002\u0003\u0004";
+		PKCS7Padding.unpad(input.getBytes(), false);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void testUnpadInvalid2() throws Exception {
+		final String input = "ICE ICE BABY\u0005\u0005\u0005\u0005";
+		PKCS7Padding.unpad(input.getBytes(), false);
+	}
+
 }

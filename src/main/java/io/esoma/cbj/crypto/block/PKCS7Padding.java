@@ -52,31 +52,44 @@ public class PKCS7Padding {
 	/**
 	 * Removes the padding values from a block of bytes based on PKCS#7 assuming the
 	 * block contains padding values. If the block does not conform to the padding
-	 * rules, it will be returned as is.
+	 * rules, it will be returned as is if parsing is lenient.
 	 * 
-	 * @param bytes the block containing padding
+	 * @param bytes   the block containing padding
+	 * @param lenient if the operation should be graceful when padding is invalid
 	 * @return the byte array without the padding
 	 */
-	public static byte[] unpad(byte[] bytes) {
-		if (bytes == null) {
+	public static byte[] unpad(byte[] bytes, boolean lenient) {
+		if (bytes == null || bytes.length == 0) {
 			throw new IllegalArgumentException("Input is null");
-		} else if (bytes.length == 0) {
-			return bytes;
 		}
 
 		int size = bytes.length;
 		byte last = bytes[size - 1];
-		if (last > size) {
-			return bytes;
-		}
 
-		for (int i = 1; i <= last; ++i) {
-			if (bytes[size - i] != last) {
-				// Return the original array if the padding is incorrect.
+		try {
+			if (last > size) {
+				throw new PaddingException();
+			}
+
+			for (int i = 2; i <= last; ++i) {
+				if (bytes[size - i] != last) {
+					throw new PaddingException();
+				}
+			}
+		} catch (PaddingException e) {
+			if (lenient) {
 				return bytes;
+			} else {
+				throw new IllegalStateException("Bad padding detected", e);
 			}
 		}
 
 		return Arrays.copyOfRange(bytes, 0, size - last);
 	}
+}
+
+class PaddingException extends RuntimeException {
+
+	private static final long serialVersionUID = 1L;
+
 }
