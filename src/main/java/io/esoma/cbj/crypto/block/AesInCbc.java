@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.lang3.StringUtils;
@@ -97,8 +98,9 @@ public class AesInCbc {
 
 		try {
 			Key aesKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
+			IvParameterSpec ivParam = new IvParameterSpec(iv);
 			Cipher aesCipher = Cipher.getInstance(padding ? PAD_SCHEME : NO_PAD_SCHEME);
-			aesCipher.init(Cipher.ENCRYPT_MODE, aesKey);
+			aesCipher.init(Cipher.ENCRYPT_MODE, aesKey, ivParam);
 
 			return aesCipher.doFinal(input);
 		} catch (Exception e) {

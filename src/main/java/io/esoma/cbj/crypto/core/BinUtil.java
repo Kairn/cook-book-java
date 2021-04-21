@@ -112,4 +112,12 @@ public class BinUtil {
 		return decoded;
 	}
 
+	public static byte next(byte b) {
+		if (b == Byte.MAX_VALUE) {
+			return Byte.MIN_VALUE;
+		} else {
+			return ++b;
+		}
+	}
+
 }

@@ -67,7 +67,7 @@ public class PKCS7Padding {
 		byte last = bytes[size - 1];
 
 		try {
-			if (last > size) {
+			if (last > size || last < 1) {
 				throw new PaddingException();
 			}
 
