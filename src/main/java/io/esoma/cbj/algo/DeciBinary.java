@@ -44,7 +44,7 @@ public class DeciBinary {
 		int sp = 1;
 
 		while (dbNum > 0) {
-			int pv = (new Double(Math.pow((double) B2, (double) (sp - 1)))).intValue();
+			int pv = (Double.valueOf(Math.pow((double) B2, (double) (sp - 1)))).intValue();
 			int dv = B10;
 			// Increment the modulo at each position multiplied by their place value.
 			value += (dbNum % dv) * pv;
@@ -119,7 +119,7 @@ public class DeciBinary {
 			--d;
 		}
 
-		return new Long(sb.toString());
+		return Long.parseLong(sb.toString());
 	}
 
 	/**
