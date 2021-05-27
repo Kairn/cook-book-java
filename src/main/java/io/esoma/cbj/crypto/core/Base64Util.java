@@ -56,6 +56,10 @@ public class Base64Util {
 		return builder64.toString();
 	}
 
+	public static String encodeFromBytes(byte[] bytes) {
+		return encodeFromBitStream(BinUtil.bytesToBitStream(bytes));
+	}
+
 	public static byte[] decodeToByteArray(String encoded) {
 		if (StringUtils.isBlank(encoded)) {
 			return new byte[0];

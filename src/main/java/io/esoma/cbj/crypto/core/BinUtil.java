@@ -63,6 +63,19 @@ public class BinUtil {
 		return builder.toString();
 	}
 
+	public static String bytesToBitStream(byte[] bytes) {
+		if (bytes == null || bytes.length < 1) {
+			throw new IllegalArgumentException("No bytes provided");
+		}
+
+		StringBuilder builder = new StringBuilder();
+		for (byte b : bytes) {
+			builder.append(String.format("%8s", Integer.toBinaryString(b & 0xFF)).replace(' ', '0'));
+		}
+
+		return builder.toString();
+	}
+
 	/**
 	 * Returns the number of bits that are "1" for a given integer.
 	 * 
