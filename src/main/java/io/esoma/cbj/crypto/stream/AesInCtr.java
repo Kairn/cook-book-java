@@ -55,4 +55,8 @@ public class AesInCtr {
 
 		return decrypted;
 	}
+
+	public static byte[] encrypt(byte[] plainBytes, String key, byte[] nonce, CounterGenerator counterGenerator) {
+		return decrypt(plainBytes, key, nonce, counterGenerator);
+	}
 }
