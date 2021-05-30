@@ -23,6 +23,13 @@ The purpose of this repository is to collect many algorithmic problems and provi
 1. Dijkstra's algorithm
 2. Minimum spanning tree
 
+### Cryptography :key:
+1. AES-128 in ECB mode and associated attacks
+2. AES-128 in CBC mode and associated attacks
+3. AES-128 in CTR mode and fixed-nonce attack
+4. Various basic encryption schemes and attacks
+5. Other crypto related functions
+
 ### Miscellaneous :balloon:
 1. Sorted sum (from HackerRank)
 
