@@ -44,9 +44,6 @@ public class ByteMemory {
       return false;
     }
     ByteMemory other = (ByteMemory) obj;
-    if (!Arrays.equals(mem, other.mem)) {
-      return false;
-    }
-    return true;
+    return Arrays.equals(mem, other.mem);
   }
 }

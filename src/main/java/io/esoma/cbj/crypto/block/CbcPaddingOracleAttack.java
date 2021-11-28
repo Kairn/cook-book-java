@@ -69,7 +69,7 @@ public class CbcPaddingOracleAttack {
         attackBytes[j] = (byte) (expectedPad ^ decrypted[j + BLOCK_SIZE]);
       }
 
-      byte hitByte = 0;
+      byte hitByte;
       byte next = attackBytes[prev];
       for (; ; ) {
         next = BinUtil.next(next);

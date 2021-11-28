@@ -196,7 +196,7 @@ public class AvlTree<E extends Comparable<E>> {
       }
 
       // Node has one right child.
-      if (n.left == null && n.right != null) {
+      if (n.left == null) {
         if (n.parent == null) {
           this.root = n.right;
         } else if (n.parent.left == n) {
@@ -211,7 +211,7 @@ public class AvlTree<E extends Comparable<E>> {
       }
 
       // Node has one left child.
-      if (n.left != null && n.right == null) {
+      if (n.right == null) {
         if (n.parent == null) {
           this.root = n.left;
         } else if (n.parent.left == n) {
@@ -302,24 +302,18 @@ public class AvlTree<E extends Comparable<E>> {
     if (hd > 1) {
       if (n.lh > n.rh) {
         // Left side is heavier.
-        if (n.left.lh > n.left.rh) {
-          // Only right shift.
-          this.rShift(n);
-        } else {
-          // Left shift first, then right shift.
+        if (n.left.lh <= n.left.rh) {
+          // Left shift first.
           this.lShift(n.left);
-          this.rShift(n);
         }
+        this.rShift(n);
       } else {
         // Right side is heavier.
-        if (n.right.rh > n.right.lh) {
-          // Only left shift.
-          this.lShift(n);
-        } else {
-          // Right shift first, then left shift.
+        if (n.right.rh <= n.right.lh) {
+          // Right shift first.
           this.rShift(n.right);
-          this.lShift(n);
         }
+        this.lShift(n);
       }
     }
 

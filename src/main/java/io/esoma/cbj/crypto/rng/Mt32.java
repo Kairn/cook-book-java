@@ -5,7 +5,7 @@ package io.esoma.cbj.crypto.rng;
  * specified by MT19937 (32-bit).
  *
  * @author Eddy Soma
- * @see https://en.wikipedia.org/wiki/Mersenne_Twister
+ * @see <a href="https://en.wikipedia.org/wiki/Mersenne_Twister">...</a>
  */
 public class Mt32 {
 
@@ -26,7 +26,7 @@ public class Mt32 {
   private static final long F = 1812433253L;
   private static final long INT_MASK = 0xFFFFFFFFL;
 
-  private int[] mt = new int[N];
+  private final int[] mt = new int[N];
   private int mti;
 
   public Mt32() {
@@ -60,7 +60,7 @@ public class Mt32 {
 
     int i = 1;
     int j = 0;
-    int k = N > seed.length ? N : seed.length;
+    int k = Math.max(N, seed.length);
 
     for (; k > 0; --k) {
       long m0 = toUnsignedInt(mt[i]);

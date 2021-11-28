@@ -26,8 +26,7 @@ public class SillyUserProfileRegistrar {
     }
 
     SimpleUserProfile profile = new SimpleUserProfile(email);
-    byte[] encrypted = AesInEcb.encrypt(profile.toString().getBytes(), AES_KEY, true);
-    return encrypted;
+    return AesInEcb.encrypt(profile.toString().getBytes(), AES_KEY, true);
   }
 
   /**

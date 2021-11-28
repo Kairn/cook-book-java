@@ -68,14 +68,12 @@ public class ArrayCore {
     int is = array[source];
     if (source > target) {
       // Need to shift elements to the right.
-      for (int i = source - 1; i > target - 1; --i) {
-        array[i + 1] = array[i];
-      }
+      if (source - 1 - (target - 1) >= 0)
+        System.arraycopy(array, target, array, target + 1, source - 1 - (target - 1));
     } else {
       // Need to shift elements to the left.
-      for (int i = source + 1; i < target + 1; ++i) {
-        array[i - 1] = array[i];
-      }
+      if (target + 1 - (source + 1) >= 0)
+        System.arraycopy(array, source + 1, array, source + 1 - 1, target + 1 - (source + 1));
     }
 
     array[target] = is;
@@ -98,9 +96,7 @@ public class ArrayCore {
     int len = end - bin + 1;
     int[] copy = new int[len];
 
-    for (int i = 0; i < len; ++i) {
-      copy[i] = array[bin + i];
-    }
+    System.arraycopy(array, bin, copy, 0, len);
 
     return copy;
   }

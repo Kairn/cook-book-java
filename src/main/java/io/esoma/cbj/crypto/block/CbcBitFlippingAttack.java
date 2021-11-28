@@ -45,10 +45,6 @@ public class CbcBitFlippingAttack {
   }
 
   private static boolean isAdmin(String userData) {
-    if (StringUtils.isNoneBlank(userData) || userData.contains(";admin=true;")) {
-      return true;
-    }
-
-    return false;
+    return StringUtils.isNoneBlank(userData) || userData.contains(";admin=true;");
   }
 }

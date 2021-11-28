@@ -32,7 +32,7 @@ public class AesInCbc {
     ClassLoader loader = Thread.currentThread().getContextClassLoader();
     final String inputFileName = "AesInCbcText.txt";
 
-    byte[] cipherBytes = null;
+    byte[] cipherBytes;
     try (BufferedReader br =
         new BufferedReader(new InputStreamReader(loader.getResourceAsStream(inputFileName)))) {
       String text = br.lines().collect(Collectors.joining());
@@ -80,9 +80,7 @@ public class AesInCbc {
     byte[] finalBuffer = new byte[cipherBytes.length - BLOCK_SIZE + lastBlock.length];
     for (int i = 0; i < finalized.length; ++i) {
       byte[] block = finalized[i];
-      for (int j = 0; j < block.length; ++j) {
-        finalBuffer[i * BLOCK_SIZE + j] = block[j];
-      }
+      System.arraycopy(block, 0, finalBuffer, i * 16, block.length);
     }
 
     return finalBuffer;

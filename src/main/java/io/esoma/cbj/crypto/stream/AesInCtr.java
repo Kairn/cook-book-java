@@ -37,7 +37,7 @@ public class AesInCtr {
    * @param key the encryption key
    * @param nonce the nonce
    * @param counterGenerator an object that generates counter streams
-   * @return
+   * @return the decrypted bytes
    */
   public static byte[] decrypt(
       byte[] cipherBytes, String key, byte[] nonce, CounterGenerator counterGenerator) {

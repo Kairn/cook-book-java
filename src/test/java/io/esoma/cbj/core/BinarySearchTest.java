@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class BinarySearchTest {
 
@@ -34,7 +34,7 @@ public class BinarySearchTest {
     int expected = 20;
     int actual = BinarySearch.searchInt(sorted, target);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -45,7 +45,7 @@ public class BinarySearchTest {
     int expected = 1;
     int actual = BinarySearch.searchInt(sorted, target);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -55,7 +55,7 @@ public class BinarySearchTest {
     int expected = 1;
     int actual = BinarySearch.searchInt(sorted, target);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -65,7 +65,7 @@ public class BinarySearchTest {
     int expected = 14;
     int actual = BinarySearch.searchInt(sorted, target);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -75,7 +75,7 @@ public class BinarySearchTest {
     int expected = -1;
     int actual = BinarySearch.searchInt(sorted, target);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -85,7 +85,7 @@ public class BinarySearchTest {
     int expected = 0;
     int actual = BinarySearch.searchIntLeft(sorted, target, 0, sorted.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -95,7 +95,7 @@ public class BinarySearchTest {
     int expected = 7;
     int actual = BinarySearch.searchIntLeft(sorted, target, 0, sorted.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -108,7 +108,7 @@ public class BinarySearchTest {
     int expected = 18;
     int actual = BinarySearch.searchIntLeft(sorted, target, 0, sorted.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -118,7 +118,7 @@ public class BinarySearchTest {
     int expected = 10;
     int actual = BinarySearch.searchIntLeft(sorted, target, 0, sorted.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -129,7 +129,7 @@ public class BinarySearchTest {
     int expected = 14;
     int actual = BinarySearch.searchIntLeft(sorted, target, 0, sorted.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -143,7 +143,7 @@ public class BinarySearchTest {
     int expected = 11;
     int actual = BinarySearch.searchIntRight(sorted, target, 0, sorted.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -153,7 +153,7 @@ public class BinarySearchTest {
     int expected = 1;
     int actual = BinarySearch.searchIntRight(sorted, target, 0, sorted.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -163,7 +163,7 @@ public class BinarySearchTest {
     int expected = 13;
     int actual = BinarySearch.searchIntRight(sorted, target, 0, sorted.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -173,7 +173,7 @@ public class BinarySearchTest {
     int expected = 0;
     int actual = BinarySearch.searchIntRight(sorted, target, 0, sorted.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -186,6 +186,6 @@ public class BinarySearchTest {
     int expected = 17;
     int actual = BinarySearch.searchIntRight(sorted, target, 0, sorted.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 }

@@ -34,20 +34,11 @@ public class Banner {
       title = "Untitled";
     }
 
-    StringBuilder ch = new StringBuilder();
-    for (int i = 0; i < num; ++i) {
-      ch.append(sign);
-    }
-
-    ch.append(SPACE);
-    ch.append(title);
-    ch.append(SPACE);
-
-    for (int i = 0; i < num; ++i) {
-      ch.append(sign);
-    }
-
-    return ch.toString();
+    return String.valueOf(sign).repeat(num)
+        + SPACE
+        + title
+        + SPACE
+        + String.valueOf(sign).repeat(num);
   }
 
   /**

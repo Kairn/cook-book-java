@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class HelloWorldTest {
 
@@ -27,6 +27,6 @@ public class HelloWorldTest {
   @Test
   public void testRunTest() throws Exception {
     String testStr = HelloWorld.runTest();
-    assertTrue("Hello world test failed, please check test strings.", testStr.equals(TEST_STR));
+    assertEquals("Hello world test failed, please check test strings.", TEST_STR, testStr);
   }
 }

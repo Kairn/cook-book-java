@@ -130,16 +130,16 @@ public class TimSort {
    * until the merge condition is no longer satisfied, or the stack size is less than 3. Force
    * merging will be used at the end of the sorting process.
    *
-   * @param array
-   * @param force
+   * @param array the input array
+   * @param force whether to ignore the merge condition
    */
   private static void mergeCollapse(int[] array, boolean force) {
     if (run_stack.size() < 2) {
       return;
     }
 
-    Run lRun = null;
-    Run rRun = null;
+    Run lRun;
+    Run rRun;
 
     if (run_stack.size() == 2 && force) {
       rRun = run_stack.pop();
@@ -257,7 +257,7 @@ public class TimSort {
         } else {
           // Galloping mode.
           // Keep track of the galloping payoff.
-          int gp = 0;
+          int gp;
           if (leftGallop) {
             // Left search.
             int rlp = BinarySearch.searchIntLeft(array, le, rp, end);
@@ -294,11 +294,10 @@ public class TimSort {
               // Switch back to pairing mode.
               gallop_mode = false;
               badGallop = false;
-              ++min_gallop;
             } else {
               badGallop = true;
-              ++min_gallop;
             }
+            ++min_gallop;
           }
         }
       }
@@ -354,7 +353,7 @@ public class TimSort {
           }
         } else {
           // Galloping mode.
-          int gp = 0;
+          int gp;
           if (rightGallop) {
             // Right search.
             int lrp = BinarySearch.searchIntRight(array, re, bin, lp) - 1;
@@ -388,11 +387,10 @@ public class TimSort {
               // Switch back to pairing mode.
               gallop_mode = false;
               badGallop = false;
-              ++min_gallop;
             } else {
               badGallop = true;
-              ++min_gallop;
             }
+            ++min_gallop;
           }
         }
       }
@@ -438,8 +436,8 @@ public class TimSort {
 class Run {
 
   // We store the starting and ending indices in the original array.
-  private int lb;
-  private int rb;
+  private final int lb;
+  private final int rb;
 
   public Run(int lb, int rb) {
     this.lb = lb;

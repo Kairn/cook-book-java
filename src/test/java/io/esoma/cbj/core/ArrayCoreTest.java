@@ -6,8 +6,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ArrayCoreTest {
 
@@ -32,7 +31,7 @@ public class ArrayCoreTest {
     int expected = 8;
     int actual = ArrayCore.linearSearchInt(array, target, 0, array.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -42,7 +41,7 @@ public class ArrayCoreTest {
     int expected = -1;
     int actual = ArrayCore.linearSearchInt(array, target, 0, array.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -56,7 +55,7 @@ public class ArrayCoreTest {
     int expected = 14;
     int actual = ArrayCore.linearSearchInt(array, target, 0, array.length - 1);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -163,6 +162,6 @@ public class ArrayCoreTest {
           684, 684, 685, 692, 703, 708, 710, 713, 720, 766, 777, 884, 802, 804, 813, 817, 823, 826,
           878, 902, 902, 906, 908, 909, 932, 934, 936, 942, 987, 996
         };
-    assertTrue(!ArrayCore.checkIntAsc(array, 0, array.length - 1));
+    assertFalse(ArrayCore.checkIntAsc(array, 0, array.length - 1));
   }
 }

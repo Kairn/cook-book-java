@@ -2,7 +2,7 @@ package io.esoma.cbj.util;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class BannerTest {
 
@@ -11,18 +11,18 @@ public class BannerTest {
   @Test
   public void testGetTitleBanner() throws Exception {
     String testStr = "===== " + TEST_TITLE + " =====";
-    assertTrue(testStr.equals(Banner.getTitleBanner(TEST_TITLE, 5)));
+    assertEquals(testStr, Banner.getTitleBanner(TEST_TITLE, 5));
   }
 
   @Test
   public void testGetSubBanner() throws Exception {
     String testStr = "--- " + TEST_TITLE + " ---";
-    assertTrue(testStr.equals(Banner.getSubBanner(TEST_TITLE, 3)));
+    assertEquals(testStr, Banner.getSubBanner(TEST_TITLE, 3));
   }
 
   @Test
   public void testGetSpecialBanner() throws Exception {
     String testStr = "******* " + TEST_TITLE + " *******";
-    assertTrue(testStr.equals(Banner.getSpecialBanner(TEST_TITLE, 7)));
+    assertEquals(testStr, Banner.getSpecialBanner(TEST_TITLE, 7));
   }
 }

@@ -2,7 +2,7 @@ package io.esoma.cbj.crypto.slave;
 
 enum UserRole {
   ADMIN,
-  USER;
+  USER
 }
 
 /**
@@ -30,10 +30,10 @@ public class SimpleUserProfile {
 
   public static SimpleUserProfile parse(String data) {
     try {
-      String[] profileParts = data.split("\\&");
-      String email = profileParts[0].split("\\=")[1];
-      int id = Integer.parseInt(profileParts[1].split("\\=")[1]);
-      UserRole role = UserRole.valueOf(profileParts[2].split("\\=")[1]);
+      String[] profileParts = data.split("&");
+      String email = profileParts[0].split("=")[1];
+      int id = Integer.parseInt(profileParts[1].split("=")[1]);
+      UserRole role = UserRole.valueOf(profileParts[2].split("=")[1]);
 
       return new SimpleUserProfile(email, id, role);
     } catch (Exception e) {

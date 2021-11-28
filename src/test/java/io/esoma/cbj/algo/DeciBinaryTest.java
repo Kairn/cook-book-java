@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class DeciBinaryTest {
 
@@ -30,7 +30,7 @@ public class DeciBinaryTest {
     int expected = 0;
     int actual = DeciBinary.deciValue(dbNum);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -39,7 +39,7 @@ public class DeciBinaryTest {
     int expected = 1;
     int actual = DeciBinary.deciValue(dbNum);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -48,7 +48,7 @@ public class DeciBinaryTest {
     int expected = 2;
     int actual = DeciBinary.deciValue(dbNum);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -57,7 +57,7 @@ public class DeciBinaryTest {
     int expected = 24;
     int actual = DeciBinary.deciValue(dbNum);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -66,7 +66,7 @@ public class DeciBinaryTest {
     int expected = 24;
     int actual = DeciBinary.deciValue(dbNum);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -75,7 +75,7 @@ public class DeciBinaryTest {
     int expected = 19;
     int actual = DeciBinary.deciValue(dbNum);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -84,7 +84,7 @@ public class DeciBinaryTest {
     int expected = 12;
     int actual = DeciBinary.deciValue(dbNum);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -93,7 +93,7 @@ public class DeciBinaryTest {
     int expected = 661;
     int actual = DeciBinary.deciValue(dbNum);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -102,7 +102,7 @@ public class DeciBinaryTest {
     long expected = 4L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -111,7 +111,7 @@ public class DeciBinaryTest {
     long expected = 100L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -120,7 +120,7 @@ public class DeciBinaryTest {
     long expected = 2L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -129,7 +129,7 @@ public class DeciBinaryTest {
     long expected = 11L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -138,7 +138,7 @@ public class DeciBinaryTest {
     long expected = 111L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -147,7 +147,7 @@ public class DeciBinaryTest {
     long expected = 102L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -156,7 +156,7 @@ public class DeciBinaryTest {
     long expected = 32L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -165,7 +165,7 @@ public class DeciBinaryTest {
     long expected = 11111L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -174,7 +174,7 @@ public class DeciBinaryTest {
     long expected = 10406L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -183,7 +183,7 @@ public class DeciBinaryTest {
     long expected = 110L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -192,6 +192,6 @@ public class DeciBinaryTest {
     long expected = 0L;
     long actual = DeciBinary.deciFromDb(db);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 }

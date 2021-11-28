@@ -98,7 +98,7 @@ public class HeapSort {
           array[il] = n0;
           // Repeat with the new child from the original node.
           siftDown(array, size, il);
-        } else if (nr > n0 && nr >= nl) {
+        } else if (nr > n0) {
           // Use the right child.
           array[node] = nr;
           array[ir] = n0;

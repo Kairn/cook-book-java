@@ -6,7 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class TimSortTest {
 
@@ -1555,7 +1555,7 @@ public class TimSortTest {
     int nelts = 55;
     int mr = 55;
     int result = TimSort.calcMinRun(nelts);
-    assertTrue(mr == result);
+    assertEquals(mr, result);
   }
 
   @Test
@@ -1563,7 +1563,7 @@ public class TimSortTest {
     int nelts = 2112;
     int mr = 33;
     int result = TimSort.calcMinRun(nelts);
-    assertTrue(mr == result);
+    assertEquals(mr, result);
   }
 
   @Test
@@ -1571,7 +1571,7 @@ public class TimSortTest {
     int nelts = 64;
     int mr = 32;
     int result = TimSort.calcMinRun(nelts);
-    assertTrue(mr == result);
+    assertEquals(mr, result);
   }
 
   @Test
@@ -1579,7 +1579,7 @@ public class TimSortTest {
     int nelts = 135;
     int mr = 34;
     int result = TimSort.calcMinRun(nelts);
-    assertTrue(mr == result);
+    assertEquals(mr, result);
   }
 
   @Test
@@ -1587,6 +1587,6 @@ public class TimSortTest {
     int nelts = 1000039;
     int mr = 62;
     int result = TimSort.calcMinRun(nelts);
-    assertTrue(mr == result);
+    assertEquals(mr, result);
   }
 }

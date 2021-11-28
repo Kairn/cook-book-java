@@ -29,7 +29,7 @@ public class Printer {
         }
       }
 
-      System.out.println(sa.toString());
+      System.out.println(sa);
     } catch (Exception e) {
       System.out.println(TYPE_FAIL);
     }
@@ -51,6 +51,6 @@ public class Printer {
       }
     }
 
-    System.out.println(sa.toString());
+    System.out.println(sa);
   }
 }

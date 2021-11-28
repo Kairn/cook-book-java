@@ -5,7 +5,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class SortedSumTest {
 
@@ -29,7 +29,7 @@ public class SortedSumTest {
     int expected = 65;
     int actual = SortedSum.naiveInsertion(array);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -38,7 +38,7 @@ public class SortedSumTest {
     int expected = 80;
     int actual = SortedSum.naiveInsertion(array);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -47,7 +47,7 @@ public class SortedSumTest {
     int expected = 455;
     int actual = SortedSum.naiveInsertion(array);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -56,7 +56,7 @@ public class SortedSumTest {
     int expected = 751;
     int actual = SortedSum.optimalSum(array);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -72,7 +72,7 @@ public class SortedSumTest {
     int expected = 54551619;
     int actual = SortedSum.optimalSum(array);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -85,7 +85,7 @@ public class SortedSumTest {
     int expected = 257575486;
     int actual = SortedSum.optimalSum(array);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -94,7 +94,7 @@ public class SortedSumTest {
     int expected = 448;
     int actual = SortedSum.optimalSum(array);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -106,7 +106,7 @@ public class SortedSumTest {
     int expected = 20554621;
     int actual = SortedSum.optimalSum(array);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 
   @Test
@@ -133,6 +133,6 @@ public class SortedSumTest {
     int expected = 436562823;
     int actual = SortedSum.optimalSum(array);
     System.out.println(actual);
-    assertTrue(expected == actual);
+    assertEquals(expected, actual);
   }
 }

@@ -21,7 +21,7 @@ public class DecipherRepeatingXor {
   private static final int MAX_KEY_SIZE = 40;
 
   public static void main(String[] args) {
-    String input = null;
+    String input;
     ClassLoader loader = Thread.currentThread().getContextClassLoader();
     String inputFileName = "DecipherRepeatingXorText.txt";
     try (BufferedReader br =

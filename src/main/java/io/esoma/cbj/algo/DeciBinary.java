@@ -39,7 +39,7 @@ public class DeciBinary {
     int sp = 1;
 
     while (dbNum > 0) {
-      int pv = (Double.valueOf(Math.pow((double) B2, (double) (sp - 1)))).intValue();
+      int pv = (Double.valueOf(Math.pow(B2, sp - 1))).intValue();
       int dv = B10;
       // Increment the modulo at each position multiplied by their place value.
       value += (dbNum % dv) * pv;
@@ -94,7 +94,7 @@ public class DeciBinary {
 
     // Construct the final decibinary integer.
     StringBuilder sb = new StringBuilder();
-    long cur = 0;
+    long cur;
     while (d > -1) {
       // Current count of integers.
       cur = 0;

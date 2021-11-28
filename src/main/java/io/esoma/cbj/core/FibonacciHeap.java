@@ -16,10 +16,10 @@ import java.util.Map;
  */
 public class FibonacciHeap<E extends Comparable<E>> {
 
+  private final LinkedList<FhNode<E>> mainChain;
   // Internal state.
   private int size;
   private FhNode<E> minNode;
-  private LinkedList<FhNode<E>> mainChain;
   /*
    * Default constructor for creating a blank Fibonacci heap.
    */
@@ -86,9 +86,7 @@ public class FibonacciHeap<E extends Comparable<E>> {
     this.mainChain.remove(this.minNode);
     // Promote its children if any.
     if (this.minNode.children != null) {
-      for (FhNode<E> mnc : this.minNode.children) {
-        this.mainChain.add(mnc);
-      }
+      this.mainChain.addAll(this.minNode.children);
     }
 
     // Prepare the next min key.
@@ -111,9 +109,7 @@ public class FibonacciHeap<E extends Comparable<E>> {
       }
 
       // Populate the main chain again.
-      for (FhNode<E> n : map.values()) {
-        this.mainChain.add(n);
-      }
+      this.mainChain.addAll(map.values());
 
       // Set the next min key.
       this.minNode = newMn;
@@ -198,7 +194,7 @@ public class FibonacciHeap<E extends Comparable<E>> {
      * Writes all the elements under the node into the given StringBuilder for debugging and
      * reporting purpose.
      *
-     * @param bu
+     * @param bu the output builder target
      */
     void reportElements(StringBuilder bu) {
       bu.append(this.key.toString());

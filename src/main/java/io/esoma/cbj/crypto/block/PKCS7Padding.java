@@ -36,9 +36,7 @@ public class PKCS7Padding {
 
     int padVal = blockSize - bytes.length;
     byte[] padded = new byte[bytes.length + padVal];
-    for (int i = 0; i < bytes.length; ++i) {
-      padded[i] = bytes[i];
-    }
+    System.arraycopy(bytes, 0, padded, 0, bytes.length);
 
     for (int i = bytes.length; i < padded.length; ++i) {
       padded[i] = (byte) padVal;

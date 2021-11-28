@@ -14,10 +14,6 @@ public class CharUtil {
       return true;
     } else if (Character.isWhitespace(c)) {
       return true;
-    } else if (c == ',' || c == '.') {
-      return true;
-    }
-
-    return false;
+    } else return c == ',' || c == '.';
   }
 }

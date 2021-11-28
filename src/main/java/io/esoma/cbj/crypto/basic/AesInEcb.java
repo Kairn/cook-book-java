@@ -27,7 +27,7 @@ public class AesInEcb {
     final String inputFileName = "AesInEcbText.txt";
     ClassLoader loader = Thread.currentThread().getContextClassLoader();
 
-    String inputText = null;
+    String inputText;
     try (BufferedReader br =
         new BufferedReader(new InputStreamReader(loader.getResourceAsStream(inputFileName)))) {
       inputText = br.lines().collect(Collectors.joining());

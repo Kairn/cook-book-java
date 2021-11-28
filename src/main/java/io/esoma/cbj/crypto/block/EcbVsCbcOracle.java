@@ -15,11 +15,7 @@ public class EcbVsCbcOracle {
   private static final char TEST_CHAR = 'F';
 
   public static void main(String[] args) {
-    StringBuilder textBuilder = new StringBuilder();
-    for (int i = 0; i < LENGTH; ++i) {
-      textBuilder.append(TEST_CHAR);
-    }
-    byte[] inputBytes = textBuilder.toString().getBytes();
+    byte[] inputBytes = String.valueOf(TEST_CHAR).repeat(LENGTH).getBytes();
 
     int correctCount = 0;
     for (int i = 0; i < ROUNDS; ++i) {
