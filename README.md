@@ -42,6 +42,7 @@ time to time.
 ### Miscellaneous :balloon:
 
 1. Sorted sum (from HackerRank)
+2. Sub-array Imbalance (from Amazon test)
 
 ## Test
 
