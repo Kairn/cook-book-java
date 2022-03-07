@@ -24,7 +24,7 @@ public class PKCS7PaddingTest {
   }
 
   @Test
-  public void testPerformStringInt() throws Exception {
+  public void testPerformStringInt() {
     final String input = "YELLOW SUBMARINE";
     final String expected = "YELLOW SUBMARINE\u0004\u0004\u0004\u0004";
     String actual = PKCS7Padding.perform(input, 20);
@@ -33,7 +33,7 @@ public class PKCS7PaddingTest {
   }
 
   @Test
-  public void testUnpadValid() throws Exception {
+  public void testUnpadValid() {
     final String input = "ICE ICE BABY\u0004\u0004\u0004\u0004";
     final String expected = "ICE ICE BABY";
     String actual = new String(PKCS7Padding.unpad(input.getBytes(), false));
@@ -42,13 +42,13 @@ public class PKCS7PaddingTest {
   }
 
   @Test(expected = IllegalStateException.class)
-  public void testUnpadInvalid() throws Exception {
+  public void testUnpadInvalid() {
     final String input = "ICE ICE BABY\u0001\u0002\u0003\u0004";
     PKCS7Padding.unpad(input.getBytes(), false);
   }
 
   @Test(expected = IllegalStateException.class)
-  public void testUnpadInvalid2() throws Exception {
+  public void testUnpadInvalid2() {
     final String input = "ICE ICE BABY\u0005\u0005\u0005\u0005";
     PKCS7Padding.unpad(input.getBytes(), false);
   }

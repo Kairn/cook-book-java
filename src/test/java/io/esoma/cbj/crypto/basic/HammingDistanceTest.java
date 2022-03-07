@@ -24,7 +24,7 @@ public class HammingDistanceTest {
   }
 
   @Test
-  public void testComputeStringString() throws Exception {
+  public void testComputeStringString() {
     final String s1 = "this is a test";
     final String s2 = "wokka wokka!!!";
     final int expected = 37;

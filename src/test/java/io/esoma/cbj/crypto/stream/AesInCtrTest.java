@@ -27,7 +27,7 @@ public class AesInCtrTest {
   }
 
   @Test
-  public void testEncrypt() throws Exception {
+  public void testEncrypt() {
     final String key = "YELLOW SUBMARINE";
     final byte[] nonce = new byte[8];
     final CounterGenerator counterGenerator = new LeIntegerCounterGenerator();

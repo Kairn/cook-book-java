@@ -25,7 +25,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort1() throws Exception {
+  public void testSort1() {
     int[] unsorted =
         new int[] {
           78, 36, 37, 40, 75, 51, 93, 81, 12, 3, 87, 68, 79, 44, 73, 19, 9, 2, 4, 44, 92, 40, 33, 6,
@@ -127,7 +127,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort2() throws Exception {
+  public void testSort2() {
     int[] unsorted =
         new int[] {
           54, 25, 50, 51, 91, 78, 92, 48, 99, 57, 75, 17, 13, 54, 56, 36, 48, 28, 43, 95, 32, 47,
@@ -146,7 +146,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort3() throws Exception {
+  public void testSort3() {
     int[] unsorted =
         new int[] {
           7, 5, 1, 0, 4, 6, 2, 6, 3, 7, 7, 1, 9, 6, 7, 5, 0, 0, 2, 8, 3, 5, 1, 5, 4, 8, 2, 8, 8, 8,
@@ -293,7 +293,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort4() throws Exception {
+  public void testSort4() {
     int[] unsorted =
         new int[] {
           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0,
@@ -348,7 +348,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort5() throws Exception {
+  public void testSort5() {
     int[] unsorted =
         new int[] {
           707, 714, 714, 722, 724, 727, 734, 742, 748, 768, 771, 779, 791, 799, 807, 812, 813, 816,
@@ -365,7 +365,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort6() throws Exception {
+  public void testSort6() {
     int[] unsorted =
         new int[] {
           10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,
@@ -488,7 +488,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort7() throws Exception {
+  public void testSort7() {
     int[] unsorted =
         new int[] {
           8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
@@ -669,7 +669,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort8() throws Exception {
+  public void testSort8() {
     int[] unsorted =
         new int[] {
           7775, 7762, 7646, 7514, 7445, 7418, 7363, 7344, 7334, 7313, 7293, 7172, 7122, 7004, 6974,
@@ -686,7 +686,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort9() throws Exception {
+  public void testSort9() {
     int[] unsorted =
         new int[] {
           20, 20, 20, 20, 20, 19, 19, 19, 19, 19, 19, 19, 19, 18, 18, 18, 18, 18, 17, 17, 17, 17,
@@ -723,7 +723,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort10() throws Exception {
+  public void testSort10() {
     int[] unsorted =
         new int[] {
           1, 1, 1, 1, 1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 14, 6, 6,
@@ -762,7 +762,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort11() throws Exception {
+  public void testSort11() {
     int[] unsorted =
         new int[] {
           110, 124, 134, 153, 161, 165, 172, 177, 178, 182, 183, 192, 201, 203, 208, 214, 225, 227,
@@ -783,7 +783,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort12() throws Exception {
+  public void testSort12() {
     int[] unsorted =
         new int[] {
           9, 17, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 11, 11, 11, 11, 9,
@@ -808,7 +808,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort13() throws Exception {
+  public void testSort13() {
     int[] unsorted =
         new int[] {
           -9, -9, -9, -9, -9, -9, -9, -9, -9, -9, -8, -8, -8, -8, -8, -8, -8, -7, -7, -7, -7, -7,
@@ -911,7 +911,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort14() throws Exception {
+  public void testSort14() {
     int[] unsorted =
         new int[] {
           97, 112, 118, 120, 141, 144, 153, 166, 187, 196, 210, 220, 235, 241, 248, 251, 252, 257,
@@ -938,7 +938,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort15() throws Exception {
+  public void testSort15() {
     int[] unsorted =
         new int[] {
           131, 133, 133, 137, 140, 140, 143, 143, 143, 143, 144, 145, 147, 150, 152, 154, 158, 160,
@@ -957,7 +957,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort16() throws Exception {
+  public void testSort16() {
     int[] unsorted =
         new int[] {
           0, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1,
@@ -1090,7 +1090,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort17() throws Exception {
+  public void testSort17() {
     int[] unsorted =
         new int[] {
           6, 5, 6, 8, 2, 4, 5, 7, 8, 3, 4, 3, 8, 9, 8, 4, 5, 2, 8, 5, 4, 7, 8, 5, 3, 9, 8, 3, 8, 7,
@@ -1117,7 +1117,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort18() throws Exception {
+  public void testSort18() {
     int[] unsorted =
         new int[] {
           47, 47, 46, 49, 48, 49, 49, 48, 46, 49, 46, 48, 49, 46, 47, 47, 46, 47, 47, 46, 46, 47,
@@ -1140,7 +1140,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort19() throws Exception {
+  public void testSort19() {
     int[] unsorted =
         new int[] {
           70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70,
@@ -1181,7 +1181,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort20() throws Exception {
+  public void testSort20() {
     int[] unsorted =
         new int[] {
           233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233,
@@ -1204,7 +1204,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testSort21() throws Exception {
+  public void testSort21() {
     int[] unsorted =
         new int[] {
           2, 0, 0, 2, 6, 3, 3, 1, 8, 7, 0, 0, 8, 7, 3, 7, 2, 4, 6, 1, 6, 8, 1, 2, 6, 8, 8, 3, 4, 7,
@@ -1551,7 +1551,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testCalcMinRun1() throws Exception {
+  public void testCalcMinRun1() {
     int nelts = 55;
     int mr = 55;
     int result = TimSort.calcMinRun(nelts);
@@ -1559,7 +1559,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testCalcMinRun2() throws Exception {
+  public void testCalcMinRun2() {
     int nelts = 2112;
     int mr = 33;
     int result = TimSort.calcMinRun(nelts);
@@ -1567,7 +1567,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testCalcMinRun3() throws Exception {
+  public void testCalcMinRun3() {
     int nelts = 64;
     int mr = 32;
     int result = TimSort.calcMinRun(nelts);
@@ -1575,7 +1575,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testCalcMinRun4() throws Exception {
+  public void testCalcMinRun4() {
     int nelts = 135;
     int mr = 34;
     int result = TimSort.calcMinRun(nelts);
@@ -1583,7 +1583,7 @@ public class TimSortTest {
   }
 
   @Test
-  public void testCalcMinRun5() throws Exception {
+  public void testCalcMinRun5() {
     int nelts = 1000039;
     int mr = 62;
     int result = TimSort.calcMinRun(nelts);

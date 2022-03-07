@@ -32,7 +32,7 @@ public class FibonacciHeapTest {
   /*
    * Aggregate test of 20 batches of operations.
    */
-  public void testFh() throws Exception {
+  public void testFh() {
     int expected = 0;
     int actual = tfh.getSize();
     System.out.println(tfh);
@@ -53,7 +53,7 @@ public class FibonacciHeapTest {
     System.out.println(tfh);
     assertEquals(expected, actual);
 
-    expected = 1;
+    // Expected is still 1.
     actual = tfh.popMin();
     System.out.println(tfh);
     assertEquals(expected, actual);

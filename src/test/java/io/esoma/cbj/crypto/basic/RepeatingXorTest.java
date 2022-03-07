@@ -24,7 +24,7 @@ public class RepeatingXorTest {
   }
 
   @Test
-  public void testEncrypt() throws Exception {
+  public void testEncrypt() {
     final String message =
         "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal";
     final String key = "ICE";
@@ -36,7 +36,7 @@ public class RepeatingXorTest {
   }
 
   @Test
-  public void testDecrypt() throws Exception {
+  public void testDecrypt() {
     final String message =
         "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal";
     final String key = "ICE";

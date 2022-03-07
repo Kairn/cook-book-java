@@ -24,7 +24,7 @@ public class MinSpanTreeTest {
   }
 
   @Test
-  public void testCalcKruskal1() throws Exception {
+  public void testCalcKruskal1() {
     int n = 5;
     int[][] edges = new int[][] {{1, 2, 3}, {1, 3, 4}, {4, 2, 6}, {5, 2, 2}, {2, 3, 5}, {3, 5, 7}};
     int expected = 15;
@@ -34,7 +34,7 @@ public class MinSpanTreeTest {
   }
 
   @Test
-  public void testCalcKruskal2() throws Exception {
+  public void testCalcKruskal2() {
     int n = 4;
     int[][] edges = new int[][] {{1, 2, 5}, {1, 3, 3}, {4, 1, 6}, {2, 4, 7}, {3, 2, 4}, {3, 4, 5}};
     int expected = 12;
@@ -44,7 +44,7 @@ public class MinSpanTreeTest {
   }
 
   @Test
-  public void testCalcKruskal3() throws Exception {
+  public void testCalcKruskal3() {
     int n = 5;
     int[][] edges =
         new int[][] {
@@ -57,7 +57,7 @@ public class MinSpanTreeTest {
   }
 
   @Test
-  public void testCalcKruskal4() throws Exception {
+  public void testCalcKruskal4() {
     int n = 10;
     int[][] edges =
         new int[][] {

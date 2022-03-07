@@ -54,105 +54,105 @@ public class DijkstraTest {
   }
 
   @Test
-  public void testDjFind1() throws Exception {
+  public void testDjFind1() {
     int index = 0;
     System.out.println(result[index]);
     assertEquals(0, result[index]);
   }
 
   @Test
-  public void testDjFind2() throws Exception {
+  public void testDjFind2() {
     int index = 1;
     System.out.println(result[index]);
     assertEquals(5, result[index]);
   }
 
   @Test
-  public void testDjFind3() throws Exception {
+  public void testDjFind3() {
     int index = 2;
     System.out.println(result[index]);
     assertEquals(7, result[index]);
   }
 
   @Test
-  public void testDjFind4() throws Exception {
+  public void testDjFind4() {
     int index = 4;
     System.out.println(result[index]);
     assertEquals(-1, result[index]);
   }
 
   @Test
-  public void testDjFind5() throws Exception {
+  public void testDjFind5() {
     int index = 5;
     System.out.println(result[index]);
     assertEquals(6, result[index]);
   }
 
   @Test
-  public void testDjFind6() throws Exception {
+  public void testDjFind6() {
     int index = 6;
     System.out.println(result[index]);
     assertEquals(8, result[index]);
   }
 
   @Test
-  public void testDjFind7() throws Exception {
+  public void testDjFind7() {
     int index = 7;
     System.out.println(result[index]);
     assertEquals(4, result[index]);
   }
 
   @Test
-  public void testDjFind8() throws Exception {
+  public void testDjFind8() {
     int index = 9;
     System.out.println(result[index]);
     assertEquals(5, result[index]);
   }
 
   @Test
-  public void testDjFind9() throws Exception {
+  public void testDjFind9() {
     int index = 10;
     System.out.println(result[index]);
     assertEquals(7, result[index]);
   }
 
   @Test
-  public void testDjFind10() throws Exception {
+  public void testDjFind10() {
     int index = 12;
     System.out.println(result[index]);
     assertEquals(10, result[index]);
   }
 
   @Test
-  public void testDjFind11() throws Exception {
+  public void testDjFind11() {
     int index = 13;
     System.out.println(result[index]);
     assertEquals(8, result[index]);
   }
 
   @Test
-  public void testDjFind12() throws Exception {
+  public void testDjFind12() {
     int index = 16;
     System.out.println(result[index]);
     assertEquals(6, result[index]);
   }
 
   @Test
-  public void testDjFind13() throws Exception {
+  public void testDjFind13() {
     int index = 17;
     System.out.println(result[index]);
     assertEquals(6, result[index]);
   }
 
   @Test
-  public void testDjFind14() throws Exception {
+  public void testDjFind14() {
     int index = 8;
     System.out.println(result[index]);
     assertEquals(9, result[index]);
   }
 
   @Test
-  public void testDjFind15() throws Exception {
+  public void testDjFind15() {
     int index = 19;
     System.out.println(result[index]);
     assertEquals(7, result[index]);

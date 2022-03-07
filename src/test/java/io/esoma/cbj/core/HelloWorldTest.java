@@ -25,7 +25,7 @@ public class HelloWorldTest {
   }
 
   @Test
-  public void testRunTest() throws Exception {
+  public void testRunTest() {
     String testStr = HelloWorld.runTest();
     assertEquals("Hello world test failed, please check test strings.", TEST_STR, testStr);
   }

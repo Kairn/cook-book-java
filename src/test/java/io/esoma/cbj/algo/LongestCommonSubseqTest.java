@@ -24,7 +24,7 @@ public class LongestCommonSubseqTest {
   }
 
   @Test
-  public void testFindLcs1() throws Exception {
+  public void testFindLcs1() {
     String s1 = "bcv";
     String s2 = "accid";
     int expected = 1;
@@ -34,7 +34,7 @@ public class LongestCommonSubseqTest {
   }
 
   @Test
-  public void testFindLcs2() throws Exception {
+  public void testFindLcs2() {
     String s1 = "rtg5";
     String s2 = "";
     int expected = 0;
@@ -44,7 +44,7 @@ public class LongestCommonSubseqTest {
   }
 
   @Test
-  public void testFindLcs3() throws Exception {
+  public void testFindLcs3() {
     String s1 = "AGCDFGDA";
     String s2 = "GFAADGDA";
     int expected = 5;
@@ -54,7 +54,7 @@ public class LongestCommonSubseqTest {
   }
 
   @Test
-  public void testFindLcs4() throws Exception {
+  public void testFindLcs4() {
     String s1 = "398397970";
     String s2 = "3399917206";
     int expected = 6;
@@ -64,7 +64,7 @@ public class LongestCommonSubseqTest {
   }
 
   @Test
-  public void testFindLcs5() throws Exception {
+  public void testFindLcs5() {
     String s1 = "12341";
     String s2 = "341213";
     int expected = 3;
@@ -74,7 +74,7 @@ public class LongestCommonSubseqTest {
   }
 
   @Test
-  public void testFindLcs6() throws Exception {
+  public void testFindLcs6() {
     String s1 = "44321751322856067355245610665431643040435861973548";
     String s2 = "5217202868630547660313515968975138408327244335729710";
     int expected = 24;
@@ -84,7 +84,7 @@ public class LongestCommonSubseqTest {
   }
 
   @Test
-  public void testFindLcs7() throws Exception {
+  public void testFindLcs7() {
     String s1 =
         "vrqwpvtbfekzcdokahhyoilammjswyqbafctbvrjvdphaqahuqjsjxxslkywdlqudvchnbtiphksqiqwfimigumwmigbepmbeat";
     String s2 =
@@ -96,7 +96,7 @@ public class LongestCommonSubseqTest {
   }
 
   @Test
-  public void testFindLcs8() throws Exception {
+  public void testFindLcs8() {
     String s1 = "tiroqeitqitr";
     String s2 = "zxmnjsdmfncvjg";
     int expected = 0;

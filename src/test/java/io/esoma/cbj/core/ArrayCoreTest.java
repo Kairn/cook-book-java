@@ -26,7 +26,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testLinearSearchInt() throws Exception {
+  public void testLinearSearchInt() {
     int[] array = new int[] {49, 96, 79, 3, 100, 15, 86, 71, 7, 54, 87, 63, 90, 90, 80, 86, 17};
     int target = 7;
     int expected = 8;
@@ -36,7 +36,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testLinearSearchInt2() throws Exception {
+  public void testLinearSearchInt2() {
     int[] array = new int[] {94, 60, 63, 83, 87, 51, 8};
     int target = 18;
     int expected = -1;
@@ -46,7 +46,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testLinearSearchInt3() throws Exception {
+  public void testLinearSearchInt3() {
     int[] array =
         new int[] {
           4119, 2927, 4017, 3787, 2025, 2444, 2358, 3845, 2979, 3085, 4030, 2844, 2237, 3656, 3581,
@@ -60,7 +60,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testReverseInt1() throws Exception {
+  public void testReverseInt1() {
     int[] straight =
         new int[] {
           257, 282, 284, 304, 317, 351, 353, 360, 368, 374, 410, 428, 476, 501, 525, 553, 568, 582,
@@ -77,7 +77,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testReverseInt2() throws Exception {
+  public void testReverseInt2() {
     int[] straight = new int[] {1, 1, 0, 1, 1};
     int[] reverse = new int[] {1, 1, 0, 1, 1};
     int[] result = ArrayCore.reverseInt(straight, 0, straight.length - 1);
@@ -86,7 +86,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testReverseInt3() throws Exception {
+  public void testReverseInt3() {
     int[] straight = new int[] {2, 7, 8, 8, 4, 4, 4, -3, -3, -4, -5, -6, -6, -2, 0};
     int[] reverse = new int[] {2, 7, -6, -6, -5, -4, -3, -3, 4, 4, 4, 8, 8, -2, 0};
     int[] result = ArrayCore.reverseInt(straight, 2, straight.length - 3);
@@ -95,7 +95,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testInsertInt1() throws Exception {
+  public void testInsertInt1() {
     int[] old =
         new int[] {
           5, 8, -9, 0, -7, 3, 3, 1, 0, 2, -6, -9, 7, 9, -3, 2, -1, -6, 1, -8, -5, -8, -6, -4, 1, -3
@@ -110,7 +110,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testInsertInt2() throws Exception {
+  public void testInsertInt2() {
     int[] old =
         new int[] {
           645, 842, 953, 709, 120, 93, 685, 813, 399, 341, 540, 574, 920, 283, 45, 942, 474
@@ -125,7 +125,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testInsertInt3() throws Exception {
+  public void testInsertInt3() {
     int[] old = new int[] {7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
     int[] inserted = new int[] {7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
     ArrayCore.insertInt(old, 2, 0);
@@ -134,7 +134,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testCheckIntAsc1() throws Exception {
+  public void testCheckIntAsc1() {
     int[] array =
         new int[] {
           1, 2, 4, 5, 5, 6, 6, 8, 8, 8, 8, 9, 9, 10, 11, 12, 14, 16, 18, 19, 21, 21, 23, 23, 24, 24,
@@ -147,7 +147,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testCheckIntAsc2() throws Exception {
+  public void testCheckIntAsc2() {
     int[] array =
         new int[] {
           99, 1009, 40, 40, 40, 40, 41, 42, 43, 43, 44, 44, 45, 45, 46, 47, 48, 48, 48, 49, 49, 50,
@@ -157,7 +157,7 @@ public class ArrayCoreTest {
   }
 
   @Test
-  public void testCheckIntAsc3() throws Exception {
+  public void testCheckIntAsc3() {
     int[] array =
         new int[] {
           684, 684, 685, 692, 703, 708, 710, 713, 720, 766, 777, 884, 802, 804, 813, 817, 823, 826,

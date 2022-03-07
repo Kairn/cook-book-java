@@ -32,7 +32,7 @@ public class AvlTreeTest {
   /*
    * Aggregate test of 20 batches of operations.
    */
-  public void testAvl() throws Exception {
+  public void testAvl() {
     int expected = 0;
     int actual = avt.getSize();
     System.out.println(avt);
@@ -65,7 +65,7 @@ public class AvlTreeTest {
     System.out.println(avt);
     assertEquals(expected, actual);
 
-    expected = 0;
+    // Expected is still 0.
     actual = avt.delete(800) == null ? 0 : 1;
     System.out.println(avt);
     assertEquals(expected, actual);
@@ -170,7 +170,7 @@ public class AvlTreeTest {
   }
 
   @Test
-  public void testToSortedList() throws Exception {
+  public void testToSortedList() {
     AvlTree<Integer> tree = new AvlTree<>();
     int[] array =
         new int[] {
