@@ -55,4 +55,6 @@ public class RepeatingXor {
 
     return builder.toString();
   }
+
+  private RepeatingXor() {}
 }

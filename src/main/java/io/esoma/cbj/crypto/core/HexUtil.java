@@ -123,4 +123,6 @@ public class HexUtil {
 
     return BinUtil.bitStreamToBytes(builder.toString());
   }
+
+  private HexUtil() {}
 }

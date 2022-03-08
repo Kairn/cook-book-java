@@ -91,7 +91,7 @@ public class FibonacciHeap<E extends Comparable<E>> {
 
     // Prepare the next min key.
     --this.size;
-    if (this.mainChain.size() == 0) {
+    if (this.mainChain.isEmpty()) {
       this.minNode = null;
     } else {
       FhNode<E> newMn = this.mainChain.element();

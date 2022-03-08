@@ -20,7 +20,7 @@ public class FixedXor {
     for (int i = 0; i < first.length(); ++i) {
       String bits1 = HexUtil.hexCharToBits(first.charAt(i));
       String bits2 = HexUtil.hexCharToBits(second.charAt(i));
-      builder.append(HexUtil.bitsToHexChar(Xor(bits1, bits2)));
+      builder.append(HexUtil.bitsToHexChar(xor(bits1, bits2)));
     }
 
     return builder.toString();
@@ -39,7 +39,7 @@ public class FixedXor {
     return result;
   }
 
-  private static String Xor(String first, String second) {
+  private static String xor(String first, String second) {
     if (StringUtils.isAnyBlank(first, second) || first.length() != second.length()) {
       throw new IllegalArgumentException("Invalid string inputs");
     }
@@ -58,4 +58,6 @@ public class FixedXor {
 
     return builder.toString();
   }
+
+  private FixedXor() {}
 }

@@ -78,4 +78,6 @@ public class MergeSort {
 
     return sorted;
   }
+
+  private MergeSort() {}
 }

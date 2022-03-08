@@ -97,4 +97,6 @@ public class BinarySearch {
 
     return array[bin] <= target ? bin + 1 : bin;
   }
+
+  private BinarySearch() {}
 }

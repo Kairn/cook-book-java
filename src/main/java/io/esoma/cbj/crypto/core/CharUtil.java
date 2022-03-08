@@ -16,4 +16,6 @@ public class CharUtil {
       return true;
     } else return c == ',' || c == '.';
   }
+
+  private CharUtil() {}
 }

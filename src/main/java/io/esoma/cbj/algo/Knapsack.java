@@ -133,4 +133,6 @@ public class Knapsack {
       }
     }
   }
+
+  private Knapsack() {}
 }

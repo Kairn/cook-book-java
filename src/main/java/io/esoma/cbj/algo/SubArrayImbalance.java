@@ -123,4 +123,6 @@ public class SubArrayImbalance {
       this.val = val;
     }
   }
+
+  private SubArrayImbalance() {}
 }

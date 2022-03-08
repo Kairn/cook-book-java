@@ -159,4 +159,6 @@ public class GreatestCommonDivisor {
 
     return cache[c][a][n];
   }
+
+  private GreatestCommonDivisor() {}
 }

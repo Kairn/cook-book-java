@@ -1,6 +1,7 @@
 package io.esoma.cbj.algo;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Class for studying the Minimum Spanning Tree (MST) problem. A MST is a subset of the edges of a
@@ -75,6 +76,8 @@ public class MinSpanTree {
 
     return total;
   }
+
+  private MinSpanTree() {}
 }
 
 /**
@@ -92,6 +95,19 @@ class Edge implements Comparable<Edge> {
     this.from = from;
     this.to = to;
     this.weight = weight;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Edge edge = (Edge) o;
+    return from == edge.from && to == edge.to && weight == edge.weight;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(from, to, weight);
   }
 
   @Override

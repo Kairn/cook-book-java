@@ -50,20 +50,17 @@ public class Dijkstra {
           // Skip the node itself.
           continue;
         }
-        if (dist != -1) {
+        if ((dist != -1) && (results[i] == -1 || cur + dist < results[i])) {
           // Direct path exists.
           // Calculate new distance value and update if smaller.
-          if (results[i] == -1) {
-            results[i] = cur + dist;
-            nodeQueue.offer(i);
-          } else if (cur + dist < results[i]) {
-            results[i] = cur + dist;
-            nodeQueue.offer(i);
-          }
+          results[i] = cur + dist;
+          nodeQueue.offer(i);
         }
       }
     }
 
     return results;
   }
+
+  private Dijkstra() {}
 }

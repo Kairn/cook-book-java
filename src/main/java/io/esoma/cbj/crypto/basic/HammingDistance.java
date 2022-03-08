@@ -41,4 +41,6 @@ public class HammingDistance {
 
     return distance;
   }
+
+  private HammingDistance() {}
 }

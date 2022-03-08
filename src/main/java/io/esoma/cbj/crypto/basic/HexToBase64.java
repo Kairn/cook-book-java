@@ -27,4 +27,6 @@ public class HexToBase64 {
     String bitStream = builder.toString();
     return Base64Util.encodeFromBitStream(bitStream);
   }
+
+  private HexToBase64() {}
 }

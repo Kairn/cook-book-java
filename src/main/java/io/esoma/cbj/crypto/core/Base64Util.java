@@ -90,4 +90,6 @@ public class Base64Util {
 
     return getChar(BinUtil.bitStreamToInt(bits));
   }
+
+  private Base64Util() {}
 }

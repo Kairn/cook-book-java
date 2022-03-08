@@ -107,4 +107,6 @@ public class HeapSort {
       }
     }
   }
+
+  private HeapSort() {}
 }

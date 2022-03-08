@@ -42,4 +42,6 @@ public class BinaryInsertionSort {
       ArrayCore.insertInt(array, i, target);
     }
   }
+
+  private BinaryInsertionSort() {}
 }

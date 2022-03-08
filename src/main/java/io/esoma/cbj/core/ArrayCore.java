@@ -143,4 +143,6 @@ public class ArrayCore {
 
     return sb.toString();
   }
+
+  private ArrayCore() {}
 }

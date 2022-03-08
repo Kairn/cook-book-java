@@ -131,4 +131,6 @@ public class BinUtil {
       return ++b;
     }
   }
+
+  private BinUtil() {}
 }

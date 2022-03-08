@@ -34,4 +34,6 @@ public class RandUtil {
     int bound = max - min + 1;
     return min + PRNG.nextInt(bound);
   }
+
+  private RandUtil() {}
 }

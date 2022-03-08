@@ -302,14 +302,14 @@ public class AvlTree<E extends Comparable<E>> {
     if (hd > 1) {
       if (n.lh > n.rh) {
         // Left side is heavier.
-        if (n.left.lh <= n.left.rh) {
+        if (n.left != null && n.left.lh <= n.left.rh) {
           // Left shift first.
           this.lShift(n.left);
         }
         this.rShift(n);
       } else {
         // Right side is heavier.
-        if (n.right.rh <= n.right.lh) {
+        if (n.right != null && n.right.rh <= n.right.lh) {
           // Right shift first.
           this.rShift(n.right);
         }
@@ -441,11 +441,8 @@ public class AvlTree<E extends Comparable<E>> {
     }
   }
 
+  /** Returns a string representation of the AVL tree. Elements will be shown in ascending order. */
   @Override
-  /*
-   * Returns a string representation of the AVL tree. Elements will be shown in
-   * ascending order.
-   */
   public String toString() {
     StringBuilder bu = new StringBuilder();
     for (E e : this.toSortedList()) {

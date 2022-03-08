@@ -56,7 +56,7 @@ public class SortedSum {
       }
     }
 
-    return Long.valueOf(total).intValue();
+    return (int) total;
   }
 
   /**
@@ -105,6 +105,8 @@ public class SortedSum {
       }
     }
 
-    return Long.valueOf(sum).intValue();
+    return (int) sum;
   }
+
+  private SortedSum() {}
 }

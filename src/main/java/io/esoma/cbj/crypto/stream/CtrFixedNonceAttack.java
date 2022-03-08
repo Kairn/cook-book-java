@@ -19,7 +19,8 @@ public class CtrFixedNonceAttack {
 
   public static final String TEST_FILE = "CtrAttackText.txt";
   public static final String TEST_KEY = "ALMOND SUBMARINE";
-  public static final byte[] TEST_NONCE = new byte[8];
+
+  static final byte[] TEST_NONCE = new byte[8];
 
   /**
    * Enumerates the cipher texts and tests each byte on each position to obtain a good guess of the
@@ -80,4 +81,6 @@ public class CtrFixedNonceAttack {
 
     return guessKeyStream(cipherArrays, 16);
   }
+
+  private CtrFixedNonceAttack() {}
 }

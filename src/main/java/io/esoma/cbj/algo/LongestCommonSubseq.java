@@ -39,4 +39,6 @@ public class LongestCommonSubseq {
 
     return cache[l1][l2];
   }
+
+  private LongestCommonSubseq() {}
 }

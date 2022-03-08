@@ -4,7 +4,8 @@ import io.esoma.cbj.core.ArrayCore;
 import io.esoma.cbj.core.BinaryInsertionSort;
 import io.esoma.cbj.core.BinarySearch;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Class for implementing the Timsort algorithm. Timsort is a hybrid stable sorting algorithm,
@@ -31,13 +32,11 @@ public class TimSort {
 
   // This keeps track of the ideal galloping threshold which adapts appropriately
   // based on the data for each sorting case.
-  private static int min_gallop = MIN_GALLOP_INIT;
+  private static int minGallop = MIN_GALLOP_INIT;
   // This controls the merge mode.
-  private static boolean gallop_mode = false;
-  // The minimum length of a run will be calculated at the start of the algorithm.
-  private static int min_run = 32;
+  private static boolean gallopMode = false;
   // The stack of runs
-  private static Stack<Run> run_stack = null;
+  private static Deque<Run> runStack = null;
 
   /**
    * Performs the standard Timsort for the given array. The array is theoretically sorted in-place
@@ -52,9 +51,11 @@ public class TimSort {
   public static int[] sort(int[] array) {
     // Initialize parameters and the run stack.
     int n = array.length;
-    min_gallop = MIN_GALLOP_INIT;
-    min_run = calcMinRun(n);
-    run_stack = new Stack<>();
+    minGallop = MIN_GALLOP_INIT;
+    runStack = new ArrayDeque<>();
+
+    // The minimum length of a run will be calculated at the start of the algorithm.
+    int minRun = calcMinRun(n);
 
     // This flag controls whether we create a new run.
     boolean newRun = true;
@@ -71,7 +72,7 @@ public class TimSort {
         lb = i;
         // If only one element remains, we push it to the stack.
         if (i == n - 1) {
-          run_stack.push(new Run(i, i));
+          runStack.push(new Run(i, i));
           break;
         } else {
           // A run has at least a length of 2, we will decide the order.
@@ -89,17 +90,17 @@ public class TimSort {
           }
           // Check if the current run has reaches required length.
           // Insertion sort is used for adding additional elements if not.
-          if (rb - lb + 1 >= min_run) {
+          if (rb - lb + 1 >= minRun) {
             // This element needs to be reused for the new run.
             --i;
           } else {
             // Collect more elements
-            rb = Math.min(n - 1, lb + min_run - 1);
+            rb = Math.min(n - 1, lb + minRun - 1);
             BinaryInsertionSort.sortOnline(array, lb, rb, i);
             i = rb;
           }
           // Push the natural or crafted run.
-          run_stack.push(new Run(lb, rb));
+          runStack.push(new Run(lb, rb));
           newRun = true;
         }
       }
@@ -109,7 +110,7 @@ public class TimSort {
         if (!asc) {
           ArrayCore.reverseInt(array, lb, rb);
         }
-        run_stack.push(new Run(lb, rb));
+        runStack.push(new Run(lb, rb));
       }
 
       // Check merging condition if a new run is added.
@@ -134,27 +135,27 @@ public class TimSort {
    * @param force whether to ignore the merge condition
    */
   private static void mergeCollapse(int[] array, boolean force) {
-    if (run_stack.size() < 2) {
+    if (runStack.size() < 2) {
       return;
     }
 
     Run lRun;
     Run rRun;
 
-    if (run_stack.size() == 2 && force) {
-      rRun = run_stack.pop();
-      lRun = run_stack.pop();
-    } else if (run_stack.size() > 2) {
+    if (runStack.size() == 2 && force) {
+      rRun = runStack.pop();
+      lRun = runStack.pop();
+    } else if (runStack.size() > 2) {
       // Load the top three runs and check the merge condition.
-      Run c = run_stack.pop();
-      Run b = run_stack.pop();
-      Run a = run_stack.pop();
+      Run c = runStack.pop();
+      Run b = runStack.pop();
+      Run a = runStack.pop();
       // Two invariants specified by the author.
       if ((b.getLen() > c.getLen() && a.getLen() > (b.getLen() + c.getLen())) && !force) {
         // Return the runs to the stack.
-        run_stack.push(a);
-        run_stack.push(b);
-        run_stack.push(c);
+        runStack.push(a);
+        runStack.push(b);
+        runStack.push(c);
         return;
       }
 
@@ -163,14 +164,14 @@ public class TimSort {
         // Merge a and b.
         lRun = a;
         rRun = b;
-        run_stack.push(new Run(a.getLb(), b.getRb()));
-        run_stack.push(c);
+        runStack.push(new Run(a.getLb(), b.getRb()));
+        runStack.push(c);
       } else {
         // Merge b and c.
         lRun = b;
         rRun = c;
-        run_stack.push(a);
-        run_stack.push(new Run(b.getLb(), c.getRb()));
+        runStack.push(a);
+        runStack.push(new Run(b.getLb(), c.getRb()));
       }
     } else {
       // Only 2 runs in the stack while in the process.
@@ -236,7 +237,7 @@ public class TimSort {
       } else {
         int le = tempL[lp];
         int re = array[rp];
-        if (!gallop_mode) {
+        if (!gallopMode) {
           // One pair at a time mode (pairing).
           if (le <= re) {
             // Left run wins.
@@ -250,8 +251,8 @@ public class TimSort {
             ++rp;
           }
           // Check if we need to switch mode.
-          if (Math.abs(streak) >= min_gallop) {
-            gallop_mode = ENABLE_GALLOP;
+          if (Math.abs(streak) >= minGallop) {
+            gallopMode = ENABLE_GALLOP;
             streak = 0;
           }
         } else {
@@ -286,18 +287,18 @@ public class TimSort {
           }
           // Evaluate galloping.
           leftGallop = !leftGallop;
-          if (gp >= min_gallop) {
+          if (gp >= minGallop) {
             // Galloping is paying off.
-            --min_gallop;
+            --minGallop;
           } else {
             if (badGallop) {
               // Switch back to pairing mode.
-              gallop_mode = false;
+              gallopMode = false;
               badGallop = false;
             } else {
               badGallop = true;
             }
-            ++min_gallop;
+            ++minGallop;
           }
         }
       }
@@ -334,7 +335,7 @@ public class TimSort {
       } else {
         int re = tempR[rp];
         int le = array[lp];
-        if (!gallop_mode) {
+        if (!gallopMode) {
           // Pairing mode.
           if (re >= le) {
             streak = Math.max(1, streak + 1);
@@ -347,8 +348,8 @@ public class TimSort {
             --lp;
           }
           // Check if we need to switch mode.
-          if (Math.abs(streak) >= min_gallop) {
-            gallop_mode = ENABLE_GALLOP;
+          if (Math.abs(streak) >= minGallop) {
+            gallopMode = ENABLE_GALLOP;
             streak = 0;
           }
         } else {
@@ -379,18 +380,18 @@ public class TimSort {
           }
           // Evaluate galloping.
           rightGallop = !rightGallop;
-          if (gp >= min_gallop) {
+          if (gp >= minGallop) {
             // Galloping is paying off.
-            --min_gallop;
+            --minGallop;
           } else {
             if (badGallop) {
               // Switch back to pairing mode.
-              gallop_mode = false;
+              gallopMode = false;
               badGallop = false;
             } else {
               badGallop = true;
             }
-            ++min_gallop;
+            ++minGallop;
           }
         }
       }
@@ -426,6 +427,8 @@ public class TimSort {
 
     return n;
   }
+
+  private TimSort() {}
 }
 
 /**
