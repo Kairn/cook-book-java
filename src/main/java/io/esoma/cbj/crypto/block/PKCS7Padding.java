@@ -82,6 +82,8 @@ public class PKCS7Padding {
 
     return Arrays.copyOfRange(bytes, 0, size - last);
   }
+
+  private PKCS7Padding() {}
 }
 
 class PaddingException extends RuntimeException {

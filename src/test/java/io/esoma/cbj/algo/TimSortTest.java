@@ -1,13 +1,17 @@
 package io.esoma.cbj.algo;
 
 import io.esoma.cbj.util.Banner;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+@RunWith(JUnitParamsRunner.class)
 public class TimSortTest {
 
   private static final String START = "Timsort Test Start";
@@ -1551,42 +1555,8 @@ public class TimSortTest {
   }
 
   @Test
-  public void testCalcMinRun1() {
-    int nelts = 55;
-    int mr = 55;
-    int result = TimSort.calcMinRun(nelts);
-    assertEquals(mr, result);
-  }
-
-  @Test
-  public void testCalcMinRun2() {
-    int nelts = 2112;
-    int mr = 33;
-    int result = TimSort.calcMinRun(nelts);
-    assertEquals(mr, result);
-  }
-
-  @Test
-  public void testCalcMinRun3() {
-    int nelts = 64;
-    int mr = 32;
-    int result = TimSort.calcMinRun(nelts);
-    assertEquals(mr, result);
-  }
-
-  @Test
-  public void testCalcMinRun4() {
-    int nelts = 135;
-    int mr = 34;
-    int result = TimSort.calcMinRun(nelts);
-    assertEquals(mr, result);
-  }
-
-  @Test
-  public void testCalcMinRun5() {
-    int nelts = 1000039;
-    int mr = 62;
-    int result = TimSort.calcMinRun(nelts);
-    assertEquals(mr, result);
+  @Parameters({"55, 55", "2112, 33", "64, 32", "135, 34", "1000039, 62"})
+  public void testCalcMinRun(int nelts, int mr) {
+    assertEquals(mr, TimSort.calcMinRun(nelts));
   }
 }

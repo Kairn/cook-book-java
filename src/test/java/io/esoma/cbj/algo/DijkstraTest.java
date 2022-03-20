@@ -1,12 +1,16 @@
 package io.esoma.cbj.algo;
 
 import io.esoma.cbj.util.Banner;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(JUnitParamsRunner.class)
 public class DijkstraTest {
 
   private static final String START = "Dijkstra Test Start";
@@ -54,107 +58,12 @@ public class DijkstraTest {
   }
 
   @Test
-  public void testDjFind1() {
-    int index = 0;
+  @Parameters({
+    "0, 0", "1, 5", "2, 7", "4, -1", "5, 6", "6, 8", "7, 4", "9, 5", "10, 7", "12, 10", "13, 8",
+    "16, 6", "17, 6", "8, 9", "19, 7"
+  })
+  public void testDjFind(int index, int dist) {
     System.out.println(result[index]);
-    assertEquals(0, result[index]);
-  }
-
-  @Test
-  public void testDjFind2() {
-    int index = 1;
-    System.out.println(result[index]);
-    assertEquals(5, result[index]);
-  }
-
-  @Test
-  public void testDjFind3() {
-    int index = 2;
-    System.out.println(result[index]);
-    assertEquals(7, result[index]);
-  }
-
-  @Test
-  public void testDjFind4() {
-    int index = 4;
-    System.out.println(result[index]);
-    assertEquals(-1, result[index]);
-  }
-
-  @Test
-  public void testDjFind5() {
-    int index = 5;
-    System.out.println(result[index]);
-    assertEquals(6, result[index]);
-  }
-
-  @Test
-  public void testDjFind6() {
-    int index = 6;
-    System.out.println(result[index]);
-    assertEquals(8, result[index]);
-  }
-
-  @Test
-  public void testDjFind7() {
-    int index = 7;
-    System.out.println(result[index]);
-    assertEquals(4, result[index]);
-  }
-
-  @Test
-  public void testDjFind8() {
-    int index = 9;
-    System.out.println(result[index]);
-    assertEquals(5, result[index]);
-  }
-
-  @Test
-  public void testDjFind9() {
-    int index = 10;
-    System.out.println(result[index]);
-    assertEquals(7, result[index]);
-  }
-
-  @Test
-  public void testDjFind10() {
-    int index = 12;
-    System.out.println(result[index]);
-    assertEquals(10, result[index]);
-  }
-
-  @Test
-  public void testDjFind11() {
-    int index = 13;
-    System.out.println(result[index]);
-    assertEquals(8, result[index]);
-  }
-
-  @Test
-  public void testDjFind12() {
-    int index = 16;
-    System.out.println(result[index]);
-    assertEquals(6, result[index]);
-  }
-
-  @Test
-  public void testDjFind13() {
-    int index = 17;
-    System.out.println(result[index]);
-    assertEquals(6, result[index]);
-  }
-
-  @Test
-  public void testDjFind14() {
-    int index = 8;
-    System.out.println(result[index]);
-    assertEquals(9, result[index]);
-  }
-
-  @Test
-  public void testDjFind15() {
-    int index = 19;
-    System.out.println(result[index]);
-    assertEquals(7, result[index]);
+    assertEquals(dist, result[index]);
   }
 }
