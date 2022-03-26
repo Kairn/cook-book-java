@@ -4,6 +4,7 @@ import io.esoma.cbj.crypto.basic.AesInEcb;
 import io.esoma.cbj.crypto.basic.FixedXor;
 import io.esoma.cbj.crypto.core.Base64Util;
 import org.apache.commons.lang3.StringUtils;
+import org.tinylog.Logger;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
@@ -46,7 +47,7 @@ public class AesInCbc {
     final String key = "YELLOW SUBMARINE";
     String originalText = new String(decrypt(cipherBytes, key, iv));
 
-    System.out.println("Decrypted message: " + originalText);
+    Logger.info("Decrypted message:\n" + originalText);
   }
 
   /**

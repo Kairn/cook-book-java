@@ -4,6 +4,7 @@ import io.esoma.cbj.crypto.core.ByteMemory;
 import io.esoma.cbj.crypto.slave.EncryptionScheme;
 import io.esoma.cbj.crypto.slave.LessSillyEcbEncryptionScheme;
 import org.apache.commons.lang3.ArrayUtils;
+import org.tinylog.Logger;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,9 +25,9 @@ public class EcbOracleAttackPlus {
     EncryptionScheme targetScheme = new LessSillyEcbEncryptionScheme();
 
     int len = findAttackPrefixLength(targetScheme);
-    System.out.println("Found the attack prefix length: " + len);
+    Logger.info("Found the attack prefix length: " + len);
     byte[] unknownText = attackAndExtract(targetScheme, len);
-    System.out.println("Uncovered unknown text: " + new String(unknownText));
+    Logger.info("Uncovered unknown text:\n" + new String(unknownText));
   }
 
   public static byte[] attackAndExtract(EncryptionScheme scheme, int len) {

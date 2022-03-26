@@ -3,6 +3,7 @@ package io.esoma.cbj.crypto.stream;
 import io.esoma.cbj.crypto.basic.AesInEcb;
 import io.esoma.cbj.crypto.core.Base64Util;
 import org.apache.commons.lang3.ArrayUtils;
+import org.tinylog.Logger;
 
 import java.nio.charset.StandardCharsets;
 
@@ -23,7 +24,7 @@ public class AesInCtr {
     byte[] nonce = new byte[8];
     byte[] cipherBytes = Base64Util.decodeToByteArray(base64Cipher);
 
-    System.out.println(
+    Logger.info(
         new String(
             decrypt(cipherBytes, key, nonce, new LeIntegerCounterGenerator()),
             StandardCharsets.US_ASCII));

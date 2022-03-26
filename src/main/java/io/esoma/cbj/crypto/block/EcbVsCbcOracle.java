@@ -4,6 +4,7 @@ import io.esoma.cbj.crypto.basic.AesInEcb;
 import io.esoma.cbj.crypto.core.RandUtil;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.tinylog.Logger;
 
 import java.util.Arrays;
 
@@ -27,7 +28,7 @@ public class EcbVsCbcOracle {
       }
     }
 
-    System.out.format("Detection oracle got %d out of %d cases correct", correctCount, ROUNDS);
+    Logger.info("Detection oracle got {} out of {} cases correct", correctCount, ROUNDS);
   }
 
   private static byte[] randEncrypt(byte[] inputBytes, boolean isCbc) {

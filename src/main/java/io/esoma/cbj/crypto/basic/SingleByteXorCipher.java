@@ -4,6 +4,7 @@ import io.esoma.cbj.crypto.core.BinUtil;
 import io.esoma.cbj.crypto.core.HexUtil;
 import io.esoma.cbj.crypto.core.SimpleCipherOutput;
 import org.apache.commons.lang3.StringUtils;
+import org.tinylog.Logger;
 
 /**
  * Class for studying the algorithm to decrypt a hex encoded string that has been XORed by a
@@ -18,7 +19,7 @@ public class SingleByteXorCipher {
   private static final char MAX_CODE = 255;
 
   public static void main(String[] args) {
-    System.out.println(
+    Logger.info(
         decryptMessage("1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"));
   }
 
@@ -68,8 +69,8 @@ public class SingleByteXorCipher {
     }
 
     if (!SILENT) {
-      System.out.println("Found the best decryption key: " + (char) bestCode);
-      System.out.println("Decrypted message as: " + bestMessage);
+      Logger.info("Found the best decryption key: " + (char) bestCode);
+      Logger.info("Decrypted message as: " + bestMessage);
     }
     return new SimpleCipherOutput<>(null, bestMessage, (char) bestCode);
   }

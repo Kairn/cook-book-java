@@ -5,6 +5,7 @@ import io.esoma.cbj.crypto.core.BinUtil;
 import io.esoma.cbj.crypto.core.RandUtil;
 import io.esoma.cbj.crypto.slave.VulnerableCbcCryptoScheme;
 import org.apache.commons.lang3.ArrayUtils;
+import org.tinylog.Logger;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -43,7 +44,7 @@ public class CbcPaddingOracleAttack {
     byte[] cipherBytes = scheme.encrypt(plainBytes, DEFAULT_IV);
     byte[] decryptedBytes = attackAndReveal(scheme, cipherBytes);
 
-    System.out.println("Uncovered original text: " + new String(decryptedBytes));
+    Logger.info("Uncovered original text:\n" + new String(decryptedBytes));
   }
 
   public static byte[] attackAndReveal(VulnerableCbcCryptoScheme scheme, byte[] cipherBytes) {
