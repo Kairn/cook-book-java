@@ -1,6 +1,7 @@
 package io.esoma.cbj.crypto.basic;
 
 import io.esoma.cbj.crypto.core.HexUtil;
+import org.tinylog.Logger;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -48,9 +49,11 @@ public class DetectAesInEcb {
       throw new IllegalStateException("Failed to process file");
     }
 
-    System.out.format(
-        "Detected ECB cipher <%s> on line <%d> with score of <%.2f>",
-        ecbCipher, bestLine, bestScore);
+    Logger.info(
+        "Detected ECB cipher <{}> on line <{}> with score of <{0.00}>",
+        ecbCipher,
+        bestLine,
+        bestScore);
   }
 
   /**
@@ -97,7 +100,7 @@ public class DetectAesInEcb {
 
     score /= cipherBytes.length;
     if (!SILENT) {
-      System.out.println("Got score: " + score);
+      Logger.info("Got score: " + score);
     }
     return score;
   }

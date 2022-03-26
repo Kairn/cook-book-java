@@ -2,6 +2,7 @@ package io.esoma.cbj.crypto.basic;
 
 import io.esoma.cbj.crypto.core.Base64Util;
 import io.esoma.cbj.crypto.core.SimpleCipherOutput;
+import org.tinylog.Logger;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -35,7 +36,7 @@ public class DecipherRepeatingXor {
     int keySize = guessKeySize(cipherBytes);
     String key = hackForKey(cipherBytes, keySize);
 
-    System.out.println("Decrypted message as: " + RepeatingXor.create(cipherBytes, key, false));
+    Logger.info("Decrypted message as:\n" + RepeatingXor.create(cipherBytes, key, false));
   }
 
   private static int guessKeySize(byte[] bytes) {
@@ -66,7 +67,7 @@ public class DecipherRepeatingXor {
       }
     }
 
-    System.out.println("Best key size is: " + bestKeySize);
+    Logger.info("Best key size is: " + bestKeySize);
     return bestKeySize;
   }
 
@@ -98,7 +99,7 @@ public class DecipherRepeatingXor {
     outputs.forEach(output -> keyBuilder.append(output.getKey()));
     String key = keyBuilder.toString();
 
-    System.out.println("Hacked key: " + key);
+    Logger.info("Hacked key: " + key);
     return key;
   }
 }

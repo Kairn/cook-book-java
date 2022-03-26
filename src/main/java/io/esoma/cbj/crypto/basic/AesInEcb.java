@@ -2,6 +2,7 @@ package io.esoma.cbj.crypto.basic;
 
 import io.esoma.cbj.crypto.core.Base64Util;
 import org.apache.commons.lang3.StringUtils;
+import org.tinylog.Logger;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -35,7 +36,7 @@ public class AesInEcb {
       throw new IllegalStateException("Unable to read input file");
     }
 
-    System.out.println("Decrypted message: " + decryptBase64(inputText, secretKey));
+    Logger.info("Decrypted message:\n" + decryptBase64(inputText, secretKey));
   }
 
   /**

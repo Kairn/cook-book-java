@@ -1,6 +1,7 @@
 package io.esoma.cbj.crypto.basic;
 
 import org.apache.commons.lang3.StringUtils;
+import org.tinylog.Logger;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -29,7 +30,7 @@ public class DetectSingleByteXor {
               encrypted -> {
                 String decrypted = SingleByteXorCipher.decryptMessage(encrypted).getDecrypted();
                 if (isGoodMessage(decrypted)) {
-                  System.out.format("Detected cipher <%s> which yields: %s", encrypted, decrypted);
+                  Logger.info("Detected cipher <{}> which yields: {}", encrypted, decrypted);
                 }
               });
     } catch (Exception e) {

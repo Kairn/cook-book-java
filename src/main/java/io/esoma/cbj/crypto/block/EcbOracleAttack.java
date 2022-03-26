@@ -4,6 +4,7 @@ import io.esoma.cbj.crypto.core.ByteMemory;
 import io.esoma.cbj.crypto.slave.EncryptionScheme;
 import io.esoma.cbj.crypto.slave.SillyEcbEncryptionScheme;
 import org.apache.commons.lang3.ArrayUtils;
+import org.tinylog.Logger;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class EcbOracleAttack {
 
   public static void main(String[] args) {
     String unknownText = attackAndExtractV2(new SillyEcbEncryptionScheme());
-    System.out.println("Uncovered unknown text: " + unknownText);
+    Logger.info("Uncovered unknown text:\n" + unknownText);
   }
 
   public static String attackAndExtractV2(EncryptionScheme scheme) {

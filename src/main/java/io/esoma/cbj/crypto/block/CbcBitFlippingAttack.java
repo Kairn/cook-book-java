@@ -3,6 +3,7 @@ package io.esoma.cbj.crypto.block;
 import io.esoma.cbj.crypto.slave.CryptoScheme;
 import io.esoma.cbj.crypto.slave.SandwichCbcCryptoScheme;
 import org.apache.commons.lang3.StringUtils;
+import org.tinylog.Logger;
 
 /**
  * Class that studies the bit flipping attack used against CBC encryption mode. It takes advantage
@@ -22,9 +23,9 @@ public class CbcBitFlippingAttack {
 
     byte[] hackedUserData = scheme.decrypt(attackAndFalsify(scheme));
     if (isAdmin(new String(hackedUserData))) {
-      System.out.println("Successfully got admin access");
+      Logger.info("Successfully got admin access");
     } else {
-      System.out.println("Hacking failed");
+      Logger.warn("Hacking failed");
     }
   }
 

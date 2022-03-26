@@ -3,6 +3,7 @@ package io.esoma.cbj.crypto.block;
 import io.esoma.cbj.crypto.slave.SillyUserProfileRegistrar;
 import io.esoma.cbj.crypto.slave.SimpleUserProfile;
 import org.apache.commons.lang3.ArrayUtils;
+import org.tinylog.Logger;
 
 import java.util.Arrays;
 
@@ -37,7 +38,7 @@ public class EcbCutPasteAttack {
 
     SimpleUserProfile myProfile = REGISTRAR.login(adminCredentials);
     if (myProfile.isAdmin()) {
-      System.out.format("Successfully created a user with <%s> role", myProfile.getRole());
+      Logger.info("Successfully created a user with <{}> role", myProfile.getRole());
     }
   }
 }
