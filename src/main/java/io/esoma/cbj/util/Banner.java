@@ -14,6 +14,8 @@ public class Banner {
   private static final char DASH = '-';
   private static final char STAR = '*';
 
+  private Banner() {}
+
   /**
    * Builds a banner string of a title wrapped by a number of specified padding signs. Used
    * internally for building more specific banner strings.
@@ -73,6 +75,4 @@ public class Banner {
   public static String getSpecialBanner(String title, int num) {
     return getCommonBanner(title, num, STAR);
   }
-
-  private Banner() {}
 }
