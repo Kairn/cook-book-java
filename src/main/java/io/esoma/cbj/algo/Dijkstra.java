@@ -14,6 +14,8 @@ import java.util.Queue;
  */
 public class Dijkstra {
 
+  private Dijkstra() {}
+
   /**
    * Traverses through the graph and finds the shortest distances between the first node (index 0)
    * and all other nodes in the graph. There might be nodes disconnected from the rest of the graph.
@@ -61,6 +63,4 @@ public class Dijkstra {
 
     return results;
   }
-
-  private Dijkstra() {}
 }

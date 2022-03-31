@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class FixedXor {
 
+  private FixedXor() {}
+
   public static String combine(String first, String second) {
     if (StringUtils.isAnyBlank(first, second) || first.length() != second.length()) {
       throw new IllegalArgumentException("Invalid string inputs");
@@ -58,6 +60,4 @@ public class FixedXor {
 
     return builder.toString();
   }
-
-  private FixedXor() {}
 }

@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class RepeatingXor {
 
+  private RepeatingXor() {}
+
   /**
    * Encrypts a message with the given key using repeating XOR cipher scheme. Each byte of the
    * message will be XORed with a byte from the key by cycling iteration. The resulting cipher can
@@ -55,6 +57,4 @@ public class RepeatingXor {
 
     return builder.toString();
   }
-
-  private RepeatingXor() {}
 }

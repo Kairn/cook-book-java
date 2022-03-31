@@ -17,6 +17,8 @@ public class SortedSum {
   // The divisor to be used on the modulo operation.
   private static final int M = 1000000007;
 
+  private SortedSum() {}
+
   /**
    * Processes the input array from left to right in a way similar to an insertion sort. For each
    * element, traverse through the sorted area, adding to the sum by comparison, and insert the
@@ -107,6 +109,4 @@ public class SortedSum {
 
     return (int) sum;
   }
-
-  private SortedSum() {}
 }

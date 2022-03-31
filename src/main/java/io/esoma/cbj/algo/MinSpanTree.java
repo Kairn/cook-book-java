@@ -12,6 +12,8 @@ import java.util.Objects;
  */
 public class MinSpanTree {
 
+  private MinSpanTree() {}
+
   /**
    * Calculates the total weight of a MST with the given edges in a connected graph using Kruskal's
    * algorithm. The idea behind this algorithm is to repeatedly check the edge with the smallest
@@ -76,8 +78,6 @@ public class MinSpanTree {
 
     return total;
   }
-
-  private MinSpanTree() {}
 }
 
 /**

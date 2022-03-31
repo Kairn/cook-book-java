@@ -22,6 +22,8 @@ public class CtrFixedNonceAttack {
 
   static final byte[] TEST_NONCE = new byte[8];
 
+  private CtrFixedNonceAttack() {}
+
   /**
    * Enumerates the cipher texts and tests each byte on each position to obtain a good guess of the
    * key stream given the ciphers are produced by CTR with a fixed-nonce. The strategy for guessing
@@ -81,6 +83,4 @@ public class CtrFixedNonceAttack {
 
     return guessKeyStream(cipherArrays, 16);
   }
-
-  private CtrFixedNonceAttack() {}
 }

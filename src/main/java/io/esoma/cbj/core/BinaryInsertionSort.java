@@ -13,6 +13,8 @@ package io.esoma.cbj.core;
  */
 public class BinaryInsertionSort {
 
+  private BinaryInsertionSort() {}
+
   /**
    * Performs in-place insertion of elements starting from the next unsorted index given to the
    * method. It will not waste time sorting the entire region specified by the bounds if there is a
@@ -42,6 +44,4 @@ public class BinaryInsertionSort {
       ArrayCore.insertInt(array, i, target);
     }
   }
-
-  private BinaryInsertionSort() {}
 }

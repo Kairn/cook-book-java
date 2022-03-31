@@ -12,6 +12,8 @@ package io.esoma.cbj.core;
  */
 public class BinarySearch {
 
+  private BinarySearch() {}
+
   /**
    * Performs the basic binary search and returns the index of the search target in a sorted array.
    * If not found, -1 is returned. The return value is not guaranteed to be the leftmost or
@@ -97,6 +99,4 @@ public class BinarySearch {
 
     return array[bin] <= target ? bin + 1 : bin;
   }
-
-  private BinarySearch() {}
 }

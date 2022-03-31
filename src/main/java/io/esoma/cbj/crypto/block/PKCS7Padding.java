@@ -16,6 +16,8 @@ public class PKCS7Padding {
 
   private static final int MAX_PADDING = 255;
 
+  private PKCS7Padding() {}
+
   public static String perform(String input, int blockSize) {
     if (StringUtils.isBlank(input) || blockSize < 1 || (blockSize - input.length()) > MAX_PADDING) {
       throw new IllegalArgumentException("Invalid input");
@@ -82,8 +84,6 @@ public class PKCS7Padding {
 
     return Arrays.copyOfRange(bytes, 0, size - last);
   }
-
-  private PKCS7Padding() {}
 }
 
 class PaddingException extends RuntimeException {

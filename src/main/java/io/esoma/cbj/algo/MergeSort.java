@@ -9,6 +9,8 @@ package io.esoma.cbj.algo;
  */
 public class MergeSort {
 
+  private MergeSort() {}
+
   /**
    * Performs sorting on an initially unsorted array. Order is ascending.
    *
@@ -78,6 +80,4 @@ public class MergeSort {
 
     return sorted;
   }
-
-  private MergeSort() {}
 }

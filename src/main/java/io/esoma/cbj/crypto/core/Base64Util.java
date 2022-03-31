@@ -14,6 +14,8 @@ public class Base64Util {
   private static final char PADDING = '=';
   private static final int BLOCK_SIZE = 6;
 
+  private Base64Util() {}
+
   public static char getChar(int index) {
     if (index > 63 || index < 0) {
       throw new IllegalArgumentException("Invalid index");
@@ -90,6 +92,4 @@ public class Base64Util {
 
     return getChar(BinUtil.bitStreamToInt(bits));
   }
-
-  private Base64Util() {}
 }

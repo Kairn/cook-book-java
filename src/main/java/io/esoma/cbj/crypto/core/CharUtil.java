@@ -7,6 +7,8 @@ package io.esoma.cbj.crypto.core;
  */
 public class CharUtil {
 
+  private CharUtil() {}
+
   public static boolean isCommonEnglishChar(char c) {
     if (Character.isUpperCase(c)) {
       return true;
@@ -16,6 +18,4 @@ public class CharUtil {
       return true;
     } else return c == ',' || c == '.';
   }
-
-  private CharUtil() {}
 }

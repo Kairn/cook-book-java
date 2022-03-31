@@ -28,6 +28,8 @@ public class DeciBinary {
   private static final long[][] COUNTS = new long[MAX_DIGITS][MAX_DECI];
   private static final long[] PRE_COUNTS = new long[MAX_DECI];
 
+  private DeciBinary() {}
+
   /**
    * Computes the decimal value of a decibinary number in its decimal representation.
    *
@@ -167,6 +169,4 @@ public class DeciBinary {
 
     return COUNTS[d][s];
   }
-
-  private DeciBinary() {}
 }

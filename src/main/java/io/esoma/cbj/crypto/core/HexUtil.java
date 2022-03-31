@@ -9,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class HexUtil {
 
+  private HexUtil() {}
+
   public static String hexCharToBits(char c) {
     switch (c) {
       case '0':
@@ -123,6 +125,4 @@ public class HexUtil {
 
     return BinUtil.bitStreamToBytes(builder.toString());
   }
-
-  private HexUtil() {}
 }

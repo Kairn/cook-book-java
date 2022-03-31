@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class HexToBase64 {
 
+  private HexToBase64() {}
+
   public static String perform(String hexString) {
     if (StringUtils.isBlank(hexString)) {
       return "";
@@ -27,6 +29,4 @@ public class HexToBase64 {
     String bitStream = builder.toString();
     return Base64Util.encodeFromBitStream(bitStream);
   }
-
-  private HexToBase64() {}
 }

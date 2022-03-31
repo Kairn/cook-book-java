@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
  */
 public class SubArrayImbalance {
 
+  private SubArrayImbalance() {}
+
   public static long getTotalImbalance(int[] array) {
     if (ArrayUtils.isEmpty(array)) {
       return 0L;
@@ -123,6 +125,4 @@ public class SubArrayImbalance {
       this.val = val;
     }
   }
-
-  private SubArrayImbalance() {}
 }

@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class Knapsack {
 
+  private Knapsack() {}
+
   /**
    * Derives the maximum weight/value that can be fitted into the knapsack of the given size with an
    * array of different items. The algorithm used in this method is called "Meet in the middle"
@@ -133,6 +135,4 @@ public class Knapsack {
       }
     }
   }
-
-  private Knapsack() {}
 }

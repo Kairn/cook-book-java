@@ -16,6 +16,8 @@ public class GreatestCommonDivisor {
   private static int[] sa;
   private static int[][][] cache;
 
+  private GreatestCommonDivisor() {}
+
   /**
    * Calculates the GCD between two integers using the Euclidean algorithm. The Euclidean algorithm
    * is based on the principle that the greatest common divisor of two numbers does not change if
@@ -159,6 +161,4 @@ public class GreatestCommonDivisor {
 
     return cache[c][a][n];
   }
-
-  private GreatestCommonDivisor() {}
 }

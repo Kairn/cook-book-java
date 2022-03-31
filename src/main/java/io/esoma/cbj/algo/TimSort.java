@@ -38,6 +38,8 @@ public class TimSort {
   // The stack of runs
   private static Deque<Run> runStack = null;
 
+  private TimSort() {}
+
   /**
    * Performs the standard Timsort for the given array. The array is theoretically sorted in-place
    * but a reference is also returned. Galloping is enabled when appropriate for the merging process
@@ -427,8 +429,6 @@ public class TimSort {
 
     return n;
   }
-
-  private TimSort() {}
 }
 
 /**

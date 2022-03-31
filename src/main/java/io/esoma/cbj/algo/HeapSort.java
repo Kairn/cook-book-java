@@ -12,6 +12,8 @@ package io.esoma.cbj.algo;
  */
 public class HeapSort {
 
+  private HeapSort() {}
+
   /**
    * Implements the algorithm by first building a max heap followed by iterative steps of shrinking
    * its size by removing the top node and heapifying the remaining nodes. The array will be sorted
@@ -107,6 +109,4 @@ public class HeapSort {
       }
     }
   }
-
-  private HeapSort() {}
 }

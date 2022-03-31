@@ -12,6 +12,8 @@ public class RandUtil {
 
   private static final SecureRandom PRNG = new SecureRandom();
 
+  private RandUtil() {}
+
   public static byte[] randBytes(int size) {
     if (size > 0) {
       byte[] randBytes = new byte[size];
@@ -34,6 +36,4 @@ public class RandUtil {
     int bound = max - min + 1;
     return min + PRNG.nextInt(bound);
   }
-
-  private RandUtil() {}
 }

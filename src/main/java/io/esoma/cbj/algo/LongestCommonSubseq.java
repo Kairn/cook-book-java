@@ -10,6 +10,8 @@ package io.esoma.cbj.algo;
  */
 public class LongestCommonSubseq {
 
+  private LongestCommonSubseq() {}
+
   /**
    * Computes the length of the LCS between the two given strings. It utilizes dynamic programming
    * with a cache table for optimal performance. It will return 0 if no common character is found.
@@ -39,6 +41,4 @@ public class LongestCommonSubseq {
 
     return cache[l1][l2];
   }
-
-  private LongestCommonSubseq() {}
 }

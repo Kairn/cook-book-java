@@ -8,6 +8,8 @@ package io.esoma.cbj.core;
  */
 public class ArrayCore {
 
+  private ArrayCore() {}
+
   /**
    * Iterates through the integer array and compares each element with the target until it finds a
    * match or reaches the end of the array. Will only search between the specified bounds.
@@ -143,6 +145,4 @@ public class ArrayCore {
 
     return sb.toString();
   }
-
-  private ArrayCore() {}
 }

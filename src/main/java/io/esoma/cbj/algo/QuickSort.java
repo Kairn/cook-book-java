@@ -12,6 +12,8 @@ package io.esoma.cbj.algo;
  */
 public class QuickSort {
 
+  private QuickSort() {}
+
   /**
    * Implements the original "Hoare partition scheme" where two indices are used check inversions
    * and swap elements in the wrong order with the given pivot. The middle element is selected as
@@ -84,6 +86,4 @@ public class QuickSort {
     process(array, bin, f);
     process(array, f + 1, end);
   }
-
-  private QuickSort() {}
 }

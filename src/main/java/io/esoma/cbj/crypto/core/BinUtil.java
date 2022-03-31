@@ -9,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class BinUtil {
 
+  private BinUtil() {}
+
   /**
    * Converts a binary string consists of 0s and 1s into an integer. Negative numbers are not
    * accounted for. If the bit stream represents a number greater than {@link Integer#MAX_VALUE},
@@ -131,6 +133,4 @@ public class BinUtil {
       return ++b;
     }
   }
-
-  private BinUtil() {}
 }

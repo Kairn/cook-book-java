@@ -11,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class HammingDistance {
 
+  private HammingDistance() {}
+
   public static int compute(String first, String second) {
     if (StringUtils.isAnyBlank(first, second) || first.length() != second.length()) {
       throw new IllegalArgumentException("Invalid input strings");
@@ -41,6 +43,4 @@ public class HammingDistance {
 
     return distance;
   }
-
-  private HammingDistance() {}
 }
