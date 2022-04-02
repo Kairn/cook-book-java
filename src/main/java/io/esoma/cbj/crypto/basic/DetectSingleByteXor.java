@@ -1,5 +1,6 @@
 package io.esoma.cbj.crypto.basic;
 
+import io.esoma.cbj.util.ResourceLoader;
 import org.apache.commons.lang3.StringUtils;
 import org.tinylog.Logger;
 
@@ -21,10 +22,10 @@ public class DetectSingleByteXor {
   private static final int THRESHOLD = 95;
 
   public static void main(String[] args) {
-    ClassLoader loader = Thread.currentThread().getContextClassLoader();
     String inputFileName = "DetectSingleByteXorTestCases.txt";
     try (BufferedReader br =
-        new BufferedReader(new InputStreamReader(loader.getResourceAsStream(inputFileName)))) {
+        new BufferedReader(
+            new InputStreamReader(ResourceLoader.getResourceAsReader(inputFileName)))) {
       br.lines()
           .forEach(
               encrypted -> {

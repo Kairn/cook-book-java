@@ -1,6 +1,7 @@
 package io.esoma.cbj.crypto.basic;
 
 import io.esoma.cbj.crypto.core.Base64Util;
+import io.esoma.cbj.util.ResourceLoader;
 import org.apache.commons.lang3.StringUtils;
 import org.tinylog.Logger;
 
@@ -26,11 +27,11 @@ public class AesInEcb {
   public static void main(String[] args) {
     final String secretKey = "YELLOW SUBMARINE";
     final String inputFileName = "AesInEcbText.txt";
-    ClassLoader loader = Thread.currentThread().getContextClassLoader();
 
     String inputText;
     try (BufferedReader br =
-        new BufferedReader(new InputStreamReader(loader.getResourceAsStream(inputFileName)))) {
+        new BufferedReader(
+            new InputStreamReader(ResourceLoader.getResourceAsReader(inputFileName)))) {
       inputText = br.lines().collect(Collectors.joining());
     } catch (Exception e) {
       throw new IllegalStateException("Unable to read input file");

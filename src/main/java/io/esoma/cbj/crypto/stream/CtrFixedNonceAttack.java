@@ -2,6 +2,7 @@ package io.esoma.cbj.crypto.stream;
 
 import io.esoma.cbj.crypto.core.Base64Util;
 import io.esoma.cbj.crypto.core.CharUtil;
+import io.esoma.cbj.util.ResourceLoader;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -67,9 +68,8 @@ public class CtrFixedNonceAttack {
 
   public static byte[] loadAndGuess() {
     byte[][] cipherArrays;
-    ClassLoader loader = Thread.currentThread().getContextClassLoader();
     try (BufferedReader reader =
-        new BufferedReader(new InputStreamReader(loader.getResourceAsStream(TEST_FILE)))) {
+        new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsReader(TEST_FILE)))) {
       List<String> encodedInputs = reader.lines().collect(Collectors.toList());
       cipherArrays = new byte[encodedInputs.size()][];
       for (int i = 0; i < encodedInputs.size(); ++i) {

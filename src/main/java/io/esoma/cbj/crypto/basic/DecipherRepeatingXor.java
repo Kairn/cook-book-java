@@ -2,6 +2,7 @@ package io.esoma.cbj.crypto.basic;
 
 import io.esoma.cbj.crypto.core.Base64Util;
 import io.esoma.cbj.crypto.core.SimpleCipherOutput;
+import io.esoma.cbj.util.ResourceLoader;
 import org.tinylog.Logger;
 
 import java.io.BufferedReader;
@@ -23,10 +24,10 @@ public class DecipherRepeatingXor {
 
   public static void main(String[] args) {
     String input;
-    ClassLoader loader = Thread.currentThread().getContextClassLoader();
     String inputFileName = "DecipherRepeatingXorText.txt";
     try (BufferedReader br =
-        new BufferedReader(new InputStreamReader(loader.getResourceAsStream(inputFileName)))) {
+        new BufferedReader(
+            new InputStreamReader(ResourceLoader.getResourceAsReader(inputFileName)))) {
       input = br.lines().collect(Collectors.joining());
     } catch (Exception e) {
       throw new IllegalStateException("Unable to read file", e);

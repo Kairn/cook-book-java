@@ -1,6 +1,7 @@
 package io.esoma.cbj.crypto.basic;
 
 import io.esoma.cbj.crypto.core.HexUtil;
+import io.esoma.cbj.util.ResourceLoader;
 import org.tinylog.Logger;
 
 import java.io.BufferedReader;
@@ -27,7 +28,6 @@ public class DetectAesInEcb {
   private static final int BLOCK_SIZE = 16;
 
   public static void main(String[] args) {
-    ClassLoader loader = Thread.currentThread().getContextClassLoader();
     final String inputFileName = "DetectAesInEcbTestCases.txt";
     int lineNum = 1;
     int bestLine = 0;
@@ -35,7 +35,8 @@ public class DetectAesInEcb {
     String ecbCipher = null;
 
     try (BufferedReader br =
-        new BufferedReader(new InputStreamReader(loader.getResourceAsStream(inputFileName)))) {
+        new BufferedReader(
+            new InputStreamReader(ResourceLoader.getResourceAsReader(inputFileName)))) {
       for (String text : br.lines().collect(Collectors.toList())) {
         double score = calcScore(HexUtil.stringToRawBytes(text));
         if (score > bestScore) {

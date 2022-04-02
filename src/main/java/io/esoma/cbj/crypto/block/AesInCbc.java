@@ -3,6 +3,7 @@ package io.esoma.cbj.crypto.block;
 import io.esoma.cbj.crypto.basic.AesInEcb;
 import io.esoma.cbj.crypto.basic.FixedXor;
 import io.esoma.cbj.crypto.core.Base64Util;
+import io.esoma.cbj.util.ResourceLoader;
 import org.apache.commons.lang3.StringUtils;
 import org.tinylog.Logger;
 
@@ -30,12 +31,12 @@ public class AesInCbc {
   private static final String NO_PAD_SCHEME = "AES/CBC/NoPadding";
 
   public static void main(String[] args) {
-    ClassLoader loader = Thread.currentThread().getContextClassLoader();
     final String inputFileName = "AesInCbcText.txt";
 
     byte[] cipherBytes;
     try (BufferedReader br =
-        new BufferedReader(new InputStreamReader(loader.getResourceAsStream(inputFileName)))) {
+        new BufferedReader(
+            new InputStreamReader(ResourceLoader.getResourceAsReader(inputFileName)))) {
       String text = br.lines().collect(Collectors.joining());
       cipherBytes = Base64Util.decodeToByteArray(text);
     } catch (Exception e) {

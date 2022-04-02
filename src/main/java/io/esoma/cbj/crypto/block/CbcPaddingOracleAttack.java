@@ -4,6 +4,7 @@ import io.esoma.cbj.crypto.core.Base64Util;
 import io.esoma.cbj.crypto.core.BinUtil;
 import io.esoma.cbj.crypto.core.RandUtil;
 import io.esoma.cbj.crypto.slave.VulnerableCbcCryptoScheme;
+import io.esoma.cbj.util.ResourceLoader;
 import org.apache.commons.lang3.ArrayUtils;
 import org.tinylog.Logger;
 
@@ -29,10 +30,10 @@ public class CbcPaddingOracleAttack {
 
   public static void main(String[] args) {
     final String inputFileName = "CbcPaddingOracleAttackText.txt";
-    ClassLoader loader = Thread.currentThread().getContextClassLoader();
     byte[] plainBytes;
     try (BufferedReader br =
-        new BufferedReader(new InputStreamReader(loader.getResourceAsStream(inputFileName)))) {
+        new BufferedReader(
+            new InputStreamReader(ResourceLoader.getResourceAsReader(inputFileName)))) {
       List<String> lines = br.lines().collect(Collectors.toList());
       int index = RandUtil.randInt(0, lines.size() - 1);
       plainBytes = Base64Util.decodeToByteArray(lines.get(index));
