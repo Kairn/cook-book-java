@@ -19,12 +19,12 @@ public class CtrFixedNonceAttackTest {
   private static final String END = "CTR Attack Test End";
 
   @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
+  public static void setUpBeforeClass() {
     System.out.println(Banner.getTitleBanner(START, 3));
   }
 
   @AfterClass
-  public static void tearDownAfterClass() throws Exception {
+  public static void tearDownAfterClass() {
     System.out.println(Banner.getTitleBanner(END, 3));
     System.out.println();
   }

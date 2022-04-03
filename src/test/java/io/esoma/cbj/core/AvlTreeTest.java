@@ -16,13 +16,13 @@ public class AvlTreeTest {
   private static AvlTree<Integer> avt;
 
   @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
+  public static void setUpBeforeClass() {
     System.out.println(Banner.getTitleBanner(START, 3));
     avt = new AvlTree<>();
   }
 
   @AfterClass
-  public static void tearDownAfterClass() throws Exception {
+  public static void tearDownAfterClass() {
     avt = null;
     System.out.println(Banner.getTitleBanner(END, 3));
     System.out.println();

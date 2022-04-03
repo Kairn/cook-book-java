@@ -45,14 +45,14 @@ public class DijkstraTest {
   private static int[] result = null;
 
   @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
+  public static void setUpBeforeClass() {
     System.out.println(Banner.getTitleBanner(START, 3));
     // Run test.
     result = Dijkstra.djFind(TEST_GRAPH);
   }
 
   @AfterClass
-  public static void tearDownAfterClass() throws Exception {
+  public static void tearDownAfterClass() {
     System.out.println(Banner.getTitleBanner(END, 3));
     System.out.println();
   }
