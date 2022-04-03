@@ -16,13 +16,13 @@ public class FibonacciHeapTest {
   private static FibonacciHeap<Integer> tfh;
 
   @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
+  public static void setUpBeforeClass() {
     System.out.println(Banner.getTitleBanner(START, 3));
     tfh = new FibonacciHeap<>();
   }
 
   @AfterClass
-  public static void tearDownAfterClass() throws Exception {
+  public static void tearDownAfterClass() {
     tfh = null;
     System.out.println(Banner.getTitleBanner(END, 3));
     System.out.println();

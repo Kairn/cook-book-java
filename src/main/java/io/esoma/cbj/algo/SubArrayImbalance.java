@@ -116,7 +116,7 @@ public class SubArrayImbalance {
    */
   private static class Node {
 
-    int val;
+    final int val;
     int maxCount;
     int minCount;
     int temp;

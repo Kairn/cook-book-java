@@ -87,9 +87,9 @@ public class MinSpanTree {
  */
 class Edge implements Comparable<Edge> {
 
-  int from;
-  int to;
-  int weight;
+  final int from;
+  final int to;
+  final int weight;
 
   Edge(int from, int to, int weight) {
     this.from = from;
@@ -123,7 +123,7 @@ class Edge implements Comparable<Edge> {
  */
 class DsNode {
 
-  int count;
+  final int count;
   DsNode parent;
 
   DsNode(int count, DsNode parent) {

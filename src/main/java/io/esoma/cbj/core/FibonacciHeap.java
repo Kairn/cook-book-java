@@ -166,8 +166,8 @@ public class FibonacciHeap<E extends Comparable<E>> {
    */
   private static class FhNode<E extends Comparable<E>> {
 
-    E key;
-    LinkedList<FhNode<E>> children;
+    final E key;
+    final LinkedList<FhNode<E>> children;
 
     /*
      * Constructor for creating a basic node with the given key.
