@@ -3,12 +3,10 @@ package io.esoma.cbj.algo;
 import io.esoma.cbj.util.Banner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-@Ignore
 public class QuickSelectTest {
 
   private static final String START = "Quick Select Test Start";
@@ -127,6 +125,40 @@ public class QuickSelectTest {
         };
     int k = 61;
     int expected = -2;
+    int found = QuickSelect.findKthSmallest(array, k);
+    System.out.println(found);
+    assertEquals(expected, found);
+  }
+
+  @Test
+  public void testFindKth9() {
+    int[] array = new int[] {0};
+    int k = 1;
+    int expected = 0;
+    int found = QuickSelect.findKthSmallest(array, k);
+    System.out.println(found);
+    assertEquals(expected, found);
+  }
+
+  @Test
+  public void testFindKth10() {
+    int[] array = new int[] {-90, 5003};
+    int k = 2;
+    int expected = 5003;
+    int found = QuickSelect.findKthSmallest(array, k);
+    System.out.println(found);
+    assertEquals(expected, found);
+  }
+
+  @Test
+  public void testFindKth11() {
+    int[] array =
+        new int[] {
+          5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+          5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+        };
+    int k = 29;
+    int expected = 5;
     int found = QuickSelect.findKthSmallest(array, k);
     System.out.println(found);
     assertEquals(expected, found);
