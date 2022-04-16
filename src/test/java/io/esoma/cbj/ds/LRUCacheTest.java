@@ -3,7 +3,6 @@ package io.esoma.cbj.ds;
 import io.esoma.cbj.util.Banner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ public class LRUCacheTest {
     System.out.println();
   }
 
-  @Ignore
   @Test
   public void testLRUCacheSmallCap() {
     final Object o1 = 12;
@@ -83,7 +81,6 @@ public class LRUCacheTest {
     assertSame(o5, lruCache.get(5));
   }
 
-  @Ignore
   @Test
   public void testLRUCacheLargeCap() {
     final String prefix = "lru_str_";

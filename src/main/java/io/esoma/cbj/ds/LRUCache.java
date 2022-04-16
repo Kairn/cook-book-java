@@ -22,7 +22,7 @@ public class LRUCache<V> {
   private final int capacity;
   private int size = 0;
 
-  private Map<Integer, EntryNode<V>> internalMap;
+  private final Map<Integer, EntryNode<V>> internalMap;
   private EntryNode<V> head;
   private EntryNode<V> tail;
 
@@ -40,6 +40,8 @@ public class LRUCache<V> {
     this.internalMap = new HashMap<>();
   }
 
+  // TODO: Add clear method and test it.
+
   /**
    * Inserts a value into the cache identified by the specified key. If a key already exists, the
    * old value will be replaced. Replacement counts as access. Exception is thrown if the provided
@@ -51,7 +53,29 @@ public class LRUCache<V> {
    *     occurs
    */
   public boolean put(int key, V value) {
-    return false;
+    if (value == null) {
+      throw new IllegalArgumentException("Null value is not permitted");
+    }
+
+    if (internalMap.containsKey(key)) {
+      EntryNode<V> existingNode = internalMap.get(key);
+      existingNode.value = value;
+      makeHead(existingNode);
+      return false;
+    } else {
+      EntryNode<V> newNode = new EntryNode<>(key, value);
+      internalMap.put(key, newNode);
+      if (size < capacity) {
+        // Add node to the head
+        addToHead(newNode);
+        ++size;
+      } else {
+        // Cut the tail then add node to the head
+        cutTail();
+        addToHead(newNode);
+      }
+      return true;
+    }
   }
 
   /**
@@ -62,7 +86,52 @@ public class LRUCache<V> {
    * @return the associated value, or null if the key is not found in the cache
    */
   public V get(int key) {
+    if (internalMap.containsKey(key)) {
+      EntryNode<V> existingNode = internalMap.get(key);
+      makeHead(existingNode);
+      return existingNode.value;
+    }
     return null;
+  }
+
+  private void addToHead(EntryNode<V> node) {
+    node.next = head;
+    if (head != null) {
+      head.prev = node;
+    } else {
+      // First node is also the tail
+      tail = node;
+    }
+    head = node;
+  }
+
+  private void cutTail() {
+    if (tail != null) {
+      internalMap.remove(tail.key);
+      tail = tail.prev;
+      if (tail != null) {
+        tail.next = null;
+      }
+    }
+  }
+
+  private void makeHead(EntryNode<V> node) {
+    EntryNode<V> nextNode = node.next;
+    EntryNode<V> prevNode = node.prev;
+    node.next = null;
+    node.prev = null;
+
+    if (nextNode != null && prevNode != null) {
+      prevNode.next = nextNode;
+      nextNode.prev = prevNode;
+      addToHead(node);
+    } else if (prevNode != null) {
+      // Node is the tail
+      tail = prevNode;
+      addToHead(node);
+    }
+
+    // Node is already the head otherwise
   }
 
   private static class EntryNode<V> {
