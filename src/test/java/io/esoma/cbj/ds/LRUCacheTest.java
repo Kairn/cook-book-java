@@ -79,6 +79,11 @@ public class LRUCacheTest {
     assertTrue(lruCache.put(6, o6)); // 6, 9, 5
     assertNull(lruCache.get(1));
     assertSame(o5, lruCache.get(5));
+
+    lruCache.clear();
+    assertNull(lruCache.get(6));
+    assertNull(lruCache.get(9));
+    assertNull(lruCache.get(5));
   }
 
   @Test
@@ -118,5 +123,10 @@ public class LRUCacheTest {
     assertNull(lruCache.get(9000));
     assertNull(lruCache.get(10000));
     assertEquals(prefix + 2999, lruCache.get(2999));
+
+    lruCache.clear();
+    for (int i = -1000; i <= 0; ++i) {
+      assertNull(lruCache.get(i));
+    }
   }
 }

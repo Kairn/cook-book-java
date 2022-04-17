@@ -40,7 +40,13 @@ public class LRUCache<V> {
     this.internalMap = new HashMap<>();
   }
 
-  // TODO: Add clear method and test it.
+  /** Deletes all entries in the cache. */
+  public void clear() {
+    internalMap.clear();
+    head = null;
+    tail = null;
+    size = 0;
+  }
 
   /**
    * Inserts a value into the cache identified by the specified key. If a key already exists, the
