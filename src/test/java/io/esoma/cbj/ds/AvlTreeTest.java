@@ -1,4 +1,4 @@
-package io.esoma.cbj.core;
+package io.esoma.cbj.ds;
 
 import io.esoma.cbj.util.Banner;
 import org.junit.AfterClass;

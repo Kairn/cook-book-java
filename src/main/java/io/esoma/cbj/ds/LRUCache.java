@@ -20,9 +20,8 @@ public class LRUCache<V> {
   private static final int DEFAULT_CAPACITY = 20;
 
   private final int capacity;
-  private int size = 0;
-
   private final Map<Integer, EntryNode<V>> internalMap;
+  private int size = 0;
   private EntryNode<V> head;
   private EntryNode<V> tail;
 

@@ -31,6 +31,12 @@ time to time.
 1. Dijkstra's algorithm
 2. Minimum spanning tree
 
+### Data Structure :six_pointed_star:
+
+1. AVL tree
+2. Fibonacci heap
+3. LRU Cache
+
 ### Cryptography :key:
 
 1. AES-128 in ECB mode and associated attacks

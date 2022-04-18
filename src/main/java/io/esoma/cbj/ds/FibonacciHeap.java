@@ -1,4 +1,4 @@
-package io.esoma.cbj.core;
+package io.esoma.cbj.ds;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -85,9 +85,7 @@ public class FibonacciHeap<E extends Comparable<E>> {
     // Remove the min node.
     this.mainChain.remove(this.minNode);
     // Promote its children if any.
-    if (this.minNode.children != null) {
-      this.mainChain.addAll(this.minNode.children);
-    }
+    this.mainChain.addAll(this.minNode.children);
 
     // Prepare the next min key.
     --this.size;
@@ -183,11 +181,7 @@ public class FibonacciHeap<E extends Comparable<E>> {
      * @return the degree
      */
     int degree() {
-      if (this.children == null) {
-        return 0;
-      } else {
-        return this.children.size();
-      }
+      return this.children.size();
     }
 
     /**
@@ -199,10 +193,8 @@ public class FibonacciHeap<E extends Comparable<E>> {
     void reportElements(StringBuilder bu) {
       bu.append(this.key.toString());
       bu.append(' ');
-      if (this.children != null) {
-        for (FhNode<E> n : this.children) {
-          n.reportElements(bu);
-        }
+      for (FhNode<E> n : this.children) {
+        n.reportElements(bu);
       }
     }
 

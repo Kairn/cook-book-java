@@ -1,4 +1,4 @@
-package io.esoma.cbj.core;
+package io.esoma.cbj.ds;
 
 import java.util.ArrayList;
 import java.util.List;
