@@ -1,9 +1,7 @@
 package io.esoma.cbj.algo;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import java.util.Arrays;
 
@@ -11,26 +9,12 @@ import static org.junit.Assert.assertArrayEquals;
 
 public class HeapSortTest {
 
-  private static final String START = "Heap Sort Test Start";
-  private static final String END = "Heap Sort Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
-
   @Test
   public void testSort1() {
     int[] unsorted = new int[] {2, 1, 2, 9, 1, 6, 6, 8, 1, 9};
     int[] sorted = new int[] {1, 1, 1, 2, 2, 6, 6, 8, 9, 9};
     int[] result = HeapSort.sort(unsorted);
-    System.out.println(Arrays.toString(unsorted));
+    Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
   }
 
@@ -39,7 +23,7 @@ public class HeapSortTest {
     int[] unsorted = new int[] {17, 21, 5, 30, 7, 16, 4, 15, 29, 1, 26, 14, 10, 18, 17};
     int[] sorted = new int[] {1, 4, 5, 7, 10, 14, 15, 16, 17, 17, 18, 21, 26, 29, 30};
     int[] result = HeapSort.sort(unsorted);
-    System.out.println(Arrays.toString(unsorted));
+    Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
   }
 
@@ -48,7 +32,7 @@ public class HeapSortTest {
     int[] unsorted = new int[] {-19, -26, -18, -5, -18, -3, -11, -11, -12, -14, -22, -21};
     int[] sorted = new int[] {-26, -22, -21, -19, -18, -18, -14, -12, -11, -11, -5, -3};
     int[] result = HeapSort.sort(unsorted);
-    System.out.println(Arrays.toString(unsorted));
+    Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
   }
 
@@ -65,7 +49,7 @@ public class HeapSortTest {
           26, 53, 55, 55, 64, 66, 81, 82, 83, 88, 92, 96
         };
     int[] result = HeapSort.sort(unsorted);
-    System.out.println(Arrays.toString(unsorted));
+    Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
   }
 
@@ -74,7 +58,7 @@ public class HeapSortTest {
     int[] unsorted = new int[] {14, 13};
     int[] sorted = new int[] {13, 14};
     int[] result = HeapSort.sort(unsorted);
-    System.out.println(Arrays.toString(unsorted));
+    Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
   }
 
@@ -89,7 +73,7 @@ public class HeapSortTest {
           -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2
         };
     int[] result = HeapSort.sort(unsorted);
-    System.out.println(Arrays.toString(unsorted));
+    Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
   }
 
@@ -98,7 +82,7 @@ public class HeapSortTest {
     int[] unsorted = new int[] {63079, 61607, 62859, 63848, 62004, 61060, 60896, 60864};
     int[] sorted = new int[] {60864, 60896, 61060, 61607, 62004, 62859, 63079, 63848};
     int[] result = HeapSort.sort(unsorted);
-    System.out.println(Arrays.toString(unsorted));
+    Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
   }
 
@@ -107,7 +91,7 @@ public class HeapSortTest {
     int[] unsorted = new int[] {119, 118, 110, 107, 107, 97, 84, 74, 71, 69, 66, 65, 49, 38, 29};
     int[] sorted = new int[] {29, 38, 49, 65, 66, 69, 71, 74, 84, 97, 107, 107, 110, 118, 119};
     int[] result = HeapSort.sort(unsorted);
-    System.out.println(Arrays.toString(unsorted));
+    Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
   }
 
@@ -116,7 +100,7 @@ public class HeapSortTest {
     int[] unsorted = new int[] {983, 642, 818, 788, 887, 682, 610, 583, 590, 1006};
     int[] sorted = new int[] {583, 590, 610, 642, 682, 788, 818, 887, 983, 1006};
     int[] result = HeapSort.sort(unsorted);
-    System.out.println(Arrays.toString(unsorted));
+    Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
   }
 
@@ -131,7 +115,7 @@ public class HeapSortTest {
           10, 10, 10, 11, 12, 12, 12, 12, 12, 13, 13, 13, 14, 14, 15, 15, 16, 16, 16, 17, 17, 17, 17
         };
     int[] result = HeapSort.sort(unsorted);
-    System.out.println(Arrays.toString(unsorted));
+    Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
   }
 }

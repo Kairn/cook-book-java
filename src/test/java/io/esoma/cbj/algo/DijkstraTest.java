@@ -1,20 +1,16 @@
 package io.esoma.cbj.algo;
 
-import io.esoma.cbj.util.Banner;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnitParamsRunner.class)
 public class DijkstraTest {
-
-  private static final String START = "Dijkstra Test Start";
-  private static final String END = "Dijkstra Test End";
 
   // Test input.
   private static final int[][] TEST_GRAPH =
@@ -46,15 +42,8 @@ public class DijkstraTest {
 
   @BeforeClass
   public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
     // Run test.
     result = Dijkstra.djFind(TEST_GRAPH);
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
   }
 
   @Test
@@ -63,7 +52,7 @@ public class DijkstraTest {
     "16, 6", "17, 6", "8, 9", "19, 7"
   })
   public void testDjFind(int index, int dist) {
-    System.out.println(result[index]);
+    Logger.debug(result[index]);
     assertEquals(dist, result[index]);
   }
 }

@@ -1,27 +1,11 @@
 package io.esoma.cbj.core;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 public class BinarySearchTest {
-
-  private static final String START = "Binary Search Test Start";
-  private static final String END = "Binary Search Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
 
   @Test
   public void testSearchInt1() {
@@ -33,7 +17,7 @@ public class BinarySearchTest {
     int target = 84;
     int expected = 20;
     int actual = BinarySearch.searchInt(sorted, target);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -44,7 +28,7 @@ public class BinarySearchTest {
     int target = 11;
     int expected = 1;
     int actual = BinarySearch.searchInt(sorted, target);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -54,7 +38,7 @@ public class BinarySearchTest {
     int target = 2;
     int expected = 1;
     int actual = BinarySearch.searchInt(sorted, target);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -64,7 +48,7 @@ public class BinarySearchTest {
     int target = 97;
     int expected = 14;
     int actual = BinarySearch.searchInt(sorted, target);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -74,7 +58,7 @@ public class BinarySearchTest {
     int target = 0;
     int expected = -1;
     int actual = BinarySearch.searchInt(sorted, target);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -84,7 +68,7 @@ public class BinarySearchTest {
     int target = 5;
     int expected = 0;
     int actual = BinarySearch.searchIntLeft(sorted, target, 0, sorted.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -94,7 +78,7 @@ public class BinarySearchTest {
     int target = 34;
     int expected = 7;
     int actual = BinarySearch.searchIntLeft(sorted, target, 0, sorted.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -107,7 +91,7 @@ public class BinarySearchTest {
     int target = 0;
     int expected = 18;
     int actual = BinarySearch.searchIntLeft(sorted, target, 0, sorted.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -117,7 +101,7 @@ public class BinarySearchTest {
     int target = 99;
     int expected = 10;
     int actual = BinarySearch.searchIntLeft(sorted, target, 0, sorted.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -128,7 +112,7 @@ public class BinarySearchTest {
     int target = 55;
     int expected = 14;
     int actual = BinarySearch.searchIntLeft(sorted, target, 0, sorted.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -142,7 +126,7 @@ public class BinarySearchTest {
     int target = 27;
     int expected = 11;
     int actual = BinarySearch.searchIntRight(sorted, target, 0, sorted.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -152,7 +136,7 @@ public class BinarySearchTest {
     int target = -7;
     int expected = 1;
     int actual = BinarySearch.searchIntRight(sorted, target, 0, sorted.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -162,7 +146,7 @@ public class BinarySearchTest {
     int target = 998;
     int expected = 13;
     int actual = BinarySearch.searchIntRight(sorted, target, 0, sorted.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -172,7 +156,7 @@ public class BinarySearchTest {
     int target = 0;
     int expected = 0;
     int actual = BinarySearch.searchIntRight(sorted, target, 0, 0);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -185,7 +169,7 @@ public class BinarySearchTest {
     int target = 4;
     int expected = 17;
     int actual = BinarySearch.searchIntRight(sorted, target, 0, sorted.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 }

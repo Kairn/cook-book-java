@@ -1,27 +1,11 @@
 package io.esoma.cbj.algo;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 public class MinSpanTreeTest {
-
-  private static final String START = "MST Test Start";
-  private static final String END = "MST Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
 
   @Test
   public void testCalcKruskal1() {
@@ -29,7 +13,7 @@ public class MinSpanTreeTest {
     int[][] edges = new int[][] {{1, 2, 3}, {1, 3, 4}, {4, 2, 6}, {5, 2, 2}, {2, 3, 5}, {3, 5, 7}};
     int expected = 15;
     int actual = MinSpanTree.calcKruskal(n, edges);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -39,7 +23,7 @@ public class MinSpanTreeTest {
     int[][] edges = new int[][] {{1, 2, 5}, {1, 3, 3}, {4, 1, 6}, {2, 4, 7}, {3, 2, 4}, {3, 4, 5}};
     int expected = 12;
     int actual = MinSpanTree.calcKruskal(n, edges);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -52,7 +36,7 @@ public class MinSpanTreeTest {
         };
     int expected = 150;
     int actual = MinSpanTree.calcKruskal(n, edges);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -84,7 +68,7 @@ public class MinSpanTreeTest {
         };
     int expected = 267;
     int actual = MinSpanTree.calcKruskal(n, edges);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 }

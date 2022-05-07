@@ -1,8 +1,5 @@
 package io.esoma.cbj.ds;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -12,20 +9,6 @@ import java.util.stream.Stream;
 import static org.junit.Assert.*;
 
 public class LRUCacheTest {
-
-  private static final String START = "LRU Cache Test Start";
-  private static final String END = "LRU Cache Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
 
   @Test
   public void testLRUCacheSmallCap() {

@@ -1,34 +1,18 @@
 package io.esoma.cbj.algo;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 public class SortedSumTest {
-
-  private static final String START = "Sorted Sum Test Start";
-  private static final String END = "Sorted Sum Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
 
   @Test
   public void testNaiveInsertion1() {
     int[] array = new int[] {4, 3, 2, 1};
     int expected = 65;
     int actual = SortedSum.naiveInsertion(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -37,7 +21,7 @@ public class SortedSumTest {
     int[] array = new int[] {9, 5, 8};
     int expected = 80;
     int actual = SortedSum.naiveInsertion(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -46,7 +30,7 @@ public class SortedSumTest {
     int[] array = new int[] {9, 5, 8, 7, 4, 12};
     int expected = 455;
     int actual = SortedSum.naiveInsertion(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -55,7 +39,7 @@ public class SortedSumTest {
     int[] array = new int[] {9, 5, 8, 7, 4, 12, 16};
     int expected = 751;
     int actual = SortedSum.optimalSum(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -71,7 +55,7 @@ public class SortedSumTest {
         };
     int expected = 54551619;
     int actual = SortedSum.optimalSum(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -84,7 +68,7 @@ public class SortedSumTest {
         };
     int expected = 257575486;
     int actual = SortedSum.optimalSum(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -93,7 +77,7 @@ public class SortedSumTest {
     int[] array = new int[] {1, 5, 7, 9, 11, 15};
     int expected = 448;
     int actual = SortedSum.optimalSum(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -105,7 +89,7 @@ public class SortedSumTest {
         };
     int expected = 20554621;
     int actual = SortedSum.optimalSum(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -132,7 +116,7 @@ public class SortedSumTest {
         };
     int expected = 436562823;
     int actual = SortedSum.optimalSum(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 }

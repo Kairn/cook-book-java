@@ -1,34 +1,18 @@
 package io.esoma.cbj.algo;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 public class GreatestCommonDivisorTest {
-
-  private static final String START = "GCD Test Start";
-  private static final String END = "GCD Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
 
   @Test
   public void testFindGcd1() {
     int[] array = new int[] {5, 10, 15};
     int expected = 5;
     int actual = GreatestCommonDivisor.findGcd(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -37,7 +21,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {612, 806, 240, 412};
     int expected = 2;
     int actual = GreatestCommonDivisor.findGcd(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -46,7 +30,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {9800, 500, 400, 100};
     int expected = 100;
     int actual = GreatestCommonDivisor.findGcd(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -55,7 +39,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {79, 35, 10, 6, 120};
     int expected = 1;
     int actual = GreatestCommonDivisor.findGcd(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -64,7 +48,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {226, 113};
     int expected = 113;
     int actual = GreatestCommonDivisor.findGcd(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -73,7 +57,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {525, 70, 35};
     int expected = 35;
     int actual = GreatestCommonDivisor.findGcd(array);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -82,7 +66,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {4, 6, 5, 10, 15, 12};
     int expected = 5;
     int actual = GreatestCommonDivisor.bestGcd(array, 3);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -91,7 +75,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {88, 33, 111, 10, 9, 1, 22, 44, 66, 109, 780};
     int expected = 22;
     int actual = GreatestCommonDivisor.bestGcd(array, 4);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -100,7 +84,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {7, 3, 10, 22, 15, 6, 190, 6, 8, 19};
     int expected = 1;
     int actual = GreatestCommonDivisor.bestGcd(array, 10);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -109,7 +93,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {40, 100, 100, 100, 600, 50, 45, 150, 250};
     int expected = 100;
     int actual = GreatestCommonDivisor.bestGcd(array, 3);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -118,7 +102,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {24, 36, 12, 6, 4, 30};
     int expected = 12;
     int actual = GreatestCommonDivisor.bestGcd(array, 2);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -157,7 +141,7 @@ public class GreatestCommonDivisorTest {
         };
     int expected = 997;
     int actual = GreatestCommonDivisor.bestGcd(array, 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -169,7 +153,7 @@ public class GreatestCommonDivisorTest {
         };
     int expected = 15;
     int actual = GreatestCommonDivisor.bestGcd(array, 5);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -178,7 +162,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {111, 7, 13, 29, 2377, 1913, 99, 73, 193, 9967, 7993, 4447, 1087};
     int expected = 3;
     int actual = GreatestCommonDivisor.bestGcd(array, 2);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -187,7 +171,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {94, 47, 30, 150, 92, 46, 23, 138, 470, 230};
     int expected = 47;
     int actual = GreatestCommonDivisor.bestGcd(array, 3);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -196,7 +180,7 @@ public class GreatestCommonDivisorTest {
     int[] array = new int[] {6, 4, 120, 728, 100, 46, 90, 130, 7, 22, 14};
     int expected = 2;
     int actual = GreatestCommonDivisor.bestGcd(array, 8);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 }

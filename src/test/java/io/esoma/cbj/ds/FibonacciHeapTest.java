@@ -1,31 +1,25 @@
 package io.esoma.cbj.ds;
 
-import io.esoma.cbj.util.Banner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 public class FibonacciHeapTest {
-
-  private static final String START = "Fibonacci Heap Test Start";
-  private static final String END = "Fibonacci Heap Test End";
 
   // Hold the heap used for testing.
   private static FibonacciHeap<Integer> tfh;
 
   @BeforeClass
   public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
     tfh = new FibonacciHeap<>();
   }
 
   @AfterClass
   public static void tearDownAfterClass() {
     tfh = null;
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
   }
 
   @Test
@@ -35,7 +29,7 @@ public class FibonacciHeapTest {
   public void testFh() {
     int expected = 0;
     int actual = tfh.getSize();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     tfh.push(35);
@@ -45,17 +39,17 @@ public class FibonacciHeapTest {
     tfh.push(1);
     expected = 5;
     actual = tfh.getSize();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     expected = 1;
     actual = tfh.peekMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     // Expected is still 1.
     actual = tfh.popMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     tfh.push(25);
@@ -67,27 +61,27 @@ public class FibonacciHeapTest {
     tfh.push(29);
     expected = 11;
     actual = tfh.getSize();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     expected = 4;
     actual = tfh.popMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     expected = 5;
     actual = tfh.popMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     expected = 9;
     actual = tfh.getSize();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     expected = 11;
     actual = tfh.peekMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     tfh.push(3);
@@ -97,13 +91,13 @@ public class FibonacciHeapTest {
     tfh.push(30000);
     expected = 3;
     actual = tfh.popMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     tfh.popMin();
     expected = 15;
     actual = tfh.popMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     tfh.push(43);
@@ -111,12 +105,12 @@ public class FibonacciHeapTest {
     tfh.push(79);
     expected = 14;
     actual = tfh.getSize();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     expected = 7;
     actual = tfh.peekMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     tfh.push(2);
@@ -127,17 +121,17 @@ public class FibonacciHeapTest {
     tfh.push(90);
     expected = 0;
     actual = tfh.popMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     expected = 2;
     actual = tfh.popMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     expected = 18;
     actual = tfh.getSize();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     tfh.popMin();
@@ -145,24 +139,24 @@ public class FibonacciHeapTest {
     tfh.popMin();
     expected = 27;
     actual = tfh.popMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     expected = 29;
     actual = tfh.popMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     tfh.popMin();
     tfh.push(28);
     expected = 28;
     actual = tfh.popMin();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
 
     expected = 12;
     actual = tfh.getSize();
-    System.out.println(tfh);
+    Logger.debug(tfh);
     assertEquals(expected, actual);
   }
 }

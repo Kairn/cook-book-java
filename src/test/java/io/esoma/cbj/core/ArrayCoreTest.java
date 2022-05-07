@@ -1,9 +1,7 @@
 package io.esoma.cbj.core;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import java.util.Arrays;
 
@@ -11,27 +9,13 @@ import static org.junit.Assert.*;
 
 public class ArrayCoreTest {
 
-  private static final String START = "Array Core Test Start";
-  private static final String END = "Array Core Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
-
   @Test
   public void testLinearSearchInt() {
     int[] array = new int[] {49, 96, 79, 3, 100, 15, 86, 71, 7, 54, 87, 63, 90, 90, 80, 86, 17};
     int target = 7;
     int expected = 8;
     int actual = ArrayCore.linearSearchInt(array, target, 0, array.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -41,7 +25,7 @@ public class ArrayCoreTest {
     int target = 18;
     int expected = -1;
     int actual = ArrayCore.linearSearchInt(array, target, 0, array.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -55,7 +39,7 @@ public class ArrayCoreTest {
     int target = 3581;
     int expected = 14;
     int actual = ArrayCore.linearSearchInt(array, target, 0, array.length - 1);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -72,7 +56,7 @@ public class ArrayCoreTest {
           304, 284, 282, 257
         };
     int[] result = ArrayCore.reverseInt(straight, 0, straight.length - 1);
-    System.out.println(Arrays.toString(result));
+    Logger.debug(Arrays.toString(result));
     assertArrayEquals(reverse, result);
   }
 
@@ -81,7 +65,7 @@ public class ArrayCoreTest {
     int[] straight = new int[] {1, 1, 0, 1, 1};
     int[] reverse = new int[] {1, 1, 0, 1, 1};
     int[] result = ArrayCore.reverseInt(straight, 0, straight.length - 1);
-    System.out.println(Arrays.toString(result));
+    Logger.debug(Arrays.toString(result));
     assertArrayEquals(reverse, result);
   }
 
@@ -90,7 +74,7 @@ public class ArrayCoreTest {
     int[] straight = new int[] {2, 7, 8, 8, 4, 4, 4, -3, -3, -4, -5, -6, -6, -2, 0};
     int[] reverse = new int[] {2, 7, -6, -6, -5, -4, -3, -3, 4, 4, 4, 8, 8, -2, 0};
     int[] result = ArrayCore.reverseInt(straight, 2, straight.length - 3);
-    System.out.println(Arrays.toString(result));
+    Logger.debug(Arrays.toString(result));
     assertArrayEquals(reverse, result);
   }
 
@@ -105,7 +89,7 @@ public class ArrayCoreTest {
           5, 8, -9, 0, -7, 3, 3, 0, 2, -6, -9, 7, 1, 9, -3, 2, -1, -6, 1, -8, -5, -8, -6, -4, 1, -3
         };
     ArrayCore.insertInt(old, 7, 12);
-    System.out.println(Arrays.toString(old));
+    Logger.debug(Arrays.toString(old));
     assertArrayEquals(old, inserted);
   }
 
@@ -120,7 +104,7 @@ public class ArrayCoreTest {
           645, 842, 953, 942, 709, 120, 93, 685, 813, 399, 341, 540, 574, 920, 283, 45, 474
         };
     ArrayCore.insertInt(old, 15, 3);
-    System.out.println(Arrays.toString(old));
+    Logger.debug(Arrays.toString(old));
     assertArrayEquals(old, inserted);
   }
 
@@ -129,7 +113,7 @@ public class ArrayCoreTest {
     int[] old = new int[] {7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
     int[] inserted = new int[] {7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
     ArrayCore.insertInt(old, 2, 0);
-    System.out.println(Arrays.toString(old));
+    Logger.debug(Arrays.toString(old));
     assertArrayEquals(old, inserted);
   }
 

@@ -46,7 +46,7 @@ public class ResourceLoaderTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testGetNonExistentFile() {
-    InputStream inputStream = ResourceLoader.getResourceAsReader(NON_EXISTENT_FILE);
+    ResourceLoader.getResourceAsReader(NON_EXISTENT_FILE);
     // Exception should have been thrown
     fail();
   }

@@ -1,31 +1,20 @@
 package io.esoma.cbj.algo;
 
-import io.esoma.cbj.util.Banner;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnitParamsRunner.class)
 public class DeciBinaryTest {
 
-  private static final String START = "Decibinary Test Start";
-  private static final String END = "Decibinary Test End";
-
   @BeforeClass
   public static void setUpBeforeClass() {
     DeciBinary.initCache();
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
   }
 
   @Test
@@ -41,7 +30,7 @@ public class DeciBinaryTest {
   })
   public void testDeciValue(int dbNum, int value) {
     int actual = DeciBinary.deciValue(dbNum);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(value, actual);
   }
 
@@ -61,7 +50,7 @@ public class DeciBinaryTest {
   })
   public void testDeciFromDb(long db, long value) {
     long actual = DeciBinary.deciFromDb(db);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(value, actual);
   }
 }

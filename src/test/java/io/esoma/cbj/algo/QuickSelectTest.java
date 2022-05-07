@@ -1,27 +1,11 @@
 package io.esoma.cbj.algo;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 public class QuickSelectTest {
-
-  private static final String START = "Quick Select Test Start";
-  private static final String END = "Quick Select Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
 
   @Test
   public void testFindKth1() {
@@ -29,7 +13,7 @@ public class QuickSelectTest {
     int k = 6;
     int expected = 8;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 
@@ -39,7 +23,7 @@ public class QuickSelectTest {
     int k = 1;
     int expected = 1;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 
@@ -53,7 +37,7 @@ public class QuickSelectTest {
     int k = 30;
     int expected = 19;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 
@@ -66,7 +50,7 @@ public class QuickSelectTest {
     int k = 4;
     int expected = -124;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 
@@ -79,7 +63,7 @@ public class QuickSelectTest {
     int k = 10;
     int expected = 1017;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 
@@ -94,7 +78,7 @@ public class QuickSelectTest {
     int k = 17;
     int expected = -39307;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 
@@ -108,7 +92,7 @@ public class QuickSelectTest {
     int k = 9;
     int expected = 0;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 
@@ -126,7 +110,7 @@ public class QuickSelectTest {
     int k = 61;
     int expected = -2;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 
@@ -136,7 +120,7 @@ public class QuickSelectTest {
     int k = 1;
     int expected = 0;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 
@@ -146,7 +130,7 @@ public class QuickSelectTest {
     int k = 2;
     int expected = 5003;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 
@@ -160,7 +144,7 @@ public class QuickSelectTest {
     int k = 29;
     int expected = 5;
     int found = QuickSelect.findKthSmallest(array, k);
-    System.out.println(found);
+    Logger.debug(found);
     assertEquals(expected, found);
   }
 }

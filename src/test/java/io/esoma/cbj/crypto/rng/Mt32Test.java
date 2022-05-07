@@ -1,10 +1,8 @@
 package io.esoma.cbj.crypto.rng;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import java.util.Arrays;
 
@@ -16,20 +14,6 @@ import static org.junit.Assert.assertEquals;
 @Ignore
 public class Mt32Test {
 
-  private static final String START = "MT-32 Test Start";
-  private static final String END = "MT-32 Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
-
   @Test
   public void testRngInt() {
     final int[] seed = new int[] {0x123, 0x234, 0x345, 0x456};
@@ -39,7 +23,7 @@ public class Mt32Test {
     int i3 = mt32.next();
     int i4 = mt32.next();
     int i5 = mt32.next();
-    System.out.println(Arrays.asList(i1, i2, i3, i4, i5));
+    Logger.debug(Arrays.asList(i1, i2, i3, i4, i5));
     assertEquals(1067595299, i1);
     assertEquals(955945823, i2);
     assertEquals(477289528, i3);

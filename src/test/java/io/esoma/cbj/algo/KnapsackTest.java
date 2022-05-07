@@ -1,27 +1,11 @@
 package io.esoma.cbj.algo;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 public class KnapsackTest {
-
-  private static final String START = "Knapsack Test Start";
-  private static final String END = "Knapsack Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
 
   @Test
   public void testFitKs1() {
@@ -29,7 +13,7 @@ public class KnapsackTest {
     int limit = 1;
     int expected = 1;
     int actual = Knapsack.fitKs(array, limit);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -39,7 +23,7 @@ public class KnapsackTest {
     int limit = 29;
     int expected = 26;
     int actual = Knapsack.fitKs(array, limit);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -49,7 +33,7 @@ public class KnapsackTest {
     int limit = 42;
     int expected = 41;
     int actual = Knapsack.fitKs(array, limit);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -59,7 +43,7 @@ public class KnapsackTest {
     int limit = 10;
     int expected = 10;
     int actual = Knapsack.fitKs(array, limit);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -69,7 +53,7 @@ public class KnapsackTest {
     int limit = 88;
     int expected = 0;
     int actual = Knapsack.fitKs(array, limit);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -79,7 +63,7 @@ public class KnapsackTest {
     int limit = 15;
     int expected = 15;
     int actual = Knapsack.fitKs(array, limit);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -89,7 +73,7 @@ public class KnapsackTest {
     int limit = 5000;
     int expected = 4999;
     int actual = Knapsack.fitKs(array, limit);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 
@@ -99,7 +83,7 @@ public class KnapsackTest {
     int limit = 8888;
     int expected = 1228;
     int actual = Knapsack.fitKs(array, limit);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 }

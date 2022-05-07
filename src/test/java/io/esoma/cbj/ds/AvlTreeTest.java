@@ -1,31 +1,25 @@
 package io.esoma.cbj.ds;
 
-import io.esoma.cbj.util.Banner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 public class AvlTreeTest {
-
-  private static final String START = "AVL Tree Test Start";
-  private static final String END = "AVL Tree Test End";
 
   // Hold the tree used for testing.
   private static AvlTree<Integer> avt;
 
   @BeforeClass
   public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
     avt = new AvlTree<>();
   }
 
   @AfterClass
   public static void tearDownAfterClass() {
     avt = null;
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
   }
 
   @Test
@@ -35,7 +29,7 @@ public class AvlTreeTest {
   public void testAvl() {
     int expected = 0;
     int actual = avt.getSize();
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     avt.insert(67);
@@ -47,37 +41,37 @@ public class AvlTreeTest {
     avt.insert(1);
     expected = 6;
     actual = avt.getSize();
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 20;
     actual = avt.insert(20);
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 1;
     actual = avt.contains(10) ? 1 : 0;
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 0;
     actual = avt.contains(104) ? 1 : 0;
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     // Expected is still 0.
     actual = avt.delete(800) == null ? 0 : 1;
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 1;
     actual = avt.delete(67) == null ? 0 : 1;
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 6;
     actual = avt.getSize();
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     avt.insert(307);
@@ -89,12 +83,12 @@ public class AvlTreeTest {
     avt.insert(550);
     expected = 13;
     actual = avt.getSize();
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 1;
     actual = avt.toSortedList().get(0);
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     avt.delete(1);
@@ -102,17 +96,17 @@ public class AvlTreeTest {
     avt.delete(499);
     expected = 11;
     actual = avt.getSize();
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 0;
     actual = avt.contains(689) ? 1 : 0;
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 1;
     actual = avt.contains(709) ? 1 : 0;
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     avt.insert(9999);
@@ -125,23 +119,23 @@ public class AvlTreeTest {
     avt.insert(111);
     expected = 18;
     actual = avt.getSize();
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 1;
     actual = avt.contains(7777) ? 1 : 0;
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     avt.delete(550);
     expected = 17;
     actual = avt.getSize();
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 0;
     actual = avt.contains(550) ? 1 : 0;
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     avt.delete(66);
@@ -151,12 +145,12 @@ public class AvlTreeTest {
     avt.delete(111);
     expected = 16;
     actual = avt.getSize();
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     expected = 9999;
     actual = avt.toSortedList().get(avt.getSize() - 1);
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
 
     avt.insert(398);
@@ -165,7 +159,7 @@ public class AvlTreeTest {
     avt.delete(9);
     expected = 12;
     actual = avt.toSortedList().get(1);
-    System.out.println(avt);
+    Logger.debug(avt);
     assertEquals(expected, actual);
   }
 

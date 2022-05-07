@@ -1,31 +1,15 @@
 package io.esoma.cbj.algo;
 
-import io.esoma.cbj.util.Banner;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnitParamsRunner.class)
 public class LongestCommonSubseqTest {
-
-  private static final String START = "LCS Test Start";
-  private static final String END = "LCS Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
 
   @Test
   @Parameters({
@@ -40,7 +24,7 @@ public class LongestCommonSubseqTest {
   })
   public void testFindLcs(String s1, String s2, int lcs) {
     int actual = LongestCommonSubseq.findLcs(s1, s2);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(lcs, actual);
   }
 }

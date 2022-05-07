@@ -1,32 +1,16 @@
 package io.esoma.cbj.algo;
 
-import io.esoma.cbj.util.Banner;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnitParamsRunner.class)
 public class TimSortTest {
-
-  private static final String START = "Timsort Test Start";
-  private static final String END = "Timsort Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
 
   @Test
   public void testSort1() {
@@ -126,7 +110,7 @@ public class TimSortTest {
           100, 100, 100, 100, 100, 100, 100, 100, 100, 100
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -145,7 +129,7 @@ public class TimSortTest {
           73, 75, 76, 78, 78, 79, 79, 80, 84, 90, 90, 90, 91, 91, 92, 94, 95, 98, 99
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -292,7 +276,7 @@ public class TimSortTest {
           9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -347,7 +331,7 @@ public class TimSortTest {
           29, 29, 29, 29, 29, 29, 29, 29, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -364,7 +348,7 @@ public class TimSortTest {
           816, 838, 842, 850, 857, 857, 857, 859, 865, 865, 876, 887, 892, 900
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -487,7 +471,7 @@ public class TimSortTest {
           98, 98, 98, 98, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99, 99
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -668,7 +652,7 @@ public class TimSortTest {
           8, 8, 8, 8, 8, 8, 8, 8, 8, 8
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -685,7 +669,7 @@ public class TimSortTest {
           7762, 7775
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -722,7 +706,7 @@ public class TimSortTest {
           19, 19, 19, 19, 20, 20, 20, 20, 20
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -761,7 +745,7 @@ public class TimSortTest {
           48, 48, 48, 48, 48, 48, 49, 49, 49, 49, 49, 49, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -782,7 +766,7 @@ public class TimSortTest {
           422, 424, 424, 426, 428, 438, 443, 444, 449, 464, 467, 468, 475, 489, 491, 499
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -807,7 +791,7 @@ public class TimSortTest {
           18, 18, 18, 18, 18, 18, 18
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -910,7 +894,7 @@ public class TimSortTest {
           80, 80, 80, 80, 80, 80, 80, 80, 80, 80
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -937,7 +921,7 @@ public class TimSortTest {
           968, 984
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -956,7 +940,7 @@ public class TimSortTest {
           173, 173, 173, 174, 174, 176
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -1089,7 +1073,7 @@ public class TimSortTest {
           1, 1, 1, 1, 1, 1, 1, 1, 1, 1
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -1116,7 +1100,7 @@ public class TimSortTest {
           8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -1139,7 +1123,7 @@ public class TimSortTest {
           49, 49, 49, 49, 49, 49, 49, 49, 49, 49, 49
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -1180,7 +1164,7 @@ public class TimSortTest {
           70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -1203,7 +1187,7 @@ public class TimSortTest {
           233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233, 233
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 
@@ -1550,7 +1534,7 @@ public class TimSortTest {
           9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9
         };
     int[] result = TimSort.sort(unsorted);
-    System.out.println("Done ! Nelts: " + unsorted.length + ".");
+    Logger.debug("Done! Nelts: {}.", unsorted.length);
     assertArrayEquals(sorted, result);
   }
 

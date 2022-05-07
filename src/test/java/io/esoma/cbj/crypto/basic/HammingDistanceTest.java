@@ -1,27 +1,11 @@
 package io.esoma.cbj.crypto.basic;
 
-import io.esoma.cbj.util.Banner;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.assertEquals;
 
 public class HammingDistanceTest {
-
-  private static final String START = "Hamming distance Test Start";
-  private static final String END = "Hamming distance Test End";
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    System.out.println(Banner.getTitleBanner(START, 3));
-  }
-
-  @AfterClass
-  public static void tearDownAfterClass() {
-    System.out.println(Banner.getTitleBanner(END, 3));
-    System.out.println();
-  }
 
   @Test
   public void testComputeStringString() {
@@ -29,7 +13,7 @@ public class HammingDistanceTest {
     final String s2 = "wokka wokka!!!";
     final int expected = 37;
     int actual = HammingDistance.compute(s1, s2);
-    System.out.println(actual);
+    Logger.debug(actual);
     assertEquals(expected, actual);
   }
 }
