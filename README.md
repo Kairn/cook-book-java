@@ -25,6 +25,7 @@ time to time.
 1. Greatest common divisor
 2. Longest common subsequence
 3. Decimal-binary numbers (from HackerRank)
+4. Maximal Square (from LeetCode)
 
 ### Graph Theory :globe_with_meridians:
 
