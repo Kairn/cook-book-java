@@ -10,6 +10,14 @@ import static org.junit.Assert.*;
 public class PermutationGenTest {
 
   @Test
+  public void testPermGenOne() {
+    PermutationGen gen = new PermutationGen(1);
+
+    assertArrayEquals(new int[] {1}, gen.getNext());
+    assertFalse(gen.hasNext());
+  }
+
+  @Test
   public void testPermGenSmall() {
     PermutationGen gen = new PermutationGen(3);
 
@@ -44,6 +52,7 @@ public class PermutationGenTest {
 
     assertEquals("654312", generated);
     assertArrayEquals(new int[] {6, 5, 4, 3, 2, 1}, gen.getNext());
+    assertFalse(gen.hasNext());
   }
 
   @Test

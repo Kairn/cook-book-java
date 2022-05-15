@@ -19,13 +19,14 @@ time to time.
 ### Searching :mag_right:
 
 1. Knapsack with divide and conquer
+2. Quickselect (find kth smallest element)
 
 ### Dynamic Programming :rocket:
 
 1. Greatest common divisor
 2. Longest common subsequence
 3. Decimal-binary numbers (from HackerRank)
-4. Maximal Square (from LeetCode)
+4. Maximal square (from LeetCode)
 
 ### Graph Theory :globe_with_meridians:
 
@@ -36,7 +37,7 @@ time to time.
 
 1. AVL tree
 2. Fibonacci heap
-3. LRU Cache
+3. LRU cache
 
 ### Cryptography :key:
 
@@ -49,7 +50,8 @@ time to time.
 ### Miscellaneous :balloon:
 
 1. Sorted sum (from HackerRank)
-2. Sub-array Imbalance (from Amazon test)
+2. Sub-array imbalance (from Amazon test)
+3. Permutation generator
 
 ## Test
 
