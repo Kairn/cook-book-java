@@ -52,7 +52,7 @@ public class PermutationGen {
 
     int[] result = Arrays.copyOf(state, state.length);
 
-    // Find the first decrease starting from the end
+    // Find the first decrease starting from the end.
     int pivotIndex = -1;
     int prev = Integer.MIN_VALUE;
     for (int i = state.length - 1; i >= 0; --i) {
@@ -64,16 +64,16 @@ public class PermutationGen {
       prev = cur;
     }
 
-    // State is strictly descending indicating it's the last permutation
+    // State is strictly descending indicating it's the last permutation.
     if (pivotIndex == -1) {
       ended = true;
       return result;
     }
 
-    // Revert the tail to ascending order
+    // Revert the tail to ascending order.
     ArrayCore.reverseInt(state, pivotIndex + 1, state.length - 1);
 
-    // Find the smallest number greater than the pivot to swap the pivot with
+    // Find the smallest number greater than the pivot to swap the pivot with.
     int pivot = state[pivotIndex];
     int swapIndex = Arrays.binarySearch(state, pivotIndex + 1, state.length, pivot + 1);
     if (swapIndex < 0) {

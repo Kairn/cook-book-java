@@ -1,4 +1,4 @@
-package io.esoma.cbj.algo;
+package io.esoma.cbj.prob;
 
 /**
  * Class for solving the Maximal Square problem in which a 2D matrix of only 0s and 1s is given, and
@@ -29,7 +29,7 @@ public class MaximalSquare {
     int n = matrix.length;
     int m = matrix[0].length;
 
-    // Initialize cache
+    // Initialize cache.
     cache = new int[n][m];
     for (int i = 0; i < n; ++i) {
       for (int j = 0; j < m; ++j) {
@@ -37,7 +37,7 @@ public class MaximalSquare {
       }
     }
 
-    // Search each element by fixing it at the top left
+    // Search each element by fixing it at the top left.
     for (int i = 0; i < n; ++i) {
       for (int j = 0; j < m; ++j) {
         maxLength = Math.max(maxLength, findAtPoint(matrix, i, j));

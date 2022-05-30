@@ -27,6 +27,7 @@ time to time.
 2. Longest common subsequence
 3. Decimal-binary numbers (from HackerRank)
 4. Maximal square (from LeetCode)
+5. Interleave string (from LeetCode)
 
 ### Graph Theory :globe_with_meridians:
 
@@ -52,6 +53,7 @@ time to time.
 1. Sorted sum (from HackerRank)
 2. Sub-array imbalance (from Amazon test)
 3. Permutation generator
+4. Sub-array sum equals k (from LeetCode)
 
 ## Test
 

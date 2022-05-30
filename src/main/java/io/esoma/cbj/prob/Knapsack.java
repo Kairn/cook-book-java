@@ -1,4 +1,4 @@
-package io.esoma.cbj.algo;
+package io.esoma.cbj.prob;
 
 import java.util.ArrayList;
 import java.util.Arrays;

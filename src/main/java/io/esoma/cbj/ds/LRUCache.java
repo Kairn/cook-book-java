@@ -71,11 +71,11 @@ public class LRUCache<V> {
       EntryNode<V> newNode = new EntryNode<>(key, value);
       internalMap.put(key, newNode);
       if (size < capacity) {
-        // Add node to the head
+        // Add node to the head.
         addToHead(newNode);
         ++size;
       } else {
-        // Cut the tail then add node to the head
+        // Cut the tail then add node to the head.
         cutTail();
         addToHead(newNode);
       }
@@ -104,7 +104,7 @@ public class LRUCache<V> {
     if (head != null) {
       head.prev = node;
     } else {
-      // First node is also the tail
+      // First node is also the tail.
       tail = node;
     }
     head = node;
@@ -131,12 +131,12 @@ public class LRUCache<V> {
       nextNode.prev = prevNode;
       addToHead(node);
     } else if (prevNode != null) {
-      // Node is the tail
+      // Node is the tail.
       tail = prevNode;
       addToHead(node);
     }
 
-    // Node is already the head otherwise
+    // Node is already the head otherwise.
   }
 
   private static class EntryNode<V> {

@@ -1,4 +1,4 @@
-package io.esoma.cbj.algo;
+package io.esoma.cbj.prob;
 
 import org.apache.commons.lang3.ArrayUtils;
 

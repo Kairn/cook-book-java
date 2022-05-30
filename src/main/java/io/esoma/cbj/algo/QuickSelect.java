@@ -60,13 +60,13 @@ public class QuickSelect {
       }
     }
 
-    // Move i to the starting index of the right partition
+    // Move i to the starting index of the right partition.
     if (array[i] < pivot) {
       ++i;
     }
 
     if (k < i + 1) {
-      // Answer is on the left
+      // Answer is on the left.
       return searchKth(array, start, i, k);
     } else {
       return searchKth(array, i, end, k);

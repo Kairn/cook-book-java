@@ -1,4 +1,4 @@
-package io.esoma.cbj.algo;
+package io.esoma.cbj.prob;
 
 /**
  * Class for studying the Decibinary problem. The Decibinary system is a number system such that

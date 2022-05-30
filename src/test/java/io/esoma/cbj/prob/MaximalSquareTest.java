@@ -1,4 +1,4 @@
-package io.esoma.cbj.algo;
+package io.esoma.cbj.prob;
 
 import org.junit.Test;
 import org.tinylog.Logger;

@@ -1,4 +1,4 @@
-package io.esoma.cbj.algo;
+package io.esoma.cbj.prob;
 
 /**
  * Class for studying the Longest Common Subsequence (LCS) problem. A subsequence is a sequence that
