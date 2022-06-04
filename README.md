@@ -54,6 +54,7 @@ time to time.
 2. Sub-array imbalance (from Amazon test)
 3. Permutation generator
 4. Sub-array sum equals k (from LeetCode)
+5. Partition equal subset sum (from LeetCode)
 
 ## Test
 
