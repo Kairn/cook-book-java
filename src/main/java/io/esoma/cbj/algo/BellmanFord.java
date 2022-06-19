@@ -11,6 +11,8 @@ package io.esoma.cbj.algo;
  */
 public class BellmanFord {
 
+  private BellmanFord() {}
+
   /**
    * Finds the shortest (with the least weight) path from a source vertex to a destination vertex in
    * a directed weighted graph with at most k stops (k + 1 edges). All weights are positive numbers
@@ -26,6 +28,51 @@ public class BellmanFord {
    * @return the cumulative weight of the shortest path
    */
   public static int bfFind(int n, int[][] edges, int src, int dest, int k) {
-    return 0;
+    if (n < 2 || edges.length < 1 || src >= n || dest >= n) {
+      throw new IllegalArgumentException("Invalid input parameter(s)");
+    }
+
+    if (src == dest) {
+      return 0;
+    }
+
+    // Build weight caches for n vertices.
+    int[] priCache = new int[n];
+    int[] altCache = new int[n];
+    for (int i = 0; i < n; ++i) {
+      if (i == src) {
+        priCache[i] = 0;
+        altCache[i] = 0;
+      } else {
+        priCache[i] = Integer.MAX_VALUE;
+        altCache[i] = Integer.MAX_VALUE;
+      }
+    }
+
+    int stops = 0;
+    while (stops <= k) {
+      for (int[] edge : edges) {
+        int start = edge[0];
+        int end = edge[1];
+        int weight = edge[2];
+
+        if (priCache[start] == Integer.MAX_VALUE) {
+          // No path to the start vertex.
+          continue;
+        }
+
+        int toEndCost = priCache[start] + weight;
+        altCache[end] = Math.min(altCache[end], toEndCost);
+      }
+
+      // Swap caches.
+      int[] tempCache = altCache;
+      altCache = priCache;
+      priCache = tempCache;
+
+      ++stops;
+    }
+
+    return priCache[dest] == Integer.MAX_VALUE ? -1 : priCache[dest];
   }
 }

@@ -133,7 +133,7 @@ public class BellmanFordTest {
         };
     int src = 0;
     int dest = 3;
-    int k = 2;
+    int k = 1;
 
     int expected = 700;
     int actual = BellmanFord.bfFind(n, edges, src, dest, k);

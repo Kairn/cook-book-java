@@ -33,6 +33,7 @@ time to time.
 
 1. Dijkstra's algorithm
 2. Minimum spanning tree
+3. Bellman-Ford algorithm
 
 ### Data Structure :six_pointed_star:
 
