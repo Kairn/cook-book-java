@@ -69,6 +69,10 @@ public class BTree23Test {
       assertTrue(bt23.insert(key));
     }
 
+    assertTrue(bt23.contains(-500));
+    assertTrue(bt23.contains(500));
+    assertTrue(bt23.contains(5000));
+    assertTrue(bt23.contains(50000));
     assertEquals(len, bt23.size());
     assertArrayEquals(array, bt23.toSortedArray());
   }
