@@ -81,8 +81,22 @@ public class BTree23 {
    * @return true if a key is deleted after the operation, or false otherwise
    */
   public boolean delete(int key) {
-    // TODO
-    return false;
+    if (!contains(key)) {
+      return false;
+    }
+
+    if (size == 1) {
+      // Destroy the only node which is the root.
+      root = null;
+    } else {
+      Node24 newRoot = root.deleteKey(key);
+      if (newRoot != null) {
+        root = newRoot;
+      }
+    }
+
+    --size;
+    return true;
   }
 
   /**
@@ -312,14 +326,22 @@ public class BTree23 {
     }
 
     /**
-     * Splits the node (which must be a 4-node) by pushing the middle key up one level (insert into
-     * the parent if present) and re-adjusting the children. If the parent becomes a 4-node, then
-     * the process is repeated until there are no more 4-nodes. If a new root is created at the top
-     * level, it is returned to the caller.
+     * Splits the node (if is a 4-node) by pushing the middle key up one level (insert into the
+     * parent if present) and re-adjusting the children. This process is repeated until there are no
+     * more 4-nodes on the way up to the root. If a new root is created at the top level, it is
+     * returned to the caller.
      *
      * @return the new root node if created
      */
     private Node24 split() {
+      if (!this.is4Node()) {
+        if (this.parent == null) {
+          return null;
+        } else {
+          return this.parent.split();
+        }
+      }
+
       // First, both the left (primary) and right (secondary) keys will become new 2-nodes.
       Node24 leftPartition;
       Node24 rightPartition;
@@ -361,8 +383,8 @@ public class BTree23 {
           destNode.childRight = rightPartition;
           // The left child already exists and won't need to be changed.
         }
-        // A new root won't be needed.
-        return null;
+        // Continue on the way up.
+        return destNode.split();
       }
 
       // Make the destination (parent) node a 4-node.
@@ -391,6 +413,313 @@ public class BTree23 {
 
       // Recursively split up the parent as well.
       return destNode.split();
+    }
+
+    /**
+     * Deletes the specified key from the subtree starting from this node. The key is guaranteed to
+     * exist within the subtree. If a new root is created after restructuring, it is returned to the
+     * caller.
+     *
+     * @param key the key to delete
+     * @return the new root node if created
+     */
+    Node24 deleteKey(int key) {
+      if (this.parent == null && this.is2Node()) {
+        // Perform root specific transformation.
+        if (this.childLeft.is2Node() && this.childRight.is2Node()) {
+          // Merge both children into the root.
+          this.tertiary = this.primary;
+          this.primary = this.childLeft.primary;
+          this.secondary = this.childRight.primary;
+          // Replace the children with grandchildren.
+          this.childMidLeft = this.childLeft.childRight;
+          this.childMidRight = this.childRight.childLeft;
+          this.childLeft = this.childLeft.childLeft;
+          this.childRight = this.childRight.childRight;
+          // Readjust the parent for moved children.
+          this.ensureParent();
+          // Repeat the process on the root.
+          return this.deleteKey(key);
+        } else if (this.childLeft.is3Node() && this.childRight.is3Node()) {
+          // Both children don't need extra transformation.
+          if (key == this.primary) {
+            // Replace this with the successor from the right child and delete the same.
+            this.primary = this.childRight.findMin();
+            return this.childRight.deleteKey(this.primary);
+          } else if (key < this.primary) {
+            return this.childLeft.deleteKey(key);
+          } else {
+            return this.childRight.deleteKey(key);
+          }
+        } else if (this.childLeft.is2Node()) {
+          // The right child must be a 3-node.
+          if (key <= this.primary) {
+            // Must borrow a key from the right child and move this key to the left.
+            this.primary = this.rotateLeft(this.childLeft, this.primary, this.childRight);
+            // Delete from the left.
+            return this.childLeft.deleteKey(key);
+          } else {
+            return this.childRight.deleteKey(key);
+          }
+        } else {
+          // The left child must be a 3-node.
+          if (key >= this.primary) {
+            // Must borrow a key from the left child and move this key to the right.
+            this.primary = this.rotateRight(this.childLeft, this.primary, this.childRight);
+            // Delete from the right.
+            return this.childRight.deleteKey(key);
+          } else {
+            return this.childLeft.deleteKey(key);
+          }
+        }
+      }
+
+      // At this point, the current node is guaranteed to NOT be a 2-node.
+      if (!this.hasChildren()) {
+        // This node must contain the key, so delete it.
+        this.deleteKeyInside(key);
+        // Split any temporary 4-nodes on the way up.
+        return this.split();
+      }
+
+      // Ensure the child for the next step is not a 2-node.
+      Node24 nextChild;
+      // The peer node to help the next child to become a non 2-node.
+      Node24 helper;
+      if (key < this.primary) {
+        // The next child is the left child.
+        nextChild = this.childLeft;
+        if (nextChild.is2Node()) {
+          // Help is needed from the right peer.
+          helper = this.childMidLeft;
+          if (helper.is3Node()) {
+            // Let's rotate to the left.
+            this.primary = this.rotateLeft(nextChild, this.primary, helper);
+          } else {
+            // Let's merge peers.
+            Node24 mergedChild = this.mergeTo4Node(nextChild, this.primary, helper);
+            // Attach the merged child on the left.
+            this.replaceLeftKeyWithChild(mergedChild);
+          }
+        }
+      } else if (key >= this.secondary) {
+        // The next child is the right child.
+        nextChild = this.childRight;
+        if (nextChild.is2Node()) {
+          // Help is needed from the left peer.
+          helper = this.is3Node() ? this.childMidLeft : this.childMidRight;
+          if (helper.is3Node()) {
+            // Let's rotate to the right.
+            this.secondary = this.rotateRight(helper, this.secondary, nextChild);
+          } else {
+            // Let's merge peers.
+            Node24 mergedChild = this.mergeTo4Node(helper, this.secondary, nextChild);
+            nextChild = mergedChild;
+            // Attach the merged child on the right.
+            this.replaceRightKeyWithChild(mergedChild);
+          }
+        }
+      } else if (this.tertiary != null && key >= this.tertiary) {
+        // The next child is the mid-right child.
+        nextChild = this.childMidRight;
+        if (nextChild.is2Node()) {
+          // Help is needed from the right peer.
+          helper = this.childRight;
+          if (helper.is3Node()) {
+            // Let's rotate to the left.
+            this.secondary = this.rotateLeft(nextChild, this.secondary, helper);
+          } else {
+            // Let's merge peers.
+            Node24 mergedChild = this.mergeTo4Node(nextChild, this.secondary, helper);
+            // Attach the merged child on the right.
+            this.replaceRightKeyWithChild(mergedChild);
+          }
+        }
+      } else {
+        // The next child is the mid-left child.
+        nextChild = this.childMidLeft;
+        if (nextChild.is2Node()) {
+          // Help is needed from the left peer.
+          helper = this.childLeft;
+          if (helper.is3Node()) {
+            // Let's rotate to the right.
+            this.primary = this.rotateRight(helper, this.primary, nextChild);
+          } else {
+            // Let's merge peers.
+            Node24 mergedChild = this.mergeTo4Node(helper, this.primary, nextChild);
+            nextChild = mergedChild;
+            // Attach the merged child on the left.
+            this.replaceLeftKeyWithChild(mergedChild);
+          }
+        }
+      }
+
+      // If the key is present in the current node, replace it with the successor (min key) in the
+      // next child. Then, the process becomes deleting the successor in the next child.
+      if (this.primary == key) {
+        this.primary = nextChild.findMin();
+        key = this.primary;
+      } else if (this.tertiary != null && this.tertiary == key) {
+        this.tertiary = nextChild.findMin();
+        key = this.tertiary;
+      } else if (this.secondary == key) {
+        this.secondary = nextChild.findMin();
+        key = this.secondary;
+      }
+
+      return nextChild.deleteKey(key);
+    }
+
+    /**
+     * Iterates through this node's children and ensure they have this node as the parent. A
+     * convenient method used internally only.
+     */
+    private void ensureParent() {
+      if (this.childLeft != null) {
+        this.childLeft.parent = this;
+      }
+      if (this.childMidLeft != null) {
+        this.childMidLeft.parent = this;
+      }
+      if (this.childMidRight != null) {
+        this.childMidRight.parent = this;
+      }
+      if (this.childRight != null) {
+        this.childRight.parent = this;
+      }
+    }
+
+    /**
+     * From the parent node's view, rotates a key from right to left with the specified children
+     * (peers). The right peer is guaranteed to be a 3-node, and the left peer must be a 2-node.
+     *
+     * @param leftPeer the left peer (borrower)
+     * @param parentKey the parent key between the peers on the parent
+     * @param rightPeer the right peer (lender)
+     * @return the key to replace the original parent key
+     */
+    private int rotateLeft(Node24 leftPeer, int parentKey, Node24 rightPeer) {
+      // Move the parent key to the left peer.
+      leftPeer.secondary = parentKey;
+      leftPeer.childMidLeft = leftPeer.childRight;
+      leftPeer.childRight = rightPeer.childLeft;
+
+      leftPeer.ensureParent();
+      int keyToReturn = rightPeer.primary;
+
+      // Trim the right peer to a 2-node.
+      rightPeer.primary = rightPeer.secondary;
+      rightPeer.secondary = null;
+      rightPeer.childLeft = rightPeer.childMidLeft;
+      rightPeer.childMidLeft = null;
+
+      return keyToReturn;
+    }
+
+    /**
+     * From the parent node's view, rotates a key from left to right with the specified children
+     * (peers). The left peer is guaranteed to be a 3-node, and the right peer must be a 2-node.
+     *
+     * @param leftPeer the left peer (lender)
+     * @param parentKey the parent key between the peers on the parent
+     * @param rightPeer the right peer (borrower)
+     * @return the key to replace the original parent key
+     */
+    private int rotateRight(Node24 leftPeer, int parentKey, Node24 rightPeer) {
+      // Move the parent key to the right peer.
+      rightPeer.secondary = rightPeer.primary;
+      rightPeer.primary = parentKey;
+      rightPeer.childMidLeft = rightPeer.childLeft;
+      rightPeer.childLeft = leftPeer.childRight;
+
+      rightPeer.ensureParent();
+      int keyToReturn = leftPeer.secondary;
+
+      // Trim the left peer to a 2-node.
+      leftPeer.secondary = null;
+      leftPeer.childRight = leftPeer.childMidLeft;
+      leftPeer.childMidLeft = null;
+
+      return keyToReturn;
+    }
+
+    /**
+     * From the parent node's view, merges its two children with a key in the middle into a 4-node.
+     * Both peers must be 2-nodes, and the left peer is the target to receive extra keys and
+     * children.
+     *
+     * @param leftPeer the left child (receiver)
+     * @param parentKey the parent key that goes into the middle of the merged node
+     * @param rightPeer the right child (giver)
+     * @return the merged node
+     */
+    private Node24 mergeTo4Node(Node24 leftPeer, int parentKey, Node24 rightPeer) {
+      // TODO
+      leftPeer.ensureParent();
+      return leftPeer;
+    }
+
+    /**
+     * Removes the left key in the node and attach a new left child instead. This node might be a
+     * 3-node or a 4-node.
+     *
+     * @param child the child to be attached
+     */
+    private void replaceLeftKeyWithChild(Node24 child) {
+      if (this.is3Node()) {
+        this.primary = this.secondary;
+        this.secondary = null;
+        this.childMidLeft = null;
+      } else {
+        this.primary = this.tertiary;
+        this.tertiary = null;
+        this.childMidLeft = this.childMidRight;
+        this.childMidRight = null;
+      }
+
+      this.childLeft = child;
+      this.ensureParent();
+    }
+
+    /**
+     * Removes the right key in the node and attach a new right child instead. This node might be a
+     * 3-node or a 4-node.
+     *
+     * @param child the child to be attached
+     */
+    private void replaceRightKeyWithChild(Node24 child) {
+      if (this.is3Node()) {
+        this.secondary = null;
+        this.childMidLeft = null;
+      } else {
+        this.secondary = this.tertiary;
+        this.tertiary = null;
+        this.childMidRight = null;
+      }
+
+      this.childRight = child;
+      this.ensureParent();
+    }
+
+    /**
+     * Deletes a key inside this node. The key is guaranteed to exist, and this node is guaranteed
+     * to have no children and NOT be a 2-node. This is only called internally as the final step of
+     * key deletion.
+     *
+     * @param key the key to delete
+     */
+    private void deleteKeyInside(int key) {
+      // TODO
+    }
+
+    /**
+     * Finds the key with the minimum value in this node's subtree.
+     *
+     * @return the min key
+     */
+    private int findMin() {
+      // TODO
+      return -1;
     }
   }
 }

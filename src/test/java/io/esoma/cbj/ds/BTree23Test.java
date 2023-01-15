@@ -78,6 +78,36 @@ public class BTree23Test {
   }
 
   @Test
+  public void testDeleteSimple() {
+    for (int i = 1; i <= 16; ++i) {
+      assertTrue(bt23.insert(i));
+    }
+
+    assertTrue(bt23.contains(1));
+    assertTrue(bt23.delete(1));
+    assertFalse(bt23.contains(1));
+
+    assertTrue(bt23.contains(16));
+    assertTrue(bt23.delete(16));
+    assertFalse(bt23.contains(16));
+
+    assertTrue(bt23.contains(2));
+    assertTrue(bt23.delete(2));
+    assertFalse(bt23.contains(2));
+
+    assertTrue(bt23.contains(8));
+    assertTrue(bt23.delete(8));
+    assertFalse(bt23.contains(8));
+
+    assertTrue(bt23.contains(12));
+    assertTrue(bt23.delete(12));
+    assertFalse(bt23.contains(12));
+
+    assertEquals(11, bt23.size());
+    assertArrayEquals(new int[] {3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15}, bt23.toSortedArray());
+  }
+
+  @Test
   public void testDeletes() {
     for (int i = 0; i < 200; ++i) {
       assertTrue(bt23.insert(i));
@@ -135,5 +165,38 @@ public class BTree23Test {
     assertFalse(bt23.contains(199));
     assertFalse(bt23.contains(198));
     assertFalse(bt23.contains(100));
+  }
+
+  @Test
+  public void testDeleteWaves() {
+    for (int i = 0; i < 500; ++i) {
+      bt23.insert(i);
+    }
+    assertEquals(500, bt23.size());
+
+    for (int i = 250; i < 500; ++i) {
+      assertTrue(bt23.delete(i));
+    }
+    assertEquals(250, bt23.size());
+
+    for (int i = 0; i < 5000; ++i) {
+      bt23.insert(i);
+    }
+    assertEquals(5000, bt23.size());
+
+    for (int i = 1250; i < 3750; ++i) {
+      assertTrue(bt23.delete(i));
+    }
+    assertEquals(2500, bt23.size());
+
+    for (int i = 0; i < 50000; ++i) {
+      bt23.insert(i);
+    }
+    assertEquals(50000, bt23.size());
+
+    for (int i = 0; i < 25000; ++i) {
+      assertTrue(bt23.delete(i));
+    }
+    assertEquals(25000, bt23.size());
   }
 }
