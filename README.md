@@ -40,6 +40,7 @@ time to time.
 1. AVL tree
 2. Fibonacci heap
 3. LRU cache
+4. 2-3 tree
 
 ### Cryptography :key:
 

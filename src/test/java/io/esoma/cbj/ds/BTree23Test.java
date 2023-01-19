@@ -3,6 +3,7 @@ package io.esoma.cbj.ds;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.tinylog.Logger;
 
 import static org.junit.Assert.*;
 
@@ -56,6 +57,8 @@ public class BTree23Test {
     assertTrue(bt23.contains(Integer.MIN_VALUE));
     assertTrue(bt23.contains(5533));
     assertTrue(bt23.contains(-6));
+
+    Logger.debug(bt23);
   }
 
   @Test
@@ -105,6 +108,8 @@ public class BTree23Test {
 
     assertEquals(11, bt23.size());
     assertArrayEquals(new int[] {3, 4, 5, 6, 7, 9, 10, 11, 13, 14, 15}, bt23.toSortedArray());
+
+    Logger.debug(bt23);
   }
 
   @Test
