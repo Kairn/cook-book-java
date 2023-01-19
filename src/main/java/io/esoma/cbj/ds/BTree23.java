@@ -205,10 +205,10 @@ public class BTree23 {
    */
   private static class Node24 {
 
-    // Primary is the only key when the node is a 2-node. It is always the left key in extended
-    // form.
+    // Primary is the only key when the node is a 2-node. It is always the leftmost key in extended
+    // form(s).
     Integer primary;
-    // Secondary is always the right key when the node is a 3 or 4-node.
+    // Secondary is always the rightmost key when the node is a 3 or 4-node.
     Integer secondary;
     // Tertiary is always the middle key when the node is a temporary 4-node.
     Integer tertiary;
@@ -220,7 +220,7 @@ public class BTree23 {
     Node24 childLeft;
     // This represents the middle child in a 3-node or the second from left child in a 4-node.
     Node24 childMidLeft;
-    // This always represent the second from right child in a 4-node, and it will otherwise be null.
+    // This always represent the second from right child in a 4-node, or it will be null otherwise.
     Node24 childMidRight;
     // This always represent the rightmost child in all node forms.
     Node24 childRight;
@@ -562,7 +562,7 @@ public class BTree23 {
       } else if (this.tertiary != null && this.tertiary == key) {
         this.tertiary = nextChild.findMin();
         key = this.tertiary;
-      } else if (this.secondary == key) {
+      } else if (this.secondary != null && this.secondary == key) {
         this.secondary = nextChild.findMin();
         key = this.secondary;
       }
@@ -654,7 +654,11 @@ public class BTree23 {
      * @return the merged node
      */
     private Node24 mergeTo4Node(Node24 leftPeer, int parentKey, Node24 rightPeer) {
-      // TODO
+      leftPeer.secondary = rightPeer.primary;
+      leftPeer.tertiary = parentKey;
+      leftPeer.childMidLeft = leftPeer.childRight;
+      leftPeer.childMidRight = rightPeer.childLeft;
+      leftPeer.childRight = rightPeer.childRight;
       leftPeer.ensureParent();
       return leftPeer;
     }
@@ -709,7 +713,22 @@ public class BTree23 {
      * @param key the key to delete
      */
     private void deleteKeyInside(int key) {
-      // TODO
+      if (this.is3Node()) {
+        if (this.primary == key) {
+          this.primary = this.secondary;
+        }
+        // Right key is always deleted as it becomes a 2-node.
+        this.secondary = null;
+      } else {
+        // Must be a temporary 4-node.
+        if (this.primary == key) {
+          this.primary = this.tertiary;
+        } else if (this.secondary == key) {
+          this.secondary = this.tertiary;
+        }
+        // Middle key is always deleted as it becomes a 3-node.
+        this.tertiary = null;
+      }
     }
 
     /**
@@ -718,8 +737,11 @@ public class BTree23 {
      * @return the min key
      */
     private int findMin() {
-      // TODO
-      return -1;
+      if (!this.hasChildren()) {
+        return this.primary;
+      } else {
+        return this.childLeft.findMin();
+      }
     }
   }
 }
