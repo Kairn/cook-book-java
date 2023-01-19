@@ -1,6 +1,6 @@
 # Cook Book (Java) :books:
 
-[![Build Status](https://travis-ci.org/Kairn/cook-book-java.svg?branch=master)](https://travis-ci.org/Kairn/cook-book-java)
+[![Kairn](https://circleci.com/gh/Kairn/cook-book-java.svg?style=svg)](https://app.circleci.com/pipelines/github/Kairn/cook-book-java)
 
 The purpose of this repository is to collect many algorithmic problems and provide implementations for them. Test cases
 are bundled in the source code, and they will be run when making a project build. The collection will be updated from
