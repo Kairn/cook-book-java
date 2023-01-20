@@ -20,12 +20,6 @@ public class AvlTree<E extends Comparable<E>> {
   private int size;
   private AtNode<E> root;
   private AtNode<E> del;
-  /*
-   * Default constructor for creating a blank AVL tree.
-   */
-  public AvlTree() {
-    super();
-  }
 
   /**
    * Queries and returns the number of elements in the tree.
