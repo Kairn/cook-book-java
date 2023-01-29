@@ -115,6 +115,19 @@ public class RedBlackTreeTest {
   }
 
   @Test
+  public void testOrderedDeleteSimple() {
+    for (int i = 0; i < 32; ++i) {
+      assertTrue(rbTree.insert(i));
+    }
+
+    for (int i = 4; i < 30; ++i) {
+      assertTrue(rbTree.delete(i));
+    }
+
+    Logger.debug(rbTree);
+  }
+
+  @Test
   public void testDeletes() {
     for (int i = 0; i < 1000; ++i) {
       assertTrue(rbTree.insert(i));
@@ -134,7 +147,7 @@ public class RedBlackTreeTest {
     assertTrue(rbTree.contains(700));
     assertTrue(rbTree.contains(800));
     assertTrue(rbTree.contains(900));
-    assertFalse(rbTree.contains(100));
+    assertFalse(rbTree.contains(1000));
 
     assertTrue(rbTree.insert(300));
     assertTrue(rbTree.insert(350));
@@ -164,7 +177,7 @@ public class RedBlackTreeTest {
   public void testLargeCase() {
     for (int i = -1; i < 65536; ++i) {
       assertTrue(rbTree.insert(i));
-      assertFalse(rbTree.insert(1));
+      assertFalse(rbTree.insert(i));
     }
     assertEquals(65537, rbTree.size());
 

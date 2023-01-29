@@ -41,6 +41,7 @@ time to time.
 2. Fibonacci heap
 3. LRU cache
 4. 2-3 tree
+5. Red-black tree
 
 ### Cryptography :key:
 
