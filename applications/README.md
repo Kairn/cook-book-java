@@ -35,11 +35,26 @@ A collection based on the last-in-first-out (LIFO) policy.
 
 1. An interpreter application to evaluate expressions from left to right.
 
-### ?
+### Disjoint set
+
+A collection of disjoint sets.
 
 #### Implementation
 
+1. Use a set of linked nodes.
+    * Every element in the collection is represented by a node with a pointer to its parent and a size.
+    * Initially every node points to itself and has a size of 1.
+    * A find operation recursively searches from the bottom node to its root.
+    * Every union operation finds the root of the two nodes and updates one's root to match the other (if different).
+      The tree that has a smaller size is always connected to the one with a larger size.
+    * In each find operation, path compression can be used by updating each intermediate node's parent to the final
+      root.
+
 #### When to use
+
+1. Solve a dynamic connectivity problem with union find.
+2. Finding the minimum spamming tree by iteratively connecting the next cheapest edge until all nodes belong to a single
+   root.
 
 ## Algorithms
 
