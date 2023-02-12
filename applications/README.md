@@ -56,6 +56,27 @@ A collection of disjoint sets.
 2. Finding the minimum spamming tree by iteratively connecting the next cheapest edge until all nodes belong to a single
    root.
 
+### Priority queue
+
+A queue-like collection where the maximum/minimum element can be extracted efficiently.
+
+#### Implementation
+
+1. Use a binary heap (complete binary tree where the parent node is always larger/equal to its children, if max heap).
+    * Efficiently store tree nodes in an array in level-order.
+    * To insert, add the key at the bottom on the next available slot and let it swim up to restore heap order.
+    * To delete a key, replace it with the last element and let it sink down to restore heap order.
+    * Arbitrary data in an array can be initialized to a heap by constructing subtrees that are heap ordered from the
+      bottom up. To do this, start at the middle (lowest parent) and sink this key, repeat until the root is processed.
+
+#### When to use
+
+1. Sorting data by iteratively removing elements.
+2. Find the running median (or top K) of a data stream using two of these queues to partition the stream into a higher (
+   min heap) and a lower (max heap) part.
+3. Combinatorial search. Put the start configuration into the queue; repeatedly removes the highest priority item from
+   the queue and add the next possible configurations back into the queue until the goal configuration is reached.
+
 ## Algorithms
 
 ### ?
