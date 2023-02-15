@@ -1,6 +1,9 @@
 package io.esoma.cbj.ds;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * A key-value store implemented with an open-addressing hash table where collided entries are
@@ -26,7 +29,24 @@ public class LinearProbingHashTable<K, V> {
   }
 
   public LinearProbingHashTable(int initialCapacity) {
-    this.entries = new ArrayList<>(initialCapacity);
+    if (initialCapacity < 4) {
+      initialCapacity = 4;
+    }
+    this.entries = createTable(initialCapacity);
+  }
+
+  /**
+   * Creates a new empty table for the specified capacity. It will be filled with null elements.
+   *
+   * @param capacity the table size
+   * @return a new null-filled ArrayList representing the table
+   */
+  private ArrayList<Entry<K, V>> createTable(int capacity) {
+    ArrayList<Entry<K, V>> table = new ArrayList<>();
+    for (int i = 0; i < capacity; ++i) {
+      this.entries.add(null);
+    }
+    return table;
   }
 
   /**
@@ -47,7 +67,19 @@ public class LinearProbingHashTable<K, V> {
    * @return true if a new entry is created, or false otherwise
    */
   public boolean put(K key, V value) {
-    return false;
+    if (key == null) {
+      throw new IllegalArgumentException("Key may not be null");
+    }
+
+    int slot = findSlot(key);
+    if (entries.get(slot) == null) {
+      entries.set(slot, new Entry<>(key, value));
+      ++size;
+      return true;
+    } else {
+      entries.get(slot).value = value;
+      return false;
+    }
   }
 
   /**
@@ -57,7 +89,11 @@ public class LinearProbingHashTable<K, V> {
    * @return whether the key exists in the table
    */
   public boolean containsKey(K key) {
-    return false;
+    if (key == null) {
+      throw new IllegalArgumentException("Key may not be null");
+    }
+
+    return entries.get(findSlot(key)) != null;
   }
 
   /**
@@ -68,7 +104,16 @@ public class LinearProbingHashTable<K, V> {
    * @return the associated value, or null if not existent
    */
   public V get(K key) {
-    return null;
+    if (key == null) {
+      throw new IllegalArgumentException("Key may not be null");
+    }
+
+    int slot = findSlot(key);
+    if (entries.get(slot) == null) {
+      return null;
+    } else {
+      return entries.get(slot).value;
+    }
   }
 
   /**
@@ -78,12 +123,59 @@ public class LinearProbingHashTable<K, V> {
    * @return true if a key is deleted, or false otherwise
    */
   public boolean delete(K key) {
+    if (key == null) {
+      throw new IllegalArgumentException("Key may not be null");
+    }
     return false;
   }
 
   @Override
   public String toString() {
-    return "LinearProbingHashTable{" + "entries=" + entries + '}';
+    return "LinearProbingHashTable{" + "entries=" + allEntries() + '}';
+  }
+
+  public Collection<Entry<K, V>> allEntries() {
+    return entries.stream().filter(Objects::nonNull).collect(Collectors.toList());
+  }
+
+  /**
+   * Finds the slot (index into the flat table) where the specified key is to be inserted. If the
+   * key exists, its current slot will be returned.
+   *
+   * @param key the key to find slot for
+   * @return the table index where the key resides, or an empty slot for insertion
+   */
+  private int findSlot(K key) {
+    return -1;
+  }
+
+  /**
+   * Doubles the capacity of the table to accommodate for more keys. Existing keys will be
+   * re-inserted.
+   */
+  private void expand() {
+    ArrayList<Entry<K, V>> oldTable = entries;
+    this.entries = createTable(oldTable.size() * 2);
+
+    for (Entry<K, V> entry : entries) {
+      if (entry != null) {
+        // Re-insert into the table.
+        put(entry.key, entry.value);
+      }
+    }
+  }
+
+  /** Halves the capacity of the table to save memory. Existing keys will be re-inserted. */
+  private void shrink() {
+    ArrayList<Entry<K, V>> oldTable = entries;
+    this.entries = createTable(oldTable.size() / 2);
+
+    for (Entry<K, V> entry : entries) {
+      if (entry != null) {
+        // Re-insert into the table.
+        put(entry.key, entry.value);
+      }
+    }
   }
 
   /**
