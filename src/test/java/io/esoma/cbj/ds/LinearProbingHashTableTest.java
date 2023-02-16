@@ -177,9 +177,32 @@ public class LinearProbingHashTableTest {
   }
 
   @Test
+  public void testResizing() {
+    for (int i = 0; i < 656; ++i) {
+      lpTable.put(i, (char) (i + 1));
+    }
+    assertEquals(656, lpTable.size());
+
+    for (int i = 0; i < 656; ++i) {
+      if (i <= 555 || i >= 560) {
+        assertTrue(lpTable.delete(i));
+      }
+    }
+
+    assertEquals(4, lpTable.size());
+    assertEquals((char) 557, lpTable.get(556).charValue());
+    assertEquals((char) 558, lpTable.get(557).charValue());
+    assertEquals((char) 559, lpTable.get(558).charValue());
+    assertEquals((char) 560, lpTable.get(559).charValue());
+  }
+
+  @Test
   public void testLargeCase() {
     for (int i = -65536; i < 65539; ++i) {
       assertTrue(lpTable.put(i, '*'));
+      if (i % 10000 == 0) {
+        Logger.info(i);
+      }
     }
     assertEquals(131075, lpTable.size());
 

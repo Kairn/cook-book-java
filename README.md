@@ -42,6 +42,7 @@ time to time.
 3. LRU cache
 4. 2-3 tree
 5. Red-black tree
+6. Linear probing hash table
 
 ### Cryptography :key:
 
