@@ -77,6 +77,23 @@ A queue-like collection where the maximum/minimum element can be extracted effic
 3. Combinatorial search. Put the start configuration into the queue; repeatedly removes the highest priority item from
    the queue and add the next possible configurations back into the queue until the goal configuration is reached.
 
+### Adjacency-lists
+
+In the context of representing an undirected graph, where a linked list is maintained for each vertex containing other
+vertices connected to it. Lists can be replaced by sets to get a faster check connection operation when the graph is
+dense (many edges) with more overhead in add connection operation.
+
+#### Implementation
+
+1. Use one linked list or array to store lists of connected vertices. Vertices are identified by their indexes from 0 to
+   V - 1, assuming V is the number of vertices in the graph.
+2. Use a symbol table to store the mapping between vertices and their adjacency lists. Vertices can be represented by
+   any type instead of only integer indexes.
+
+#### When to use
+
+1. Find (transitive) connectivity/path between two vertices in an undirected graph using DFS/BFS.
+
 ## Algorithms
 
 ### ?
