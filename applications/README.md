@@ -83,6 +83,9 @@ In the context of representing an undirected graph, where a linked list is maint
 vertices connected to it. Lists can be replaced by sets to get a faster check connection operation when the graph is
 dense (many edges) with more overhead in add connection operation.
 
+In the context of representing a directed graph, the same structure can be used. But instead of representing a
+connection, each list element is merely considered reachable from the source vertex.
+
 #### Implementation
 
 1. Use one linked list or array to store lists of connected vertices. Vertices are identified by their indexes from 0 to
@@ -93,6 +96,10 @@ dense (many edges) with more overhead in add connection operation.
 #### When to use
 
 1. Find (transitive) connectivity/path between two vertices in an undirected graph using DFS/BFS.
+2. Find unreachable objects in a mark-and-sweep garbage collection cycle.
+3. Solve a precedence-constrained scheduling problem and detect a directed cycle.
+4. Find connected components in an undirected graph or strongly connected components in a digraph (Kosaraju’s
+   algorithm).
 
 ## Algorithms
 
