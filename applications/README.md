@@ -1,9 +1,9 @@
 # Applications :hotsprings:
 
-In this section, we will enumerate data structures and algorithms and how they can be utilized to solve particular
-problems efficiently.
+In this section, we will look at abstract data structures (ADTs) and related algorithms and see how they can be utilized
+to solve particular problems efficiently.
 
-## Data Structures
+## Abstract Data Structures
 
 ### Symbol table
 
@@ -54,7 +54,7 @@ A collection of disjoint sets.
 
 1. Solve a dynamic connectivity problem with union find.
 2. Finding the minimum spamming tree by iteratively connecting the next cheapest edge until all nodes belong to a single
-   root.
+   root, also known as Kruskal's algorithm.
 
 ### Priority queue
 
@@ -101,10 +101,34 @@ connection, each list element is merely considered reachable from the source ver
 4. Find connected components in an undirected graph or strongly connected components in a digraph (Kosaraju’s
    algorithm).
 
-## Algorithms
-
 ### ?
 
 #### Implementation
 
 #### When to use
+
+## Algorithms
+
+### Prim's algorithm
+
+Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph.
+
+#### Implementation
+
+1. Pick an arbitrary vertex to start with, create a vertex-indexed array, with each element being the current "known"
+   best edge that connects that vertex to the existing MST.
+2. Create a priority queue of edges that supports finding the edge with minimum weight.
+3. Each edge contains source and destination vertices as well as the weight.
+4. At the starting vertex, add all edges in the adjacency-list to the priority queue and update the array with these
+   initial best edges. Then, poll the "best" edge to add that edge and associated vertex to the MST.
+5. After adding a vertex, enumerate all edges in that vertex's adjacency-list and check if the weight is less than the "
+   known" best edge stored. If yes, update the array and push that edge to the priority queue and continue.
+6. The algorithm stops after collecting all vertices.
+
+### Dijkstra's algorithm
+
+#### Implementation
+
+### ?
+
+#### Implementation
