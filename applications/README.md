@@ -127,7 +127,24 @@ Prim's algorithm is a greedy algorithm that finds a minimum spanning tree for a 
 
 ### Dijkstra's algorithm
 
+Dijkstra’s algorithm solves the single-source shortest-paths problem in edge-weighted digraphs with non-negative
+weights.
+
 #### Implementation
+
+1. Initialize a vertex-indexed array of all vertices. Each vertex element tracks the current shortest distance from
+   source to it and whether it has been marked.
+2. Each vertex element is initialized to having a distance of infinity, and unmarked.
+3. Initializes a priority queue of these vertices supporting finding the vertex with minimum distance from source.
+4. Set the source vertex's distance to itself to 0, and push it to the queue.
+5. While the queue is not empty, as each vertex is polled from queue, it must be marked first. Then, its edges are
+   iterated, and the distances of the edge targets can be updated if traveling from the given edge (after going from
+   source to the current vertex first) is faster than the currently recorded shortest distance. When updating, if the
+   target vertex is not yet in the queue, it will be added, and if in the queue, its priority is also updated to reflect
+   the better distance.
+6. In the above operation, if a target vertex is already marked, it doesn't need examination. As weights are
+   non-negative, every polled vertex is guaranteed to have the shortest path from source.
+7. When the queue is empty, the algorithm ends and all vertex elements have stored their shortest distances from source.
 
 ### ?
 
