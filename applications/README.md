@@ -146,6 +146,23 @@ weights.
    non-negative, every polled vertex is guaranteed to have the shortest path from source.
 7. When the queue is empty, the algorithm ends and all vertex elements have stored their shortest distances from source.
 
+### Topological sort
+
+Topological ordering of a directed graph is a linear ordering of its vertices such that for every directed edge u-v from
+vertex u to vertex v, u comes before v in the ordering. Precisely, a topological sort is a graph traversal in which each
+node v is visited only after all its dependencies are visited, with each directed edge pointing to a node's dependent. A
+digraph may contain many topological orderings, but there must be no directed cycles.
+
+#### Implementation
+
+1. A simple DFS solution can be used by visiting each node in arbitrary order with adjacency-lists.
+2. Initialize an empty queue for storing ordered nodes, and each node has a temporary mark and a permanent mark.
+3. Loop through (visit) each node, if a node is permanently marked, return, otherwise, mark it temporarily and visit its
+   neighbors by checking each directed edge originating from it.
+4. If a visited node is already marked temporarily, the process fails because a cycle is detected.
+5. After visiting the children, each parent node is marked permanently and added to the HEAD of the queue.
+6. When the DFS ends, the queue contains sorted nodes from the least dependent to the most dependent (head to tail).
+
 ### ?
 
 #### Implementation
