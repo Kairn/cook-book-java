@@ -163,6 +163,24 @@ digraph may contain many topological orderings, but there must be no directed cy
 5. After visiting the children, each parent node is marked permanently and added to the HEAD of the queue.
 6. When the DFS ends, the queue contains sorted nodes from the least dependent to the most dependent (head to tail).
 
+### Critical path method
+
+The critical path method finds the minimum time required to complete a parallelized schedule with precedence
+constraints. It is equivalent to finding the longest path in an edge-weighted acyclic digraph, where edge weights
+represent time requirement and the direction represents precedence.
+
+#### Implementation
+
+1. Create an edge-weighted DAG with a virtual source vertex and a virtual sink vertex.
+2. For each job, create two vertices representing the start and end, and an edge connecting from the start to the end
+   with the time as weight.
+3. For each constraint, add a zero-weight edge from the end of the dependency to the start of the dependent.
+4. There is one zero-weight edge from source to each start node, and from each end node to sink.
+5. The longest path from source to sink is the critical path.
+6. To find the longest path, convert the digraph into a shortest path tree by first negating all of the weights.
+7. Using the strategy similar to Dijkstra's with edge relaxation, but processing the vertices in topological order, the
+   shortest path can be found in linear time.
+
 ### ?
 
 #### Implementation
