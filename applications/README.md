@@ -101,6 +101,19 @@ connection, each list element is merely considered reachable from the source ver
 4. Find connected components in an undirected graph or strongly connected components in a digraph (Kosaraju’s
    algorithm).
 
+### Character-indexed array (alphabet)
+
+#### Implementation
+
+Use an character array to store index-char mapping, and use a reverse integer array (size of 65556 for supporting all
+2-byte unicode chars) to store char-index mapping. With a limited alphabet, the size of the reverse array can be reduced
+to the largest character.
+
+#### When to use
+
+1. In algorithms where there is the need to efficiently access information by characters. Such as a character counting
+   algorithm.
+
 ### ?
 
 #### Implementation
@@ -180,6 +193,23 @@ represent time requirement and the direction represents precedence.
 6. To find the longest path, convert the digraph into a shortest path tree by first negating all of the weights.
 7. Using the strategy similar to Dijkstra's with edge relaxation, but processing the vertices in topological order, the
    shortest path can be found in linear time.
+
+### Radix string sort
+
+A sorting algorithm for strings based on key-indexed counting. Instead of doing full string comparisons, it processes
+one character at a time for all strings (at the same position), and it uses counting sort to rank strings in each pass.
+Most suitable for random strings with a small Alphabet (character set).
+
+#### Implementation
+
+1. Starting at the first character (most significant character), in each character pass, create a count array for each
+   possible character and count the occurrence of them in strings at that position.
+2. After counting, re-slot strings into "buckets" based on the counts. At the end of the pass, the original string array
+   will be divided into numerous sub-arrays each containing the same character at the examined position.
+3. Recursively do the same work on each sub-array by proceeding to the next character until the sub-array only has one
+   element. The sort naturally terminates when all recursive calls have returned.
+4. If all strings have equal length, an alternative is to start with the least significant character, and rank all
+   strings one character at a time while maintaining stability. Strings will be sorted once all characters are ranked.
 
 ### ?
 
