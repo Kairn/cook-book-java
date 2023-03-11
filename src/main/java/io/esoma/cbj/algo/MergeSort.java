@@ -51,7 +51,7 @@ public class MergeSort {
 
     // Merge the left and right sub-arrays given they were already sorted.
     int[] sorted = new int[len];
-    // All indices for tracking sub-arrays
+    // All indices for tracking sub-arrays.
     int si = 0;
     int li = 0;
     int le = left.length - 1;

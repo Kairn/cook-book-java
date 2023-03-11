@@ -58,6 +58,8 @@ public class ThreeWayStringSortTest {
           "23m2", "473S", "4mge", "A8Rf", "bT0v", "CCuK", "CoVj", "DCvV", "HUjp", "IMlZ", "jEWy",
           "lwoi", "nxB5", "Obaj", "QrbQ", "tkPN", "Uyer", "yCi5", "YEbZ", "ZJpq"
         };
+    // Fix case sensitivity.
+    Arrays.sort(sorted);
     String[] result = ThreeWayStringSort.sort(unsorted);
     Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
@@ -215,6 +217,8 @@ public class ThreeWayStringSortTest {
           "ZJqJnCEr",
           "ztRTDPTlGOoaXmwtNiMwpT"
         };
+    // Fix case sensitivity.
+    Arrays.sort(sorted);
     String[] result = ThreeWayStringSort.sort(unsorted);
     Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);
@@ -366,6 +370,8 @@ public class ThreeWayStringSortTest {
           "veniam,",
           "voluptate"
         };
+    // Fix case sensitivity.
+    Arrays.sort(sorted);
     String[] result = ThreeWayStringSort.sort(unsorted);
     Logger.debug(Arrays.toString(unsorted));
     assertArrayEquals(sorted, result);

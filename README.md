@@ -15,6 +15,7 @@ time to time.
 3. Heap sort
 4. Quick sort
 5. Tim sort with galloping
+6. Three-way string sort
 
 ### Searching :mag_right:
 
