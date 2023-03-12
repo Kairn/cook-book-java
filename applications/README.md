@@ -103,6 +103,8 @@ connection, each list element is merely considered reachable from the source ver
 
 ### Character-indexed array (alphabet)
 
+A data structure for associating characters to numerical indices and from indices back to characters.
+
 #### Implementation
 
 Use an character array to store index-char mapping, and use a reverse integer array (size of 65556 for supporting all
@@ -113,6 +115,26 @@ to the largest character.
 
 1. In algorithms where there is the need to efficiently access information by characters. Such as a character counting
    algorithm.
+
+### Trie
+
+A tree-like data structure build from characters of strings.
+
+#### Implementation
+
+1. A full search trie can be represented by nodes and links to next nodes. Each node corresponds to a character (or a
+   prefix if path is taken into consideration) and points to R nodes in an array, where R is the cardinality of the
+   alphabet. Each node also contains a stored value that can indicate the presence of the full string and/or the value
+   associated to that string key.
+2. When the alphabet and/or the length of input strings are huge, an alternative is to use a ternary search trie where
+   each node contains 3 links, pointing to nodes whose character is less than, equal to, and greater than the current
+   character of the node. To keep the trie balanced, the structure can be built from the knowledge of the alphabet,
+   instead of from the input as in a BST.
+
+#### When to use
+
+1. Search strings by prefixes and wildcards.
+2. General efficient string matching for small alphabets and short keys.
 
 ### ?
 
