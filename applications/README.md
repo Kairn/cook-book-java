@@ -233,6 +233,18 @@ Most suitable for random strings with a small Alphabet (character set).
 4. If all strings have equal length, an alternative is to start with the least significant character, and rank all
    strings one character at a time while maintaining stability. Strings will be sorted once all characters are ranked.
 
-### ?
+### Boyer-Moore substring search
+
+A sublinear substring search algorithm based on mismatched character heuristic.
 
 #### Implementation
+
+1. Preprocess the substring pattern by building a "right" array which stores the rightmost index of each alphabet
+   character in the pattern.
+2. First, line up the beginning of the patten to the text, and start comparing from right to left.
+3. If the character matches, continue the verification to the left until a mismatch or the entire pattern is matched.
+4. For a mismatch, slide the pattern to the right so that the mismatch character in text lines up with the same
+   character in the rightmost position in the pattern. The sliding distance can be found with the "right" array.
+5. If the mismatched character is not in the pattern, shift by the length of the entire pattern.
+6. This heuristic works because shifting any less on a mismatch will cause the mismatched character to again line up
+   with a different character in the pattern.
