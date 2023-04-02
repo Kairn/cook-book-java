@@ -135,6 +135,7 @@ A tree-like data structure build from characters of strings.
 
 1. Search strings by prefixes and wildcards.
 2. General efficient string matching for small alphabets and short keys.
+3. To represent Huffman encoding.
 
 ### ?
 
@@ -248,3 +249,18 @@ A sublinear substring search algorithm based on mismatched character heuristic.
 5. If the mismatched character is not in the pattern, shift by the length of the entire pattern.
 6. This heuristic works because shifting any less on a mismatch will cause the mismatched character to again line up
    with a different character in the pattern.
+
+### Huffman compression/code
+
+A form of lossless compression achieved by constructing an optimal prefix-free code for characters in the data stream.
+More frequently used characters are encoded with fewer bits, and the frequency distribution affects the compression
+ratio.
+
+#### Implementation
+
+1. Start with a forest of single-leaf trees (one for each character), and do a read pass on the input and store the
+   frequencies of each leaf.
+2. Repeatedly combine two of the least used leaves into a single node (by appending a parent with the sum of the
+   counts). The trie is complete once there is one tree left.
+3. To compress, read the trie and create a mapping of character to code, and then write the code.
+4. To expand, walk down the trie given the bit stream and write down each character once reached and go back to top.
