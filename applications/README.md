@@ -137,6 +137,40 @@ A tree-like data structure build from characters of strings.
 2. General efficient string matching for small alphabets and short keys.
 3. To represent Huffman encoding.
 
+### B-tree
+
+An ordered symbol table in the form of a balanced multi-way search tree. The tree contains external pages at the leaf
+positions for actual data, and internal nodes (with duplicated keys) used to guide the search.
+
+#### Implementation
+
+Represented similar to a 2-3 tree with varying order. On each node, however, instead of having links that point to keys
+that are "between" two keys, each key associates with a link directly, and the associated node may contain keys less
+than or equal to the parent key. Search only ends on an external node. If an insertion causes a leaf to overflow, the
+node is split with a duplicated key propagated up as an internal key, recursively. Deletions can be done by marking the
+external key as "deleted" without altering the internal nodes.
+
+#### When to use
+
+1. Building search index for large external database.
+
+### Suffix array
+
+A string array for a single string that contains all substrings starting at each character all the way to the last
+character.
+
+#### Implementation
+
+Iterate through characters of the given string and add to the array the substring from this character to the end.
+
+#### When to use
+
+1. Because all substrings of the string is a prefix of a member in the suffix array, after sorting the suffix array, a
+   single pass can find the longest repeated substring in a given string by tracking the longest prefix match in
+   adjacent members.
+2. Building an inverted search index for text. A key is binary searched in the sorted suffix array to determine if the
+   text is a hit for the search.
+
 ### ?
 
 #### Implementation
