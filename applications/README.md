@@ -298,3 +298,16 @@ ratio.
    counts). The trie is complete once there is one tree left.
 3. To compress, read the trie and create a mapping of character to code, and then write the code.
 4. To expand, walk down the trie given the bit stream and write down each character once reached and go back to top.
+
+### Ford-Fulkerson algorithm
+
+An algorithm for finding the max flow of a flow network by iteratively looking for augmenting paths. An augmenting path
+is a path from source to sink in which there is no full forward edges and no empty backward edge.
+
+#### Implementation
+
+1. To find augmenting paths, convert the flow network into a residual network.
+2. A residual network is represented as a digraph with the same vertices as the original network, but for any edge that
+   is not-empty, there will be a backward edge with weight equal to the used capacity.
+3. If any edge in the original digraph is full, the residual network will only contain a backward edge.
+4. Using a shortest path algorithm on the residual network will find an augmenting path if exists.
