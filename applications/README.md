@@ -171,12 +171,6 @@ Iterate through characters of the given string and add to the array the substrin
 2. Building an inverted search index for text. A key is binary searched in the sorted suffix array to determine if the
    text is a hit for the search.
 
-### ?
-
-#### Implementation
-
-#### When to use
-
 ## Algorithms
 
 ### Prim's algorithm
