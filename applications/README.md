@@ -225,7 +225,8 @@ digraph may contain many topological orderings, but there must be no directed cy
    neighbors by checking each directed edge originating from it.
 4. If a visited node is already marked temporarily, the process fails because a cycle is detected.
 5. After visiting the children, each parent node is marked permanently and added to the HEAD of the queue.
-6. When the DFS ends, the queue contains sorted nodes from the least dependent to the most dependent (head to tail).
+6. When the DFS ends, the queue contains sorted nodes in topological order (head to tail) where dependencies come before
+   dependents.
 
 ### Critical path method
 
