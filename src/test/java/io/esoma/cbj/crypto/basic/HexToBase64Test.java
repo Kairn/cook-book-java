@@ -1,9 +1,9 @@
 package io.esoma.cbj.crypto.basic;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.tinylog.Logger;
-
-import static org.junit.Assert.assertEquals;
 
 public class HexToBase64Test {
 
