@@ -3,7 +3,6 @@ package io.esoma.cbj.ds;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * A key-value store implemented with an open-addressing hash table where collided entries are
@@ -195,8 +194,8 @@ public class LinearProbingHashTable<K, V> {
     return "LinearProbingHashTable{" + "entries=" + allEntries() + '}';
   }
 
-  public Collection<Entry<K, V>> allEntries() {
-    return entries.stream().filter(Objects::nonNull).collect(Collectors.toList());
+  private Collection<Entry<K, V>> allEntries() {
+    return entries.stream().filter(Objects::nonNull).toList();
   }
 
   /**

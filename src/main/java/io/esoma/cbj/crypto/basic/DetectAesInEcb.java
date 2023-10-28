@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Class for studying how to detect a cipher encrypted by AES in ECB mode. AES uses block size of 16
@@ -37,7 +36,7 @@ public class DetectAesInEcb {
     try (BufferedReader br =
         new BufferedReader(
             new InputStreamReader(ResourceLoader.getResourceAsReader(inputFileName)))) {
-      for (String text : br.lines().collect(Collectors.toList())) {
+      for (String text : br.lines().toList()) {
         double score = calcScore(HexUtil.stringToRawBytes(text));
         if (score > bestScore) {
           bestScore = score;

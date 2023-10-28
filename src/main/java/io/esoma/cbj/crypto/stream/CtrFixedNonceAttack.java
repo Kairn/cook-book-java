@@ -7,7 +7,6 @@ import io.esoma.cbj.util.ResourceLoader;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Class for implementing an exploit against fixed-nonce CTR encryption scheme. By evaluating a
@@ -70,7 +69,7 @@ public class CtrFixedNonceAttack {
     byte[][] cipherArrays;
     try (BufferedReader reader =
         new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsReader(TEST_FILE)))) {
-      List<String> encodedInputs = reader.lines().collect(Collectors.toList());
+      List<String> encodedInputs = reader.lines().toList();
       cipherArrays = new byte[encodedInputs.size()][];
       for (int i = 0; i < encodedInputs.size(); ++i) {
         byte[] decodedBytes = Base64Util.decodeToByteArray(encodedInputs.get(i));

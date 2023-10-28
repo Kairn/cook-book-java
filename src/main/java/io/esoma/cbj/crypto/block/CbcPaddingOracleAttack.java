@@ -12,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Class that studies the famous CBC padding oracle attack. It attempts to decrypt the message by
@@ -34,7 +33,7 @@ public class CbcPaddingOracleAttack {
     try (BufferedReader br =
         new BufferedReader(
             new InputStreamReader(ResourceLoader.getResourceAsReader(inputFileName)))) {
-      List<String> lines = br.lines().collect(Collectors.toList());
+      List<String> lines = br.lines().toList();
       int index = RandUtil.randInt(0, lines.size() - 1);
       plainBytes = Base64Util.decodeToByteArray(lines.get(index));
     } catch (Exception e) {
