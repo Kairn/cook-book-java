@@ -1,16 +1,13 @@
 package io.esoma.cbj.algo;
 
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(JUnitParamsRunner.class)
-public class DijkstraTest {
+class DijkstraTest {
 
   // Test input.
   private static final int[][] TEST_GRAPH =
@@ -40,18 +37,18 @@ public class DijkstraTest {
   // Test result.
   private static int[] result = null;
 
-  @BeforeClass
-  public static void setUpBeforeClass() {
+  @BeforeAll
+   static void setUpBeforeClass() {
     // Run test.
     result = Dijkstra.djFind(TEST_GRAPH);
   }
 
-  @Test
-  @Parameters({
+  @ParameterizedTest
+  @CsvSource({
     "0, 0", "1, 5", "2, 7", "4, -1", "5, 6", "6, 8", "7, 4", "9, 5", "10, 7", "12, 10", "13, 8",
     "16, 6", "17, 6", "8, 9", "19, 7"
   })
-  public void testDjFind(int index, int dist) {
+   void testDjFind(int index, int dist) {
     Logger.debug(result[index]);
     assertEquals(dist, result[index]);
   }

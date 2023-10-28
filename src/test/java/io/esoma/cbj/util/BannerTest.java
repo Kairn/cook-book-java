@@ -1,27 +1,27 @@
 package io.esoma.cbj.util;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
 
-public class BannerTest {
+class BannerTest {
 
   private static final String TEST_TITLE = "Test";
 
   @Test
-  public void testGetTitleBanner() {
+  void testGetTitleBanner() {
     String testStr = "===== " + TEST_TITLE + " =====";
     assertEquals(testStr, Banner.getTitleBanner(TEST_TITLE, 5));
   }
 
   @Test
-  public void testGetSubBanner() {
+  void testGetSubBanner() {
     String testStr = "--- " + TEST_TITLE + " ---";
     assertEquals(testStr, Banner.getSubBanner(TEST_TITLE, 3));
   }
 
   @Test
-  public void testGetSpecialBanner() {
+  void testGetSpecialBanner() {
     String testStr = "******* " + TEST_TITLE + " *******";
     assertEquals(testStr, Banner.getSpecialBanner(TEST_TITLE, 7));
   }

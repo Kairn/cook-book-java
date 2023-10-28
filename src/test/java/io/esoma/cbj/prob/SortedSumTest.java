@@ -1,14 +1,14 @@
 package io.esoma.cbj.prob;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
-
-public class SortedSumTest {
+class SortedSumTest {
 
   @Test
-  public void testNaiveInsertion1() {
+  void testNaiveInsertion1() {
     int[] array = new int[] {4, 3, 2, 1};
     int expected = 65;
     int actual = SortedSum.naiveInsertion(array);
@@ -17,7 +17,7 @@ public class SortedSumTest {
   }
 
   @Test
-  public void testNaiveInsertion2() {
+  void testNaiveInsertion2() {
     int[] array = new int[] {9, 5, 8};
     int expected = 80;
     int actual = SortedSum.naiveInsertion(array);
@@ -26,7 +26,7 @@ public class SortedSumTest {
   }
 
   @Test
-  public void testNaiveInsertion3() {
+  void testNaiveInsertion3() {
     int[] array = new int[] {9, 5, 8, 7, 4, 12};
     int expected = 455;
     int actual = SortedSum.naiveInsertion(array);
@@ -35,7 +35,7 @@ public class SortedSumTest {
   }
 
   @Test
-  public void testOptimalSum1() {
+  void testOptimalSum1() {
     int[] array = new int[] {9, 5, 8, 7, 4, 12, 16};
     int expected = 751;
     int actual = SortedSum.optimalSum(array);
@@ -44,7 +44,7 @@ public class SortedSumTest {
   }
 
   @Test
-  public void testOptimalSum2() {
+  void testOptimalSum2() {
     int[] array =
         new int[] {
           776, 638, 509, 238, 326, 268, 66, 297, 156, 608, 485, 796, 711, 995, 543, 408, 481, 362,
@@ -60,7 +60,7 @@ public class SortedSumTest {
   }
 
   @Test
-  public void testOptimalSum3() {
+  void testOptimalSum3() {
     int[] array =
         new int[] {
           928026116, 954133790, 934849055, 975379763, 910330669, 924467517, 973461265, 977369382,
@@ -73,7 +73,7 @@ public class SortedSumTest {
   }
 
   @Test
-  public void testOptimalSum4() {
+  void testOptimalSum4() {
     int[] array = new int[] {1, 5, 7, 9, 11, 15};
     int expected = 448;
     int actual = SortedSum.optimalSum(array);
@@ -82,7 +82,7 @@ public class SortedSumTest {
   }
 
   @Test
-  public void testOptimalSum5() {
+  void testOptimalSum5() {
     int[] array =
         new int[] {
           44402, 41408, 24656, 44273, 56289, 47562, 77838, 71603, 11183, 77484, 54177, 18229
@@ -94,7 +94,7 @@ public class SortedSumTest {
   }
 
   @Test
-  public void testOptimalSum6() {
+  void testOptimalSum6() {
     int[] array =
         new int[] {
           392, 296, 156, 443, 409, 9, 9, 330, 199, 140, 102, 246, 341, 496, 78, 46, 193, 13, 111,

@@ -1,22 +1,21 @@
 package io.esoma.cbj.util;
 
-import org.junit.Test;
-import org.tinylog.Logger;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import org.junit.jupiter.api.Test;
+import org.tinylog.Logger;
 
-import static org.junit.Assert.*;
-
-public class ResourceLoaderTest {
+class ResourceLoaderTest {
 
   private static final String EXAMPLE_FILE = "example.txt";
   private static final String INNER_EXAMPLE_FILE = "example/example-2.txt";
   private static final String NON_EXISTENT_FILE = "nosuchfile.txt";
 
   @Test
-  public void testGetExampleFile() {
+  void testGetExampleFile() {
     InputStream inputStream = ResourceLoader.getResourceAsReader(EXAMPLE_FILE);
     assertNotNull(inputStream);
 
@@ -31,7 +30,7 @@ public class ResourceLoaderTest {
   }
 
   @Test
-  public void testGetExampleFileFromInnerDirectory() {
+  void testGetExampleFileFromInnerDirectory() {
     InputStream inputStream = ResourceLoader.getResourceAsReader(INNER_EXAMPLE_FILE);
     assertNotNull(inputStream);
 
@@ -44,10 +43,10 @@ public class ResourceLoaderTest {
     }
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testGetNonExistentFile() {
-    ResourceLoader.getResourceAsReader(NON_EXISTENT_FILE);
-    // Exception should have been thrown
-    fail();
+  @Test
+  void testGetNonExistentFile() {
+    assertThrowsExactly(
+        IllegalArgumentException.class,
+        () -> ResourceLoader.getResourceAsReader(NON_EXISTENT_FILE));
   }
 }

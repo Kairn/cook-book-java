@@ -1,24 +1,24 @@
 package io.esoma.cbj.ds;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
-
-public class FibonacciHeapTest {
+class FibonacciHeapTest {
 
   // Hold the heap used for testing.
   private static FibonacciHeap<Integer> tfh;
 
-  @BeforeClass
-  public static void setUpBeforeClass() {
+  @BeforeEach
+  void setUp() {
     tfh = new FibonacciHeap<>();
   }
 
-  @AfterClass
-  public static void tearDownAfterClass() {
+  @AfterEach
+  void tearDown() {
     tfh = null;
   }
 
@@ -26,7 +26,7 @@ public class FibonacciHeapTest {
   /*
    * Aggregate test of 20 batches of operations.
    */
-  public void testFh() {
+  void testFh() {
     int expected = 0;
     int actual = tfh.getSize();
     Logger.debug(tfh);

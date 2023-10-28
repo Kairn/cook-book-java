@@ -1,24 +1,21 @@
 package io.esoma.cbj.prob;
 
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
+class DeciBinaryTest {
 
-@RunWith(JUnitParamsRunner.class)
-public class DeciBinaryTest {
-
-  @BeforeClass
-  public static void setUpBeforeClass() {
+  @BeforeAll
+  static void setUpBeforeClass() {
     DeciBinary.initCache();
   }
 
-  @Test
-  @Parameters({
+  @ParameterizedTest
+  @CsvSource({
     "0, 0",
     "1, 1",
     "10, 2",
@@ -28,14 +25,14 @@ public class DeciBinaryTest {
     "108, 12",
     "7422485, 661"
   })
-  public void testDeciValue(int dbNum, int value) {
+  void testDeciValue(int dbNum, int value) {
     int actual = DeciBinary.deciValue(dbNum);
     Logger.debug(actual);
     assertEquals(value, actual);
   }
 
-  @Test
-  @Parameters({
+  @ParameterizedTest
+  @CsvSource({
     "7, 4",
     "10, 100",
     "3, 2",
@@ -48,7 +45,7 @@ public class DeciBinaryTest {
     "20, 110",
     "1, 0"
   })
-  public void testDeciFromDb(long db, long value) {
+  void testDeciFromDb(long db, long value) {
     long actual = DeciBinary.deciFromDb(db);
     Logger.debug(actual);
     assertEquals(value, actual);

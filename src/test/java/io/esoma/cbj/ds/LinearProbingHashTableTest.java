@@ -1,28 +1,28 @@
 package io.esoma.cbj.ds;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.*;
-
-public class LinearProbingHashTableTest {
+class LinearProbingHashTableTest {
 
   private static LinearProbingHashTable<Integer, Character> lpTable;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     lpTable = new LinearProbingHashTable<>();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     lpTable = null;
   }
 
   @Test
-  public void testPutSimple() {
+  void testPutSimple() {
     assertTrue(lpTable.put(0, '0'));
     assertTrue(lpTable.put(1, '1'));
     assertTrue(lpTable.put(2, '2'));
@@ -66,7 +66,7 @@ public class LinearProbingHashTableTest {
   }
 
   @Test
-  public void testPuts() {
+  void testPuts() {
     for (int i = 0; i < 200; ++i) {
       assertTrue(lpTable.put(i, 'a'));
     }
@@ -88,7 +88,7 @@ public class LinearProbingHashTableTest {
   }
 
   @Test
-  public void testDeleteSimple() {
+  void testDeleteSimple() {
     assertFalse(lpTable.delete(0));
     assertTrue(lpTable.put(5000, 'a'));
     assertTrue(lpTable.put(6000, 'b'));
@@ -139,7 +139,7 @@ public class LinearProbingHashTableTest {
   }
 
   @Test
-  public void testDeletes() {
+  void testDeletes() {
     for (int i = 0; i < 512; ++i) {
       assertTrue(lpTable.put(i, (char) i));
     }
@@ -177,7 +177,7 @@ public class LinearProbingHashTableTest {
   }
 
   @Test
-  public void testResizing() {
+  void testResizing() {
     for (int i = 0; i < 656; ++i) {
       lpTable.put(i, (char) (i + 1));
     }
@@ -197,7 +197,7 @@ public class LinearProbingHashTableTest {
   }
 
   @Test
-  public void testLargeCase() {
+  void testLargeCase() {
     for (int i = -65536; i < 65539; ++i) {
       assertTrue(lpTable.put(i, '*'));
       if (i % 10000 == 0) {

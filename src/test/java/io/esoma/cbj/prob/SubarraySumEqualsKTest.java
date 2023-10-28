@@ -1,14 +1,14 @@
 package io.esoma.cbj.prob;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
-
-public class SubarraySumEqualsKTest {
+class SubarraySumEqualsKTest {
 
   @Test
-  public void testCount1() {
+  void testCount1() {
     int[] array = new int[] {1909};
     long expected = 1L;
     long actual = SubarraySumEqualsK.count(array, 1909);
@@ -17,7 +17,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount2() {
+  void testCount2() {
     int[] array = new int[] {1, 2, 3};
     long expected = 2L;
     long actual = SubarraySumEqualsK.count(array, 3);
@@ -26,7 +26,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount3() {
+  void testCount3() {
     int[] array = new int[] {1, 1, 1, 1};
     long expected = 3L;
     long actual = SubarraySumEqualsK.count(array, 2);
@@ -35,7 +35,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount4() {
+  void testCount4() {
     int[] array =
         new int[] {2, 2, 3, 1, 4, 2, 3, 2, 5, 5, 5, 5, 2, 3, 1, 3, 4, 3, 5, 5, 2, 1, 2, 4, 2};
     long expected = 11L;
@@ -45,7 +45,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount5() {
+  void testCount5() {
     int[] array =
         new int[] {-2, -90, -142, 180, -185, 175, -11, 26, -105, 148, 36, -31, 54, -171, 157};
     long expected = 1L;
@@ -55,7 +55,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount6() {
+  void testCount6() {
     int[] array =
         new int[] {
           1, 2, 0, -2, -2, 2, -1, 2, 0, -2, 0, 2, -2, 0, 2, -2, -1, 0, 1, 1, 1, -2, -2, -1, -1, 2,
@@ -74,7 +74,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount7() {
+  void testCount7() {
     int[] array = new int[] {-989, -997, -994, -997, -998, -990, -995, -996, -994, -993};
     long expected = 1L;
     long actual = SubarraySumEqualsK.count(array, -1995);
@@ -83,7 +83,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount8() {
+  void testCount8() {
     int[] array =
         new int[] {
           8, -4, -4, -5, -2, -5, -3, 9, 0, -6, -6, 2, 9, -2, -3, 2, -3, -2, -6, -3, 2, 7, -4, -5,
@@ -96,7 +96,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount9() {
+  void testCount9() {
     int[] array =
         new int[] {
           3, 1, 3, 1, 3, 5, 3, 3, 2, 5, 5, 2, 1, 4, 5, 2, 5, 1, 4, 2, 1, 4, 3, 4, 3, 1, 1, 3, 4, 3,
@@ -110,7 +110,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount10() {
+  void testCount10() {
     int[] array =
         new int[] {
           98, 74, 71, 82, 51, 6, 49, 79, 16, 11, 20, 68, 58, 30, 75, 63, 31, 37, 52, 6, 9, 70, 49,
@@ -126,7 +126,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount11() {
+  void testCount11() {
     int[] array =
         new int[] {
           1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
@@ -138,7 +138,7 @@ public class SubarraySumEqualsKTest {
   }
 
   @Test
-  public void testCount12() {
+  void testCount12() {
     int[] array =
         new int[] {
           -36, -33, 81, -49, -86, 25, -38, -55, -49, -85, -51, 35, 68, 23, -74, 9, -83, -40, 2, -48,

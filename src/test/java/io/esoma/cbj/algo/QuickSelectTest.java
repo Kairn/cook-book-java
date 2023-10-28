@@ -1,14 +1,14 @@
 package io.esoma.cbj.algo;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
-
-public class QuickSelectTest {
+class QuickSelectTest {
 
   @Test
-  public void testFindKth1() {
+  void testFindKth1() {
     int[] array = new int[] {5, 9, 8, 10, 5, 8, 1, 8, 7, 1};
     int k = 6;
     int expected = 8;
@@ -18,7 +18,7 @@ public class QuickSelectTest {
   }
 
   @Test
-  public void testFindKth2() {
+  void testFindKth2() {
     int[] array = new int[] {20, 4, 8, 1, 10, 4, 16, 14, 18, 7, 15, 1, 5, 7, 9, 12, 4, 11, 15, 12};
     int k = 1;
     int expected = 1;
@@ -28,7 +28,7 @@ public class QuickSelectTest {
   }
 
   @Test
-  public void testFindKth3() {
+  void testFindKth3() {
     int[] array =
         new int[] {
           19, 15, 13, 8, 4, 16, 17, 10, 16, 7, 14, 10, 3, 7, 19, 18, 18, 18, 4, 6, 5, 10, 20, 7, 12,
@@ -42,7 +42,7 @@ public class QuickSelectTest {
   }
 
   @Test
-  public void testFindKth4() {
+  void testFindKth4() {
     int[] array =
         new int[] {
           -487, 1657, 1806, -262, 1381, 1294, -124, -974, 285, 1165, 1631, 320, 931, -70, 440
@@ -55,7 +55,7 @@ public class QuickSelectTest {
   }
 
   @Test
-  public void testFindKth5() {
+  void testFindKth5() {
     int[] array =
         new int[] {
           -1181, -339, 1725, 851, 257, 1896, 1517, 1527, 256, 1017, -205, 55, 1782, 607, 879
@@ -68,7 +68,7 @@ public class QuickSelectTest {
   }
 
   @Test
-  public void testFindKth6() {
+  void testFindKth6() {
     int[] array =
         new int[] {
           -33823, -15963, -38334, -46335, -96163, -76210, -57797, -75574, -85646, -33865, -57678,
@@ -83,7 +83,7 @@ public class QuickSelectTest {
   }
 
   @Test
-  public void testFindKth7() {
+  void testFindKth7() {
     int[] array =
         new int[] {
           0, 2, 1, 1, 1, 0, 0, 1, 0, 1, 2, 1, 0, 1, 2, 0, 1, 0, 1, 1, 2, 0, 1, 2, 2, 1, 1, 1, 0, 0,
@@ -97,7 +97,7 @@ public class QuickSelectTest {
   }
 
   @Test
-  public void testFindKth8() {
+  void testFindKth8() {
     int[] array =
         new int[] {
           -6, 6, -7, -8, 0, -4, 5, 8, -2, -1, -3, 7, 10, 7, -3, 7, 2, 7, 2, 2, 7, 5, -5, 10, -8, 4,
@@ -115,7 +115,7 @@ public class QuickSelectTest {
   }
 
   @Test
-  public void testFindKth9() {
+  void testFindKth9() {
     int[] array = new int[] {0};
     int k = 1;
     int expected = 0;
@@ -125,7 +125,7 @@ public class QuickSelectTest {
   }
 
   @Test
-  public void testFindKth10() {
+  void testFindKth10() {
     int[] array = new int[] {-90, 5003};
     int k = 2;
     int expected = 5003;
@@ -135,7 +135,7 @@ public class QuickSelectTest {
   }
 
   @Test
-  public void testFindKth11() {
+  void testFindKth11() {
     int[] array =
         new int[] {
           5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,

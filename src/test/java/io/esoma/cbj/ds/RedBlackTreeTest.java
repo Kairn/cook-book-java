@@ -1,31 +1,30 @@
 package io.esoma.cbj.ds;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.tinylog.Logger;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.tinylog.Logger;
 
-import static org.junit.Assert.*;
-
-public class RedBlackTreeTest {
+class RedBlackTreeTest {
 
   // Hold the tree used for testing.
   private static RedBlackTree<Integer> rbTree;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     rbTree = new RedBlackTree<>();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     rbTree = null;
   }
 
   @Test
-  public void testInsertSimple() {
+  void testInsertSimple() {
     assertTrue(rbTree.insert(2));
     assertFalse(rbTree.insert(2));
     assertTrue(rbTree.insert(1));
@@ -61,7 +60,7 @@ public class RedBlackTreeTest {
   }
 
   @Test
-  public void testInserts() {
+  void testInserts() {
     for (int i = -900; i < 900; ++i) {
       assertTrue(rbTree.insert(i));
     }
@@ -89,7 +88,7 @@ public class RedBlackTreeTest {
   }
 
   @Test
-  public void testDeleteSimple() {
+  void testDeleteSimple() {
     for (int i = -8; i < 8; ++i) {
       assertTrue(rbTree.insert(i));
     }
@@ -115,7 +114,7 @@ public class RedBlackTreeTest {
   }
 
   @Test
-  public void testOrderedDeleteSimple() {
+  void testOrderedDeleteSimple() {
     for (int i = 0; i < 32; ++i) {
       assertTrue(rbTree.insert(i));
     }
@@ -128,7 +127,7 @@ public class RedBlackTreeTest {
   }
 
   @Test
-  public void testDeletes() {
+  void testDeletes() {
     for (int i = 0; i < 1000; ++i) {
       assertTrue(rbTree.insert(i));
     }
@@ -174,7 +173,7 @@ public class RedBlackTreeTest {
   }
 
   @Test
-  public void testLargeCase() {
+  void testLargeCase() {
     for (int i = -1; i < 65536; ++i) {
       assertTrue(rbTree.insert(i));
       assertFalse(rbTree.insert(i));

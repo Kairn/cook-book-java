@@ -1,21 +1,20 @@
 package io.esoma.cbj.crypto.rng;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.tinylog.Logger;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.tinylog.Logger;
 
 /*
  * The outputs are different from the original C output for some reason.
  */
-@Ignore
-public class Mt32Test {
+@Disabled
+class Mt32Test {
 
   @Test
-  public void testRngInt() {
+  void testRngInt() {
     final int[] seed = new int[] {0x123, 0x234, 0x345, 0x456};
     Mt32 mt32 = new Mt32(seed);
     int i1 = mt32.next();

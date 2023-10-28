@@ -1,29 +1,29 @@
 package io.esoma.cbj.ds;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.*;
-
-public class BTree23Test {
+class BTree23Test {
 
   // Hold the tree used for testing.
   private static BTree23 bt23;
 
-  @Before
-  public void setUp() {
+  @BeforeEach
+  void setUp() {
     bt23 = new BTree23();
   }
 
-  @After
-  public void tearDown() {
+  @AfterEach
+  void tearDown() {
     bt23 = null;
   }
 
   @Test
-  public void testRandomInserts() {
+  void testRandomInserts() {
     bt23.insert(344);
     bt23.insert(24);
     bt23.insert(-98);
@@ -62,7 +62,7 @@ public class BTree23Test {
   }
 
   @Test
-  public void testUniformInserts() {
+  void testUniformInserts() {
     int min = -600;
     int len = 65537;
     int[] array = new int[len];
@@ -81,7 +81,7 @@ public class BTree23Test {
   }
 
   @Test
-  public void testDeleteSimple() {
+  void testDeleteSimple() {
     for (int i = 1; i <= 16; ++i) {
       assertTrue(bt23.insert(i));
     }
@@ -113,7 +113,7 @@ public class BTree23Test {
   }
 
   @Test
-  public void testDeletes() {
+  void testDeletes() {
     for (int i = 0; i < 200; ++i) {
       assertTrue(bt23.insert(i));
     }
@@ -173,7 +173,7 @@ public class BTree23Test {
   }
 
   @Test
-  public void testDeleteWaves() {
+  void testDeleteWaves() {
     for (int i = 0; i < 500; ++i) {
       bt23.insert(i);
     }

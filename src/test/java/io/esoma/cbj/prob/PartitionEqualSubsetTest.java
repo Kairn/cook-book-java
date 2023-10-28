@@ -1,15 +1,15 @@
 package io.esoma.cbj.prob;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-public class PartitionEqualSubsetTest {
+class PartitionEqualSubsetTest {
 
   @Test
-  public void testJudge1() {
+  void testJudge1() {
     int[] array = new int[] {1, 5, 11, 5};
     boolean actual = PartitionEqualSubset.judge(array);
     Logger.debug(actual);
@@ -17,7 +17,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge2() {
+  void testJudge2() {
     int[] array =
         new int[] {
           50, 58, 95, 29, 95, 92, 41, 23, 91, 13, 99, 46, 76, 53, 88, 43, 11, 2, 77, 10, 17, 36, 23,
@@ -32,7 +32,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge3() {
+  void testJudge3() {
     int[] array = new int[] {8, 8};
     boolean actual = PartitionEqualSubset.judge(array);
     Logger.debug(actual);
@@ -40,7 +40,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge4() {
+  void testJudge4() {
     int[] array =
         new int[] {
           4, 4, 4, 4, 5, 4, 5, 5, 5, 5, 4, 5, 4, 5, 4, 5, 4, 5, 5, 4, 4, 5, 4, 5, 5, 5, 5, 4, 4, 5,
@@ -52,7 +52,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge5() {
+  void testJudge5() {
     int[] array =
         new int[] {
           35, 35, 34, 35, 34, 35, 33, 33, 33, 33, 33, 33, 33, 35, 35, 35, 35, 33, 33, 35, 34, 34,
@@ -70,7 +70,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge6() {
+  void testJudge6() {
     int[] array = new int[] {1, 2, 3, 5};
     boolean actual = PartitionEqualSubset.judge(array);
     Logger.debug(actual);
@@ -78,7 +78,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge7() {
+  void testJudge7() {
     int[] array =
         new int[] {
           89, 80, 83, 82, 80, 87, 87, 88, 88, 83, 87, 89, 87, 86, 87, 90, 84, 88, 83, 88, 90, 86,
@@ -97,7 +97,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge8() {
+  void testJudge8() {
     int[] array =
         new int[] {91, 46, 58, 41, 40, 92, 43, 26, 70, 26, 41, 75, 39, 50, 93, 81, 27, 65, 5, 34};
     boolean actual = PartitionEqualSubset.judge(array);
@@ -106,7 +106,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge9() {
+  void testJudge9() {
     int[] array =
         new int[] {
           1, 2, 3, 1, 1, 3, 3, 1, 1, 1, 1, 3, 1, 1, 3, 3, 3, 2, 2, 1, 3, 1, 3, 2, 2, 3, 1, 1, 1, 1,
@@ -118,7 +118,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge10() {
+  void testJudge10() {
     int[] array = new int[] {7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7};
     boolean actual = PartitionEqualSubset.judge(array);
     Logger.debug(actual);
@@ -126,7 +126,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge11() {
+  void testJudge11() {
     int[] array = new int[] {70};
     boolean actual = PartitionEqualSubset.judge(array);
     Logger.debug(actual);
@@ -134,7 +134,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge12() {
+  void testJudge12() {
     int[] array = new int[] {1, 2};
     boolean actual = PartitionEqualSubset.judge(array);
     Logger.debug(actual);
@@ -142,7 +142,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge13() {
+  void testJudge13() {
     int[] array =
         new int[] {
           12, 5, 3, 11, 3, 4, 4, 1, 3, 9, 4, 9, 7, 9, 13, 1, 8, 6, 15, 12, 11, 4, 3, 8, 1, 5, 8, 1,
@@ -154,7 +154,7 @@ public class PartitionEqualSubsetTest {
   }
 
   @Test
-  public void testJudge14() {
+  void testJudge14() {
     int[] array =
         new int[] {
           90, 81, 72, 70, 9, 19, 3, 63, 24, 3, 6, 29, 23, 68, 42, 1, 19, 3, 20, 17, 18, 28, 70, 88,

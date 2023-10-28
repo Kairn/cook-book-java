@@ -1,16 +1,16 @@
 package io.esoma.cbj.algo;
 
-import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
-
-public class PermutationGenTest {
+class PermutationGenTest {
 
   @Test
-  public void testPermGenOne() {
+   void testPermGenOne() {
     PermutationGen gen = new PermutationGen(1);
 
     assertArrayEquals(new int[] {1}, gen.getNext());
@@ -18,7 +18,7 @@ public class PermutationGenTest {
   }
 
   @Test
-  public void testPermGenSmall() {
+   void testPermGenSmall() {
     PermutationGen gen = new PermutationGen(3);
 
     assertArrayEquals(new int[] {1, 2, 3}, gen.getNext());
@@ -30,7 +30,7 @@ public class PermutationGenTest {
   }
 
   @Test
-  public void testPermGenLarger() {
+   void testPermGenLarger() {
     PermutationGen gen = new PermutationGen(6);
 
     assertArrayEquals(new int[] {1, 2, 3, 4, 5, 6}, gen.getNext());
@@ -56,7 +56,7 @@ public class PermutationGenTest {
   }
 
   @Test
-  public void testPermGenOutOfBounds() {
+   void testPermGenOutOfBounds() {
     PermutationGen gen = new PermutationGen(2);
 
     assertTrue(gen.hasNext());

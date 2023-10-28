@@ -1,14 +1,14 @@
 package io.esoma.cbj.crypto.basic;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
-
-public class RepeatingXorTest {
+class RepeatingXorTest {
 
   @Test
-  public void testEncrypt() {
+  void testEncrypt() {
     final String message =
         "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal";
     final String key = "ICE";
@@ -20,7 +20,7 @@ public class RepeatingXorTest {
   }
 
   @Test
-  public void testDecrypt() {
+  void testDecrypt() {
     final String message =
         "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal";
     final String key = "ICE";

@@ -1,14 +1,14 @@
 package io.esoma.cbj.crypto.basic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-public class HexToBase64Test {
+class HexToBase64Test {
 
   @Test
-  public void testPerform() {
+  void testPerform() {
     final String hexInput =
         "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d";
     final String expected = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t";

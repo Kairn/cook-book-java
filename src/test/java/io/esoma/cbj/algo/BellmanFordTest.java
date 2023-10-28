@@ -1,15 +1,13 @@
 package io.esoma.cbj.algo;
 
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
-
-@RunWith(JUnitParamsRunner.class)
-public class BellmanFordTest {
+class BellmanFordTest {
 
   // Test inputs for the larger test case(s).
   private static final int LARGE_TEST_N = 15;
@@ -121,7 +119,7 @@ public class BellmanFordTest {
       };
 
   @Test
-  public void testBfFindSample1() {
+  void testBfFindSample1() {
     int n = 4;
     int[][] edges =
         new int[][] {
@@ -142,7 +140,7 @@ public class BellmanFordTest {
   }
 
   @Test
-  public void testBfFindSample2() {
+  void testBfFindSample2() {
     int n = 3;
     int[][] edges =
         new int[][] {
@@ -160,8 +158,8 @@ public class BellmanFordTest {
     assertEquals(expected, actual);
   }
 
-  @Test
-  @Parameters({
+  @ParameterizedTest
+  @CsvSource({
     "0, 1, 5, 4",
     "1, 7, 2, 3",
     "3, 4, 3, 7",
@@ -175,7 +173,7 @@ public class BellmanFordTest {
     "2, 6, 1, -1",
     "2, 6, 2, 6"
   })
-  public void testBfFindLarge(int src, int dest, int k, int expected) {
+  void testBfFindLarge(int src, int dest, int k, int expected) {
     int actual = BellmanFord.bfFind(LARGE_TEST_N, LARGE_TEST_EDGES, src, dest, k);
     Logger.debug(actual);
     assertEquals(expected, actual);

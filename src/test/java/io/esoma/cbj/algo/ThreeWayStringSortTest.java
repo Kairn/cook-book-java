@@ -1,15 +1,16 @@
 package io.esoma.cbj.algo;
 
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.util.Arrays;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-public class ThreeWayStringSortTest {
+class ThreeWayStringSortTest {
 
   @Test
-  public void testSort1() {
+  void testSort1() {
     String[] unsorted = new String[] {"a", "b", "c", "d", "e", "f", "g", "h"};
     String[] sorted = new String[] {"a", "b", "c", "d", "e", "f", "g", "h"};
     String[] result = ThreeWayStringSort.sort(unsorted);
@@ -18,7 +19,7 @@ public class ThreeWayStringSortTest {
   }
 
   @Test
-  public void testSort2() {
+  void testSort2() {
     String[] unsorted =
         new String[] {
           "aaaaaaae",
@@ -47,7 +48,7 @@ public class ThreeWayStringSortTest {
   }
 
   @Test
-  public void testSort3() {
+  void testSort3() {
     String[] unsorted =
         new String[] {
           "473S", "4mge", "Uyer", "yCi5", "lwoi", "jEWy", "nxB5", "ZJpq", "tkPN", "A8Rf", "QrbQ",
@@ -66,7 +67,7 @@ public class ThreeWayStringSortTest {
   }
 
   @Test
-  public void testSort4() {
+  void testSort4() {
     String[] unsorted =
         new String[] {
           "BknTzIPa",
@@ -225,7 +226,7 @@ public class ThreeWayStringSortTest {
   }
 
   @Test
-  public void testSort5() {
+  void testSort5() {
     String[] unsorted =
         new String[] {
           "Lorem",
@@ -378,7 +379,7 @@ public class ThreeWayStringSortTest {
   }
 
   @Test
-  public void testSort6() {
+  void testSort6() {
     String[] unsorted =
         new String[] {
           "CAAAGACT",
@@ -591,7 +592,7 @@ public class ThreeWayStringSortTest {
   }
 
   @Test
-  public void testSort7() {
+  void testSort7() {
     String[] unsorted =
         new String[] {
           "4919",

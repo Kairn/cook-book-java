@@ -1,14 +1,14 @@
 package io.esoma.cbj.prob;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
-
-public class MaximalSquareTest {
+class MaximalSquareTest {
 
   @Test
-  public void testFindArea1() {
+  void testFindArea1() {
     int[][] matrix =
         new int[][] {
           new int[] {1, 0, 1, 0, 0},
@@ -23,7 +23,7 @@ public class MaximalSquareTest {
   }
 
   @Test
-  public void testFindArea2() {
+  void testFindArea2() {
     int[][] matrix =
         new int[][] {
           new int[] {0, 1},
@@ -36,7 +36,7 @@ public class MaximalSquareTest {
   }
 
   @Test
-  public void testFindArea3() {
+  void testFindArea3() {
     int[][] matrix =
         new int[][] {
           new int[] {1, 0, 0, 0, 0},
@@ -67,7 +67,7 @@ public class MaximalSquareTest {
   }
 
   @Test
-  public void testFindArea4() {
+  void testFindArea4() {
     int[][] matrix = new int[][] {new int[] {0}};
     int expected = 0;
     int actual = MaximalSquare.findMaxArea(matrix);
@@ -76,7 +76,7 @@ public class MaximalSquareTest {
   }
 
   @Test
-  public void testFindArea5() {
+  void testFindArea5() {
     int[][] matrix =
         new int[][] {
           new int[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -98,7 +98,7 @@ public class MaximalSquareTest {
   }
 
   @Test
-  public void testFindArea6() {
+  void testFindArea6() {
     int[][] matrix =
         new int[][] {
           new int[] {
@@ -253,7 +253,7 @@ public class MaximalSquareTest {
   }
 
   @Test
-  public void testFindArea7() {
+  void testFindArea7() {
     int[][] matrix =
         new int[][] {
           new int[] {1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -325,7 +325,7 @@ public class MaximalSquareTest {
   }
 
   @Test
-  public void testFindArea8() {
+  void testFindArea8() {
     int[][] matrix =
         new int[][] {
           new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -353,7 +353,7 @@ public class MaximalSquareTest {
   }
 
   @Test
-  public void testFindArea9() {
+  void testFindArea9() {
     int[][] matrix =
         new int[][] {
           new int[] {0, 0, 0, 0},
@@ -368,7 +368,7 @@ public class MaximalSquareTest {
   }
 
   @Test
-  public void testFindArea10() {
+  void testFindArea10() {
     int[][] matrix = new int[][] {new int[] {1}};
     int expected = 1;
     int actual = MaximalSquare.findMaxArea(matrix);

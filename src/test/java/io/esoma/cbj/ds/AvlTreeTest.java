@@ -1,24 +1,22 @@
 package io.esoma.cbj.ds;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.*;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
-
-public class AvlTreeTest {
+class AvlTreeTest {
 
   // Hold the tree used for testing.
   private static AvlTree<Integer> avt;
 
-  @BeforeClass
-  public static void setUpBeforeClass() {
+  @BeforeEach
+  void setUp() {
     avt = new AvlTree<>();
   }
 
-  @AfterClass
-  public static void tearDownAfterClass() {
+  @AfterEach
+  void tearDown() {
     avt = null;
   }
 
@@ -26,7 +24,7 @@ public class AvlTreeTest {
   /*
    * Aggregate test of 20 batches of operations.
    */
-  public void testAvl() {
+  void testAvl() {
     int expected = 0;
     int actual = avt.getSize();
     Logger.debug(avt);
@@ -164,8 +162,7 @@ public class AvlTreeTest {
   }
 
   @Test
-  public void testToSortedList() {
-    AvlTree<Integer> tree = new AvlTree<>();
+  void testToSortedList() {
     int[] array =
         new int[] {
           56, 94, 80, 88, 23, 5, 0, 68, 49, 60, 15, 66, 12, 35, -3, 69, 89, 12, 46, 11, 24, -5, 86,
@@ -175,7 +172,7 @@ public class AvlTreeTest {
           32, 5, 96, 36, 73, 31, 63, 42, 68
         };
     for (int a : array) {
-      tree.insert(a);
+      avt.insert(a);
     }
 
     // Duplicates are not included.
@@ -186,7 +183,7 @@ public class AvlTreeTest {
           76, 79, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 92, 94, 96, 100, 101, 102, 103, 104
         };
     int i = 0;
-    for (int e : tree.toSortedList()) {
+    for (int e : avt.toSortedList()) {
       assertEquals(expected[i], e);
       ++i;
     }

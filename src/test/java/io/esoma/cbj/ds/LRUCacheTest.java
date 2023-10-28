@@ -1,17 +1,16 @@
 package io.esoma.cbj.ds;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
-
-public class LRUCacheTest {
+class LRUCacheTest {
 
   @Test
-  public void testLRUCacheSmallCap() {
+  void testLRUCacheSmallCap() {
     final Object o1 = 12;
     final Object o2 = "sakura";
     final Object o3 = "8899";
@@ -70,7 +69,7 @@ public class LRUCacheTest {
   }
 
   @Test
-  public void testLRUCacheLargeCap() {
+  void testLRUCacheLargeCap() {
     final String prefix = "lru_str_";
 
     LRUCache<String> lruCache = new LRUCache<>(2022);

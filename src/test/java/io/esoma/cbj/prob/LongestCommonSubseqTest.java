@@ -1,20 +1,17 @@
 package io.esoma.cbj.prob;
 
-import junitparams.JUnitParamsRunner;
-import junitparams.Parameters;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.tinylog.Logger;
 
-import static org.junit.Assert.assertEquals;
+class LongestCommonSubseqTest {
 
-@RunWith(JUnitParamsRunner.class)
-public class LongestCommonSubseqTest {
-
-  @Test
-  @Parameters({
+  @ParameterizedTest
+  @CsvSource({
     "bcv, accid, 1",
-    "rtg5, , 0",
+    "rtg5, '', 0",
     "AGCDFGDA, GFAADGDA, 5",
     "398397970, 3399917206, 6",
     "12341, 341213, 3",
@@ -22,7 +19,7 @@ public class LongestCommonSubseqTest {
     "vrqwpvtbfekzcdokahhyoilammjswyqbafctbvrjvdphaqahuqjsjxxslkywdlqudvchnbtiphksqiqwfimigumwmigbepmbeat, wtoexkciduowkjhtdhymjwyfonqbavfybrjvagtmqchuqxrslrwkxwfdunlquvennfiieihqzkosgqinrkqqimgmwdicyacmeahk, 55",
     "tiroqeitqitr, zxmnjsdmfncvjg, 0"
   })
-  public void testFindLcs(String s1, String s2, int lcs) {
+  void testFindLcs(String s1, String s2, int lcs) {
     int actual = LongestCommonSubseq.findLcs(s1, s2);
     Logger.debug(actual);
     assertEquals(lcs, actual);
