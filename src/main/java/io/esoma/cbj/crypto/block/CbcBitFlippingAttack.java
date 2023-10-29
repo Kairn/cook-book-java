@@ -14,38 +14,38 @@ import org.tinylog.Logger;
  */
 public class CbcBitFlippingAttack {
 
-  private static final int BLOCK_SIZE = 16;
+    private static final int BLOCK_SIZE = 16;
 
-  public static void main(String[] args) {
-    final String prefix = "comment1=cooking%20MCs;userdata=";
-    final String suffix = ";comment2=%20like%20a%20pound%20of%20bacon";
-    CryptoScheme scheme = new SandwichCbcCryptoScheme(prefix.getBytes(), suffix.getBytes());
+    public static void main(String[] args) {
+        final String prefix = "comment1=cooking%20MCs;userdata=";
+        final String suffix = ";comment2=%20like%20a%20pound%20of%20bacon";
+        CryptoScheme scheme = new SandwichCbcCryptoScheme(prefix.getBytes(), suffix.getBytes());
 
-    byte[] hackedUserData = scheme.decrypt(attackAndFalsify(scheme));
-    if (isAdmin(new String(hackedUserData))) {
-      Logger.info("Successfully got admin access");
-    } else {
-      Logger.warn("Hacking failed");
-    }
-  }
-
-  public static byte[] attackAndFalsify(CryptoScheme scheme) {
-    if (scheme == null) {
-      throw new IllegalArgumentException("Scheme is required");
+        byte[] hackedUserData = scheme.decrypt(attackAndFalsify(scheme));
+        if (isAdmin(new String(hackedUserData))) {
+            Logger.info("Successfully got admin access");
+        } else {
+            Logger.warn("Hacking failed");
+        }
     }
 
-    String attackString = "abcdefghijklmnop" + "?????:admin<true";
-    int attackPos1 = 5 + BLOCK_SIZE * 2;
-    int attackPos2 = 11 + BLOCK_SIZE * 2;
+    public static byte[] attackAndFalsify(CryptoScheme scheme) {
+        if (scheme == null) {
+            throw new IllegalArgumentException("Scheme is required");
+        }
 
-    byte[] origCipher = scheme.encrypt(attackString.getBytes());
-    origCipher[attackPos1] ^= 1;
-    origCipher[attackPos2] ^= 1;
+        String attackString = "abcdefghijklmnop" + "?????:admin<true";
+        int attackPos1 = 5 + BLOCK_SIZE * 2;
+        int attackPos2 = 11 + BLOCK_SIZE * 2;
 
-    return origCipher;
-  }
+        byte[] origCipher = scheme.encrypt(attackString.getBytes());
+        origCipher[attackPos1] ^= 1;
+        origCipher[attackPos2] ^= 1;
 
-  private static boolean isAdmin(String userData) {
-    return StringUtils.isNoneBlank(userData) || userData.contains(";admin=true;");
-  }
+        return origCipher;
+    }
+
+    private static boolean isAdmin(String userData) {
+        return StringUtils.isNoneBlank(userData) || userData.contains(";admin=true;");
+    }
 }

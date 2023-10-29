@@ -10,51 +10,51 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class RepeatingXor {
 
-  private RepeatingXor() {}
+    private RepeatingXor() {}
 
-  /**
-   * Encrypts a message with the given key using repeating XOR cipher scheme. Each byte of the
-   * message will be XORed with a byte from the key by cycling iteration. The resulting cipher can
-   * optionally be hex encoded. This can be used to decipher a non hex encoded cipher string as
-   * well.
-   *
-   * @param message the message to encrypt/decrypt
-   * @param key the encryption key
-   * @param hex if the result should be hex encoded
-   * @return the encrypted string
-   */
-  public static String create(String message, String key, boolean hex) {
-    if (StringUtils.isAnyBlank(message, key)) {
-      throw new IllegalArgumentException("Invalid message or key");
+    /**
+     * Encrypts a message with the given key using repeating XOR cipher scheme. Each byte of the
+     * message will be XORed with a byte from the key by cycling iteration. The resulting cipher can
+     * optionally be hex encoded. This can be used to decipher a non hex encoded cipher string as
+     * well.
+     *
+     * @param message the message to encrypt/decrypt
+     * @param key the encryption key
+     * @param hex if the result should be hex encoded
+     * @return the encrypted string
+     */
+    public static String create(String message, String key, boolean hex) {
+        if (StringUtils.isAnyBlank(message, key)) {
+            throw new IllegalArgumentException("Invalid message or key");
+        }
+
+        byte[] rawBytes = new byte[message.length()];
+        for (int i = 0; i < message.length(); ++i) {
+            rawBytes[i] = (byte) message.charAt(i);
+        }
+
+        return operate(rawBytes, key, hex);
     }
 
-    byte[] rawBytes = new byte[message.length()];
-    for (int i = 0; i < message.length(); ++i) {
-      rawBytes[i] = (byte) message.charAt(i);
+    public static String create(byte[] bytes, String key, boolean hex) {
+        return operate(bytes, key, hex);
     }
 
-    return operate(rawBytes, key, hex);
-  }
+    private static String operate(byte[] bytes, String key, boolean hex) {
+        int[] cipherChars = new int[bytes.length];
+        for (int i = 0; i < bytes.length; ++i) {
+            cipherChars[i] = bytes[i] ^ key.charAt(i % key.length());
+        }
 
-  public static String create(byte[] bytes, String key, boolean hex) {
-    return operate(bytes, key, hex);
-  }
+        StringBuilder builder = new StringBuilder();
+        for (int c : cipherChars) {
+            if (hex) {
+                builder.append(HexUtil.byteToHexString(c));
+            } else {
+                builder.append((char) c);
+            }
+        }
 
-  private static String operate(byte[] bytes, String key, boolean hex) {
-    int[] cipherChars = new int[bytes.length];
-    for (int i = 0; i < bytes.length; ++i) {
-      cipherChars[i] = bytes[i] ^ key.charAt(i % key.length());
+        return builder.toString();
     }
-
-    StringBuilder builder = new StringBuilder();
-    for (int c : cipherChars) {
-      if (hex) {
-        builder.append(HexUtil.byteToHexString(c));
-      } else {
-        builder.append((char) c);
-      }
-    }
-
-    return builder.toString();
-  }
 }

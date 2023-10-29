@@ -9,5 +9,5 @@ package io.esoma.cbj.crypto.slave;
 @FunctionalInterface
 public interface EncryptionScheme {
 
-  byte[] encrypt(byte[] buffer);
+    byte[] encrypt(byte[] buffer);
 }

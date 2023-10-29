@@ -12,16 +12,17 @@ import org.tinylog.Logger;
 
 class CtrFixedNonceAttackTest {
 
-  @Test
-  void testDecryptWithGuess() {
-    final String encodedPlainText = "aWxvdmVsYXVyZW5zY290dA==";
-    final byte[] plainTextBytes = Base64Util.decodeToByteArray(encodedPlainText);
-    final byte[] encrypted =
-        AesInCtr.encrypt(plainTextBytes, TEST_KEY, TEST_NONCE, new LeIntegerCounterGenerator());
-    byte[] guessedKeyStream = CtrFixedNonceAttack.loadAndGuess();
-    String actual =
-        new String(FixedXor.combine(encrypted, guessedKeyStream), StandardCharsets.US_ASCII);
-    Logger.debug(actual);
-    assertEquals(encodedPlainText, Base64Util.encodeFromBytes(actual.toLowerCase().getBytes()));
-  }
+    @Test
+    void testDecryptWithGuess() {
+        final String encodedPlainText = "aWxvdmVsYXVyZW5zY290dA==";
+        final byte[] plainTextBytes = Base64Util.decodeToByteArray(encodedPlainText);
+        final byte[] encrypted =
+                AesInCtr.encrypt(plainTextBytes, TEST_KEY, TEST_NONCE, new LeIntegerCounterGenerator());
+        byte[] guessedKeyStream = CtrFixedNonceAttack.loadAndGuess();
+        String actual = new String(FixedXor.combine(encrypted, guessedKeyStream), StandardCharsets.US_ASCII);
+        Logger.debug(actual);
+        assertEquals(
+                encodedPlainText,
+                Base64Util.encodeFromBytes(actual.toLowerCase().getBytes()));
+    }
 }

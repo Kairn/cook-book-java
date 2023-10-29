@@ -5,13 +5,12 @@ import io.esoma.cbj.crypto.core.BinUtil;
 import io.esoma.cbj.crypto.core.RandUtil;
 import io.esoma.cbj.crypto.slave.VulnerableCbcCryptoScheme;
 import io.esoma.cbj.util.ResourceLoader;
-import org.apache.commons.lang3.ArrayUtils;
-import org.tinylog.Logger;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.lang3.ArrayUtils;
+import org.tinylog.Logger;
 
 /**
  * Class that studies the famous CBC padding oracle attack. It attempts to decrypt the message by
@@ -24,72 +23,68 @@ import java.util.List;
  */
 public class CbcPaddingOracleAttack {
 
-  private static final int BLOCK_SIZE = 16;
-  private static final byte[] DEFAULT_IV = new byte[BLOCK_SIZE];
+    private static final int BLOCK_SIZE = 16;
+    private static final byte[] DEFAULT_IV = new byte[BLOCK_SIZE];
 
-  public static void main(String[] args) {
-    final String inputFileName = "CbcPaddingOracleAttackText.txt";
-    byte[] plainBytes;
-    try (BufferedReader br =
-        new BufferedReader(
-            new InputStreamReader(ResourceLoader.getResourceAsReader(inputFileName)))) {
-      List<String> lines = br.lines().toList();
-      int index = RandUtil.randInt(0, lines.size() - 1);
-      plainBytes = Base64Util.decodeToByteArray(lines.get(index));
-    } catch (Exception e) {
-      throw new IllegalStateException("Unable to read the file");
-    }
-
-    final VulnerableCbcCryptoScheme scheme = new VulnerableCbcCryptoScheme();
-    byte[] cipherBytes = scheme.encrypt(plainBytes, DEFAULT_IV);
-    byte[] decryptedBytes = attackAndReveal(scheme, cipherBytes);
-
-    Logger.info("Uncovered original text:\n" + new String(decryptedBytes));
-  }
-
-  public static byte[] attackAndReveal(VulnerableCbcCryptoScheme scheme, byte[] cipherBytes) {
-    if (scheme == null
-        || cipherBytes == null
-        || cipherBytes.length == 0
-        || cipherBytes.length % BLOCK_SIZE != 0) {
-      throw new IllegalArgumentException("Invalid input information");
-    }
-
-    byte[] extendedCipher = ArrayUtils.addAll(DEFAULT_IV, cipherBytes);
-    byte[] original = new byte[extendedCipher.length];
-    byte[] decrypted = new byte[extendedCipher.length];
-
-    for (int a = extendedCipher.length - 1; a >= BLOCK_SIZE; --a) {
-      byte[] attackBytes = Arrays.copyOf(extendedCipher, extendedCipher.length);
-      byte expectedPad = (byte) (BLOCK_SIZE - (a % BLOCK_SIZE));
-      int prev = a - BLOCK_SIZE;
-      int last = (BLOCK_SIZE - 1 - (prev % BLOCK_SIZE)) + prev;
-
-      // Ensure previous cipher bytes all produce the same padding byte.
-      for (int j = prev + 1; j <= last; ++j) {
-        attackBytes[j] = (byte) (expectedPad ^ decrypted[j + BLOCK_SIZE]);
-      }
-
-      byte hitByte;
-      byte next = attackBytes[prev];
-      for (; ; ) {
-        next = BinUtil.next(next);
-        attackBytes[prev] = next;
-        byte[] iv = Arrays.copyOfRange(attackBytes, 0, BLOCK_SIZE);
-        int end = last + BLOCK_SIZE + 1;
-        byte[] tampered = Arrays.copyOfRange(attackBytes, BLOCK_SIZE, end);
-        if (scheme.hasValidPadding(tampered, iv)) {
-          // Valid padding is found.
-          hitByte = next;
-          break;
+    public static void main(String[] args) {
+        final String inputFileName = "CbcPaddingOracleAttackText.txt";
+        byte[] plainBytes;
+        try (BufferedReader br =
+                new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsReader(inputFileName)))) {
+            List<String> lines = br.lines().toList();
+            int index = RandUtil.randInt(0, lines.size() - 1);
+            plainBytes = Base64Util.decodeToByteArray(lines.get(index));
+        } catch (Exception e) {
+            throw new IllegalStateException("Unable to read the file");
         }
-      }
 
-      decrypted[a] = (byte) (hitByte ^ expectedPad);
-      original[a] = (byte) (decrypted[a] ^ extendedCipher[prev]);
+        final VulnerableCbcCryptoScheme scheme = new VulnerableCbcCryptoScheme();
+        byte[] cipherBytes = scheme.encrypt(plainBytes, DEFAULT_IV);
+        byte[] decryptedBytes = attackAndReveal(scheme, cipherBytes);
+
+        Logger.info("Uncovered original text:\n" + new String(decryptedBytes));
     }
 
-    original = Arrays.copyOfRange(original, BLOCK_SIZE, original.length);
-    return PKCS7Padding.unpad(original, false);
-  }
+    public static byte[] attackAndReveal(VulnerableCbcCryptoScheme scheme, byte[] cipherBytes) {
+        if (scheme == null || cipherBytes == null || cipherBytes.length == 0 || cipherBytes.length % BLOCK_SIZE != 0) {
+            throw new IllegalArgumentException("Invalid input information");
+        }
+
+        byte[] extendedCipher = ArrayUtils.addAll(DEFAULT_IV, cipherBytes);
+        byte[] original = new byte[extendedCipher.length];
+        byte[] decrypted = new byte[extendedCipher.length];
+
+        for (int a = extendedCipher.length - 1; a >= BLOCK_SIZE; --a) {
+            byte[] attackBytes = Arrays.copyOf(extendedCipher, extendedCipher.length);
+            byte expectedPad = (byte) (BLOCK_SIZE - (a % BLOCK_SIZE));
+            int prev = a - BLOCK_SIZE;
+            int last = (BLOCK_SIZE - 1 - (prev % BLOCK_SIZE)) + prev;
+
+            // Ensure previous cipher bytes all produce the same padding byte.
+            for (int j = prev + 1; j <= last; ++j) {
+                attackBytes[j] = (byte) (expectedPad ^ decrypted[j + BLOCK_SIZE]);
+            }
+
+            byte hitByte;
+            byte next = attackBytes[prev];
+            for (; ; ) {
+                next = BinUtil.next(next);
+                attackBytes[prev] = next;
+                byte[] iv = Arrays.copyOfRange(attackBytes, 0, BLOCK_SIZE);
+                int end = last + BLOCK_SIZE + 1;
+                byte[] tampered = Arrays.copyOfRange(attackBytes, BLOCK_SIZE, end);
+                if (scheme.hasValidPadding(tampered, iv)) {
+                    // Valid padding is found.
+                    hitByte = next;
+                    break;
+                }
+            }
+
+            decrypted[a] = (byte) (hitByte ^ expectedPad);
+            original[a] = (byte) (decrypted[a] ^ extendedCipher[prev]);
+        }
+
+        original = Arrays.copyOfRange(original, BLOCK_SIZE, original.length);
+        return PKCS7Padding.unpad(original, false);
+    }
 }

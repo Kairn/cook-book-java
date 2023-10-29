@@ -7,15 +7,15 @@ package io.esoma.cbj.crypto.core;
  */
 public class CharUtil {
 
-  private CharUtil() {}
+    private CharUtil() {}
 
-  public static boolean isCommonEnglishChar(char c) {
-    if (Character.isUpperCase(c)) {
-      return true;
-    } else if (Character.isLowerCase(c)) {
-      return true;
-    } else if (Character.isWhitespace(c)) {
-      return true;
-    } else return c == ',' || c == '.';
-  }
+    public static boolean isCommonEnglishChar(char c) {
+        if (Character.isUpperCase(c)) {
+            return true;
+        } else if (Character.isLowerCase(c)) {
+            return true;
+        } else if (Character.isWhitespace(c)) {
+            return true;
+        } else return c == ',' || c == '.';
+    }
 }

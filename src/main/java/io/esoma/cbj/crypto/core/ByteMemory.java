@@ -10,40 +10,40 @@ import java.util.Arrays;
  */
 public class ByteMemory {
 
-  private final byte[] mem;
+    private final byte[] mem;
 
-  public ByteMemory(byte... bytes) {
-    this.mem = bytes;
-  }
-
-  public int length() {
-    return mem.length;
-  }
-
-  public byte[] getMem() {
-    return mem;
-  }
-
-  @Override
-  public int hashCode() {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + Arrays.hashCode(mem);
-    return result;
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
+    public ByteMemory(byte... bytes) {
+        this.mem = bytes;
     }
-    if (obj == null) {
-      return false;
+
+    public int length() {
+        return mem.length;
     }
-    if (getClass() != obj.getClass()) {
-      return false;
+
+    public byte[] getMem() {
+        return mem;
     }
-    ByteMemory other = (ByteMemory) obj;
-    return Arrays.equals(mem, other.mem);
-  }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + Arrays.hashCode(mem);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ByteMemory other = (ByteMemory) obj;
+        return Arrays.equals(mem, other.mem);
+    }
 }

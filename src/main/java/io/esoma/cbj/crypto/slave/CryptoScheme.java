@@ -8,5 +8,5 @@ package io.esoma.cbj.crypto.slave;
  */
 public interface CryptoScheme extends EncryptionScheme {
 
-  byte[] decrypt(byte[] buffer);
+    byte[] decrypt(byte[] buffer);
 }

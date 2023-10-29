@@ -9,10 +9,9 @@ import org.tinylog.Logger;
 
 class BellmanFordTest {
 
-  // Test inputs for the larger test case(s).
-  private static final int LARGE_TEST_N = 15;
-  private static final int[][] LARGE_TEST_EDGES =
-      new int[][] {
+    // Test inputs for the larger test case(s).
+    private static final int LARGE_TEST_N = 15;
+    private static final int[][] LARGE_TEST_EDGES = new int[][] {
         new int[] {0, 1, 8},
         new int[] {0, 2, 5},
         new int[] {0, 3, 7},
@@ -116,66 +115,64 @@ class BellmanFordTest {
         new int[] {14, 12, 8},
         new int[] {14, 13, 3},
         new int[] {14, 8, 4}
-      };
+    };
 
-  @Test
-  void testBfFindSample1() {
-    int n = 4;
-    int[][] edges =
-        new int[][] {
-          new int[] {0, 1, 100},
-          new int[] {1, 2, 100},
-          new int[] {2, 0, 100},
-          new int[] {1, 3, 600},
-          new int[] {2, 3, 200}
+    @Test
+    void testBfFindSample1() {
+        int n = 4;
+        int[][] edges = new int[][] {
+            new int[] {0, 1, 100},
+            new int[] {1, 2, 100},
+            new int[] {2, 0, 100},
+            new int[] {1, 3, 600},
+            new int[] {2, 3, 200}
         };
-    int src = 0;
-    int dest = 3;
-    int k = 1;
+        int src = 0;
+        int dest = 3;
+        int k = 1;
 
-    int expected = 700;
-    int actual = BellmanFord.bfFind(n, edges, src, dest, k);
-    Logger.debug(actual);
-    assertEquals(expected, actual);
-  }
+        int expected = 700;
+        int actual = BellmanFord.bfFind(n, edges, src, dest, k);
+        Logger.debug(actual);
+        assertEquals(expected, actual);
+    }
 
-  @Test
-  void testBfFindSample2() {
-    int n = 3;
-    int[][] edges =
-        new int[][] {
-          new int[] {0, 1, 100},
-          new int[] {1, 2, 100},
-          new int[] {0, 2, 500}
+    @Test
+    void testBfFindSample2() {
+        int n = 3;
+        int[][] edges = new int[][] {
+            new int[] {0, 1, 100},
+            new int[] {1, 2, 100},
+            new int[] {0, 2, 500}
         };
-    int src = 0;
-    int dest = 2;
-    int k = 1;
+        int src = 0;
+        int dest = 2;
+        int k = 1;
 
-    int expected = 200;
-    int actual = BellmanFord.bfFind(n, edges, src, dest, k);
-    Logger.debug(actual);
-    assertEquals(expected, actual);
-  }
+        int expected = 200;
+        int actual = BellmanFord.bfFind(n, edges, src, dest, k);
+        Logger.debug(actual);
+        assertEquals(expected, actual);
+    }
 
-  @ParameterizedTest
-  @CsvSource({
-    "0, 1, 5, 4",
-    "1, 7, 2, 3",
-    "3, 4, 3, 7",
-    "10, 14, 2, 7",
-    "1, 14, 7, 4",
-    "8, 12, 2, 5",
-    "9, 13, 5, 8",
-    "2, 7, 4, 4",
-    "3, 8, 2, 5",
-    "12, 11, 1, 7",
-    "2, 6, 1, -1",
-    "2, 6, 2, 6"
-  })
-  void testBfFindLarge(int src, int dest, int k, int expected) {
-    int actual = BellmanFord.bfFind(LARGE_TEST_N, LARGE_TEST_EDGES, src, dest, k);
-    Logger.debug(actual);
-    assertEquals(expected, actual);
-  }
+    @ParameterizedTest
+    @CsvSource({
+        "0, 1, 5, 4",
+        "1, 7, 2, 3",
+        "3, 4, 3, 7",
+        "10, 14, 2, 7",
+        "1, 14, 7, 4",
+        "8, 12, 2, 5",
+        "9, 13, 5, 8",
+        "2, 7, 4, 4",
+        "3, 8, 2, 5",
+        "12, 11, 1, 7",
+        "2, 6, 1, -1",
+        "2, 6, 2, 6"
+    })
+    void testBfFindLarge(int src, int dest, int k, int expected) {
+        int actual = BellmanFord.bfFind(LARGE_TEST_N, LARGE_TEST_EDGES, src, dest, k);
+        Logger.debug(actual);
+        assertEquals(expected, actual);
+    }
 }

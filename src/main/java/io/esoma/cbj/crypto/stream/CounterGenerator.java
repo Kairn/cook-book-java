@@ -8,9 +8,9 @@ package io.esoma.cbj.crypto.stream;
  */
 public interface CounterGenerator {
 
-  void reset();
+    void reset();
 
-  byte[] getNext();
+    byte[] getNext();
 
-  byte[] peekNext();
+    byte[] peekNext();
 }

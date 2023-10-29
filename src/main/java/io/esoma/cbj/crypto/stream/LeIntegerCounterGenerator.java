@@ -11,41 +11,41 @@ import java.util.Arrays;
  */
 public class LeIntegerCounterGenerator implements CounterGenerator {
 
-  private static final byte BYTE_CAP = (byte) 0xFF;
+    private static final byte BYTE_CAP = (byte) 0xFF;
 
-  private long counter = 0L;
-  private byte[] counterBytes = new byte[8];
+    private long counter = 0L;
+    private byte[] counterBytes = new byte[8];
 
-  @Override
-  public void reset() {
-    counter = 0L;
-    counterBytes = new byte[8];
-  }
-
-  @Override
-  public byte[] getNext() {
-    if (counter >= Long.MAX_VALUE) {
-      throw new IllegalStateException("Maximum counter value exceeded");
+    @Override
+    public void reset() {
+        counter = 0L;
+        counterBytes = new byte[8];
     }
-    try {
-      return Arrays.copyOf(counterBytes, 8);
-    } finally {
-      counter++;
-      incrementBytes(0);
-    }
-  }
 
-  @Override
-  public byte[] peekNext() {
-    return counterBytes;
-  }
-
-  private void incrementBytes(int position) {
-    if (counterBytes[position] == BYTE_CAP) {
-      counterBytes[position] = 0x00;
-      incrementBytes(position + 1);
-    } else {
-      counterBytes[position]++;
+    @Override
+    public byte[] getNext() {
+        if (counter >= Long.MAX_VALUE) {
+            throw new IllegalStateException("Maximum counter value exceeded");
+        }
+        try {
+            return Arrays.copyOf(counterBytes, 8);
+        } finally {
+            counter++;
+            incrementBytes(0);
+        }
     }
-  }
+
+    @Override
+    public byte[] peekNext() {
+        return counterBytes;
+    }
+
+    private void incrementBytes(int position) {
+        if (counterBytes[position] == BYTE_CAP) {
+            counterBytes[position] = 0x00;
+            incrementBytes(position + 1);
+        } else {
+            counterBytes[position]++;
+        }
+    }
 }

@@ -13,35 +13,35 @@ package io.esoma.cbj.core;
  */
 public class BinaryInsertionSort {
 
-  private BinaryInsertionSort() {}
+    private BinaryInsertionSort() {}
 
-  /**
-   * Performs in-place insertion of elements starting from the next unsorted index given to the
-   * method. It will not waste time sorting the entire region specified by the bounds if there is a
-   * sorted left portion.
-   *
-   * @param array the source array to perform sorting
-   * @param bin the left bound
-   * @param end the right bound
-   * @param next the first unsorted index, anything between it and the left bound is assumed to be
-   *     sorted
-   */
-  public static void sortOnline(int[] array, int bin, int end, int next) {
-    // The first element is obviously sorted.
-    if (next <= bin) {
-      next = bin + 1;
+    /**
+     * Performs in-place insertion of elements starting from the next unsorted index given to the
+     * method. It will not waste time sorting the entire region specified by the bounds if there is a
+     * sorted left portion.
+     *
+     * @param array the source array to perform sorting
+     * @param bin the left bound
+     * @param end the right bound
+     * @param next the first unsorted index, anything between it and the left bound is assumed to be
+     *     sorted
+     */
+    public static void sortOnline(int[] array, int bin, int end, int next) {
+        // The first element is obviously sorted.
+        if (next <= bin) {
+            next = bin + 1;
+        }
+
+        // Looping through all elements that need to be inserted (sorted).
+        for (int i = next; i <= end; ++i) {
+            int it = array[i];
+
+            // Perform binary search to find the insertion spot.
+            // To maintain stability, we insert at the rightmost index.
+            int target = BinarySearch.searchIntRight(array, it, bin, i - 1);
+
+            // Insert the element into the sorted region.
+            ArrayCore.insertInt(array, i, target);
+        }
     }
-
-    // Looping through all elements that need to be inserted (sorted).
-    for (int i = next; i <= end; ++i) {
-      int it = array[i];
-
-      // Perform binary search to find the insertion spot.
-      // To maintain stability, we insert at the rightmost index.
-      int target = BinarySearch.searchIntRight(array, it, bin, i - 1);
-
-      // Insert the element into the sorted region.
-      ArrayCore.insertInt(array, i, target);
-    }
-  }
 }

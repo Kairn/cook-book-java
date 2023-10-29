@@ -11,46 +11,46 @@ import java.util.Set;
  */
 public class PartitionEqualSubset {
 
-  private PartitionEqualSubset() {}
+    private PartitionEqualSubset() {}
 
-  /**
-   * Determines if the input array can be partitioned into two subsets with equal sums. This
-   * algorithm iteratively computes and stores all possible sums that can be derived from subsets of
-   * the input array, and the decision is arrived once the target sum (half of the total array sum)
-   * is found or the entire array is traversed without seeing the target.
-   *
-   * @param array the input array
-   * @return true if partitioning is possible, or false otherwise
-   */
-  public static boolean judge(int[] array) {
-    int total = Arrays.stream(array).sum();
-    if (total % 2 == 1) {
-      // Odd total means not possible to partition.
-      return false;
-    }
-
-    int target = total / 2;
-    Set<Integer> sums = new HashSet<>();
-    Set<Integer> temp = new HashSet<>();
-
-    for (int num : array) {
-      if (num == target) {
-        return true;
-      }
-      temp.add(num);
-
-      for (int sum : sums) {
-        int newSum = num + sum;
-        if (newSum == target) {
-          return true;
+    /**
+     * Determines if the input array can be partitioned into two subsets with equal sums. This
+     * algorithm iteratively computes and stores all possible sums that can be derived from subsets of
+     * the input array, and the decision is arrived once the target sum (half of the total array sum)
+     * is found or the entire array is traversed without seeing the target.
+     *
+     * @param array the input array
+     * @return true if partitioning is possible, or false otherwise
+     */
+    public static boolean judge(int[] array) {
+        int total = Arrays.stream(array).sum();
+        if (total % 2 == 1) {
+            // Odd total means not possible to partition.
+            return false;
         }
-        temp.add(newSum);
-      }
 
-      sums.addAll(temp);
-      temp.clear();
+        int target = total / 2;
+        Set<Integer> sums = new HashSet<>();
+        Set<Integer> temp = new HashSet<>();
+
+        for (int num : array) {
+            if (num == target) {
+                return true;
+            }
+            temp.add(num);
+
+            for (int sum : sums) {
+                int newSum = num + sum;
+                if (newSum == target) {
+                    return true;
+                }
+                temp.add(newSum);
+            }
+
+            sums.addAll(temp);
+            temp.clear();
+        }
+
+        return false;
     }
-
-    return false;
-  }
 }

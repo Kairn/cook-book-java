@@ -10,30 +10,30 @@ import java.security.SecureRandom;
  */
 public class RandUtil {
 
-  private static final SecureRandom PRNG = new SecureRandom();
+    private static final SecureRandom PRNG = new SecureRandom();
 
-  private RandUtil() {}
+    private RandUtil() {}
 
-  public static byte[] randBytes(int size) {
-    if (size > 0) {
-      byte[] randBytes = new byte[size];
-      PRNG.nextBytes(randBytes);
-      return randBytes;
+    public static byte[] randBytes(int size) {
+        if (size > 0) {
+            byte[] randBytes = new byte[size];
+            PRNG.nextBytes(randBytes);
+            return randBytes;
+        }
+
+        return new byte[0];
     }
 
-    return new byte[0];
-  }
-
-  public static boolean randBool() {
-    return PRNG.nextBoolean();
-  }
-
-  public static int randInt(int min, int max) {
-    if (max <= min) {
-      throw new IllegalArgumentException("Max must be larger than min");
+    public static boolean randBool() {
+        return PRNG.nextBoolean();
     }
 
-    int bound = max - min + 1;
-    return min + PRNG.nextInt(bound);
-  }
+    public static int randInt(int min, int max) {
+        if (max <= min) {
+            throw new IllegalArgumentException("Max must be larger than min");
+        }
+
+        int bound = max - min + 1;
+        return min + PRNG.nextInt(bound);
+    }
 }

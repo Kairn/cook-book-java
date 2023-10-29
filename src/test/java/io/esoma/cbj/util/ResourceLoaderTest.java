@@ -10,43 +10,42 @@ import org.tinylog.Logger;
 
 class ResourceLoaderTest {
 
-  private static final String EXAMPLE_FILE = "example.txt";
-  private static final String INNER_EXAMPLE_FILE = "example/example-2.txt";
-  private static final String NON_EXISTENT_FILE = "nosuchfile.txt";
+    private static final String EXAMPLE_FILE = "example.txt";
+    private static final String INNER_EXAMPLE_FILE = "example/example-2.txt";
+    private static final String NON_EXISTENT_FILE = "nosuchfile.txt";
 
-  @Test
-  void testGetExampleFile() {
-    InputStream inputStream = ResourceLoader.getResourceAsReader(EXAMPLE_FILE);
-    assertNotNull(inputStream);
+    @Test
+    void testGetExampleFile() {
+        InputStream inputStream = ResourceLoader.getResourceAsReader(EXAMPLE_FILE);
+        assertNotNull(inputStream);
 
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-      assertEquals("2022", br.readLine());
-      assertEquals("EOF", br.readLine());
-      assertNull(br.readLine());
-    } catch (Exception e) {
-      Logger.error("Exception encountered while reading example file", e);
-      fail();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            assertEquals("2022", br.readLine());
+            assertEquals("EOF", br.readLine());
+            assertNull(br.readLine());
+        } catch (Exception e) {
+            Logger.error("Exception encountered while reading example file", e);
+            fail();
+        }
     }
-  }
 
-  @Test
-  void testGetExampleFileFromInnerDirectory() {
-    InputStream inputStream = ResourceLoader.getResourceAsReader(INNER_EXAMPLE_FILE);
-    assertNotNull(inputStream);
+    @Test
+    void testGetExampleFileFromInnerDirectory() {
+        InputStream inputStream = ResourceLoader.getResourceAsReader(INNER_EXAMPLE_FILE);
+        assertNotNull(inputStream);
 
-    try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-      assertEquals("YET another example.", br.readLine());
-      assertNull(br.readLine());
-    } catch (Exception e) {
-      Logger.error("Exception encountered while reading example-2 file", e);
-      fail();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            assertEquals("YET another example.", br.readLine());
+            assertNull(br.readLine());
+        } catch (Exception e) {
+            Logger.error("Exception encountered while reading example-2 file", e);
+            fail();
+        }
     }
-  }
 
-  @Test
-  void testGetNonExistentFile() {
-    assertThrowsExactly(
-        IllegalArgumentException.class,
-        () -> ResourceLoader.getResourceAsReader(NON_EXISTENT_FILE));
-  }
+    @Test
+    void testGetNonExistentFile() {
+        assertThrowsExactly(
+                IllegalArgumentException.class, () -> ResourceLoader.getResourceAsReader(NON_EXISTENT_FILE));
+    }
 }

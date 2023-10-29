@@ -12,21 +12,21 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class HexToBase64 {
 
-  private HexToBase64() {}
+    private HexToBase64() {}
 
-  public static String perform(String hexString) {
-    if (StringUtils.isBlank(hexString)) {
-      return "";
-    } else {
-      hexString = hexString.toLowerCase();
+    public static String perform(String hexString) {
+        if (StringUtils.isBlank(hexString)) {
+            return "";
+        } else {
+            hexString = hexString.toLowerCase();
+        }
+
+        StringBuilder builder = new StringBuilder();
+        for (char c : hexString.toCharArray()) {
+            builder.append(HexUtil.hexCharToBits(c));
+        }
+
+        String bitStream = builder.toString();
+        return Base64Util.encodeFromBitStream(bitStream);
     }
-
-    StringBuilder builder = new StringBuilder();
-    for (char c : hexString.toCharArray()) {
-      builder.append(HexUtil.hexCharToBits(c));
-    }
-
-    String bitStream = builder.toString();
-    return Base64Util.encodeFromBitStream(bitStream);
-  }
 }

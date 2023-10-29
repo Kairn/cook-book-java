@@ -11,35 +11,35 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class SandwichCbcCryptoScheme implements CryptoScheme {
 
-  private static final String SECRET_KEY = "PURPLE SUBMARINE";
-  private static final byte[] IV_BLOCK = new byte[16];
+    private static final String SECRET_KEY = "PURPLE SUBMARINE";
+    private static final byte[] IV_BLOCK = new byte[16];
 
-  private final byte[] prefix;
-  private final byte[] suffix;
+    private final byte[] prefix;
+    private final byte[] suffix;
 
-  public SandwichCbcCryptoScheme(byte[] prefix, byte[] suffix) {
-    this.prefix = prefix == null ? new byte[0] : prefix;
-    this.suffix = suffix == null ? new byte[0] : suffix;
-  }
-
-  @Override
-  public byte[] encrypt(byte[] buffer) {
-    if (buffer == null || buffer.length == 0) {
-      throw new IllegalArgumentException("Buffer is empty");
+    public SandwichCbcCryptoScheme(byte[] prefix, byte[] suffix) {
+        this.prefix = prefix == null ? new byte[0] : prefix;
+        this.suffix = suffix == null ? new byte[0] : suffix;
     }
 
-    byte[] text = ArrayUtils.addAll(prefix, buffer);
-    text = ArrayUtils.addAll(text, suffix);
+    @Override
+    public byte[] encrypt(byte[] buffer) {
+        if (buffer == null || buffer.length == 0) {
+            throw new IllegalArgumentException("Buffer is empty");
+        }
 
-    return AesInCbc.encrypt(text, SECRET_KEY, IV_BLOCK, true);
-  }
+        byte[] text = ArrayUtils.addAll(prefix, buffer);
+        text = ArrayUtils.addAll(text, suffix);
 
-  @Override
-  public byte[] decrypt(byte[] buffer) {
-    if (buffer == null || buffer.length == 0) {
-      throw new IllegalArgumentException("Buffer is empty");
+        return AesInCbc.encrypt(text, SECRET_KEY, IV_BLOCK, true);
     }
 
-    return AesInCbc.decrypt(buffer, SECRET_KEY, IV_BLOCK);
-  }
+    @Override
+    public byte[] decrypt(byte[] buffer) {
+        if (buffer == null || buffer.length == 0) {
+            throw new IllegalArgumentException("Buffer is empty");
+        }
+
+        return AesInCbc.decrypt(buffer, SECRET_KEY, IV_BLOCK);
+    }
 }
