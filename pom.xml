@@ -50,6 +50,7 @@
             <format>
               <includes>
                 <include>*.md</include>
+                <include>*.yml</include>
                 <include>pom.xml</include>
                 <include>.gitignore</include>
               </includes>

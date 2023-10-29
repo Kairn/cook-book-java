@@ -65,11 +65,11 @@ time to time.
 
 ### Prerequisites
 
-* [JDK 11](https://openjdk.java.net/projects/jdk/11/)
-* [Apache Maven (wrapper available)](https://maven.apache.org/download.cgi)
+* [JDK 17](https://docs.aws.amazon.com/corretto/)
+* [Apache Maven (wrapper available)](https://maven.apache.org/wrapper/)
 
 ### Build
 
 1. Clone or download this repository and change into the project's root directory (where `pom.xml` is located).
-2. Run `mvn clean test` to execute all test cases.
-3. Run `./mvnw clean test` for the same above if you prefer to use the Maven wrapper.
+2. Run `./mvnw clean verify` to compile, test, and check format.
+3. Run `./mvnw spotless:apply` to format the code.
