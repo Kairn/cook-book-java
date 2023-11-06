@@ -62,9 +62,9 @@ public class SortedSum {
     }
 
     /**
-     * Follows the naive insertion sort algorithm for keeping track of the sorted array at every index
-     * but uses robust caching to reduce the work for computing the sum. The length of the sorted
-     * array is always equal to the amount of processed elements so unnecessary shifting is
+     * Follows the naive insertion sort algorithm for keeping track of the sorted array at every
+     * index but uses robust caching to reduce the work for computing the sum. The length of the
+     * sorted array is always equal to the amount of processed elements so unnecessary shifting is
      * eliminated.
      *
      * @param array the input array

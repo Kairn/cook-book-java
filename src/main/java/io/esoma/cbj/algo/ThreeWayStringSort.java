@@ -13,8 +13,8 @@ public class ThreeWayStringSort {
 
     /**
      * Sorts the input strings based on the "natural ordering" of strings in Java. Strings are
-     * partitioned by characters from left to right in succession. The sort is performed in place and
-     * the input array will be modified.
+     * partitioned by characters from left to right in succession. The sort is performed in place
+     * and the input array will be modified.
      *
      * @param array the array to sort
      * @return the same input array after in-place sort
@@ -30,8 +30,8 @@ public class ThreeWayStringSort {
 
     /**
      * Partitions the subarray based on the specified range at the specified character position. The
-     * specified subarray will be rearranged into three parts, and this is recursively called on each
-     * part. Only the call on the "equal" partition will advance the character position.
+     * specified subarray will be rearranged into three parts, and this is recursively called on
+     * each part. Only the call on the "equal" partition will advance the character position.
      *
      * @param array the source array
      * @param start the first index
@@ -111,8 +111,9 @@ public class ThreeWayStringSort {
     }
 
     /**
-     * Selects a pivot character for the given subarray. This is the first operation in the partition
-     * step. Selection is based on the first string that has a character in the specified position.
+     * Selects a pivot character for the given subarray. This is the first operation in the
+     * partition step. Selection is based on the first string that has a character in the specified
+     * position.
      *
      * @param array the source array
      * @param start the first index

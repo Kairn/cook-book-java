@@ -51,7 +51,8 @@ public class BTree23 {
         }
 
         // At this point, the candidate must be a node at the bottom without children.
-        // And the candidate will attempt to add the key to itself and balance on the way up if needed.
+        // And the candidate will attempt to add the key to itself and balance on the way up if
+        // needed.
         Node24 newRoot = candidate.addKey(key);
         if (newRoot != null) {
             root = newRoot;
@@ -129,8 +130,9 @@ public class BTree23 {
     }
 
     /**
-     * The internal method called from {@link #walkAndFillInOrder()} to perform the walk on a starting
-     * node (root). This process itself is also recursive until the entire subtree is examined.
+     * The internal method called from {@link #walkAndFillInOrder()} to perform the walk on a
+     * starting node (root). This process itself is also recursive until the entire subtree is
+     * examined.
      *
      * @param start which node to start the walk from
      */
@@ -154,8 +156,8 @@ public class BTree23 {
 
     /**
      * Searches the subtree starting from a node for the specified key and digs up the deepest child
-     * where the key could be residing. This process is recursive. The returned node might NOT contain
-     * the key, but it will be where the key is to be inserted (if not present yet).
+     * where the key could be residing. This process is recursive. The returned node might NOT
+     * contain the key, but it will be where the key is to be inserted (if not present yet).
      *
      * @param key the key to search for
      * @param start where to start the search
@@ -200,12 +202,13 @@ public class BTree23 {
     /**
      * A flexible node structure that is the basic component in a 2-3 tree. It can represent a 2, 3,
      * or 4-node (temporary) on demand. Because the tree is required to be perfectly balanced, this
-     * node is also always balanced, meaning it will either have no children, or all of its (required)
-     * children (depending on the form) will be non-null.
+     * node is also always balanced, meaning it will either have no children, or all of its
+     * (required) children (depending on the form) will be non-null.
      */
     private static class Node24 {
 
-        // Primary is the only key when the node is a 2-node. It is always the leftmost key in extended
+        // Primary is the only key when the node is a 2-node. It is always the leftmost key in
+        // extended
         // form(s).
         Integer primary;
         // Secondary is always the rightmost key when the node is a 3 or 4-node.
@@ -220,7 +223,8 @@ public class BTree23 {
         Node24 childLeft;
         // This represents the middle child in a 3-node or the second from left child in a 4-node.
         Node24 childMidLeft;
-        // This always represent the second from right child in a 4-node, or it will be null otherwise.
+        // This always represent the second from right child in a 4-node, or it will be null
+        // otherwise.
         Node24 childMidRight;
         // This always represent the rightmost child in all node forms.
         Node24 childRight;
@@ -283,9 +287,9 @@ public class BTree23 {
 
         /**
          * Add the given key to the node. If this is a 2-node, the key is directly added to the node
-         * structure with children adjusted. If this is a 3-node, it will become a temporary 4-node and
-         * be split up later. If a new root node is created during the split call(s) (recursive), it is
-         * returned to the caller. This method itself is non-recursive.
+         * structure with children adjusted. If this is a 3-node, it will become a temporary 4-node
+         * and be split up later. If a new root node is created during the split call(s)
+         * (recursive), it is returned to the caller. This method itself is non-recursive.
          *
          * @param key the key to be added
          * @return the new root node if created
@@ -325,9 +329,9 @@ public class BTree23 {
 
         /**
          * Splits the node (if is a 4-node) by pushing the middle key up one level (insert into the
-         * parent if present) and re-adjusting the children. This process is repeated until there are no
-         * more 4-nodes on the way up to the root. If a new root is created at the top level, it is
-         * returned to the caller.
+         * parent if present) and re-adjusting the children. This process is repeated until there
+         * are no more 4-nodes on the way up to the root. If a new root is created at the top level,
+         * it is returned to the caller.
          *
          * @return the new root node if created
          */
@@ -414,9 +418,9 @@ public class BTree23 {
         }
 
         /**
-         * Deletes the specified key from the subtree starting from this node. The key is guaranteed to
-         * exist within the subtree. If a new root is created after restructuring, it is returned to the
-         * caller.
+         * Deletes the specified key from the subtree starting from this node. The key is guaranteed
+         * to exist within the subtree. If a new root is created after restructuring, it is returned
+         * to the caller.
          *
          * @param key the key to delete
          * @return the new root node if created
@@ -552,7 +556,8 @@ public class BTree23 {
                 }
             }
 
-            // If the key is present in the current node, replace it with the successor (min key) in the
+            // If the key is present in the current node, replace it with the successor (min key) in
+            // the
             // next child. Then, the process becomes deleting the successor in the next child.
             if (this.primary == key) {
                 this.primary = nextChild.findMin();
@@ -642,9 +647,9 @@ public class BTree23 {
         }
 
         /**
-         * From the parent node's view, merges its two children with a key in the middle into a 4-node.
-         * Both peers must be 2-nodes, and the left peer is the target to receive extra keys and
-         * children.
+         * From the parent node's view, merges its two children with a key in the middle into a
+         * 4-node. Both peers must be 2-nodes, and the left peer is the target to receive extra keys
+         * and children.
          *
          * @param leftPeer the left child (receiver)
          * @param parentKey the parent key that goes into the middle of the merged node
@@ -662,8 +667,8 @@ public class BTree23 {
         }
 
         /**
-         * Removes the left key in the node and attach a new left child instead. This node might be a
-         * 3-node or a 4-node.
+         * Removes the left key in the node and attach a new left child instead. This node might be
+         * a 3-node or a 4-node.
          *
          * @param child the child to be attached
          */
@@ -684,8 +689,8 @@ public class BTree23 {
         }
 
         /**
-         * Removes the right key in the node and attach a new right child instead. This node might be a
-         * 3-node or a 4-node.
+         * Removes the right key in the node and attach a new right child instead. This node might
+         * be a 3-node or a 4-node.
          *
          * @param child the child to be attached
          */
@@ -704,9 +709,9 @@ public class BTree23 {
         }
 
         /**
-         * Deletes a key inside this node. The key is guaranteed to exist, and this node is guaranteed
-         * to have no children and NOT be a 2-node. This is only called internally as the final step of
-         * key deletion.
+         * Deletes a key inside this node. The key is guaranteed to exist, and this node is
+         * guaranteed to have no children and NOT be a 2-node. This is only called internally as the
+         * final step of key deletion.
          *
          * @param key the key to delete
          */

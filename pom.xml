@@ -61,9 +61,15 @@
           <java>
             <importOrder/>
             <removeUnusedImports/>
+            <formatAnnotations/>
+            <googleJavaFormat>
+              <style>AOSP</style>
+              <reflowLongStrings>false</reflowLongStrings>
+              <formatJavadoc>true</formatJavadoc>
+            </googleJavaFormat>
             <palantirJavaFormat>
               <style>PALANTIR</style>
-              <!-- Optionally specify a version -->
+              <version>2.38.0</version>
             </palantirJavaFormat>
           </java>
         </configuration>

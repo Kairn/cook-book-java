@@ -24,9 +24,9 @@ public class CtrFixedNonceAttack {
     private CtrFixedNonceAttack() {}
 
     /**
-     * Enumerates the cipher texts and tests each byte on each position to obtain a good guess of the
-     * key stream given the ciphers are produced by CTR with a fixed-nonce. The strategy for guessing
-     * is based on the assumption that the plain texts are all common English sentences.
+     * Enumerates the cipher texts and tests each byte on each position to obtain a good guess of
+     * the key stream given the ciphers are produced by CTR with a fixed-nonce. The strategy for
+     * guessing is based on the assumption that the plain texts are all common English sentences.
      *
      * @param cipherArrays the cipher texts
      * @param length the length of the guessed output

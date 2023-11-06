@@ -14,14 +14,14 @@ public class BellmanFord {
     private BellmanFord() {}
 
     /**
-     * Finds the shortest (with the least weight) path from a source vertex to a destination vertex in
-     * a directed weighted graph with at most k stops (k + 1 edges). All weights are positive numbers
-     * only. If there is no solution, then -1 is returned.
+     * Finds the shortest (with the least weight) path from a source vertex to a destination vertex
+     * in a directed weighted graph with at most k stops (k + 1 edges). All weights are positive
+     * numbers only. If there is no solution, then -1 is returned.
      *
      * @param n the total number of vertices (labeled from 0 to n - 1)
-     * @param edges a 2-dimensional array in which each element represents an edge (contains the start
-     *     vertex, the end vertex, and the weight of the path, respectively) in a directed weighted
-     *     graph
+     * @param edges a 2-dimensional array in which each element represents an edge (contains the
+     *     start vertex, the end vertex, and the weight of the path, respectively) in a directed
+     *     weighted graph
      * @param src the source vertex
      * @param dest the destination vertex
      * @param k the maximum number of stops (vertices between the source and the destination)

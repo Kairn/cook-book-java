@@ -20,6 +20,7 @@ public class FibonacciHeap<E extends Comparable<E>> {
     // Internal state.
     private int size;
     private FhNode<E> minNode;
+
     /*
      * Default constructor for creating a blank Fibonacci heap.
      */
@@ -67,11 +68,11 @@ public class FibonacciHeap<E extends Comparable<E>> {
     }
 
     /**
-     * Retrieves the least element and removes it from the heap. The children of the removed node will
-     * be promoted to become parts of the root list. Any time a node has lost two children, it will
-     * also be dumped to the root list. At the end, trees in the main chain will be merged if they
-     * have the same degree (number of direct children). The pointer to the next minimum node will
-     * also be updated appropriately.
+     * Retrieves the least element and removes it from the heap. The children of the removed node
+     * will be promoted to become parts of the root list. Any time a node has lost two children, it
+     * will also be dumped to the root list. At the end, trees in the main chain will be merged if
+     * they have the same degree (number of direct children). The pointer to the next minimum node
+     * will also be updated appropriately.
      *
      * @return the head of the heap, or null of the heap is empty
      */
@@ -202,8 +203,8 @@ public class FibonacciHeap<E extends Comparable<E>> {
          * Compares to another node and checks if the key is less in comparison.
          *
          * @param other the other node
-         * @return true if the key in the current node is less than the key in the other node, or false
-         *     otherwise
+         * @return true if the key in the current node is less than the key in the other node, or
+         *     false otherwise
          */
         boolean isLess(FhNode<E> other) {
             if (other == null) {

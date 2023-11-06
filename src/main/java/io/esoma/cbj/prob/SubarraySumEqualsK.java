@@ -13,8 +13,9 @@ public class SubarraySumEqualsK {
 
     /**
      * Counts the number of sub-arrays whose sums are equal to k. This implementation uses a
-     * prefix-sum hash map (key being the sum, and value being the count) that is built interactively
-     * with the main iteration to quickly compute if any sub-array fulfills the condition.
+     * prefix-sum hash map (key being the sum, and value being the count) that is built
+     * interactively with the main iteration to quickly compute if any sub-array fulfills the
+     * condition.
      *
      * @param array the input array
      * @param k the target sum

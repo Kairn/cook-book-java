@@ -60,9 +60,9 @@ public class AvlTree<E extends Comparable<E>> {
     }
 
     /**
-     * Inserts the given element into the AVL tree. The operation performs a basic search and appends
-     * the new node at the appropriate location. If the balance factor constraint is violated after
-     * insertion, the tree rotates to maintain a perfect balance.
+     * Inserts the given element into the AVL tree. The operation performs a basic search and
+     * appends the new node at the appropriate location. If the balance factor constraint is
+     * violated after insertion, the tree rotates to maintain a perfect balance.
      *
      * @param e the element to be inserted
      * @return the element itself if inserted successfully, or null a duplicate exists
@@ -168,8 +168,8 @@ public class AvlTree<E extends Comparable<E>> {
      *
      * @param n the node to start
      * @param e the target value to be cut
-     * @return the height of the node once the target has been cut from the tree, or -2 if the target
-     *     is not found
+     * @return the height of the node once the target has been cut from the tree, or -2 if the
+     *     target is not found
      */
     private int cutNode(AtNode<E> n, E e) {
         // Check if the current node is the target.
@@ -435,7 +435,9 @@ public class AvlTree<E extends Comparable<E>> {
         }
     }
 
-    /** Returns a string representation of the AVL tree. Elements will be shown in ascending order. */
+    /**
+     * Returns a string representation of the AVL tree. Elements will be shown in ascending order.
+     */
     @Override
     public String toString() {
         StringBuilder bu = new StringBuilder();

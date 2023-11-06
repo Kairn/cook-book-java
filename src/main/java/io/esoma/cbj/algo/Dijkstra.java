@@ -19,13 +19,14 @@ public class Dijkstra {
 
     /**
      * Traverses through the graph and finds the shortest distances between the first node (index 0)
-     * and all other nodes in the graph. There might be nodes disconnected from the rest of the graph.
-     * If a node cannot be reached from the starting node, -1 will be returned.
+     * and all other nodes in the graph. There might be nodes disconnected from the rest of the
+     * graph. If a node cannot be reached from the starting node, -1 will be returned.
      *
-     * @param graph a 2-dimensional array (Each row represents the ith (0th being the first row) node
-     *     of the graph, and it contains the distance values from itself to the ith node. If there is
-     *     no direct path between two nodes, -1 is stored.)
-     * @return an array that contains the shortest distances between the 0th node and all other nodes
+     * @param graph a 2-dimensional array (Each row represents the ith (0th being the first row)
+     *     node of the graph, and it contains the distance values from itself to the ith node. If
+     *     there is no direct path between two nodes, -1 is stored.)
+     * @return an array that contains the shortest distances between the 0th node and all other
+     *     nodes
      */
     public static int[] djFind(int[][] graph) {
         int n = graph.length;

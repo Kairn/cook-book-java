@@ -53,11 +53,12 @@ public class DeciBinary {
     }
 
     /**
-     * Converts a number in the decibinary system into its decimal representation. In other words, if
-     * the input is n, the method will returned the nth number in the decibinary system in its decimal
-     * format. Implementation uses dynamic programming to search for the decimal value of the target
-     * integer, and then computes each digit efficiently. This method is limited by predefined bounds
-     * and will not work when the target is too large without increasing the bounds.
+     * Converts a number in the decibinary system into its decimal representation. In other words,
+     * if the input is n, the method will returned the nth number in the decibinary system in its
+     * decimal format. Implementation uses dynamic programming to search for the decimal value of
+     * the target integer, and then computes each digit efficiently. This method is limited by
+     * predefined bounds and will not work when the target is too large without increasing the
+     * bounds.
      *
      * @param db the 1-based index in the decibinary system
      * @return the corresponding decibinary number
@@ -139,10 +140,10 @@ public class DeciBinary {
     }
 
     /**
-     * Computes how many decibinary numbers can have a particular decimal value up to a certain number
-     * of digits. The method is recursive and is fundamental to the DP nature of the main algorithm.
-     * With a reasonable bound, it efficiently finds the correct number of decibinary integers without
-     * resorting to enumeration.
+     * Computes how many decibinary numbers can have a particular decimal value up to a certain
+     * number of digits. The method is recursive and is fundamental to the DP nature of the main
+     * algorithm. With a reasonable bound, it efficiently finds the correct number of decibinary
+     * integers without resorting to enumeration.
      *
      * @param d the maximum number of digits
      * @param s the desired decimal value

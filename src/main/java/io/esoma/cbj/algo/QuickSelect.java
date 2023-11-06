@@ -15,8 +15,8 @@ public class QuickSelect {
      * invalid.
      *
      * @param array the input array
-     * @param k the position of the element to return when sorted, must not be larger than the length
-     *     of the input array
+     * @param k the position of the element to return when sorted, must not be larger than the
+     *     length of the input array
      * @return the kth smallest element
      */
     public static int findKthSmallest(int[] array, int k) {

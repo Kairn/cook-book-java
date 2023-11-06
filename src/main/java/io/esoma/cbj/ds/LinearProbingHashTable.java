@@ -62,8 +62,8 @@ public class LinearProbingHashTable<K, V> {
     }
 
     /**
-     * Puts a key into the table with the associated value. If the key already exists, the value will
-     * be overwritten.
+     * Puts a key into the table with the associated value. If the key already exists, the value
+     * will be overwritten.
      *
      * @param key the key to insert
      * @param value the value associated
@@ -162,7 +162,8 @@ public class LinearProbingHashTable<K, V> {
         entries.set(slot, null);
 
         // Search to the right and re-insert everything until an empty slot is found.
-        // This step is needed so we don't prematurely terminate the search for a key that was inserted
+        // This step is needed so we don't prematurely terminate the search for a key that was
+        // inserted
         // later than the deleted one. In other words, we cannot artificially create gaps between
         // entries. Gaps must only exist naturally.
         while (true) {
@@ -179,7 +180,8 @@ public class LinearProbingHashTable<K, V> {
         --size;
 
         // Check load and shrink the table if needed.
-        // Shrink table if the fullness is less than half of the load factor, and the table has at least
+        // Shrink table if the fullness is less than half of the load factor, and the table has at
+        // least
         // the initial capacity after shrinking.
         int capacity = entries.size();
         if ((size * 100 / capacity < LOAD_FACTOR_PCT / 2) && (capacity > minCapacity * 2)) {

@@ -38,9 +38,9 @@ public class PermutationGen {
     }
 
     /**
-     * Generates the next permutation (lexicographical incrementation from the previous return value)
-     * given the current state. The first call simply returns an array of 1 to n sorted in ascending
-     * order.
+     * Generates the next permutation (lexicographical incrementation from the previous return
+     * value) given the current state. The first call simply returns an array of 1 to n sorted in
+     * ascending order.
      *
      * @return an array representing the next permutation
      */

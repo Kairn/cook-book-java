@@ -84,8 +84,8 @@ public class LRUCache<V> {
     }
 
     /**
-     * Accesses the key and returns its value if it exists, and this key will be promoted as the most
-     * recently used key. Null will be returned for non-existent keys.
+     * Accesses the key and returns its value if it exists, and this key will be promoted as the
+     * most recently used key. Null will be returned for non-existent keys.
      *
      * @param key the key to retrieve the value
      * @return the associated value, or null if the key is not found in the cache

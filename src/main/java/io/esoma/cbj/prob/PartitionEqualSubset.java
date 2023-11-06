@@ -15,9 +15,9 @@ public class PartitionEqualSubset {
 
     /**
      * Determines if the input array can be partitioned into two subsets with equal sums. This
-     * algorithm iteratively computes and stores all possible sums that can be derived from subsets of
-     * the input array, and the decision is arrived once the target sum (half of the total array sum)
-     * is found or the entire array is traversed without seeing the target.
+     * algorithm iteratively computes and stores all possible sums that can be derived from subsets
+     * of the input array, and the decision is arrived once the target sum (half of the total array
+     * sum) is found or the entire array is traversed without seeing the target.
      *
      * @param array the input array
      * @return true if partitioning is possible, or false otherwise

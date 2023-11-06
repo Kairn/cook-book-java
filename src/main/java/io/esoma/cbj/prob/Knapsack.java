@@ -18,8 +18,8 @@ public class Knapsack {
     private Knapsack() {}
 
     /**
-     * Derives the maximum weight/value that can be fitted into the knapsack of the given size with an
-     * array of different items. The algorithm used in this method is called "Meet in the middle"
+     * Derives the maximum weight/value that can be fitted into the knapsack of the given size with
+     * an array of different items. The algorithm used in this method is called "Meet in the middle"
      * which is a search technique that employs divide and conquer for optimization. It can be
      * effective when the input size is relatively small compare to the weights.
      *

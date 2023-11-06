@@ -33,12 +33,12 @@ class ThreeWayStringSortTest {
     @Test
     void testSort3() {
         String[] unsorted = new String[] {
-            "473S", "4mge", "Uyer", "yCi5", "lwoi", "jEWy", "nxB5", "ZJpq", "tkPN", "A8Rf", "QrbQ", "CCuK", "Obaj",
-            "bT0v", "DCvV", "23m2", "YEbZ", "CoVj", "IMlZ", "HUjp"
+            "473S", "4mge", "Uyer", "yCi5", "lwoi", "jEWy", "nxB5", "ZJpq", "tkPN", "A8Rf",
+            "QrbQ", "CCuK", "Obaj", "bT0v", "DCvV", "23m2", "YEbZ", "CoVj", "IMlZ", "HUjp"
         };
         String[] sorted = new String[] {
-            "23m2", "473S", "4mge", "A8Rf", "bT0v", "CCuK", "CoVj", "DCvV", "HUjp", "IMlZ", "jEWy", "lwoi", "nxB5",
-            "Obaj", "QrbQ", "tkPN", "Uyer", "yCi5", "YEbZ", "ZJpq"
+            "23m2", "473S", "4mge", "A8Rf", "bT0v", "CCuK", "CoVj", "DCvV", "HUjp", "IMlZ",
+            "jEWy", "lwoi", "nxB5", "Obaj", "QrbQ", "tkPN", "Uyer", "yCi5", "YEbZ", "ZJpq"
         };
         // Fix case sensitivity.
         Arrays.sort(sorted);

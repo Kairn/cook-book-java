@@ -17,8 +17,8 @@ public class BinaryInsertionSort {
 
     /**
      * Performs in-place insertion of elements starting from the next unsorted index given to the
-     * method. It will not waste time sorting the entire region specified by the bounds if there is a
-     * sorted left portion.
+     * method. It will not waste time sorting the entire region specified by the bounds if there is
+     * a sorted left portion.
      *
      * @param array the source array to perform sorting
      * @param bin the left bound

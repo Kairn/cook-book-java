@@ -15,8 +15,8 @@ public class BinarySearch {
     private BinarySearch() {}
 
     /**
-     * Performs the basic binary search and returns the index of the search target in a sorted array.
-     * If not found, -1 is returned. The return value is not guaranteed to be the leftmost or
+     * Performs the basic binary search and returns the index of the search target in a sorted
+     * array. If not found, -1 is returned. The return value is not guaranteed to be the leftmost or
      * rightmost index if multiple targets exist.
      *
      * @param array the integer array to search, ascending order is assumed
@@ -73,10 +73,10 @@ public class BinarySearch {
     }
 
     /**
-     * Performs the basic binary search but strictly favors finding the rightmost index of the search
-     * target when duplicates exist. Only searches the array within the bounds specified by the
-     * inputs. Regardless of whether the target value exists in the array, this method returns the
-     * rightmost index at which the target can be inserted so that the array remains sorted.
+     * Performs the basic binary search but strictly favors finding the rightmost index of the
+     * search target when duplicates exist. Only searches the array within the bounds specified by
+     * the inputs. Regardless of whether the target value exists in the array, this method returns
+     * the rightmost index at which the target can be inserted so that the array remains sorted.
      *
      * @param array an integer array of ascending order
      * @param target the value to search

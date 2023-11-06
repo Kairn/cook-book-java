@@ -27,8 +27,8 @@ public class AesInCtr {
     }
 
     /**
-     * Decrypts the cipher with CTR mode for the given key, nonce, and a counter generator. This is a
-     * symmetrical method, meaning it can be used for encryption too.
+     * Decrypts the cipher with CTR mode for the given key, nonce, and a counter generator. This is
+     * a symmetrical method, meaning it can be used for encryption too.
      *
      * @param cipherBytes the cipher in bytes
      * @param key the encryption key

@@ -52,7 +52,8 @@ public class DetectAesInEcb {
 
     /**
      * Calculates a normalized score for a stream of cipher bytes. The higher the score, the more
-     * frequently repetition occurs, and thus the more likely the cipher is encrypted using ECB mode.
+     * frequently repetition occurs, and thus the more likely the cipher is encrypted using ECB
+     * mode.
      *
      * @param cipherBytes the cipher text in bytes
      * @return the resulting score

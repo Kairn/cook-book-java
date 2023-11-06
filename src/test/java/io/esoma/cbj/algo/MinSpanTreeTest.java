@@ -30,8 +30,15 @@ class MinSpanTreeTest {
     @Test
     void testCalcKruskal3() {
         int n = 5;
-        int[][] edges =
-                new int[][] {{1, 2, 20}, {1, 3, 50}, {1, 4, 70}, {1, 5, 90}, {2, 3, 30}, {3, 4, 40}, {4, 5, 60}};
+        int[][] edges = new int[][] {
+            {1, 2, 20},
+            {1, 3, 50},
+            {1, 4, 70},
+            {1, 5, 90},
+            {2, 3, 30},
+            {3, 4, 40},
+            {4, 5, 60}
+        };
         int expected = 150;
         int actual = MinSpanTree.calcKruskal(n, edges);
         Logger.debug(actual);

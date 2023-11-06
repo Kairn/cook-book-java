@@ -15,9 +15,9 @@ public class HeapSort {
     private HeapSort() {}
 
     /**
-     * Implements the algorithm by first building a max heap followed by iterative steps of shrinking
-     * its size by removing the top node and heapifying the remaining nodes. The array will be sorted
-     * once the heap size is 0. The array is sorted in-place.
+     * Implements the algorithm by first building a max heap followed by iterative steps of
+     * shrinking its size by removing the top node and heapifying the remaining nodes. The array
+     * will be sorted once the heap size is 0. The array is sorted in-place.
      *
      * @param array the input array
      * @return the sorted array
@@ -68,9 +68,9 @@ public class HeapSort {
     }
 
     /**
-     * Given a max heap specified by the array and size, starting from a specific node and checks its
-     * children nodes and swap them if the parent is less than any of the children. This is repeated
-     * until the bottom of the heap is reached.
+     * Given a max heap specified by the array and size, starting from a specific node and checks
+     * its children nodes and swap them if the parent is less than any of the children. This is
+     * repeated until the bottom of the heap is reached.
      *
      * @param array the heap source array
      * @param size the size of the heap

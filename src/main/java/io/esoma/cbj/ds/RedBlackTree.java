@@ -81,9 +81,9 @@ public class RedBlackTree<E extends Comparable<E>> {
     }
 
     /**
-     * Inserts a key into the starting node's subtree while preserving the properties of the tree. It
-     * is possible that another node will be in the place of the starting node (could be null) after
-     * some transformations, therefore this node is returned to the caller.
+     * Inserts a key into the starting node's subtree while preserving the properties of the tree.
+     * It is possible that another node will be in the place of the starting node (could be null)
+     * after some transformations, therefore this node is returned to the caller.
      *
      * @param key the key to insert
      * @param start the root of the targeted subtree
@@ -124,8 +124,8 @@ public class RedBlackTree<E extends Comparable<E>> {
 
     /**
      * Performs a right rotation around the pivot node. This is needed when there are 2 consecutive
-     * red links on the pivot's left subtree, and the left child will take the pivot's place after the
-     * operation.
+     * red links on the pivot's left subtree, and the left child will take the pivot's place after
+     * the operation.
      *
      * @param pivot the node on which the operation occurs
      * @return the node that replaces the pivot at the end
@@ -140,8 +140,8 @@ public class RedBlackTree<E extends Comparable<E>> {
     }
 
     /**
-     * Switches the colors of the specified node as well as its children. This is similar to splitting
-     * a 4-node or combining 2-nodes into a 4-node.
+     * Switches the colors of the specified node as well as its children. This is similar to
+     * splitting a 4-node or combining 2-nodes into a 4-node.
      *
      * @param pivot the node on which to flip colors
      */
@@ -204,7 +204,8 @@ public class RedBlackTree<E extends Comparable<E>> {
             }
             if (start.right == null) {
                 // This must be the node to delete as the left child must not exist.
-                // Red child is checked above, and black child will violate the perfect black balance.
+                // Red child is checked above, and black child will violate the perfect black
+                // balance.
                 return null;
             }
 
@@ -215,7 +216,8 @@ public class RedBlackTree<E extends Comparable<E>> {
                 start = makeRightRed(start);
             }
             if (key.compareTo(start.key) == 0) {
-                // Replace the current node's key with the minimum on the right and delete that key instead.
+                // Replace the current node's key with the minimum on the right and delete that key
+                // instead.
                 start.key = findMin(start.right).key;
                 start.right = deleteMin(start.right);
             } else {
@@ -228,8 +230,8 @@ public class RedBlackTree<E extends Comparable<E>> {
     }
 
     /**
-     * Deletes the smallest key from the specified node's subtree. This is used internally as part of
-     * a {@link #delete(Comparable)} call.
+     * Deletes the smallest key from the specified node's subtree. This is used internally as part
+     * of a {@link #delete(Comparable)} call.
      *
      * @param start the root of the subtree from which the key is to be deleted
      * @return the node replacing the start node after transformations
@@ -336,8 +338,8 @@ public class RedBlackTree<E extends Comparable<E>> {
     }
 
     /**
-     * Puts all elements found in the starting node's subtree into the cache by performing an in-order
-     * traversal.
+     * Puts all elements found in the starting node's subtree into the cache by performing an
+     * in-order traversal.
      *
      * @param start the starting node
      */
@@ -441,9 +443,10 @@ public class RedBlackTree<E extends Comparable<E>> {
         }
 
         /**
-         * Checks if this node has two consecutive red links on its (left) subtree. This will not happen
-         * on the right subtree as long as the properties of the red-black tree are maintained. The
-         * situation is similar to a 4-node with this node's key being the right key.
+         * Checks if this node has two consecutive red links on its (left) subtree. This will not
+         * happen on the right subtree as long as the properties of the red-black tree are
+         * maintained. The situation is similar to a 4-node with this node's key being the right
+         * key.
          *
          * @return tree if the left child that has a red child is also red, or false otherwise
          */
@@ -452,8 +455,8 @@ public class RedBlackTree<E extends Comparable<E>> {
         }
 
         /**
-         * Checks if both of this node's children are connected by red links. The situation is similar
-         * to a 4-node with this node's key being the middle key.
+         * Checks if both of this node's children are connected by red links. The situation is
+         * similar to a 4-node with this node's key being the middle key.
          *
          * @return true if both children are red, or false otherwise
          */

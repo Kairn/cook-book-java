@@ -19,11 +19,11 @@ public class GreatestCommonDivisor {
     private GreatestCommonDivisor() {}
 
     /**
-     * Calculates the GCD between two integers using the Euclidean algorithm. The Euclidean algorithm
-     * is based on the principle that the greatest common divisor of two numbers does not change if
-     * the larger number is replaced by its difference with the smaller number. The operation
-     * repeatedly replaces the larger integer of the two with the remainder of dividing it by the
-     * smaller integer until the smaller integer is a factor of (or equal to) the larger one.
+     * Calculates the GCD between two integers using the Euclidean algorithm. The Euclidean
+     * algorithm is based on the principle that the greatest common divisor of two numbers does not
+     * change if the larger number is replaced by its difference with the smaller number. The
+     * operation repeatedly replaces the larger integer of the two with the remainder of dividing it
+     * by the smaller integer until the smaller integer is a factor of (or equal to) the larger one.
      *
      * @param a the first integer
      * @param b the second integer
@@ -75,10 +75,10 @@ public class GreatestCommonDivisor {
     }
 
     /**
-     * With the given integer array, finds the largest possible GCD that can be obtained by forming a
-     * group of n integers individually picked (without replacement) from the array. For example, if
-     * we have integers 4, 5, 10, 15, 6, 12, and n is 3, then we should pick 5, 10, 15 whose GCD is
-     * the largest (5) amongst all combinations.
+     * With the given integer array, finds the largest possible GCD that can be obtained by forming
+     * a group of n integers individually picked (without replacement) from the array. For example,
+     * if we have integers 4, 5, 10, 15, 6, 12, and n is 3, then we should pick 5, 10, 15 whose GCD
+     * is the largest (5) amongst all combinations.
      *
      * @param array the input array
      * @param n the number of integers to select
@@ -109,11 +109,11 @@ public class GreatestCommonDivisor {
     }
 
     /**
-     * Computes the largest GCD with the given parameters and a cached array. This method is recursive
-     * and built on the principle of dynamic programming. The core logic is to enumerate every element
-     * of the array and decide if the current element should be a part of the final combination.
-     * Caching is used to quickly look up already computed values. However, this does not scale well
-     * with a high integer bound.
+     * Computes the largest GCD with the given parameters and a cached array. This method is
+     * recursive and built on the principle of dynamic programming. The core logic is to enumerate
+     * every element of the array and decide if the current element should be a part of the final
+     * combination. Caching is used to quickly look up already computed values. However, this does
+     * not scale well with a high integer bound.
      *
      * @param c the retained GCD
      * @param a the number of elements left in the array

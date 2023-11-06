@@ -41,10 +41,11 @@ public class TimSort {
 
     /**
      * Performs the standard Timsort for the given array. The array is theoretically sorted in-place
-     * but a reference is also returned. Galloping is enabled when appropriate for the merging process
-     * but only standard binary search is employed for the task. This sort is highly efficient for
-     * large data sets with natural patterns, but for random data it is not necessarily faster than
-     * other optimized sorts. Binary insertion sort is leveraged for sorting small data sets.
+     * but a reference is also returned. Galloping is enabled when appropriate for the merging
+     * process but only standard binary search is employed for the task. This sort is highly
+     * efficient for large data sets with natural patterns, but for random data it is not
+     * necessarily faster than other optimized sorts. Binary insertion sort is leveraged for sorting
+     * small data sets.
      *
      * @param array the input array
      * @return the sorted array
@@ -400,8 +401,8 @@ public class TimSort {
     }
 
     /**
-     * Calculates the min_run based on the array length. The goal is to achieve balanced merges at the
-     * end (especially for random data).
+     * Calculates the min_run based on the array length. The goal is to achieve balanced merges at
+     * the end (especially for random data).
      *
      * @param n the length of the input array
      * @return the ideal min_run
