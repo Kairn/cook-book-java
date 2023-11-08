@@ -24,7 +24,7 @@ class SudokuTest {
             new char[] {'.', '.', '.', '.', '8', '.', '.', '7', '9'}
         });
         assertTrue(sudoku.solve());
-        sudoku.debugGrid();
+        sudoku.debugPrint();
         assertEquals(
                 "534678912672195348198342567859761423426853791713924856961537284287419635345286179", sudoku.toString());
     }
@@ -36,7 +36,7 @@ class SudokuTest {
     void testStandardDifficulty(String input, String answer) {
         Sudoku sudoku = Sudoku.fromString(input);
         assertTrue(sudoku.solve());
-        sudoku.debugGrid();
+        sudoku.debugPrint();
         assertEquals(answer, sudoku.toString());
     }
 }
