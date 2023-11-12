@@ -128,7 +128,9 @@ public class Sudoku {
     private final CellGroup[] rows;
     private final CellGroup[] columns;
     private final CellGroup[] subgrids;
+    private final List<CellGroup> allCellGroups;
 
+    private Flag flag;
     private boolean shadowMode;
 
     private Sudoku(Cell[][] grid, CellGroup[] rows, CellGroup[] columns, CellGroup[] subgrids) {
@@ -136,7 +138,13 @@ public class Sudoku {
         this.rows = rows;
         this.columns = columns;
         this.subgrids = subgrids;
+        this.allCellGroups = new ArrayList<>(PW * 3);
+        this.flag = Flag.FRESH;
         this.shadowMode = false;
+
+        this.allCellGroups.addAll(Arrays.asList(this.rows));
+        this.allCellGroups.addAll(Arrays.asList(this.columns));
+        this.allCellGroups.addAll(Arrays.asList(this.subgrids));
     }
 
     /**
@@ -146,7 +154,76 @@ public class Sudoku {
      * @return whether the puzzle is successfully solved
      */
     public boolean solve() {
+        while (!isSolved()) {
+            switch (solveDirect()) {
+                case -1 -> {
+                    // Invalid puzzle due to contradiction under deterministic mode.
+                    return false;
+                }
+                case 0 -> {
+                    // Unable to proceed, need shadow mode.
+                    if (!solveShadow()) {
+                        // Couldn't make progress even with one level shadows.
+                        return false;
+                    }
+                }
+                default -> {
+                    // Solved.
+                    return true;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Attempts to solve the puzzle in the current state using only direct inferences.
+     *
+     * @return an int indicating the result of the run
+     */
+    private int solveDirect() {
+        for (; ; ) {
+            switch (flag) {
+                case FINISHED -> {
+                    return 1;
+                }
+                case BAD -> {
+                    return -1;
+                }
+                case STUCK -> {
+                    return 0;
+                }
+                case FRESH -> inconsistencyRoutine();
+                case DIRTY -> promotionRoutine();
+                case COVER -> coverEliminationRoutine();
+            }
+        }
+    }
+
+    /**
+     * Sometimes, indirect inference must be used to eliminate potential options by chaining direct
+     * inferences together across multiple CellGroups. This is implemented via this "Shadow Routine"
+     * where a potential number will be "tried" on a cell as the final number, and more direct
+     * inferences will be used to hope to either derive a contradiction or successfully solving the
+     * puzzle. If a contradiction is reached, the "tried" potential can be eliminated. This routine
+     * is only one level deep, meaning only one "try" can be in-progress at a time. If the algorithm
+     * gets stuck again while in "Shadow Mode", a rollback is initiated and a new potential will be
+     * tried. This routine ends whenever progress is made.
+     *
+     * @return whether progress is made in shadow mode
+     * @see <a href="https://sandiway.arizona.edu/sudoku/h1p.html">Chaining Explained</a>
+     */
+    private boolean solveShadow() {
         return false;
+    }
+
+    public boolean isSolved() {
+        for (CellGroup row : rows) {
+            if (!row.unfilled.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /** Debug prints the current puzzle state as a 9 x 9 grid. */
@@ -189,32 +266,55 @@ public class Sudoku {
      */
     @Override
     public String toString() {
-        return "";
+        StringBuilder buf = new StringBuilder(PW * PW);
+        for (Cell[] row : grid) {
+            for (Cell cell : row) {
+                if (cell.isFilled()) {
+                    buf.append(cell.num);
+                } else {
+                    buf.append(NC);
+                }
+            }
+        }
+        return buf.toString();
     }
 
     /**
      * Runs through all CellGroups and eliminate potential numbers on cells that contradict with
      * known numbers in the same group. This is the most frequently used strategy and not very
-     * expensive to run. This will NOT actually "fill" the cells even if there is only 1 potential
-     * left.
-     *
-     * @return an int indicating the result of the run
+     * expensive to run.
      */
-    private int inconsistencyRoutine() {
-        return 0;
+    private void inconsistencyRoutine() {
+        int res = 0;
+        for (CellGroup cg : allCellGroups) {
+            res += cg.inconsistentCheck();
+        }
+
+        if (res > 0) {
+            flag = Flag.DIRTY;
+        } else {
+            flag = Flag.COVER;
+        }
     }
 
     /**
      * Runs through all CellGroups and eliminate potential numbers on cells that will contradict a
      * subset of unfilled cells covering a subset of numbers. This is a more advanced strategy and
-     * more expensive to run. This will NOT actually "fill" the cells even if there is only 1
-     * potential left.
+     * more expensive to run.
      *
-     * @return an int indicating the result of the run
      * @see <a href="https://sandiway.arizona.edu/sudoku/cover.html">Cover Elimination Explained</a>
      */
-    private int coverEliminationRoutine() {
-        return 0;
+    private void coverEliminationRoutine() {
+        int res = 0;
+        for (CellGroup cg : allCellGroups) {
+            res += cg.coverCheck();
+        }
+
+        if (res > 0) {
+            flag = Flag.DIRTY;
+        } else {
+            flag = Flag.STUCK;
+        }
     }
 
     /**
@@ -222,28 +322,24 @@ public class Sudoku {
      * routines. A cell will also be filled if a potential number uniquely exists within its
      * CellGroup (other cells can't take this number). If an insufficiency is found, it will be
      * reported immediately.
-     *
-     * @return an int indicating the result of the run
      */
-    private int uniqueRoutine() {
-        return 0;
-    }
+    private void promotionRoutine() {
+        int res = 0;
+        for (CellGroup cg : allCellGroups) {
+            int r = cg.promoteAndSanityCheck();
+            if (r == -1) {
+                flag = Flag.BAD;
+                return;
+            } else {
+                res += r;
+            }
+        }
 
-    /**
-     * Sometimes, indirect inference must be used to eliminate potential options by chaining direct
-     * inferences together across multiple CellGroups. This is implemented via this "Shadow Routine"
-     * where a potential number will be "tried" on a cell as the final number, and more direct
-     * inferences will be used to hope to either derive a contradiction or successfully solving the
-     * puzzle. If a contradiction is reached, the "tried" potential can be eliminated. This routine
-     * is only one level deep, meaning only one "try" can be in-progress at a time. If the algorithm
-     * gets stuck again while in "Shadow Mode", a rollback is initiated and a new potential will be
-     * tried. This routine ends whenever progress is made.
-     *
-     * @return an int indicating the result of the run
-     * @see <a href="https://sandiway.arizona.edu/sudoku/h1p.html">Chaining Explained</a>
-     */
-    private int shadowRoutine() {
-        return 0;
+        if (res > 0) {
+            flag = isSolved() ? Flag.FINISHED : Flag.FRESH;
+        } else {
+            flag = Flag.COVER;
+        }
     }
 
     /** A class that represents a single cell in the Sudoku puzzle. */
@@ -251,14 +347,14 @@ public class Sudoku {
 
         // An unique ID for the cell across all parent CellGroups.
         final int id;
-        // A copy of the state before the programs enters non-deterministic mode.
-        Cell shadow;
+        // A copy of the state before the programs enters non-deterministic (shadow) mode.
+        Set<Character> shadow;
         // The number in the cell; '.' if empty.
         char num;
         // Potential numbers that can occupy the cell.
         final Set<Character> potentials;
         // The row, column, and 3 x 3 subgrid that this cell is a part of.
-        final CellGroup[] parents;
+        final List<CellGroup> parents;
 
         /**
          * Creates an unfilled cell.
@@ -267,10 +363,13 @@ public class Sudoku {
          */
         Cell(int id) {
             this.id = id;
-            this.shadow = null;
+            this.shadow = new HashSet<>(PW);
             this.num = NC;
-            this.potentials = Set.of('1', '2', '3', '4', '5', '6', '7', '8', '9');
-            this.parents = new CellGroup[3];
+            this.potentials = new HashSet<>(PW);
+            for (char c = '1'; c <= '9'; ++c) {
+                this.potentials.add(c);
+            }
+            this.parents = new ArrayList<>(3);
         }
 
         /**
@@ -281,19 +380,35 @@ public class Sudoku {
          */
         Cell(int id, char num) {
             this.id = id;
-            this.shadow = null;
+            this.shadow = Collections.emptySet();
             this.num = num;
             this.potentials = Collections.emptySet();
-            this.parents = new CellGroup[0];
+            this.parents = Collections.emptyList();
         }
 
         boolean isFilled() {
             return num != NC;
         }
+
+        /**
+         * Promotes this cell to a filled cell in respect to its parents. The number needs to be
+         * declared by other routines already.
+         */
+        void promote() {
+            if (num == NC) {
+                throw new IllegalStateException("Cannot promote this cell");
+            }
+            for (CellGroup cg : parents) {
+                cg.filled.add(num);
+                cg.unfilled.remove(this);
+            }
+        }
     }
 
     /** A class that represents a row, column, or 3 x 3 subgrid in the Sudoku puzzle. */
     private static class CellGroup {
+
+        static final Object NULL_CELL = new Object();
 
         final Set<Character> filled;
         final List<Cell> unfilled;
@@ -306,8 +421,155 @@ public class Sudoku {
                     this.filled.add(cell.num);
                 } else {
                     this.unfilled.add(cell);
+                    cell.parents.add(this);
                 }
             }
         }
+
+        /**
+         * Promotes unfilled cells if enough information is present to determine their final number.
+         * Reports any insufficiencies/contradictions if found.
+         *
+         * @return the result of the check
+         */
+        int promoteAndSanityCheck() {
+            // Associate each number ('1' to '9') to an object.
+            // The object will be a `NULL_CELL` if this number is insufficient.
+            // The object will be an Integer if this number is taken or with multiple potentials.
+            // The object will be a Cell if there is only one unfilled cell that claims it.
+            Map<Character, Object> groupStats = new HashMap<>(PW);
+            for (char c = '1'; c <= '9'; ++c) {
+                groupStats.put(c, filled.contains(c) ? 1 : NULL_CELL);
+            }
+
+            List<Cell> toPromote = new ArrayList<>(PW);
+
+            for (Cell cell : unfilled) {
+                if (cell.potentials.isEmpty()) {
+                    // Contradiction.
+                    return -1;
+                } else if (cell.potentials.size() == 1) {
+                    cell.num = cell.potentials.iterator().next();
+                    toPromote.add(cell);
+                    groupStats.put(cell.num, 1);
+                    continue;
+                }
+                for (char c : cell.potentials) {
+                    groupStats.compute(c, (k, v) -> v == NULL_CELL ? cell : 1);
+                }
+            }
+
+            for (Map.Entry<Character, Object> entry : groupStats.entrySet()) {
+                if (entry.getValue() == NULL_CELL) {
+                    // Insufficient candidate cells.
+                    return -1;
+                } else if (entry.getValue() instanceof Cell cell) {
+                    // Found a unique mention.
+                    cell.num = entry.getKey();
+                    toPromote.add(cell);
+                }
+            }
+
+            toPromote.forEach(Cell::promote);
+
+            return toPromote.size();
+        }
+
+        /**
+         * Eliminates potentials from unfilled cells if they are already taken in this CellGroup.
+         *
+         * @return the result of the check
+         */
+        int inconsistentCheck() {
+            int delCount = 0;
+            for (Cell cell : unfilled) {
+                delCount += cell.potentials.removeAll(filled) ? 1 : 0;
+            }
+            return delCount;
+        }
+
+        /**
+         * Iterates all combinations of unfilled cells in this CellGroup to discover "Covers". A
+         * cover must have a minimum of 2 cells. Covers are then used to eliminate potentials in
+         * other cells since they cannot take any of the covered numbers.
+         *
+         * @return the result of the check
+         */
+        int coverCheck() {
+            int maxCombo = unfilled.size() - 1;
+            if (maxCombo < 2) {
+                return 0;
+            }
+
+            Deque<Integer> idStack = new ArrayDeque<>(PW - 1);
+            Map<Character, Integer> potentialCounts = new HashMap<>(PW);
+            List<Cover> covers = new ArrayList<>();
+            coverIterate(0, maxCombo, idStack, potentialCounts, covers);
+
+            int delCount = 0;
+            for (Cover cover : covers) {
+                for (Cell cell : unfilled) {
+                    if (!cover.cellIds.contains(cell.id)) {
+                        delCount += cell.potentials.removeAll(cover.coveredNums) ? 1 : 0;
+                    }
+                }
+            }
+
+            return delCount;
+        }
+
+        private void coverIterate(
+                int ptr,
+                int maxCombo,
+                Deque<Integer> idStack,
+                Map<Character, Integer> potentialCounts,
+                List<Cover> covers) {
+            if (ptr >= unfilled.size() || (ptr == unfilled.size() - 1 && idStack.isEmpty())) {
+                return;
+            }
+
+            // Include this cell.
+            Cell curCell = unfilled.get(ptr);
+            idStack.push(curCell.id);
+            for (char num : curCell.potentials) {
+                potentialCounts.compute(num, (k, count) -> count == null ? 1 : count + 1);
+            }
+            if (idStack.size() > 1 && idStack.size() == potentialCounts.size()) {
+                // Found a cover.
+                covers.add(new Cover(new HashSet<>(idStack), new HashSet<>(potentialCounts.keySet())));
+            }
+
+            // Try to advance this combination further.
+            if (idStack.size() < maxCombo) {
+                coverIterate(ptr + 1, maxCombo, idStack, potentialCounts, covers);
+            }
+
+            // Remove this cell and try other combinations without it.
+            idStack.pop();
+            for (char num : curCell.potentials) {
+                potentialCounts.compute(num, (k, count) -> (count == null || count == 1) ? null : count - 1);
+            }
+            coverIterate(ptr + 1, maxCombo, idStack, potentialCounts, covers);
+        }
+    }
+
+    /**
+     * A simple record for a "covered" subset inside a CellGroup. If n (unfilled) cells in a row,
+     * column, or 3 x 3 subgrid jointly include exactly n unique potentials, these cells are
+     * considered as a cover.
+     *
+     * @param cellIds IDs for cells in this cover
+     * @param coveredNums the numbers covered
+     */
+    private record Cover(Set<Integer> cellIds, Set<Character> coveredNums) {}
+
+    /** An enum describing the state of the algorithm routine; used to indicate next steps. */
+    private enum Flag {
+        FRESH,
+        DIRTY,
+        COVER,
+        STUCK,
+        BAD,
+        FINISHED
     }
 }
