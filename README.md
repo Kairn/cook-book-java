@@ -60,6 +60,7 @@ time to time.
 3. Permutation generator
 4. Sub-array sum equals k (from LeetCode)
 5. Partition equal subset sum (from LeetCode)
+6. Sudoku solver
 
 ## Test
 

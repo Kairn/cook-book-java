@@ -8,30 +8,37 @@ import org.tinylog.Logger;
  * with numbers from 1-9, and the goal is to complete the whole grid where no row, column, or any of
  * the 3 x 3 subgrid contains duplicate numbers. A valid puzzle must have one and only one such
  * arrangement.
+ *
+ * <p>The main algorithm is based on common heuristics with the capability of using indirect
+ * inferences (i.e. trial-and-error) at one level deep. Although it can solve almost all puzzles
+ * found online very efficiently, there exist deliberately crafted puzzles that require a much more
+ * hardcore brute force approach to crack.
  */
 public class Sudoku {
 
     public static void main(String[] args) {
         Sudoku sudoku =
-                Sudoku.fromString(".2.6.8...58...97......4....37....5..6.......4..8....13....2......98...36...3.6.9.");
+                Sudoku.fromString(".8......79...2...36..1..4.....3..72.....4.....95...........1.452..46.3....4...8..");
         if (sudoku.solve()) {
             Logger.info("Sudoku puzzle solved! Answer:");
             sudoku.debugPrint();
         } else {
-            Logger.error("Unsolvable puzzle :(. Stuck at:");
+            Logger.info("Unsolvable puzzle :(. Stuck at:");
             sudoku.debugPrint();
         }
     }
 
-    // Puzzle width. Only 9 is supported.
+    // Puzzle grid width. Only 9 is supported.
     private static final int PW = 9;
     // Null (unfilled) character.
     private static final char NC = '.';
+    private static final int MIN_CLUES = 17;
+    private static final int SHADOW_HALT_THRESHOLD = 18;
 
     /**
      * Creates a Sudoku solver instance with a puzzle input defined by a 2-D char array. The input
-     * array must be 9 x 9. Characters from '1' to '9' will be interpreted as a prefilled number,
-     * and all other characters will be interpreted as an empty cell.
+     * array must be 9 x 9. Characters from '1' to '9' will be interpreted as prefilled numbers, and
+     * all other characters will be interpreted as unfilled cells.
      *
      * @param grid a valid 9 x 9 char grid
      * @return a solver instance for the input
@@ -41,6 +48,7 @@ public class Sudoku {
             throw new IllegalArgumentException("Invalid Sudoku dimension");
         }
 
+        int clues = 0;
         Cell[][] sGrid = new Cell[PW][PW];
         for (int i = 0; i < grid.length; ++i) {
             for (int j = 0; j < grid[i].length; ++j) {
@@ -48,10 +56,15 @@ public class Sudoku {
                 char c = grid[i][j];
                 if (isSudokuDigit(c)) {
                     sGrid[i][j] = new Cell(id, c);
+                    ++clues;
                 } else {
                     sGrid[i][j] = new Cell(id);
                 }
             }
+        }
+
+        if (clues < MIN_CLUES) {
+            throw new IllegalArgumentException("Not enough clues to begin this puzzle");
         }
 
         CellGroup[] rows = new CellGroup[PW];
@@ -70,8 +83,8 @@ public class Sudoku {
      * Creates a Sudoku solver instance with a puzzle input defined by a string. The string must
      * contain 81 characters which represents the concatenation of all 9 rows of the puzzle (the 0th
      * to 8th characters are read as the first row from left to right, and the 9th to 17th as the
-     * second row, and so on). Characters from '1' to '9' will be interpreted as a prefilled number,
-     * and all other characters will be interpreted as an empty cell.
+     * second row, and so on). Characters from '1' to '9' will be interpreted as prefilled numbers,
+     * and all other characters will be interpreted as unfilled cells.
      *
      * @param input a valid string input
      * @return a solver instance for the input
@@ -126,25 +139,21 @@ public class Sudoku {
 
     private final Cell[][] grid;
     private final CellGroup[] rows;
-    private final CellGroup[] columns;
-    private final CellGroup[] subgrids;
     private final List<CellGroup> allCellGroups;
 
     private Flag flag;
-    private boolean shadowMode;
+    private int shadowCount;
 
     private Sudoku(Cell[][] grid, CellGroup[] rows, CellGroup[] columns, CellGroup[] subgrids) {
         this.grid = grid;
         this.rows = rows;
-        this.columns = columns;
-        this.subgrids = subgrids;
         this.allCellGroups = new ArrayList<>(PW * 3);
         this.flag = Flag.FRESH;
-        this.shadowMode = false;
+        this.shadowCount = 0;
 
         this.allCellGroups.addAll(Arrays.asList(this.rows));
-        this.allCellGroups.addAll(Arrays.asList(this.columns));
-        this.allCellGroups.addAll(Arrays.asList(this.subgrids));
+        this.allCellGroups.addAll(Arrays.asList(columns));
+        this.allCellGroups.addAll(Arrays.asList(subgrids));
     }
 
     /**
@@ -165,6 +174,8 @@ public class Sudoku {
                     if (!solveShadow()) {
                         // Couldn't make progress even with one level shadows.
                         return false;
+                    } else {
+                        ++shadowCount;
                     }
                 }
                 default -> {
@@ -208,12 +219,57 @@ public class Sudoku {
      * puzzle. If a contradiction is reached, the "tried" potential can be eliminated. This routine
      * is only one level deep, meaning only one "try" can be in-progress at a time. If the algorithm
      * gets stuck again while in "Shadow Mode", a rollback is initiated and a new potential will be
-     * tried. This routine ends whenever progress is made.
+     * tried. This routine ends whenever progress is made. If this algorithm fails to move the state
+     * forward too many times, it will terminate as the puzzle is likely invalid.
      *
      * @return whether progress is made in shadow mode
      * @see <a href="https://sandiway.arizona.edu/sudoku/h1p.html">Chaining Explained</a>
      */
     private boolean solveShadow() {
+        List<Cell> shadowCells = new ArrayList<>(PW * PW);
+        for (CellGroup row : rows) {
+            shadowCells.addAll(row.unfilled);
+        }
+
+        // Try unfilled cells in order of preference up to the threshold limit.
+        shadowCells.sort(Cell.SHADOW_RANK);
+
+        // Snapshot the puzzle state by copying to shadow.
+        shadowCells.forEach(Cell::copyToShadow);
+
+        int tries = 0;
+        for (Cell tryCell : shadowCells) {
+            if (tries >= SHADOW_HALT_THRESHOLD) {
+                // Halt the program.
+                return false;
+            }
+            // Try this cell with its potentials one at a time.
+            ++tries;
+            List<Character> toTry = new ArrayList<>(tryCell.potentials);
+            for (char tryNum : toTry) {
+                tryCell.num = tryNum;
+                tryCell.promote();
+                flag = Flag.FRESH;
+
+                // Go back to direct inferences.
+                switch (solveDirect()) {
+                    case 1 -> {
+                        // This is a lucky try.
+                        return true;
+                    }
+                        // Stuck again, rollback and try something different.
+                    case 0 -> shadowCells.forEach(Cell::restoreFromShadow);
+                    case -1 -> {
+                        // Got a contradiction, a potential can be eliminated.
+                        shadowCells.forEach(Cell::restoreFromShadow);
+                        tryCell.potentials.remove(tryNum);
+                        flag = Flag.DIRTY;
+                        return true;
+                    }
+                }
+            }
+        }
+
         return false;
     }
 
@@ -224,6 +280,10 @@ public class Sudoku {
             }
         }
         return true;
+    }
+
+    public int getShadowCount() {
+        return shadowCount;
     }
 
     /** Debug prints the current puzzle state as a 9 x 9 grid. */
@@ -320,8 +380,8 @@ public class Sudoku {
     /**
      * Runs through all Cells to find numbers that can be filled in after other elimination
      * routines. A cell will also be filled if a potential number uniquely exists within its
-     * CellGroup (other cells can't take this number). If an insufficiency is found, it will be
-     * reported immediately.
+     * CellGroup (other cells can't take this number). If insufficiency/inconsistency is found, it
+     * will be reported immediately.
      */
     private void promotionRoutine() {
         int res = 0;
@@ -348,13 +408,21 @@ public class Sudoku {
         // An unique ID for the cell across all parent CellGroups.
         final int id;
         // A copy of the state before the programs enters non-deterministic (shadow) mode.
-        Set<Character> shadow;
+        final Set<Character> shadow;
         // The number in the cell; '.' if empty.
         char num;
         // Potential numbers that can occupy the cell.
         final Set<Character> potentials;
         // The row, column, and 3 x 3 subgrid that this cell is a part of.
         final List<CellGroup> parents;
+
+        // In shadow mode, prefer to try cells with less potentials and parents are more saturated.
+        static final Comparator<Cell> SHADOW_RANK = (cell1, cell2) -> {
+            if (cell1.potentials.size() == cell2.potentials.size()) {
+                return cell2.parentSaturation() - cell1.parentSaturation();
+            }
+            return cell1.potentials.size() - cell2.potentials.size();
+        };
 
         /**
          * Creates an unfilled cell.
@@ -390,18 +458,52 @@ public class Sudoku {
             return num != NC;
         }
 
+        int parentSaturation() {
+            int saturation = 0;
+            for (CellGroup cg : parents) {
+                saturation += cg.filled.size();
+            }
+            return saturation;
+        }
+
         /**
-         * Promotes this cell to a filled cell in respect to its parents. The number needs to be
-         * declared by other routines already.
+         * Promotes this cell to a filled cell in respect to its parents. The resident number needs
+         * to be declared by other routines already.
+         *
+         * @return if the promotion is successful
          */
-        void promote() {
+        boolean promote() {
             if (num == NC) {
-                throw new IllegalStateException("Cannot promote this cell");
+                throw new IllegalStateException("No promotion target");
             }
             for (CellGroup cg : parents) {
-                cg.filled.add(num);
+                if (!cg.filled.add(num)) {
+                    return false;
+                }
                 cg.unfilled.remove(this);
             }
+            return true;
+        }
+
+        void copyToShadow() {
+            shadow.clear();
+            shadow.addAll(potentials);
+        }
+
+        void restoreFromShadow() {
+            if (num != NC) {
+                // Potentially demote this cell.
+                for (CellGroup cg : parents) {
+                    cg.filled.remove(num);
+                    // Double check because the promotion might have failed in the middle.
+                    if (!cg.unfilled.contains(this)) {
+                        cg.unfilled.add(this);
+                    }
+                }
+                num = NC;
+            }
+            // Potentials cannot grow during regular routines.
+            potentials.addAll(shadow);
         }
     }
 
@@ -413,7 +515,16 @@ public class Sudoku {
         final Set<Character> filled;
         final List<Cell> unfilled;
 
+        /**
+         * Initializes an instance with its member cells.
+         *
+         * @param cells the cells that belong to this group
+         */
         CellGroup(Cell... cells) {
+            if (cells.length != PW) {
+                throw new IllegalArgumentException("Invalid CellGroup length");
+            }
+
             this.filled = new HashSet<>(PW);
             this.unfilled = new ArrayList<>(PW);
             for (Cell cell : cells) {
@@ -430,7 +541,7 @@ public class Sudoku {
          * Promotes unfilled cells if enough information is present to determine their final number.
          * Reports any insufficiencies/contradictions if found.
          *
-         * @return the result of the check
+         * @return the number of successful promotions, or -1 if sanity check fails
          */
         int promoteAndSanityCheck() {
             // Associate each number ('1' to '9') to an object.
@@ -470,7 +581,11 @@ public class Sudoku {
                 }
             }
 
-            toPromote.forEach(Cell::promote);
+            for (Cell cell : toPromote) {
+                if (!cell.promote()) {
+                    return -1;
+                }
+            }
 
             return toPromote.size();
         }
@@ -478,7 +593,7 @@ public class Sudoku {
         /**
          * Eliminates potentials from unfilled cells if they are already taken in this CellGroup.
          *
-         * @return the result of the check
+         * @return the number of eliminations
          */
         int inconsistentCheck() {
             int delCount = 0;
@@ -493,7 +608,7 @@ public class Sudoku {
          * cover must have a minimum of 2 cells. Covers are then used to eliminate potentials in
          * other cells since they cannot take any of the covered numbers.
          *
-         * @return the result of the check
+         * @return the number of eliminations
          */
         int coverCheck() {
             int maxCombo = unfilled.size() - 1;
@@ -563,13 +678,22 @@ public class Sudoku {
      */
     private record Cover(Set<Integer> cellIds, Set<Character> coveredNums) {}
 
-    /** An enum describing the state of the algorithm routine; used to indicate next steps. */
+    /**
+     * An enum describing the state of the puzzle; used to instruct the algorithm on the next
+     * step(s).
+     */
     private enum Flag {
+        // When new clues are present.
         FRESH,
+        // When some potentials have been eliminated.
         DIRTY,
+        // When ready to try cover elimination after exhausting cheaper strategies.
         COVER,
+        // No more progress can be made using direct inferences.
         STUCK,
+        // The puzzle is in an invalid state.
         BAD,
+        // The puzzle has been solved.
         FINISHED
     }
 }
