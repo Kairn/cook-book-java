@@ -19,8 +19,8 @@ import org.tinylog.Logger;
  */
 public class HostLogReporter {
 
-    static final String CLUSTER_1_FILE = "hosts/cluster1.log";
-    static final String CLUSTER_2_FILE = "hosts/cluster2.log";
+    static final String CLUSTER_1_FILE = "hosts/cluster1.csv";
+    static final String CLUSTER_2_FILE = "hosts/cluster2.csv";
 
     public static void main(String[] args) {
         Logger.info("HostLogReporter works!");
