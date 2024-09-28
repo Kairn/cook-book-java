@@ -53,6 +53,11 @@ time to time.
 4. Various basic encryption schemes and attacks
 5. Other crypto related functions
 
+### Systems :pager:
+
+1. Lsof aggregator
+2. Host log reporter
+
 ### Miscellaneous :balloon:
 
 1. Sorted sum (from HackerRank)
