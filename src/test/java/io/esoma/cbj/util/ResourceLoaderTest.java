@@ -24,7 +24,8 @@ class ResourceLoaderTest {
             assertEquals("EOF", br.readLine());
             assertNull(br.readLine());
         } catch (Exception e) {
-            Logger.error("Exception encountered while reading example file", e);
+            Logger.error("Exception encountered while reading example file");
+            Logger.error(e);
             fail();
         }
     }
@@ -38,7 +39,8 @@ class ResourceLoaderTest {
             assertEquals("YET another example.", br.readLine());
             assertNull(br.readLine());
         } catch (Exception e) {
-            Logger.error("Exception encountered while reading example-2 file", e);
+            Logger.error("Exception encountered while reading example-2 file");
+            Logger.error(e);
             fail();
         }
     }

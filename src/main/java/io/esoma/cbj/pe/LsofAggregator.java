@@ -48,7 +48,8 @@ public class LsofAggregator {
             lsofStats.display();
             Logger.info("Completed lsof aggregator.");
         } catch (Exception e) {
-            Logger.error("Failed to execute the process.", e);
+            Logger.error("Failed to execute the process.");
+            Logger.error(e);
         }
     }
 }
