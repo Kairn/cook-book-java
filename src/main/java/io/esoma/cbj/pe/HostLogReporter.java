@@ -36,10 +36,10 @@ public class HostLogReporter {
     static final String EOF = "<<EOF>>";
 
     public static void main(String[] args) {
-        // Start the server on a separate thread to simulate a remote receiver
+        // Start the server on a separate thread to simulate a remote receiver.
         new Thread(HostLogReporter::startCentralServer).start();
 
-        // Run the client reporter
+        // Run the client reporter.
         try (Socket receiver = new Socket((String) null, PORT);
                 PrintWriter sender = new PrintWriter(receiver.getOutputStream(), true);
                 BufferedReader metricsFile1 =
@@ -48,7 +48,7 @@ public class HostLogReporter {
                         new BufferedReader(new InputStreamReader(ResourceLoader.getResourceAsReader(CLUSTER_2_FILE)))) {
             Iterator<String> metricsIter1 = metricsFile1.lines().iterator();
             Iterator<String> metricsIter2 = metricsFile2.lines().iterator();
-            // Skip CSV header
+            // Skip CSV header.
             metricsIter1.next();
             metricsIter2.next();
 
@@ -74,7 +74,7 @@ public class HostLogReporter {
                     i++;
                 }
 
-                // Send the aggregated window to the server
+                // Send the aggregated window to the server.
                 sender.println(aggregatedStats);
             } while (metricsIter1.hasNext() || metricsIter2.hasNext());
 
@@ -148,7 +148,7 @@ class AggregatedStats {
     public String toString() {
         double availability = dataPoints == 0 ? 0.0 : successes / (double) dataPoints;
         return String.format(
-                "Time period: %d; Data points: %d; Unique hosts: %d; Availability: %.2f; Total request bytes: %d; Total response bytes: %d",
+                "Time period: %d; Data points: %d; Unique hosts: %d; Availability: %.2f; Total request bytes: %d; Total response bytes: %d.",
                 timePeriod, dataPoints, hostnames.size(), availability, totalRequestBytes, totalResponseBytes);
     }
 }
