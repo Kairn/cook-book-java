@@ -57,6 +57,8 @@ time to time.
 
 1. Lsof aggregator
 2. Host log reporter
+3. Data transfer encoder
+4. Stream scanner
 
 ### Miscellaneous :balloon:
 
