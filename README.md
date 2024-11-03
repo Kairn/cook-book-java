@@ -59,6 +59,7 @@ time to time.
 2. Host log reporter
 3. Data transfer encoder
 4. Stream scanner
+5. Prometheus aggregator
 
 ### Miscellaneous :balloon:
 
