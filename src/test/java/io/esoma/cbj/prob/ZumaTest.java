@@ -13,6 +13,7 @@ class ZumaTest {
         "WRRBBW, RB, -1",
         "WWRRBBWW, WRBRW, 2",
         "G, GGGGG, 2",
+        "GYRRB, GGGGG, -1",
     })
     void testSolveZuma(String board, String hand, int answer) {
         int actual = Zuma.findMinSteps(board, hand);
