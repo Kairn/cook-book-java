@@ -1,11 +1,13 @@
 package io.esoma.cbj.prob;
 
 import java.util.*;
+import org.tinylog.Logger;
 
 /** An implementation that solves the variation of the Zuma game listed on LeetCode No. 488. */
 public class Zuma {
 
     private static final ZumaState MARKER = new ZumaState(null, null);
+    private static final char[] COLORS = new char[] {'R', 'Y', 'B', 'G', 'W'};
 
     private Zuma() {}
 
@@ -18,8 +20,23 @@ public class Zuma {
      * @return the minimum number of steps to clear the board, or -1 if impossible
      */
     public static int findMinSteps(String board, String hand) {
-        for (char c : board.toCharArray()) {
-            if (!hand.contains(c + "")) {
+        int[] boardCounts = new int[COLORS.length];
+        int[] handCounts = new int[COLORS.length];
+        for (int i = 0; i < COLORS.length; ++i) {
+            for (char c : board.toCharArray()) {
+                if (c == COLORS[i]) {
+                    boardCounts[i]++;
+                }
+            }
+            for (char c : hand.toCharArray()) {
+                if (c == COLORS[i]) {
+                    handCounts[i]++;
+                }
+            }
+        }
+        // Shortcut when there aren't enough balls in hand to clear a color.
+        for (int i = 0; i < boardCounts.length; ++i) {
+            if (boardCounts[i] > 0 && boardCounts[i] < 3 && boardCounts[i] + handCounts[i] < 3) {
                 return -1;
             }
         }
@@ -27,7 +44,7 @@ public class Zuma {
         char[] handChars = hand.toCharArray();
         Arrays.sort(handChars);
 
-        ZumaState initState = new ZumaState(encode(board, null), encode(new String(handChars), board));
+        ZumaState initState = new ZumaState(encode(board), encode(new String(handChars)));
         Optional<List<ZumaState>> firstStates = initState.generateNextStates();
         if (firstStates.isEmpty()) {
             return 1;
@@ -49,6 +66,8 @@ public class Zuma {
                 }
                 steps++;
                 queue.offer(MARKER);
+                Logger.debug("Queue size: " + queue.size());
+                Logger.debug("Set size: " + seenStates.size());
                 seenStates.clear();
                 continue;
             }
@@ -69,14 +88,11 @@ public class Zuma {
         return -2;
     }
 
-    private static String encode(String source, String filter) {
+    private static String encode(String source) {
         StringBuilder builder = new StringBuilder(source.length() * 2 + 1);
         char curChar = '\0';
         int cnt = 0;
         for (char c : source.toCharArray()) {
-            if (filter != null && !filter.contains(c + "")) {
-                continue;
-            }
             if (curChar == c) {
                 ++cnt;
             } else {
@@ -144,9 +160,11 @@ record ZumaState(String board, String hand) {
      */
     int collide(String board, String nextHand, char ball, List<ZumaState> nextStates) {
         Set<String> seenBoards = new HashSet<>();
+        boolean skip = false;
 
         for (int i = 0; i < board.length(); i += 2) {
             if (board.charAt(i) == ball) {
+                skip = true;
                 String nextBoard;
                 if (board.charAt(i + 1) == '2') {
                     nextBoard = reduce(board, i);
@@ -162,7 +180,14 @@ record ZumaState(String board, String hand) {
                     nextStates.add(new ZumaState(nextBoard, nextHand));
                 }
             } else if (!nextHand.isEmpty()) {
-                nextStates.add(new ZumaState(board.substring(0, i) + ball + "1" + board.substring(i), nextHand));
+                if (!skip) {
+                    nextStates.add(new ZumaState(board.substring(0, i) + ball + "1" + board.substring(i), nextHand));
+                }
+                if (board.charAt(i + 1) == '2') {
+                    String segment = board.charAt(i) + "1" + ball + "1" + board.charAt(i) + "1";
+                    nextStates.add(new ZumaState(board.substring(0, i) + segment + board.substring(i + 2), nextHand));
+                }
+                skip = false;
             }
         }
         if (board.charAt(board.length() - 2) != ball && !nextHand.isEmpty()) {
@@ -190,6 +215,11 @@ record ZumaState(String board, String hand) {
                 continue;
             }
             break;
+        }
+
+        if (lPtr >= 2 && rPtr < board.length() && board.charAt(lPtr - 2) == board.charAt(rPtr)) {
+            char ball = board.charAt(lPtr - 2);
+            return board.substring(0, lPtr - 2) + ball + "2" + board.substring(rPtr + 2);
         }
 
         return board.substring(0, lPtr) + board.substring(rPtr);
