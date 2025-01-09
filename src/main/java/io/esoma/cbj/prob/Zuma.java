@@ -1,13 +1,11 @@
 package io.esoma.cbj.prob;
 
 import java.util.*;
-import org.tinylog.Logger;
 
 /** An implementation that solves the variation of the Zuma game listed on LeetCode No. 488. */
 public class Zuma {
 
     private static final ZumaState MARKER = new ZumaState(null, null);
-    private static final char[] COLORS = new char[] {'R', 'Y', 'B', 'G', 'W'};
 
     private Zuma() {}
 
@@ -20,31 +18,17 @@ public class Zuma {
      * @return the minimum number of steps to clear the board, or -1 if impossible
      */
     public static int findMinSteps(String board, String hand) {
-        int[] boardCounts = new int[COLORS.length];
-        int[] handCounts = new int[COLORS.length];
-        for (int i = 0; i < COLORS.length; ++i) {
-            for (char c : board.toCharArray()) {
-                if (c == COLORS[i]) {
-                    boardCounts[i]++;
-                }
-            }
-            for (char c : hand.toCharArray()) {
-                if (c == COLORS[i]) {
-                    handCounts[i]++;
-                }
-            }
-        }
-        // Shortcut when there aren't enough balls in hand to clear a color.
-        for (int i = 0; i < boardCounts.length; ++i) {
-            if (boardCounts[i] > 0 && boardCounts[i] < 3 && boardCounts[i] + handCounts[i] < 3) {
-                return -1;
-            }
-        }
-
         char[] handChars = hand.toCharArray();
         Arrays.sort(handChars);
 
-        ZumaState initState = new ZumaState(encode(board), encode(new String(handChars)));
+        String initBoard = encode(board);
+        String initHand = encode(new String(handChars));
+        initHand = evalAndOptimizeHand(initBoard, initHand);
+        if (initHand.isEmpty()) {
+            return -1;
+        }
+
+        ZumaState initState = new ZumaState(initBoard, initHand);
         Optional<List<ZumaState>> firstStates = initState.generateNextStates();
         if (firstStates.isEmpty()) {
             return 1;
@@ -66,8 +50,6 @@ public class Zuma {
                 }
                 steps++;
                 queue.offer(MARKER);
-                Logger.debug("Queue size: " + queue.size());
-                Logger.debug("Set size: " + seenStates.size());
                 seenStates.clear();
                 continue;
             }
@@ -88,6 +70,12 @@ public class Zuma {
         return -2;
     }
 
+    /**
+     * Run-length encoding of the input source string.
+     *
+     * @param source the source string
+     * @return the encoded string
+     */
     private static String encode(String source) {
         StringBuilder builder = new StringBuilder(source.length() * 2 + 1);
         char curChar = '\0';
@@ -107,6 +95,46 @@ public class Zuma {
             builder.append(curChar).append(cnt);
         }
         return builder.toString();
+    }
+
+    /**
+     * Evaluates the current board and hand (encoded form) to see if the game is over or balls from
+     * the hand can be removed.
+     *
+     * @param board the board
+     * @param hand the hand
+     * @return the optimized hand by removing useless balls, empty string if no solution is
+     *     available
+     */
+    static String evalAndOptimizeHand(String board, String hand) {
+        int removeIndex = -1;
+        LOOP:
+        for (; ; ) {
+            if (removeIndex >= 0) {
+                hand = hand.substring(0, removeIndex) + hand.substring(removeIndex + 2);
+            }
+            for (int i = 0; i < hand.length(); i += 2) {
+                char ball = hand.charAt(i);
+                int handCount = hand.charAt(i + 1) - 48;
+                int boardCount = 0;
+                for (int j = 0; j < board.length(); j += 2) {
+                    if (ball == board.charAt(j)) {
+                        boardCount += board.charAt(j + 1) - 48;
+                    }
+                }
+                // No solution is possible.
+                if (boardCount > 0 && boardCount < 3 && boardCount + handCount < 3) {
+                    return "";
+                }
+                // This ball color in hand is useless.
+                if (boardCount == 0 && handCount < 3) {
+                    removeIndex = i;
+                    continue LOOP;
+                }
+            }
+            break;
+        }
+        return hand;
     }
 }
 
@@ -140,14 +168,6 @@ record ZumaState(String board, String hand) {
         return Optional.of(nextStates);
     }
 
-    boolean isClear() {
-        return board.isEmpty();
-    }
-
-    boolean isOver() {
-        return hand.isEmpty() && !board.isEmpty();
-    }
-
     /**
      * Collide a single ball into the board and generates all possible outcomes at different
      * locations where the ball is inserted.
@@ -161,23 +181,34 @@ record ZumaState(String board, String hand) {
     int collide(String board, String nextHand, char ball, List<ZumaState> nextStates) {
         Set<String> seenBoards = new HashSet<>();
         boolean skip = false;
+        boolean optimize;
 
         for (int i = 0; i < board.length(); i += 2) {
             if (board.charAt(i) == ball) {
                 skip = true;
+                optimize = false;
                 String nextBoard;
                 if (board.charAt(i + 1) == '2') {
                     nextBoard = reduce(board, i);
-                } else {
+                    optimize = true;
+                } else if (!nextHand.isEmpty()) {
                     char[] nextBoardCharArr = board.toCharArray();
                     nextBoardCharArr[i + 1] = '2';
                     nextBoard = new String(nextBoardCharArr);
+                } else {
+                    continue;
                 }
+
                 if (nextBoard.isEmpty()) {
                     return 1;
                 } else if (!seenBoards.contains(nextBoard)) {
                     seenBoards.add(nextBoard);
-                    nextStates.add(new ZumaState(nextBoard, nextHand));
+                    if (optimize) {
+                        nextHand = Zuma.evalAndOptimizeHand(nextBoard, nextHand);
+                    }
+                    if (!nextHand.isEmpty()) {
+                        nextStates.add(new ZumaState(nextBoard, nextHand));
+                    }
                 }
             } else if (!nextHand.isEmpty()) {
                 if (!skip) {
@@ -197,6 +228,13 @@ record ZumaState(String board, String hand) {
         return nextHand.isEmpty() ? -1 : 0;
     }
 
+    /**
+     * Collapse the Zuma board until stable from the `pos` position.
+     *
+     * @param board the board
+     * @param pos the first set of balls to remove
+     * @return the stable board after reduction
+     */
     String reduce(String board, int pos) {
         int lPtr = pos;
         int rPtr = pos + 2;

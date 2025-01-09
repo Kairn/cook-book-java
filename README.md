@@ -21,6 +21,7 @@ time to time.
 
 1. Knapsack with divide and conquer
 2. Quickselect (find kth smallest element)
+3. Zuma
 
 ### Dynamic Programming :rocket:
 
