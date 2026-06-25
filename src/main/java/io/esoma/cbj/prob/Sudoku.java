@@ -257,7 +257,7 @@ public class Sudoku {
                         // This is a lucky try.
                         return true;
                     }
-                        // Stuck again, rollback and try something different.
+                    // Stuck again, rollback and try something different.
                     case 0 -> shadowCells.forEach(Cell::restoreFromShadow);
                     case -1 -> {
                         // Got a contradiction, a potential can be eliminated.
