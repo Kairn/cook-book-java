@@ -75,7 +75,7 @@ time to time.
 
 ### Prerequisites
 
-* [JDK 17](https://docs.aws.amazon.com/corretto/)
+* [JDK 21](https://docs.aws.amazon.com/corretto/)
 * [Apache Maven (wrapper available)](https://maven.apache.org/wrapper/)
 
 ### Build
